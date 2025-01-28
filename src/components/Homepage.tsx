@@ -1,10 +1,13 @@
+import pomegrenadeLogo from "../assets/pomegrenade-logo-586x245px.png";
+
 export default function Homepage() {
   return (
-    <main className="">
-      <p className="text-yellow text-xl"> Hello world</p>
-      <h1 className="bg-red-400 text-3xl font-bold text-cyan-300 underline">
-        Hello world!
-      </h1>
+    <main className="bg-secondary-light h-screen w-full">
+      <div className="bg-secondary-light container mx-auto h-full">
+        <nav className="bg-tertiary h-32 w-full rounded-b-4xl">
+          <img src={pomegrenadeLogo} className="h-full p-6" alt="" />
+        </nav>
+      </div>
     </main>
   );
 }
