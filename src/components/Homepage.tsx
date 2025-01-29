@@ -6,9 +6,20 @@ export default function Homepage() {
   return (
     <main className="bg-tertiary-light relative h-screen w-full">
       <div className="bg-tertiary-light relative container mx-auto h-full">
-        <nav className="bg-tertiary absolute z-20 flex h-24 w-full items-center justify-between rounded-b-4xl">
+        <nav className="bg-tertiary absolute z-20 flex h-24 w-full items-center justify-between rounded-b-4xl px-10">
           <img src={pomegrenadeLogo} className="h-full p-3" alt="" />
-          <div className="flex">
+          <div className="flex gap-20">
+            <a href="" className="text-secondary-light text-xl">
+              Process
+            </a>
+            <a href="" className="text-secondary-light text-xl">
+              Reviews
+            </a>
+            <a href="" className="text-secondary-light text-xl">
+              Help
+            </a>
+          </div>
+          <div className="flex gap-2">
             <button className="border-secondary-light text-secondary-light hover:bg-secondary-light hover:text-tertiary rounded-full border-2 px-3 py-1 font-normal">
               Log in
             </button>
@@ -19,7 +30,9 @@ export default function Homepage() {
         </nav>
         <div className="relative z-10 flex h-full items-center justify-center gap-30">
           <div className="">
-            <h2 className="text-tertiary text-2xl">A lightweight</h2>
+            <h2 className="text-tertiary text-2xl font-semibold">
+              A lightweight
+            </h2>
             <h1 className="text-primary-1 text-7xl font-bold">
               calorie counter <br /> with a bang.
             </h1>
