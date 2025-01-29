@@ -7,7 +7,7 @@ export default function Homepage() {
     <main className="bg-tertiary-light relative h-screen w-full">
       <div className="bg-tertiary-light relative container mx-auto h-full">
         <nav className="bg-tertiary absolute z-20 flex h-24 w-full items-center justify-between rounded-b-4xl px-10">
-          <img src={pomegrenadeLogo} className="h-full p-3" alt="" />
+          <img src={pomegrenadeLogo} className="h-full py-3" alt="" />
           <div className="flex gap-20">
             <a href="" className="text-secondary-light text-xl">
               Process
