@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
+
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap");
 
 @theme {
   --font-display: "Fredoka", "sans-serif";
+
   --color-primary-1: oklch(69.09% 0.1987 23.91); /* #FF5C5C */
   --color-primary-1-light: oklch(95.6% 0.0217 17.54); /* #FFEBEB */
   --color-primary-2: oklch(74.7% 0.205 143.18); /* ##4ACC4A */
@@ -14,4 +16,8 @@
   ); /* #ffd2ad */
   --color-tertiary: oklch(62.69% 0.0894 195.11); /* #379999 */
   --color-tertiary-light: oklch(95.32% 0.02 196.82) /* #96D9D9 */;
+}
+
+body {
+  font-family: "Fredoka", "sans-serif";
 }
