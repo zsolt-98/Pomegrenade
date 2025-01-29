@@ -1,6 +1,6 @@
 import { SVGProps } from "../../types";
 
-export default function Divider({ className, fill, stroke }: SVGProps) {
+export default function Divider({ className, fill }: SVGProps) {
   return (
     <svg
       className={`h-200 w-full ${className || ""}`}
