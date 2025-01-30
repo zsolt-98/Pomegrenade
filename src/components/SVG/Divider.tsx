@@ -6,7 +6,7 @@ export default function Divider({ className, fill }: SVGProps) {
 
   return isUnderXLScreen ? (
     <svg
-      className={`h-[80%] w-full ${className || ""}`}
+      className={`h-[75%] w-full ${className || ""}`}
       viewBox="0 0 1260 1260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
