@@ -1,6 +1,6 @@
 import pomegrenadeLogo from "../assets/pomegrenade-logo-586x245px.png";
 import placeholder from "../assets/placeholder.png";
-import Divider from "./SVG/Divider";
+// import Divider from "./SVG/Divider";
 import DividerSm from "./SVG/DividerSm";
 
 export default function Homepage() {
