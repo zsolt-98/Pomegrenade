@@ -28,8 +28,8 @@ export default function Homepage() {
             </button>
           </div>
         </nav>
-        <div className="relative z-10 flex h-full items-center justify-center gap-30">
-          <div className="">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-30 pt-24 xl:flex-row xl:pt-0">
+          <div className="pt-30 xl:pt-0">
             <h2 className="text-tertiary text-2xl font-semibold">
               A lightweight
             </h2>
