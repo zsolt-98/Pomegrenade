@@ -28,7 +28,7 @@ export default function Homepage() {
             </button>
           </div>
         </nav>
-        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-30 pt-24 xl:flex-row">
+        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-20 pt-24 xl:flex-row">
           <div className="mx-5 pt-30 xl:pt-0">
             <h2 className="text-tertiary text-xl font-semibold sm:text-2xl lg:text-3xl">
               A lightweight
