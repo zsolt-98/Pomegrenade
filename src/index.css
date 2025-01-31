@@ -12,6 +12,8 @@
   --color-secondary-light: #ffd2ad;
   --color-tertiary: #379999;
   --color-tertiary-light: #e1f4f4;
+
+  --breakpoint-3xl: 112rem;
 }
 
 body {

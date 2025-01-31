@@ -2,7 +2,7 @@ import { useMediaQuery } from "react-responsive";
 import { SVGProps } from "../../types";
 
 export default function Divider({ className, fill }: SVGProps) {
-  const isUnderXLScreen = useMediaQuery({ maxWidth: 1280 });
+  const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
 
   return isUnderXLScreen ? (
     <svg

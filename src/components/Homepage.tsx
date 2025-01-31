@@ -29,15 +29,15 @@ export default function Homepage() {
           </div>
         </nav>
         <div className="relative z-10 flex h-full w-full flex-col items-center justify-center gap-20 pt-24 xl:flex-row">
-          <div className="mx-5 pt-30 xl:pt-0">
-            <h2 className="text-tertiary text-xl font-semibold sm:text-2xl lg:text-3xl">
+          <div className="mx-5 pt-20 xl:pt-0">
+            <h2 className="text-tertiary 3xl:text-3xl text-[4vw] font-semibold md:text-[3vw] lg:text-[2.5vw] xl:text-[2vw]">
               A lightweight
             </h2>
-            <h1 className="text-primary-1 text-5xl font-bold text-nowrap sm:text-6xl lg:text-7xl">
+            <h1 className="text-primary-1 3xl:text-8xl text-[10vw] leading-none font-bold text-nowrap md:text-[7.5vw] lg:text-[6.5vw] xl:text-[5.5vw]">
               calorie counter <br /> with a bang.
             </h1>
           </div>
-          <div className="mx-5 pt-0 xl:pt-30">
+          <div className="mx-5 max-w-160 pt-0 xl:pt-20">
             <img
               src={placeholder}
               className="border-tertiary w-full rounded-4xl border-3"
