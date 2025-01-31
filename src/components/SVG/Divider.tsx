@@ -19,7 +19,7 @@ export default function Divider({ className, fill }: SVGProps) {
     </svg>
   ) : (
     <svg
-      className={`h-200 w-full ${className || ""}`}
+      className={`h-[90%] w-full ${className || ""}`}
       viewBox="0 0 1924 820"
       preserveAspectRatio="none"
       fill="none"
