@@ -19,7 +19,7 @@ export default function ProcessBadge({
       <h3 className="text-primary-1 text-xl font-semibold lg:text-3xl">
         {heading}
       </h3>
-      <p className="">{paragraph}</p>
+      <p className="text-tertiary">{paragraph}</p>
     </div>
   );
 }
