@@ -45,10 +45,10 @@ export default function Reviews() {
           <ReviewsCard
             cardClassName="absolute border-3 border-tertiary left-[-8.5rem] rotate-[6deg] top-[16rem]"
             bgColor="bg-secondary-light"
-            starColor="var(--color-secondary)"
-            pColor="text-primary-1"
+            starColor="var(--color-primary-1)"
+            pColor="text-tertiary"
             pText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam, a suscipit id iste recusandae assumenda vitae odio nulla atque numquam, repellat error adipisci itaque! Illo necessitatibus provident rerum officiis temporibus eum quae vero ab quos recusandae."
-            hColor="text-primary-1"
+            hColor="text-tertiary"
             hText="Zsolt N."
           />
         </div>
