@@ -43,7 +43,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-124 right-11 rotate-[27deg]" : "bottom-23 left-50 rotate-[-7deg]"} `}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-124 right-8 rotate-[27deg]" : "bottom-23 left-50 rotate-[-7deg]"} `}
             bgColor="bg-primary-1"
             starColor="var(--color-tertiary)"
             pColor="text-secondary-light"
@@ -53,7 +53,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-164 rotate-[-3deg] left-2" : "bottom-5 right-65  rotate-[6deg]"} `}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-164 rotate-[-3deg] left-9" : "bottom-5 right-65  rotate-[6deg]"} `}
             bgColor="bg-secondary-light"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary"
