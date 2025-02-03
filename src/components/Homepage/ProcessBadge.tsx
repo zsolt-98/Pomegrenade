@@ -10,7 +10,7 @@ export default function ProcessBadge({
   paragraph,
 }: ProcessBadge) {
   return (
-    <div className="flex w-[50%] flex-col text-center md:w-[33%]">
+    <div className="flex w-[50%] flex-col text-center md:w-[25%]">
       <img
         className="border-tertiary rounded-full border-3"
         src={imgSource}

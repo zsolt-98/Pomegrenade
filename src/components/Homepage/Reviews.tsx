@@ -3,11 +3,11 @@ import ReviewsCard from "./ReviewsCard";
 export default function Reviews() {
   return (
     <section className="bg-secondary-light h-[100vh]">
-      <div className="container mx-auto flex justify-center">
+      <div className="container mx-auto flex max-w-7xl justify-center">
         {/* Cards */}
-        <div className="relative">
+        <div className="relative h-200 w-full">
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute left-[-40rem] rotate-[-15deg]"
+            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%+20rem)] -translate-y-1/2 rotate-[-15deg]"
             bgColor="bg-tertiary"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary-light"
@@ -15,8 +15,9 @@ export default function Reviews() {
             hColor="text-tertiary-light"
             hText="Zsolt N."
           />
+          {/* Card 2 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute left-[-20rem] top-[-5rem] rotate-[-3deg]"
+            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[-3deg]"
             bgColor="bg-tertiary-light"
             starColor="var(--color-secondary)"
             pColor="text-tertiary"
@@ -24,8 +25,9 @@ export default function Reviews() {
             hColor="text-tertiary"
             hText="Zsolt N."
           />
+          {/* Card 3 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute left-[1rem] top-[-2rem] rotate-[17deg]"
+            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%-20rem)] -translate-y-1/2 rotate-[17deg]"
             bgColor="bg-secondary"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
@@ -33,8 +35,9 @@ export default function Reviews() {
             hColor="text-tertiary-light"
             hText="Zsolt N."
           />
+          {/* Card 4 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute left-[-30rem] rotate-[-7deg] top-[17rem]"
+            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%+10rem)] -translate-y-[calc(50%-20rem)] rotate-[-7deg]"
             bgColor="bg-primary-1"
             starColor="var(--color-tertiary)"
             pColor="text-secondary-light"
@@ -42,8 +45,9 @@ export default function Reviews() {
             hColor="text-secondary-light"
             hText="Zsolt N."
           />
+          {/* Card 5 */}
           <ReviewsCard
-            cardClassName="absolute border-3 border-tertiary left-[-8.5rem] rotate-[6deg] top-[16rem]"
+            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%-10rem)] -translate-y-[calc(50%-20rem)] rotate-[6deg]"
             bgColor="bg-secondary-light"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary"
