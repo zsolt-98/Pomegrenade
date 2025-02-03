@@ -1,10 +1,6 @@
-import { useMediaQuery } from "react-responsive";
 import ReviewsCard from "./ReviewsCard";
 
 export default function Reviews() {
-  const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
-  const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
-
   return (
     <section className="bg-secondary-light">
       <div className="container mx-auto flex max-w-7xl justify-center">
@@ -33,7 +29,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-88 left-7  rotate-[-14deg] xl:top-40 xl:left-208 md:top-40 md:left-90 md:rotate-[17deg] `}
+            cardClassName={`border-3 border-tertiary absolute top-88 left-7  rotate-[-14deg] xl:top-27 xl:left-198 md:top-40 md:left-90 md:rotate-[17deg] `}
             bgColor="bg-secondary"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
@@ -43,7 +39,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-124 right-8 rotate-[27deg]" : "bottom-23 left-50 rotate-[-7deg]"} `}
+            cardClassName={`border-3 border-tertiary absolute top-124 right-8 rotate-[27deg] xl:top-65 xl:left-50 md:top-60 md:left-30 md:rotate-[-7deg]`}
             bgColor="bg-primary-1"
             starColor="var(--color-tertiary)"
             pColor="text-secondary-light"
@@ -53,7 +49,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-164 rotate-[-3deg] left-9" : "bottom-5 right-65  rotate-[6deg]"} `}
+            cardClassName={`border-3 border-tertiary absolute top-164 rotate-[-3deg] left-9 xl:top-85 xl:left-146 md:top-65 md:left-70  md:rotate-[6deg] `}
             bgColor="bg-secondary-light"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary"

@@ -1,4 +1,3 @@
-import { useMediaQuery } from "react-responsive";
 import FiveStars from "../SVG/FiveStars";
 
 interface ReviewCardProps {
@@ -26,7 +25,7 @@ export default function ReviewsCard({
 
   return (
     <div
-      className={`${bgColor} ${cardClassName} flex h-60 w-60 flex-col justify-evenly gap-1 rounded-4xl p-3 md:h-80 md:w-80 xl:h-110 xl:w-100 xl:gap-5`}
+      className={`${bgColor} ${cardClassName} flex h-60 w-60 flex-col justify-evenly gap-1 rounded-4xl p-3 md:h-80 md:w-80 xl:h-110 xl:w-110 xl:gap-5 xl:p-5`}
     >
       <FiveStars size={24} fill={starColor} />
       <p className={`text-xs md:text-sm xl:text-lg ${pColor}`}>{pText}</p>
