@@ -9,7 +9,7 @@ export default function Process() {
     <section className="bg-tertiary-light relative">
       <div className="container mx-auto flex max-w-7xl justify-center pt-0 pb-20 xl:pt-20">
         <div className="mx-5 flex w-full flex-col items-center">
-          <h2 className="text-primary-1 mb-20 inline-block text-3xl font-semibold lg:text-5xl">
+          <h2 className="text-primary-1 mb-20 inline-block text-center text-3xl font-semibold lg:text-5xl">
             Three step formula for explosive progress
           </h2>
           <div className="flex flex-col items-center justify-center gap-10 md:flex-row md:items-start md:gap-20">

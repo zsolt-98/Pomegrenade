@@ -19,10 +19,6 @@ export default function ReviewsCard({
   hColor,
   hText,
 }: ReviewCardProps) {
-  // const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
-  // const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
-  // ${isUnderMDScreen ? "h-60 w-60 gap-3" : isUnderXLScreen ? "h-80 w-80" : "h-110 w-110 gap-5"}
-
   return (
     <div
       className={`${bgColor} ${cardClassName} flex h-60 w-60 flex-col justify-evenly gap-1 rounded-4xl p-3 md:h-80 md:w-80 xl:h-110 xl:w-110 xl:gap-5 xl:p-5`}
