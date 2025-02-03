@@ -3,16 +3,17 @@ import ReviewsCard from "./ReviewsCard";
 
 export default function Reviews() {
   const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
+  const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
 
   return (
     <section className="bg-secondary-light">
       <div className="container mx-auto flex max-w-7xl justify-center">
         {/* Cards */}
         <div
-          className={`relative ${isUnderXLScreen ? "mx-5 h-100" : "h-200"} w-full`}
+          className={`relative w-full ${isUnderMDScreen ? "h-246 max-w-[443px]" : isUnderXLScreen ? "h-100" : "h-200"} mx-5 xl:mx-0`}
         >
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-31 left-11  rotate-[-15deg]`}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-8 left-7" : "top-31 left-11"} rotate-[-15deg]`}
             bgColor="bg-tertiary"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary-light"
@@ -22,7 +23,7 @@ export default function Reviews() {
           />
           {/* Card 2 */}
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-4 left-110 rotate-[-4deg]`}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-54 right-7 rotate-[13deg]" : "top-4 left-110 rotate-[-4deg]"}  `}
             bgColor="bg-tertiary-light"
             starColor="var(--color-secondary)"
             pColor="text-tertiary"
@@ -32,7 +33,7 @@ export default function Reviews() {
           />
           {/* Card 3 */}
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-40 right-12 rotate-[17deg]`}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-88  left-7 rotate-[-14deg]" : "top-40 right-12 rotate-[17deg]"} `}
             bgColor="bg-secondary"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
@@ -42,7 +43,7 @@ export default function Reviews() {
           />
           {/* Card 4 */}
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute bottom-23 left-50 rotate-[-7deg]`}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-124 right-11 rotate-[27deg]" : "bottom-23 left-50 rotate-[-7deg]"} `}
             bgColor="bg-primary-1"
             starColor="var(--color-tertiary)"
             pColor="text-secondary-light"
@@ -52,7 +53,7 @@ export default function Reviews() {
           />
           {/* Card 5 */}
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute bottom-5 right-65  rotate-[6deg]`}
+            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-164 rotate-[-3deg] left-2" : "bottom-5 right-65  rotate-[6deg]"} `}
             bgColor="bg-secondary-light"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary"
