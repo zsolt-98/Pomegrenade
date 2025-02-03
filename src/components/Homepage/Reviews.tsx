@@ -10,10 +10,10 @@ export default function Reviews() {
       <div className="container mx-auto flex max-w-7xl justify-center">
         {/* Cards */}
         <div
-          className={`relative w-full ${isUnderMDScreen ? "h-246 max-w-[443px]" : isUnderXLScreen ? "h-100" : "h-200"} mx-5 xl:mx-0`}
+          className={`relative mx-5 h-246 w-full max-md:max-w-[443px] md:h-150 xl:mx-0 xl:h-200`}
         >
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-8 left-7" : "top-31 left-11"} rotate-[-15deg]`}
+            cardClassName={`border-3 border-tertiary absolute  top-8 left-7  md:top-23 md:left-7 xl:top-31 xl:left-11 rotate-[-15deg]`}
             bgColor="bg-tertiary"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary-light"
@@ -23,7 +23,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-54 right-7 rotate-[13deg]" : "top-4 left-110 rotate-[-4deg]"}  `}
+            cardClassName={`border-3 border-tertiary absolute top-54 right-7 rotate-[13deg] xl:top-4 xl:left-110 md:top-7 md:left-60 md:rotate-[-4deg]  `}
             bgColor="bg-tertiary-light"
             starColor="var(--color-secondary)"
             pColor="text-tertiary"
@@ -33,7 +33,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-88  left-7 rotate-[-14deg]" : "top-40 right-12 rotate-[17deg]"} `}
+            cardClassName={`border-3 border-tertiary absolute top-88 left-7  rotate-[-14deg] xl:top-40 xl:left-208 md:top-40 md:left-90 md:rotate-[17deg] `}
             bgColor="bg-secondary"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
