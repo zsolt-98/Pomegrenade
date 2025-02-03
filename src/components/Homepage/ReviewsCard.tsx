@@ -21,13 +21,14 @@ export default function ReviewsCard({
   hText,
 }: ReviewCardProps) {
   const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
+  const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
 
   return (
     <div
-      className={`${bgColor} ${cardClassName} flex ${isUnderXLScreen ? "h-80 w-80 gap-3" : "h-110 w-110 gap-5"} flex-col rounded-4xl p-5`}
+      className={`${bgColor} ${cardClassName} flex ${isUnderMDScreen ? "h-60 w-60" : isUnderXLScreen ? "h-80 w-80 gap-3" : "h-110 w-110 gap-5"} flex-col rounded-4xl p-5`}
     >
       <FiveStars size={24} fill={starColor} />
-      <p className={`text-sm xl:text-lg ${pColor}`}>{pText}</p>
+      <p className={`text-xs md:text-sm xl:text-lg ${pColor}`}>{pText}</p>
       <div className="h-0.5 w-60 bg-stone-300 opacity-45"></div>
       <h3 className={`${hColor} font-semibold`}>{hText}</h3>
     </div>

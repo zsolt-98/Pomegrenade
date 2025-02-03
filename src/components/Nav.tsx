@@ -3,7 +3,7 @@ import pomegrenadeLogo from "../assets/pomegrenade-logo-586x245px.png";
 export default function Nav() {
   return (
     <header>
-      <nav className="bg-tertiary z-20 mx-auto flex h-24 w-full max-w-7xl items-center justify-between rounded-b-4xl px-10">
+      <nav className="bg-tertiary z-20 mx-auto flex h-24 max-w-7xl items-center justify-between rounded-b-4xl px-10">
         <img src={pomegrenadeLogo} className="h-full py-3" alt="" />
         <div className="flex gap-20">
           <a href="" className="text-secondary-light text-xl">

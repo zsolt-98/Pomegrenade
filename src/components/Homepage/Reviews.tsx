@@ -21,7 +21,7 @@ export default function Reviews() {
             hColor="text-tertiary-light"
             hText="Katie P."
           />
-          {/* Card 2 */}
+
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-54 right-7 rotate-[13deg]" : "top-4 left-110 rotate-[-4deg]"}  `}
             bgColor="bg-tertiary-light"
@@ -31,7 +31,7 @@ export default function Reviews() {
             hColor="text-tertiary"
             hText="Leo N."
           />
-          {/* Card 3 */}
+
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-88  left-7 rotate-[-14deg]" : "top-40 right-12 rotate-[17deg]"} `}
             bgColor="bg-secondary"
@@ -41,7 +41,7 @@ export default function Reviews() {
             hColor="text-tertiary-light"
             hText="Mia H."
           />
-          {/* Card 4 */}
+
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-124 right-11 rotate-[27deg]" : "bottom-23 left-50 rotate-[-7deg]"} `}
             bgColor="bg-primary-1"
@@ -51,7 +51,7 @@ export default function Reviews() {
             hColor="text-secondary-light"
             hText="Finn J."
           />
-          {/* Card 5 */}
+
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute ${isUnderMDScreen ? "top-164 rotate-[-3deg] left-2" : "bottom-5 right-65  rotate-[6deg]"} `}
             bgColor="bg-secondary-light"
