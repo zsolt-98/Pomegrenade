@@ -1,59 +1,64 @@
+import { useMediaQuery } from "react-responsive";
 import ReviewsCard from "./ReviewsCard";
 
 export default function Reviews() {
+  const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
+
   return (
-    <section className="bg-secondary-light h-[100vh]">
+    <section className="bg-secondary-light">
       <div className="container mx-auto flex max-w-7xl justify-center">
         {/* Cards */}
-        <div className="relative h-200 w-full">
+        <div
+          className={`relative ${isUnderXLScreen ? "mx-5 h-100" : "h-200"} w-full`}
+        >
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%+20rem)] -translate-y-1/2 rotate-[-15deg]"
+            cardClassName={`border-3 border-tertiary absolute top-31 left-11  rotate-[-15deg]`}
             bgColor="bg-tertiary"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary-light"
-            pText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam, a suscipit id iste recusandae assumenda vitae odio nulla atque numquam, repellat error adipisci itaque! Illo necessitatibus provident rerum officiis temporibus eum quae vero ab quos recusandae."
+            pText="Pomegrenade makes tracking so easy! I finally understand what I’m eating, and for the first time, I can see exactly where my calories are going. It’s crazy how much I was underestimating my portions before, but now I have complete control over my diet without feeling restricted."
             hColor="text-tertiary-light"
-            hText="Zsolt N."
+            hText="Katie P."
           />
           {/* Card 2 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-[-3deg]"
+            cardClassName={`border-3 border-tertiary absolute top-4 left-110 rotate-[-4deg]`}
             bgColor="bg-tertiary-light"
             starColor="var(--color-secondary)"
             pColor="text-tertiary"
-            pText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam, a suscipit id iste recusandae assumenda vitae odio nulla atque numquam, repellat error adipisci itaque! Illo necessitatibus provident rerum officiis temporibus eum quae vero ab quos recusandae."
+            pText="Super intuitive app! I lost 10 pounds without feeling like I was dieting at all. The interface is smooth, adding foods is effortless, and I love how it breaks down my macros in a way that actually makes sense. It’s like having a personal nutrition coach in my pocket!"
             hColor="text-tertiary"
-            hText="Zsolt N."
+            hText="Leo N."
           />
           {/* Card 3 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%-20rem)] -translate-y-1/2 rotate-[17deg]"
+            cardClassName={`border-3 border-tertiary absolute top-40 right-12 rotate-[17deg]`}
             bgColor="bg-secondary"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
-            pText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam, a suscipit id iste recusandae assumenda vitae odio nulla atque numquam, repellat error adipisci itaque! Illo necessitatibus provident rerum officiis temporibus eum quae vero ab quos recusandae."
+            pText="Finally, a calorie tracker that doesn’t feel like a chore! Other apps felt clunky and overwhelming, but Pomegrenade is refreshingly simple while still being powerful. I can log my meals in seconds, see my trends at a glance, and actually stay on track without getting frustrated."
             hColor="text-tertiary-light"
-            hText="Zsolt N."
+            hText="Mia H."
           />
           {/* Card 4 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%+10rem)] -translate-y-[calc(50%-20rem)] rotate-[-7deg]"
+            cardClassName={`border-3 border-tertiary absolute bottom-23 left-50 rotate-[-7deg]`}
             bgColor="bg-primary-1"
             starColor="var(--color-tertiary)"
             pColor="text-secondary-light"
-            pText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam, a suscipit id iste recusandae assumenda vitae odio nulla atque numquam, repellat error adipisci itaque! Illo necessitatibus provident rerum officiis temporibus eum quae vero ab quos recusandae."
+            pText="I gained muscle and lost fat at the same time—game changer! I’ve been trying to do a body recomposition for months, but it wasn’t until I started tracking my intake with Pomegrenade that I saw real progress. Now, I feel stronger, leaner, and more in control of my fitness than ever before!"
             hColor="text-secondary-light"
-            hText="Zsolt N."
+            hText="Finn J."
           />
           {/* Card 5 */}
           <ReviewsCard
-            cardClassName="border-3 border-tertiary absolute top-1/2 left-1/2 transform -translate-x-[calc(50%-10rem)] -translate-y-[calc(50%-20rem)] rotate-[6deg]"
+            cardClassName={`border-3 border-tertiary absolute bottom-5 right-65  rotate-[6deg]`}
             bgColor="bg-secondary-light"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary"
-            pText="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam, a suscipit id iste recusandae assumenda vitae odio nulla atque numquam, repellat error adipisci itaque! Illo necessitatibus provident rerum officiis temporibus eum quae vero ab quos recusandae."
+            pText="This app helped me stop mindless snacking and hit my goals. I never realized how many calories I was consuming just from little bites here and there. Now, I have a much better awareness of what I’m eating, and I’ve learned to make smarter choices that keep me feeling full and satisfied."
             hColor="text-tertiary"
-            hText="Zsolt N."
+            hText="Sophia G."
           />
         </div>
         {/* Cards */}
