@@ -34,7 +34,7 @@ export default function Footer() {
           <IconInstagram size={20} fill="var(--color-secondary-light)" />
           <IconTwitter size={20} fill="var(--color-secondary-light)" />
         </div>
-        <div className="border-secondary-light m-3 w-full border-b-1" />
+        <div className="border-secondary-light my-3 w-full border-b-1" />
         <div className="flex items-center justify-end">
           <p className="text-secondary-light text-md">
             &copy; 2025 Pomegrenade
