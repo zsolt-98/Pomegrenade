@@ -4,3 +4,7 @@ export interface SVGProps {
   fill?: string;
   className?: string;
 }
+
+export interface ButtonHollowPillProps {
+  children: string;
+}

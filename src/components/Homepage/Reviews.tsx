@@ -2,8 +2,8 @@ import ReviewsCard from "./ReviewsCard";
 
 export default function Reviews() {
   return (
-    <section className="bg-secondary-light py-20">
-      <div className="container mx-auto flex max-w-7xl flex-col justify-center text-center">
+    <section className="bg-secondary-light">
+      <div className="container mx-auto flex max-w-7xl flex-col items-center justify-center text-center">
         {/* Cards */}
         <h2 className="text-primary-1 mb-20 inline-block text-3xl font-semibold lg:text-5xl">
           Results that speak for themselves
