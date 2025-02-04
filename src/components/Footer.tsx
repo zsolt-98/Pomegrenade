@@ -35,11 +35,9 @@ export default function Footer() {
           <IconTwitter size={20} fill="var(--color-secondary-light)" />
         </div>
         <div className="border-secondary-light my-3 w-full border-b-1" />
-        <div className="flex items-center justify-end">
-          <p className="text-secondary-light text-md">
-            &copy; 2025 Pomegrenade
-          </p>
-          <p className=""></p>
+        <div className="text-secondary-light text-md flex items-center justify-between">
+          <a href="https://www.fatsecret.com">Powered by fatsecret</a>
+          <p>&copy; 2025 Pomegrenade</p>
         </div>
       </div>
     </footer>
