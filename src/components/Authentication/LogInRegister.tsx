@@ -13,7 +13,7 @@ export default function LogInRegister({ h2, content }: LogInRegisterProps) {
         <div className="">
           <div className="bg-secondary-light border-tertiary mx-5 flex max-w-[650px] flex-col items-center rounded-4xl border-3 p-5 md:p-20">
             <Link to="/" className="flex justify-center">
-              <img src={pomegrenadeLogo} className="h-30" alt="" />
+              <img src={pomegrenadeLogo} className="h-20 md:h-30" alt="" />
             </Link>
             <h2 className="text-primary-1 mb-10 inline-block text-center text-3xl font-semibold text-nowrap md:text-5xl">
               {h2}
