@@ -15,7 +15,7 @@ export default function LogInRegister({ h2, content }: LogInRegisterProps) {
             <Link to="/" className="flex justify-center">
               <img src={pomegrenadeLogo} className="h-20 md:h-30" alt="" />
             </Link>
-            <h2 className="text-primary-1 mb-10 inline-block text-center text-3xl font-semibold text-nowrap md:text-5xl">
+            <h2 className="text-primary-1 mb-10 inline-block text-center text-2xl font-semibold text-nowrap md:text-5xl">
               {h2}
             </h2>
             <form className="flex w-full max-w-[364px] flex-col items-center gap-3">
