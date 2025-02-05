@@ -1,17 +1,6 @@
 import { Link } from "react-router";
 import pomegrenadeLogo from "../../assets/pomegrenade-logo-tertiary-light-636x295px.png";
-import { InputProps } from "../../types";
-
-function Input({ type, className, placeholder }: InputProps) {
-  return (
-    <input
-      type={type}
-      className={`bg-tertiary-light w-full rounded-sm border-2 p-2 ${className}`}
-      placeholder={placeholder}
-      style={{ borderColor: "rgba(var(--color-tertiary-rgb), 0.75)" }}
-    />
-  );
-}
+import Input from "../shared/Input";
 
 export default function Register() {
   return (

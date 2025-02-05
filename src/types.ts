@@ -9,9 +9,3 @@ export interface ButtonHollowPillProps {
   children: string;
   navigateTo?: string;
 }
-
-export interface InputProps {
-  type: string;
-  className?: string;
-  placeholder: string;
-}
