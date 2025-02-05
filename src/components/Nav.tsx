@@ -1,3 +1,4 @@
+import { useLocation } from "react-router";
 import pomegrenadeLogo from "../assets/pomegrenade-logo-secondary-light-636x295px.png";
 import { ButtonHollowPillProps } from "../types";
 
@@ -10,8 +11,13 @@ function ButtonHollowPillNav({ children }: ButtonHollowPillProps) {
 }
 
 export default function Nav() {
+  const location = useLocation();
+  const isHomepageRoute = location.pathname === "/";
+
   return (
-    <header>
+    <header
+      className={`${isHomepageRoute ? "bg-secondary-light" : "bg-tertiary-light"}`}
+    >
       <nav className="bg-tertiary z-100 mx-auto flex h-24 max-w-7xl items-center justify-between rounded-b-4xl px-10">
         <img src={pomegrenadeLogo} className="h-full py-3" alt="" />
         <div className="flex gap-20">
