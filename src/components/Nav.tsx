@@ -17,6 +17,10 @@ function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
 export default function Nav() {
   const location = useLocation();
   const isHomepageRoute = location.pathname === "/";
+  const isAuthRoute =
+    location.pathname === "/login" || location.pathname === "/register";
+
+  if (isAuthRoute) return null;
 
   return (
     <header

@@ -16,6 +16,10 @@
   --breakpoint-3xl: 112rem;
 }
 
+:root {
+  --color-tertiary-rgb: 55, 153, 153;
+}
+
 body {
   font-family: "Fredoka", "sans-serif";
 }
