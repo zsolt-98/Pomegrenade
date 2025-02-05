@@ -12,7 +12,7 @@ export default function Register() {
           <Input type="email" placeholder="Email address" />
           <Input type="password" placeholder="Password" />
           <Input type="password" placeholder="Confirm password" />
-          <p className="text-tertiary">
+          <p className="text-tertiary px-5">
             By continuing, you agree to Pomegrenade's{" "}
             <a href="" className="font-semibold underline">
               Terms of Service
@@ -25,7 +25,7 @@ export default function Register() {
           <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
             Register
           </button>
-          <p className="text-tertiary">
+          <p className="text-tertiary px-5">
             Already have an account?{" "}
             <Link to="/login" className="font-semibold underline">
               Log in now!
