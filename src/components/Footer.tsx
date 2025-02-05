@@ -6,27 +6,29 @@ import IconTwitter from "./SVG/icons/IconTwitter";
 export default function Footer() {
   return (
     <footer className="bg-tertiary py-20">
-      <div className="align-center container mx-auto flex max-w-7xl flex-col justify-center">
-        <div className="text-secondary-light relative mb-20 flex w-full items-start justify-center gap-40">
+      <div className="align-center container mx-auto flex max-w-7xl flex-col justify-center px-5">
+        <div className="text-secondary-light relative mb-20 flex w-full flex-col items-center justify-center gap-10 text-sm md:text-lg lg:gap-0">
           <img
             src={pomegrenadeLogo}
-            className="absolute top-0 left-0 h-30"
+            className="h-30 lg:absolute lg:top-0 lg:left-0"
             alt="Pomegrenade logo"
           />
-          <div className="flex flex-col">
-            <a className="">Process</a>
-            <a className="">Premium</a>
-            <a className="">Blog</a>
-          </div>
-          <div className="flex flex-col">
-            <a className="">About us</a>
-            <a className="">Contact us</a>
-            <a className="">Help center</a>
-          </div>
-          <div className="flex flex-col">
-            <a className="">About us</a>
-            <a className="">Careers</a>
-            <a className="">Get the app</a>
+          <div className="flex gap-15 md:gap-25 lg:gap-40">
+            <div className="flex flex-col">
+              <a className="">Process</a>
+              <a className="">Premium</a>
+              <a className="">Blog</a>
+            </div>
+            <div className="flex flex-col">
+              <a className="">About us</a>
+              <a className="">Contact us</a>
+              <a className="">Help center</a>
+            </div>
+            <div className="flex flex-col">
+              <a className="">About us</a>
+              <a className="">Careers</a>
+              <a className="">Get the app</a>
+            </div>
           </div>
         </div>
         <div className="flex justify-end gap-3">
