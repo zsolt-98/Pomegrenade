@@ -7,4 +7,5 @@ export interface SVGProps {
 
 export interface ButtonHollowPillProps {
   children: string;
+  navigateTo?: string;
 }
