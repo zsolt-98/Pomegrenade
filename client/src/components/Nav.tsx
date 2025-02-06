@@ -61,7 +61,7 @@ export default function Nav() {
       <nav className="bg-tertiary rounded-b-4xl mx-auto max-w-7xl transition-all duration-300">
         {/* Main Nav */}
         <div className="flex h-24 items-center justify-between px-5 lg:px-10">
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-2">
             {isUnderMDScreen && (
               <button onClick={() => setisNavMenuOpen(!isNavMenuOpen)}>
                 {isNavMenuOpen ? (
@@ -74,7 +74,7 @@ export default function Nav() {
             <Link to="/" className="">
               <img
                 src={pomegrenadeLogo}
-                className="h-auto w-32 py-3 md:w-40"
+                className="h-auto w-28 py-3 md:w-40"
                 alt=""
               />
             </Link>
