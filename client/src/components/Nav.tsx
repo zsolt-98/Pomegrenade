@@ -77,7 +77,7 @@ export default function Nav() {
             <Link to="/" className="">
               <img
                 src={pomegrenadeLogo}
-                className="h-auto w-28 py-3 md:w-40"
+                className="h-auto w-32 py-0 md:w-40 md:py-3"
                 alt=""
               />
             </Link>
