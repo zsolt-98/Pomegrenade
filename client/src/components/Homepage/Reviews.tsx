@@ -9,10 +9,10 @@ export default function Reviews() {
           Results that speak for themselves
         </h2>
         <div
-          className={`relative mx-5 h-246 w-full max-xl:max-w-[751px] max-md:max-w-[443px] md:h-150 xl:mx-0 xl:h-200`}
+          className={`h-246 md:h-150 xl:h-200 relative w-full px-5 max-xl:max-w-[751px] max-md:max-w-[443px] xl:px-0`}
         >
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute  top-8 left-7  md:top-23 md:left-7 xl:top-31 xl:left-11 rotate-[-15deg]`}
+            cardClassName={`border-3 border-tertiary absolute  top-8 left-11  md:top-23 md:left-7 xl:top-31 xl:left-11 rotate-[-15deg]`}
             bgColor="bg-tertiary"
             starColor="var(--color-primary-1)"
             pColor="text-tertiary-light"
@@ -22,7 +22,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-54 right-7 rotate-[13deg] xl:top-4 xl:left-110 md:top-7 md:left-60 md:rotate-[-4deg]  `}
+            cardClassName={`border-3 border-tertiary absolute top-54 right-10 rotate-[13deg] xl:top-4 xl:left-110 md:top-7 md:left-60 md:rotate-[-4deg]  `}
             bgColor="bg-tertiary-light"
             starColor="var(--color-secondary)"
             pColor="text-tertiary"
@@ -32,7 +32,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-88 left-7  rotate-[-14deg] xl:top-27 xl:left-198 md:top-40 md:left-90 md:rotate-[17deg] `}
+            cardClassName={`border-3 border-tertiary absolute top-88 left-10  rotate-[-14deg] xl:top-27 xl:left-198 md:top-40 md:left-90 md:rotate-[17deg] `}
             bgColor="bg-secondary"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
@@ -42,7 +42,7 @@ export default function Reviews() {
           />
 
           <ReviewsCard
-            cardClassName={`border-3 border-tertiary absolute top-124 right-8 rotate-[27deg] xl:top-65 xl:left-50 md:top-60 md:left-30 md:rotate-[-7deg]`}
+            cardClassName={`border-3 border-tertiary absolute top-124 right-13 rotate-[27deg] xl:top-65 xl:left-50 md:top-60 md:left-30 md:rotate-[-7deg]`}
             bgColor="bg-primary-1"
             starColor="var(--color-tertiary)"
             pColor="text-secondary-light"
