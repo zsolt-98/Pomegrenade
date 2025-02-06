@@ -9,7 +9,7 @@ function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
   return (
     <button
-      className="border-secondary-light text-secondary-light hover:bg-secondary-light hover:text-tertiary border-1 rounded-full px-1.5 py-0.5 md:border-2 md:px-3 md:py-1"
+      className="border-secondary-light text-secondary-light hover:bg-secondary-light hover:text-tertiary cursor-pointer rounded-full border-2 px-2 py-1 md:px-3"
       onClick={() => navigate(`/${navigateTo}`)}
     >
       {children}
@@ -63,7 +63,10 @@ export default function Nav() {
         <div className="flex h-24 items-center justify-between px-5 lg:px-10">
           <div className="flex items-center gap-2">
             {isUnderMDScreen && (
-              <button onClick={() => setisNavMenuOpen(!isNavMenuOpen)}>
+              <button
+                className="cursor-pointer"
+                onClick={() => setisNavMenuOpen(!isNavMenuOpen)}
+              >
                 {isNavMenuOpen ? (
                   <X size={36} color="var(--color-secondary-light)" />
                 ) : (
