@@ -9,7 +9,7 @@ function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
   return (
     <button
-      className="border-secondary-light text-secondary-light hover:bg-secondary-light hover:text-tertiary rounded-full border-2 px-3 py-1 font-normal"
+      className="border-secondary-light text-secondary-light hover:bg-secondary-light hover:text-tertiary border-1 rounded-full px-1.5 py-0.5 md:border-2 md:px-3 md:py-1"
       onClick={() => navigate(`/${navigateTo}`)}
     >
       {children}
