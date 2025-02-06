@@ -11,7 +11,7 @@ export default function LogInRegister({ h2, content }: LogInRegisterProps) {
     <section className="bg-tertiary-light flex items-center py-20">
       <div className="container mx-auto flex max-w-7xl justify-center">
         <div className="">
-          <div className="bg-secondary-light border-tertiary rounded-4xl border-3 mx-5 flex min-w-[335px] max-w-[650px] flex-col items-center p-5 md:p-20">
+          <div className="bg-secondary-light border-tertiary rounded-4xl border-3 flex min-w-[calc(100vw-1.25rem)] max-w-[650px] flex-col items-center p-5 md:p-20">
             <Link to="/" className="flex justify-center">
               <img src={pomegrenadeLogo} className="md:h-30 h-20" alt="" />
             </Link>
