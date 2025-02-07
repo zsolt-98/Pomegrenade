@@ -22,7 +22,7 @@ export default function GetStarted() {
   return (
     <section className="bg-tertiary-light">
       <DividerReviews fill="var(--color-secondary-light)" />
-      <div className="container mx-auto flex max-w-7xl flex-col items-center justify-center py-20 text-center">
+      <div className="container mx-auto flex max-w-7xl flex-col items-center justify-center py-10 text-center">
         <h2 className="text-primary-1 mb-10 inline-block text-3xl font-semibold lg:text-5xl">
           Get started now!
         </h2>

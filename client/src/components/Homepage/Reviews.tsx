@@ -5,11 +5,11 @@ export default function Reviews() {
     <section className="bg-secondary-light">
       <div className="container mx-auto flex max-w-7xl flex-col items-center justify-center text-center">
         {/* Cards */}
-        <h2 className="text-primary-1 mb-20 inline-block text-3xl font-semibold lg:text-5xl">
+        <h2 className="text-primary-1 mb-10 mt-5 inline-block text-3xl font-semibold lg:mb-20 lg:mt-0 lg:text-5xl">
           Results that speak for themselves
         </h2>
         <div
-          className={`h-246 md:h-150 xl:h-200 relative w-full px-5 max-xl:max-w-[751px] max-md:max-w-[443px] xl:px-0`}
+          className={`h-225 md:h-150 xl:h-200 relative mb-10 w-full px-5 max-xl:max-w-[751px] max-md:max-w-[443px] xl:px-0`}
         >
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute  top-8 left-11  md:top-23 md:left-7 xl:top-31 xl:left-11 rotate-[-15deg]`}
