@@ -9,7 +9,7 @@ export default function Reviews() {
           Results that speak for themselves
         </h2>
         <div
-          className={`h-225 md:h-150 xl:h-200 relative mb-10 w-full px-5 max-xl:max-w-[751px] max-md:max-w-[443px] xl:px-0`}
+          className={`h-225 md:h-150 xl:h-200 relative mb-10 w-full px-5 max-xl:max-w-[751px] max-md:max-w-[443px] lg:mb-0 xl:px-0`}
         >
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute  top-8 left-11  md:top-23 md:left-7 xl:top-31 xl:left-11 rotate-[-15deg]`}
