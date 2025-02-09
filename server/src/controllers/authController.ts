@@ -2,6 +2,7 @@ import { Request, response, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
+import transporter from "../../config/nodemailer.js";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
@@ -38,6 +39,16 @@ export const register = async (req: Request, res: Response) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
+    // Send welcome email
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: email,
+      subject: "Welcome to Pomegrenade",
+      text: `Welcome to Pomegrenade. Your account has been successfully created under the email address ${email}`,
+    };
+
+    await transporter.sendMail(mailOptions);
 
     return res.json({ success: true });
   } catch (error) {
