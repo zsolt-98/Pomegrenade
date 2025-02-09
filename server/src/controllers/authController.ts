@@ -94,7 +94,7 @@ export const logout = async (req: Request, res: Response) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
 
-    return response.json({ success: true, message: "Logged Out" });
+    return res.json({ success: true, message: "Logged Out" });
   } catch (error) {
     res.json({ success: false, message: (error as Error).message });
   }
