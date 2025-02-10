@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import pomegrenadeLogo from "../assets/pomegrenade-logo-secondary-light-636x295px.png";
 import { ButtonHollowPillProps } from "../types";
 import { Menu, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
+import { AppContext } from "../context/AppContext";
 
 function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ function NavbarLinks({ className }: NavbarLinksProps) {
 
 export default function Nav() {
   const [isNavMenuOpen, setisNavMenuOpen] = useState(false);
+  const { userData } = useContext(AppContext);
   const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
 
   const location = useLocation();
@@ -85,11 +87,19 @@ export default function Nav() {
           {!isUnderMDScreen && (
             <NavbarLinks className="flex gap-10 lg:gap-20" />
           )}
-          <div className="flex gap-2">
-            <ButtonHollowPillNav children="Log In" navigateTo="login" />
-            <ButtonHollowPillNav children="Register" navigateTo="register" />
-          </div>
+
+          {userData ? (
+            <div className="flex gap-2">
+              <p className="">Hello, {userData.name}</p>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <ButtonHollowPillNav children="Log In" navigateTo="login" />
+              <ButtonHollowPillNav children="Register" navigateTo="register" />
+            </div>
+          )}
         </div>
+
         {/* Mobile Menu */}
         <div
           className={`overflow-hidden transition-[height,opacity] duration-300 ease-in-out ${

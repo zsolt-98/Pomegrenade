@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export default function LogIn() {
   const navigate = useNavigate();
-  const { backendUrl, setIsLoggedin } = useContext(AppContext);
+  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +26,7 @@ export default function LogIn() {
 
       if (data.success) {
         setIsLoggedin(true);
+        getUserData();
         navigate("/");
         toast.success("Successful log in");
       } else {

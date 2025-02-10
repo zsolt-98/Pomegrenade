@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export default function Register() {
   const navigate = useNavigate();
-  const { backendUrl, setIsLoggedin } = useContext(AppContext);
+  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +28,7 @@ export default function Register() {
 
       if (data.success) {
         setIsLoggedin(true);
+        getUserData();
         navigate("/");
         toast.success("Successful registration");
       } else {
@@ -35,6 +36,7 @@ export default function Register() {
       }
     } catch (error) {
       console.log(error); // Temporary
+      toast.error("An error occurred during registration.");
       // toast.error(data.message);
     }
   };
