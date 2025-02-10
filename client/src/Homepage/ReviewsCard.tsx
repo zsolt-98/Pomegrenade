@@ -1,4 +1,4 @@
-import FiveStars from "../SVG/FiveStars";
+import FiveStars from "../components/SVG/FiveStars";
 
 interface ReviewCardProps {
   cardClassName?: string;
@@ -21,7 +21,7 @@ export default function ReviewsCard({
 }: ReviewCardProps) {
   return (
     <div
-      className={`${bgColor} ${cardClassName} flex h-60 w-60 flex-col justify-evenly gap-1 rounded-4xl p-3 md:h-80 md:w-80 xl:h-110 xl:w-110 xl:gap-5 xl:p-5`}
+      className={`${bgColor} ${cardClassName} rounded-4xl xl:h-110 xl:w-110 flex h-60 w-60 flex-col justify-evenly gap-1 p-3 md:h-80 md:w-80 xl:gap-5 xl:p-5`}
     >
       <FiveStars size={24} fill={starColor} />
       <p className={`text-xs md:text-sm xl:text-lg ${pColor}`}>{pText}</p>
