@@ -1,7 +1,7 @@
 import pomegrenadeLogo from "../assets/pomegrenade-logo-tertiary-light-text-590x590px.png";
-import IconFacebook from "./SVG/icons/IconFacebook";
-import IconInstagram from "./SVG/icons/IconInstagram";
-import IconTwitter from "./SVG/icons/IconTwitter";
+import IconFacebook from "./svg/icons/IconFacebook";
+import IconInstagram from "./svg/icons/IconInstagram";
+import IconTwitter from "./svg/icons/IconTwitter";
 
 export default function Footer() {
   return (

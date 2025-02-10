@@ -1,9 +1,9 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import Footer from "./components/Footer";
-import Homepage from "./Homepage/Homepage";
+import Homepage from "./homepage/Homepage";
 import Nav from "./components/Nav";
-import LogIn from "./components/Authentication/LogIn";
-import Register from "./components/Authentication/Register";
+import LogIn from "./components/authentication/LogIn";
+import Register from "./components/authentication/Register";
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import FiveStars from "../components/SVG/FiveStars";
+import FiveStars from "../components/svg/FiveStars";
 
 interface ReviewCardProps {
   cardClassName?: string;
