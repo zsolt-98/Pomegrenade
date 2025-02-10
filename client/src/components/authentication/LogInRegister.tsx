@@ -17,9 +17,7 @@ export default function LogInRegister({ h2, content }: LogInRegisterProps) {
           <h2 className="text-primary-1 mb-10 inline-block text-nowrap text-center text-2xl font-semibold md:text-5xl">
             {h2}
           </h2>
-          <form className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg">
-            {content}
-          </form>
+          {content}
         </div>
       </div>
     </section>

@@ -1,16 +1,65 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Input from "../shared/Input";
 import LogInRegister from "./LogInRegister";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { AppContext } from "../../context/AppContext";
+import { toast } from "react-toastify";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { backendUrl, setIsLoggedin } = useContext(AppContext);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmitHandler = async (e) => {
+    try {
+      e.preventDefault();
+
+      axios.defaults.withCredentials = true;
+
+      const { data } = await axios.post(backendUrl + "api/auth/register", {
+        name,
+        email,
+        password,
+      });
+
+      if (data.success) {
+        setIsLoggedin(true);
+        navigate("/");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(data.message);
+    }
+  };
+
   return (
     <LogInRegister
       h2="Create your account"
       content={
-        <>
-          <Input type="text" placeholder="First name" />
-          <Input type="email" placeholder="Email address" />
-          <Input type="password" placeholder="Password" />
+        <form className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg">
+          <Input
+            type="text"
+            placeholder="First name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+          <Input
+            type="email"
+            placeholder="Email address"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
           <Input type="password" placeholder="Confirm password" />
           <p className="text-tertiary px-5">
             By continuing, you agree to Pomegrenade's{" "}
@@ -31,7 +80,7 @@ export default function Register() {
               Log in now!
             </Link>
           </p>
-        </>
+        </form>
       }
     />
   );
