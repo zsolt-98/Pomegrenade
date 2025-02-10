@@ -5,6 +5,8 @@ import { ButtonHollowPillProps } from "../types";
 import { Menu, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
@@ -40,13 +42,30 @@ function NavbarLinks({ className }: NavbarLinksProps) {
 
 export default function Nav() {
   const [isNavMenuOpen, setisNavMenuOpen] = useState(false);
-  const { userData } = useContext(AppContext);
+  const { userData, backendUrl, setUserData, setIsLoggedin } =
+    useContext(AppContext);
   const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
 
+  const navigate = useNavigate();
   const location = useLocation();
   const isHomepageRoute = location.pathname === "/";
   const isAuthRoute =
     location.pathname === "/login" || location.pathname === "/register";
+
+  const logout = async () => {
+    try {
+      axios.defaults.withCredentials = true;
+      const { data } = await axios.post(backendUrl + "/api/auth/logout");
+      if (data.success) {
+        setIsLoggedin(false);
+        setUserData(false);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error); // Temporary
+      toast.error("An error has occurred.");
+    }
+  };
 
   useEffect(() => {
     if (!isUnderMDScreen) {
@@ -89,8 +108,32 @@ export default function Nav() {
           )}
 
           {userData ? (
-            <div className="flex gap-2">
-              <p className="">Hello, {userData.name}</p>
+            <div className="">
+              <p className="text-secondary-light text-lg">
+                Hello,{" "}
+                <Link
+                  to="profile"
+                  className="group relative capitalize underline"
+                >
+                  {userData.name}
+                  <div className="absolute right-0 top-0 z-10 hidden pt-10 group-hover:block">
+                    <ul className="m-0 list-none text-nowrap bg-gray-100 p-2 text-sm">
+                      {!userData.isAccountVerified && (
+                        <li className="px-2 py-1 hover:bg-gray-200">
+                          Verfiy email
+                        </li>
+                      )}
+
+                      <li
+                        onClick={logout}
+                        className="px-2 py-1 hover:bg-gray-200"
+                      >
+                        Log out
+                      </li>
+                    </ul>
+                  </div>
+                </Link>
+              </p>
             </div>
           ) : (
             <div className="flex gap-2">

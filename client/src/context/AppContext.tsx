@@ -8,8 +8,10 @@ interface AppContextType {
   backendUrl: string;
   isLoggedin: boolean;
   setIsLoggedin: (value: boolean) => void;
-  userData: false | { name: string };
-  setUserData: (value: false | { name: string }) => void;
+  userData: false | { name: string; isAccountVerified: boolean };
+  setUserData: (
+    value: false | { name: string; isAccountVerified: boolean },
+  ) => void;
   getUserData: () => void;
 }
 
@@ -27,18 +29,22 @@ const defaultContextValue: AppContextType = {
 export const AppContext = createContext<AppContextType>(defaultContextValue);
 
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
+  axios.defaults.withCredentials = true;
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [userData, setUserData] = useState<false | { name: string }>(false);
+  const [userData, setUserData] = useState<
+    false | { name: string; isAccountVerified: boolean }
+  >(false);
 
   const getAuthState = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/api/auth/is-auth");
       if (data.success) {
         setIsLoggedin(true);
+        getUserData();
       }
     } catch (error) {
       console.log(error); // Temporary
-      toast.error("An error occurred");
+      toast.error("An error has occurred.");
     }
   };
 

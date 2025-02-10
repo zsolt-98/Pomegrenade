@@ -23,6 +23,7 @@ function App() {
             {/* <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="reset-password" element={<ResetPassword />} /> */}
             <Route path="register" element={<Register />} />
+            <Route path="profile" element={<Register />} />
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>
           <Footer />
