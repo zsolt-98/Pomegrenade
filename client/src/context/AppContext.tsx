@@ -7,7 +7,7 @@ interface AppContextType {
   isLoggedin: boolean;
   setIsLoggedin: (value: boolean) => void;
   userData: boolean;
-  setUserData: (value: boolean) => void; // temporary any
+  setUserData: (value: boolean) => void;
 }
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;

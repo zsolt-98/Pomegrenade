@@ -14,13 +14,13 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
       axios.defaults.withCredentials = true;
 
-      const { data } = await axios.post(backendUrl + "api/auth/register", {
+      const { data } = await axios.post(backendUrl + "/api/auth/register", {
         name,
         email,
         password,
@@ -29,11 +29,13 @@ export default function Register() {
       if (data.success) {
         setIsLoggedin(true);
         navigate("/");
+        toast.success("Successful registration");
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(data.message);
+      console.log(error); // Temporary
+      // toast.error(data.message);
     }
   };
 
@@ -41,7 +43,10 @@ export default function Register() {
     <LogInRegister
       h2="Create your account"
       content={
-        <form className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg">
+        <form
+          className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+          onSubmit={onSubmitHandler}
+        >
           <Input
             type="text"
             placeholder="First name"

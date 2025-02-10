@@ -13,13 +13,13 @@ export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
 
       axios.defaults.withCredentials = true;
 
-      const { data } = await axios.post(backendUrl + "api/auth/login", {
+      const { data } = await axios.post(backendUrl + "/api/auth/login", {
         email,
         password,
       });
@@ -27,11 +27,14 @@ export default function LogIn() {
       if (data.success) {
         setIsLoggedin(true);
         navigate("/");
+        toast.success("Successful log in");
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(data.message);
+      console.log(error); // Temporary
+      toast.error("An error occurred during login.");
+      // toast.error(data.message);
     }
   };
 
