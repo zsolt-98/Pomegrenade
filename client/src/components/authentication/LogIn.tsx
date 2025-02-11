@@ -70,7 +70,7 @@ export default function LogIn() {
               </Link>
             </p>
             <Link
-              to="/register"
+              to="/reset-password"
               className="text-tertiary flex font-semibold underline"
             >
               Forgot your password?
