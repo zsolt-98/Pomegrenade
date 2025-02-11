@@ -75,6 +75,26 @@ export default function Nav() {
 
   if (isAuthRoute) return null;
 
+  const sendVerificationOtp = async () => {
+    try {
+      axios.defaults.withCredentials = true;
+
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/send-verify-otp",
+      );
+
+      if (data.success) {
+        navigate("/email-verify");
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error); // Temporary
+      toast.error("An error has occurred.");
+    }
+  };
+
   return (
     <header
       className={`${isHomepageRoute ? "bg-secondary-light" : "bg-tertiary-light"}`}
@@ -109,17 +129,17 @@ export default function Nav() {
 
           {userData ? (
             <div className="">
-              <p className="text-secondary-light text-lg">
+              <div className="text-secondary-light text-lg">
                 Hello,{" "}
-                <Link
-                  to="profile"
-                  className="group relative capitalize underline"
-                >
+                <a className="group relative capitalize underline">
                   {userData.name}
                   <div className="absolute right-0 top-0 z-10 hidden pt-10 group-hover:block">
                     <ul className="m-0 list-none text-nowrap bg-gray-100 p-2 text-sm">
                       {!userData.isAccountVerified && (
-                        <li className="px-2 py-1 hover:bg-gray-200">
+                        <li
+                          className="px-2 py-1 hover:bg-gray-200"
+                          onClick={sendVerificationOtp}
+                        >
                           Verfiy email
                         </li>
                       )}
@@ -132,8 +152,8 @@ export default function Nav() {
                       </li>
                     </ul>
                   </div>
-                </Link>
-              </p>
+                </a>
+              </div>
             </div>
           ) : (
             <div className="flex gap-2">
