@@ -12,9 +12,12 @@ import { toast } from "react-toastify";
 
 function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
+  const { isLoggedin } = useContext(AppContext);
+  const location = useLocation();
+  const isHomepageRoute = location.pathname === "/";
   return (
     <button
-      className="border-secondary-light text-secondary-light hover:bg-secondary-light hover:text-tertiary cursor-pointer rounded-full border-2 px-2 py-1 md:px-3"
+      className={`${!isLoggedin && !isHomepageRoute ? "border-tertiary-light text-tertiary-light hover:bg-tertiary-light" : "border-secondary-light text-secondary-light hover:bg-secondary-light"} hover:text-tertiary cursor-pointer rounded-full border-2 px-2 py-1 md:px-3`}
       onClick={() => navigate(`/${navigateTo}`)}
     >
       {children}
@@ -28,9 +31,12 @@ interface NavbarLinksProps {
 
 function NavbarLinks({ className }: NavbarLinksProps) {
   const { isLoggedin } = useContext(AppContext);
+  const location = useLocation();
+  const isHomepageRoute = location.pathname === "/";
+
   return (
     <div
-      className={`${className || ""} ${!isLoggedin ? "text-secondary-light" : "text-tertiary-light"} text-xl`}
+      className={`${className || ""} ${!isLoggedin && isHomepageRoute ? "text-secondary-light" : "text-tertiary-light"} text-xl`}
     >
       <a href="">Process</a>
       <a href="">Reviews</a>
@@ -49,6 +55,7 @@ export default function Nav() {
   const location = useLocation();
   const isAuthRoute =
     location.pathname === "/login" || location.pathname === "/register";
+  const isHomepageRoute = location.pathname === "/";
 
   const logout = async () => {
     try {
@@ -95,7 +102,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`${!isLoggedin ? "bg-secondary-light" : "bg-tertiary-light"}`}
+      className={`${!isLoggedin && isHomepageRoute ? "bg-secondary-light" : "bg-tertiary-light"}`}
     >
       <nav className="bg-tertiary rounded-b-4xl mx-auto max-w-7xl transition-all duration-300">
         {/* Main Nav */}
@@ -116,7 +123,7 @@ export default function Nav() {
             <Link to="/" className="">
               <img
                 src={
-                  !isLoggedin
+                  !isLoggedin && isHomepageRoute
                     ? pomegrenadeLogoSecondaryLight
                     : pomegrenadeLogoTertiaryLight
                 }
