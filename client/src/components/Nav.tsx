@@ -48,7 +48,6 @@ export default function Nav() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isHomepageRoute = location.pathname === "/";
   const isAuthRoute =
     location.pathname === "/login" || location.pathname === "/register";
 
