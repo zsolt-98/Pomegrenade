@@ -5,9 +5,9 @@ import { useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldValues, Control } from "react-hook-form";
 
-interface RegisterFormInputs {
+interface RegisterFormInputs extends FieldValues {
   name: string;
   email: string;
   password: string;
@@ -57,9 +57,9 @@ export default function Register() {
           className="flex w-full max-w-[364px] flex-col items-center justify-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Controller
+          <Controller<RegisterFormInputs>
             name="name"
-            control={control}
+            control={control as Control<RegisterFormInputs>}
             rules={{
               required: "Name is required",
               minLength: {
@@ -73,14 +73,14 @@ export default function Register() {
                 placeholder="First name"
                 value={field.value}
                 onChange={field.onChange}
-                error={errors.name?.message}
+                error={errors.name?.message as string}
               />
             )}
           />
 
-          <Controller
+          <Controller<RegisterFormInputs>
             name="email"
-            control={control}
+            control={control as Control<RegisterFormInputs>}
             rules={{
               required: "Email is required",
               pattern: {
@@ -94,14 +94,14 @@ export default function Register() {
                 placeholder="Email address"
                 value={field.value}
                 onChange={field.onChange}
-                error={errors.email?.message}
+                error={errors.email?.message as string}
               />
             )}
           />
 
-          <Controller
+          <Controller<RegisterFormInputs>
             name="password"
-            control={control}
+            control={control as Control<RegisterFormInputs>}
             rules={{
               required: "Password is required",
               minLength: {
@@ -115,17 +115,17 @@ export default function Register() {
                 placeholder="Password"
                 value={field.value}
                 onChange={field.onChange}
-                error={errors.password?.message}
+                error={errors.password?.message as string}
               />
             )}
           />
 
-          <Controller
+          <Controller<RegisterFormInputs>
             name="confirmPassword"
-            control={control}
+            control={control as Control<RegisterFormInputs>}
             rules={{
               required: "Please confirm your password",
-              validate: (value) =>
+              validate: (value: string) =>
                 value === watch("password") || "Passwords do not match",
             }}
             render={({ field }) => (
@@ -134,7 +134,7 @@ export default function Register() {
                 placeholder="Confirm password"
                 value={field.value}
                 onChange={field.onChange}
-                error={errors.confirmPassword?.message}
+                error={errors.confirmPassword?.message as string}
               />
             )}
           />
