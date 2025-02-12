@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-tertiary py-10 lg:py-20">
       <div className="align-center container mx-auto flex max-w-7xl flex-col justify-center px-5">
-        <div className="text-secondary-light relative mb-10 flex w-full flex-col items-center justify-center gap-10 text-sm md:text-lg lg:mb-20 lg:gap-0">
+        <div className="text-tertiary-light relative mb-10 flex w-full flex-col items-center justify-center gap-10 text-sm md:text-lg lg:mb-20 lg:gap-0">
           <img
             src={pomegrenadeLogo}
             className="h-30 lg:absolute lg:left-0 lg:top-0"
@@ -32,12 +32,12 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex justify-end gap-3">
-          <IconFacebook size={20} fill="var(--color-secondary-light)" />
-          <IconInstagram size={20} fill="var(--color-secondary-light)" />
-          <IconTwitter size={20} fill="var(--color-secondary-light)" />
+          <IconFacebook size={20} fill="var(--color-tertiary-light)" />
+          <IconInstagram size={20} fill="var(--color-tertiary-light)" />
+          <IconTwitter size={20} fill="var(--color-tertiary-light)" />
         </div>
-        <div className="border-secondary-light border-b-1 my-3 w-full" />
-        <div className="text-secondary-light text-md flex items-center justify-between">
+        <div className="border-tertiary-light border-b-1 my-3 w-full" />
+        <div className="text-tertiary-light text-md flex items-center justify-between">
           <a href="https://www.fatsecret.com">Powered by fatsecret</a>
           <p>&copy; 2025 Pomegrenade</p>
         </div>

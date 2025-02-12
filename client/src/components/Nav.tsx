@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-import pomegrenadeLogo from "../assets/pomegrenade-logo-secondary-light-636x295px.png";
+import pomegrenadeLogoSecondaryLight from "../assets/pomegrenade-logo-secondary-light-636x295px.png";
+import pomegrenadeLogoTertiaryLight from "../assets/pomegrenade-logo-tertiary-light-636x295px.png";
+
 import { ButtonHollowPillProps } from "../types";
 import { Menu, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
@@ -25,17 +27,14 @@ interface NavbarLinksProps {
 }
 
 function NavbarLinks({ className }: NavbarLinksProps) {
+  const { isLoggedin } = useContext(AppContext);
   return (
-    <div className={`${className}`}>
-      <a href="" className="text-secondary-light text-xl">
-        Process
-      </a>
-      <a href="" className="text-secondary-light text-xl">
-        Reviews
-      </a>
-      <a href="" className="text-secondary-light text-xl">
-        Help
-      </a>
+    <div
+      className={`${className || ""} ${!isLoggedin ? "text-secondary-light" : "text-tertiary-light"} text-xl`}
+    >
+      <a href="">Process</a>
+      <a href="">Reviews</a>
+      <a href="">Help</a>
     </div>
   );
 }
@@ -116,7 +115,11 @@ export default function Nav() {
             )}
             <Link to="/" className="">
               <img
-                src={pomegrenadeLogo}
+                src={
+                  !isLoggedin
+                    ? pomegrenadeLogoSecondaryLight
+                    : pomegrenadeLogoTertiaryLight
+                }
                 className="h-auto w-32 py-0 md:w-40 md:py-3"
                 alt=""
               />
@@ -128,7 +131,9 @@ export default function Nav() {
 
           {userData ? (
             <div className="">
-              <div className="text-secondary-light text-lg">
+              <div
+                className={`${!isLoggedin ? "text-secondary-light" : "text-tertiary-light"} text-lg`}
+              >
                 Hello,{" "}
                 <a className="group relative capitalize underline">
                   {userData.name}
