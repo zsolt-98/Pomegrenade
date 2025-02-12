@@ -2,17 +2,16 @@ interface InputProps {
   type: string;
   className?: string;
   placeholder: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Input({
   type,
   className,
   placeholder,
-  onChange,
   value,
-  ...rest
+  onChange,
 }: InputProps) {
   return (
     <input
@@ -22,9 +21,8 @@ export default function Input({
       style={{
         borderColor: "rgba(var(--color-tertiary-rgb), 0.75)",
       }}
-      onChange={onChange}
       value={value}
-      {...rest}
+      onChange={onChange}
     />
   );
 }
