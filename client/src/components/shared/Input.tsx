@@ -16,11 +16,8 @@ export default function Input({
   return (
     <input
       type={type}
-      className={`bg-tertiary-light text-tertiary w-full rounded-sm border-2 p-2 text-lg ${className || ""}`}
+      className={`bg-tertiary-light text-tertiary w-full rounded-sm border-2 border-[rgba(var(--color-tertiary-rgb),0.75)] p-2 text-lg outline-none transition-colors duration-200 focus:border-[rgba(var(--color-tertiary-rgb),1)] ${className || ""}`}
       placeholder={placeholder}
-      style={{
-        borderColor: "rgba(var(--color-tertiary-rgb), 0.75)",
-      }}
       value={value}
       onChange={onChange}
     />
