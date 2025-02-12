@@ -42,7 +42,7 @@ function NavbarLinks({ className }: NavbarLinksProps) {
 
 export default function Nav() {
   const [isNavMenuOpen, setisNavMenuOpen] = useState(false);
-  const { userData, backendUrl, setUserData, setIsLoggedin } =
+  const { userData, backendUrl, setUserData, setIsLoggedin, isLoggedin } =
     useContext(AppContext);
   const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
 
@@ -97,7 +97,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`${isHomepageRoute ? "bg-secondary-light" : "bg-tertiary-light"}`}
+      className={`${!isLoggedin ? "bg-secondary-light" : "bg-tertiary-light"}`}
     >
       <nav className="bg-tertiary rounded-b-4xl mx-auto max-w-7xl transition-all duration-300">
         {/* Main Nav */}
