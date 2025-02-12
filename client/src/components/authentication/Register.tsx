@@ -54,114 +54,90 @@ export default function Register() {
       h2="Create your account"
       content={
         <form
-          className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+          className="flex w-full max-w-[364px] flex-col items-center justify-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="w-full">
-            <Controller
-              name="name"
-              control={control}
-              rules={{
-                required: "Name is required",
-                minLength: {
-                  value: 2,
-                  message: "Name must be at least 2 characters long",
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  type="text"
-                  placeholder="First name"
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-            {errors.name && (
-              <span className="text-sm text-red-500">
-                {errors.name.message}
-              </span>
+          <Controller
+            name="name"
+            control={control}
+            rules={{
+              required: "Name is required",
+              minLength: {
+                value: 2,
+                message: "Name must be at least 2 characters long",
+              },
+            }}
+            render={({ field }) => (
+              <Input
+                type="text"
+                placeholder="First name"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.name?.message}
+              />
             )}
-          </div>
+          />
 
-          <div className="w-full">
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-            {errors.email && (
-              <span className="text-sm text-red-500">
-                {errors.email.message}
-              </span>
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => (
+              <Input
+                type="email"
+                placeholder="Email address"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.email?.message}
+              />
             )}
-          </div>
+          />
 
-          <div className="w-full">
-            <Controller
-              name="password"
-              control={control}
-              rules={{
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters long",
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-            {errors.password && (
-              <span className="text-sm text-red-500">
-                {errors.password.message}
-              </span>
+          <Controller
+            name="password"
+            control={control}
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters long",
+              },
+            }}
+            render={({ field }) => (
+              <Input
+                type="password"
+                placeholder="Password"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.password?.message}
+              />
             )}
-          </div>
+          />
 
-          <div className="w-full">
-            <Controller
-              name="confirmPassword"
-              control={control}
-              rules={{
-                required: "Please confirm your password",
-                validate: (value) =>
-                  value === watch("password") || "Passwords do not match",
-              }}
-              render={({ field }) => (
-                <Input
-                  type="password"
-                  placeholder="Confirm password"
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-            {errors.confirmPassword && (
-              <span className="text-sm text-red-500">
-                {errors.confirmPassword.message}
-              </span>
+          <Controller
+            name="confirmPassword"
+            control={control}
+            rules={{
+              required: "Please confirm your password",
+              validate: (value) =>
+                value === watch("password") || "Passwords do not match",
+            }}
+            render={({ field }) => (
+              <Input
+                type="password"
+                placeholder="Confirm password"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.confirmPassword?.message}
+              />
             )}
-          </div>
+          />
 
           <p className="text-tertiary px-5">
             By continuing, you agree to Pomegrenade's{" "}
