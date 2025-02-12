@@ -12,6 +12,7 @@ export default function Input({
   placeholder,
   onChange,
   value,
+  ...rest
 }: InputProps) {
   return (
     <input
@@ -23,6 +24,7 @@ export default function Input({
       }}
       onChange={onChange}
       value={value}
+      {...rest}
     />
   );
 }

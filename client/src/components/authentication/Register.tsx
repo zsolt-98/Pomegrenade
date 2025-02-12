@@ -5,10 +5,12 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
+// import { useForm } from "react-hook-form";
 
 export default function Register() {
   const navigate = useNavigate();
   const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext);
+  // const { register } = useForm();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
