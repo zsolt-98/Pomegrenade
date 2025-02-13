@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Input from "../shared/Input";
 import AuthLayout from "./AuthLayout";
 import { AppContext } from "../../context/AppContext";
@@ -6,18 +6,51 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 
+type ResetPasswordState = {
+  email: string;
+  isEmailSent: boolean;
+  isOtpSubmitted: boolean;
+};
+
 export default function ResetPassword() {
   const { backendUrl } = useContext(AppContext);
   axios.defaults.withCredentials = true;
 
-  const [email, setEmail] = useState("");
+  const getInitialState = (): ResetPasswordState => {
+    const savedState = localStorage.getItem("resetPasswordState");
+    if (savedState) {
+      return JSON.parse(savedState);
+    }
+    return {
+      email: "",
+      isEmailSent: false,
+      isOtpSubmitted: false,
+    };
+  };
+
+  const [email, setEmail] = useState(getInitialState().email);
   const [newPassword, setNewPassword] = useState("");
-  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(getInitialState().isEmailSent);
   const [otp, setOtp] = useState<number | string>(0);
-  const [isOtpSubmitted, setIsOtpSubmitted] = useState(false);
+  const [isOtpSubmitted, setIsOtpSubmitted] = useState(
+    getInitialState().isOtpSubmitted,
+  );
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const stateToSave: ResetPasswordState = {
+      email,
+      isEmailSent,
+      isOtpSubmitted,
+    };
+    localStorage.setItem("resetPasswordState", JSON.stringify(stateToSave));
+  }, [email, isEmailSent, isOtpSubmitted]);
+
+  const clearPersistedState = () => {
+    localStorage.removeItem("resetPasswordState");
+  };
 
   const handleInput = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -86,6 +119,7 @@ export default function ResetPassword() {
       );
       if (data.success) {
         toast.success(data.message);
+        clearPersistedState();
         navigate("/login");
       } else {
         toast.error(data.message);
