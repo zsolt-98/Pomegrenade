@@ -6,6 +6,8 @@ import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "../../schemas/RegisterSchema";
 
 interface RegisterFormInputs {
   name: string;
@@ -21,9 +23,10 @@ export default function Register() {
   const {
     control,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<RegisterFormInputs>();
+  } = useForm<RegisterFormInputs>({
+    resolver: yupResolver(registerSchema),
+  });
 
   const onSubmitHandler = async (formData: RegisterFormInputs) => {
     try {
@@ -60,13 +63,6 @@ export default function Register() {
           <Controller
             name="name"
             control={control}
-            rules={{
-              required: "Name is required",
-              minLength: {
-                value: 2,
-                message: "Name must be at least 2 characters long",
-              },
-            }}
             render={({ field }) => (
               <Input
                 type="text"
@@ -81,13 +77,6 @@ export default function Register() {
           <Controller
             name="email"
             control={control}
-            rules={{
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            }}
             render={({ field }) => (
               <Input
                 type="email"
@@ -102,13 +91,6 @@ export default function Register() {
           <Controller
             name="password"
             control={control}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters long",
-              },
-            }}
             render={({ field }) => (
               <Input
                 type="password"
@@ -123,11 +105,6 @@ export default function Register() {
           <Controller
             name="confirmPassword"
             control={control}
-            rules={{
-              required: "Please confirm your password",
-              validate: (value) =>
-                value === watch("password") || "Passwords do not match",
-            }}
             render={({ field }) => (
               <Input
                 type="password"
