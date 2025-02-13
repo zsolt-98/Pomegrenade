@@ -6,6 +6,8 @@ import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LogInSchema } from "../../schemas/LogInSchema";
 
 interface LoginFormInputs {
   email: string;
@@ -19,7 +21,9 @@ export default function LogIn() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormInputs>();
+  } = useForm<LoginFormInputs>({
+    resolver: yupResolver(LogInSchema),
+  });
 
   const onSubmitHandler = async (formData: LoginFormInputs) => {
     try {
@@ -56,13 +60,6 @@ export default function LogIn() {
           <Controller
             name="email"
             control={control}
-            rules={{
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            }}
             render={({ field }) => (
               <Input
                 type="email"
@@ -76,9 +73,6 @@ export default function LogIn() {
           <Controller
             name="password"
             control={control}
-            rules={{
-              required: "Password is required",
-            }}
             render={({ field }) => (
               <Input
                 type="password"

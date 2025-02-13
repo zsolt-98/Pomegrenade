@@ -80,7 +80,7 @@ export default function Register() {
             render={({ field }) => (
               <Input
                 type="email"
-                placeholder="Email address"
+                placeholder="Email adress"
                 value={field.value}
                 onChange={field.onChange}
                 error={errors.email?.message}
