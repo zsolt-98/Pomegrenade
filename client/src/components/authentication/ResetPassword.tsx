@@ -12,7 +12,7 @@ export default function ResetPassword() {
 
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [isEmailSent, setIsEmailSent] = useState<string | boolean>("");
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const [otp, setOtp] = useState<number | string>(0);
   const [isOtpSubmitted, setIsOtpSubmitted] = useState(false);
 
