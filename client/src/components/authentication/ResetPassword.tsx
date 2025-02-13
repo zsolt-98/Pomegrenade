@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import Input from "../shared/Input";
-import LogInRegister from "./LogInRegister";
+import AuthLayout from "./AuthLayout";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -97,7 +97,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <LogInRegister
+    <AuthLayout
       h2="Reset password"
       content={
         <>

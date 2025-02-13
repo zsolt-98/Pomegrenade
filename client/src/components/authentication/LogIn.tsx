@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import Input from "../shared/Input";
-import LogInRegister from "./LogInRegister";
+import AuthLayout from "./AuthLayout";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
@@ -50,7 +50,7 @@ export default function LogIn() {
   };
 
   return (
-    <LogInRegister
+    <AuthLayout
       h2="Log in to your account"
       content={
         <form

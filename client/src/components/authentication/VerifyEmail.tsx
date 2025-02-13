@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import LogInRegister from "./LogInRegister";
+import AuthLayout from "./AuthLayout";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
@@ -74,7 +74,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <LogInRegister
+    <AuthLayout
       h2="Verify your email"
       content={
         <form

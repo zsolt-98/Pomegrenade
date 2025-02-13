@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import Input from "../shared/Input";
-import LogInRegister from "./LogInRegister";
+import AuthLayout from "./AuthLayout";
 import { useContext } from "react";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
@@ -53,7 +53,7 @@ export default function Register() {
   };
 
   return (
-    <LogInRegister
+    <AuthLayout
       h2="Create your account"
       content={
         <form

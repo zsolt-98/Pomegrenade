@@ -1,12 +1,12 @@
 import { Link } from "react-router";
 import pomegrenadeLogo from "../../assets/pomegrenade-logo-tertiary-light-636x295px.png";
 
-interface LogInRegisterProps {
+interface AuthLayoutProps {
   h2: string;
   content: JSX.Element;
 }
 
-export default function LogInRegister({ h2, content }: LogInRegisterProps) {
+export default function AuthLayout({ h2, content }: AuthLayoutProps) {
   return (
     <section className="bg-tertiary-light flex items-center py-20">
       <div className="container mx-auto flex w-full max-w-7xl justify-center px-5">
