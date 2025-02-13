@@ -1,27 +1,33 @@
 import { Link, useNavigate } from "react-router";
 import Input from "../shared/Input";
 import LogInRegister from "./LogInRegister";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Controller, useForm } from "react-hook-form";
+
+interface LoginFormInputs {
+  email: string;
+  password: string;
+}
 
 export default function LogIn() {
   const navigate = useNavigate();
   const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitHandler = async (formData: LoginFormInputs) => {
     try {
-      e.preventDefault();
-
       axios.defaults.withCredentials = true;
 
       const { data } = await axios.post(backendUrl + "/api/auth/login", {
-        email,
-        password,
+        email: formData.email,
+        password: formData.password,
       });
 
       if (data.success) {
@@ -45,19 +51,43 @@ export default function LogIn() {
       content={
         <form
           className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-          onSubmit={onSubmitHandler}
+          onSubmit={handleSubmit(onSubmitHandler)}
         >
-          <Input
-            type="email"
-            placeholder="Email address"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => (
+              <Input
+                type="email"
+                placeholder="Email address"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.email?.message}
+              />
+            )}
           />
-          <Input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+          <Controller
+            name="password"
+            control={control}
+            rules={{
+              required: "Password is required",
+            }}
+            render={({ field }) => (
+              <Input
+                type="password"
+                placeholder="Password"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.password?.message}
+              />
+            )}
           />
           <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
             Log in

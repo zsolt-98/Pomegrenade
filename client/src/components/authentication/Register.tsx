@@ -25,7 +25,7 @@ export default function Register() {
     formState: { errors },
   } = useForm<RegisterFormInputs>();
 
-  const onSubmit = async (formData: RegisterFormInputs) => {
+  const onSubmitHandler = async (formData: RegisterFormInputs) => {
     try {
       axios.defaults.withCredentials = true;
 
@@ -55,7 +55,7 @@ export default function Register() {
       content={
         <form
           className="flex w-full max-w-[364px] flex-col items-center justify-center gap-6 text-sm md:text-lg"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmitHandler)}
         >
           <Controller
             name="name"
