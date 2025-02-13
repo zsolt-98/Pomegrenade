@@ -4,7 +4,7 @@ import AuthLayout from "./AuthLayout";
 import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function ResetPassword() {
   const { backendUrl } = useContext(AppContext);
@@ -108,8 +108,8 @@ export default function ResetPassword() {
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-tertiary">
-                  Enter your email address to receive a one time password to
-                  your email address
+                  Enter your email address to receive a 6-digit verification
+                  code for password reset.
                 </p>
               </div>
               <Input
@@ -134,7 +134,7 @@ export default function ResetPassword() {
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-tertiary">
-                  Enter the 6-digit code sent to your email address
+                  Enter the 6-digit code sent to your email address.
                 </p>
               </div>
               <div className="flex justify-between gap-2" onPaste={handlePaste}>
@@ -157,6 +157,12 @@ export default function ResetPassword() {
               <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
                 Submit
               </button>
+              <p className="text-tertiary">
+                Didn't receive an email?{" "}
+                <Link to="/register" className="font-semibold underline">
+                  Resend
+                </Link>
+              </p>
             </form>
           )}
           {isOtpSubmitted && isEmailSent && (
