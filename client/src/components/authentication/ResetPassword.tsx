@@ -121,7 +121,7 @@ export default function ResetPassword() {
         setOtp(otpValue);
         setIsOtpSubmitted(true);
       } else if (
-        data.message.toLowerCase().includes("otp") &&
+        data.message.toLowerCase().includes("code") &&
         data.message.toLowerCase().includes("expired")
       ) {
         clearPersistedState();
@@ -158,7 +158,7 @@ export default function ResetPassword() {
       } else {
         // Check if error message contains OTP expired or invalid
         if (
-          data.message.toLowerCase().includes("otp") &&
+          data.message.toLowerCase().includes("code") &&
           data.message.toLowerCase().includes("expired")
         ) {
           clearPersistedState();

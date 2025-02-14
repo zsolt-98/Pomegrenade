@@ -208,7 +208,10 @@ export const sendResetOtp = async (req: Request, res: Response) => {
   try {
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.json({ success: false, message: "User not found" });
+      return res.json({
+        success: false,
+        message: "No user found under this email address",
+      });
     }
 
     const otp = String(Math.floor(100000 + Math.random() * 900000));
@@ -230,7 +233,10 @@ export const sendResetOtp = async (req: Request, res: Response) => {
     };
 
     await transporter.sendMail(mailOption);
-    return res.json({ success: true, message: "OTP sent to your email" });
+    return res.json({
+      success: true,
+      message: "6-digit verification code sent to your email address",
+    });
   } catch (error) {
     return res.json({ success: false, message: (error as Error).message });
   }
@@ -240,7 +246,10 @@ export const verifyResetOtp = async (req: Request, res: Response) => {
   const { email, otp } = req.body;
 
   if (!email || !otp) {
-    return res.json({ success: false, message: "Email and OTP required" });
+    return res.json({
+      success: false,
+      message: "Email and 6-digit verification code are required",
+    });
   }
 
   try {
@@ -251,14 +260,14 @@ export const verifyResetOtp = async (req: Request, res: Response) => {
     }
 
     if (user.resetOtp === "" || user.resetOtp !== otp) {
-      return res.json({ success: false, message: "Invalid OTP" });
+      return res.json({ success: false, message: "Invalid verification code" });
     }
 
     if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
-      return res.json({ success: false, message: "OTP expired" });
+      return res.json({ success: false, message: "Verification code expired" });
     }
 
-    return res.json({ success: true, message: "OTP verified successfully" });
+    return res.json({ success: true, message: "Code verification successful" });
   } catch (error) {
     return res.json({ success: false, message: (error as Error).message });
   }
