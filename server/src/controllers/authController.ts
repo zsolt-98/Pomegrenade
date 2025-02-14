@@ -217,7 +217,7 @@ export const sendResetOtp = async (req: Request, res: Response) => {
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
     user.resetOtp = otp;
-    user.resetOtpExpireAt = Date.now() + 1 * 60 * 1000;
+    user.resetOtpExpireAt = Date.now() + 5 * 60 * 1000;
 
     await user.save();
 
