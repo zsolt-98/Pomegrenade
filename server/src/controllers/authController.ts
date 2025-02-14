@@ -214,7 +214,7 @@ export const sendResetOtp = async (req: Request, res: Response) => {
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
     user.resetOtp = otp;
-    user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
+    user.resetOtpExpireAt = Date.now() + 1 * 60 * 1000;
 
     await user.save();
 
@@ -236,15 +236,11 @@ export const sendResetOtp = async (req: Request, res: Response) => {
   }
 };
 
-// Reset user password
-export const resetPassword = async (req: Request, res: Response) => {
-  const { email, otp, newPassword } = req.body;
+export const verifyResetOtp = async (req: Request, res: Response) => {
+  const { email, otp } = req.body;
 
-  if (!email || !otp || !newPassword) {
-    return res.json({
-      success: false,
-      message: "Email, OTP, and new password are required.",
-    });
+  if (!email || !otp) {
+    return res.json({ success: false, message: "Email and OTP required" });
   }
 
   try {
@@ -256,6 +252,34 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     if (user.resetOtp === "" || user.resetOtp !== otp) {
       return res.json({ success: false, message: "Invalid OTP" });
+    }
+
+    if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
+      return res.json({ success: false, message: "OTP expired" });
+    }
+
+    return res.json({ success: true, message: "OTP verified successfully" });
+  } catch (error) {
+    return res.json({ success: false, message: (error as Error).message });
+  }
+};
+
+// Reset user password
+export const resetPassword = async (req: Request, res: Response) => {
+  const { email, otp, newPassword } = req.body;
+
+  if (!newPassword) {
+    return res.json({
+      success: false,
+      message: "New password is required.",
+    });
+  }
+
+  try {
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
     }
 
     if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {

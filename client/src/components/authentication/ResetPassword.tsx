@@ -109,8 +109,29 @@ export default function ResetPassword() {
   const onSubmitOtp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const otpArray = inputRefs.current.map((e) => e?.value);
-    setOtp(otpArray.join(""));
-    setIsOtpSubmitted(true);
+    const otpValue = otpArray.join("");
+
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/verify-reset-otp",
+        { email, otp: otpValue },
+      );
+
+      if (data.success) {
+        setOtp(otpValue);
+        setIsOtpSubmitted(true);
+      } else {
+        // Clear OTP inputs and let user try again
+        inputRefs.current.forEach((input) => {
+          if (input) input.value = "";
+        });
+        if (inputRefs.current[0]) inputRefs.current[0].focus();
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error has occurred.");
+    }
   };
 
   const onSubmitNewPassowrd = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -125,10 +146,23 @@ export default function ResetPassword() {
         clearPersistedState();
         navigate("/login");
       } else {
-        toast.error(data.message);
+        // Check if error message contains OTP expired or invalid
+        if (
+          data.message.toLowerCase().includes("otp") &&
+          data.message.toLowerCase().includes("expired")
+        ) {
+          clearPersistedState();
+          setEmail("");
+          setIsEmailSent(false);
+          setIsOtpSubmitted(false);
+          setOtp("");
+          toast.error(data.message + ". Please restart the process.");
+        } else {
+          toast.error(data.message);
+        }
       }
     } catch (error) {
-      console.log(error); // Temporary
+      console.log(error);
       toast.error("An error has occurred.");
     }
   };
