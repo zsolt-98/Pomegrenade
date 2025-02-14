@@ -10,6 +10,7 @@ type ResetPasswordState = {
   email: string;
   isEmailSent: boolean;
   isOtpSubmitted: boolean;
+  otp: string;
 };
 
 export default function ResetPassword() {
@@ -25,13 +26,14 @@ export default function ResetPassword() {
       email: "",
       isEmailSent: false,
       isOtpSubmitted: false,
+      otp: "",
     };
   };
 
   const [email, setEmail] = useState(getInitialState().email);
   const [newPassword, setNewPassword] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(getInitialState().isEmailSent);
-  const [otp, setOtp] = useState<number | string>(0);
+  const [otp, setOtp] = useState(getInitialState().otp);
   const [isOtpSubmitted, setIsOtpSubmitted] = useState(
     getInitialState().isOtpSubmitted,
   );
@@ -44,9 +46,10 @@ export default function ResetPassword() {
       email,
       isEmailSent,
       isOtpSubmitted,
+      otp,
     };
     localStorage.setItem("resetPasswordState", JSON.stringify(stateToSave));
-  }, [email, isEmailSent, isOtpSubmitted]);
+  }, [email, isEmailSent, isOtpSubmitted, otp]);
 
   const clearPersistedState = () => {
     localStorage.removeItem("resetPasswordState");
