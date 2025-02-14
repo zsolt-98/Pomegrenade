@@ -54,7 +54,9 @@ export default function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
   const isAuthRoute =
-    location.pathname === "/login" || location.pathname === "/register";
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/reset-password";
   const isHomepageRoute = location.pathname === "/";
 
   const logout = async () => {
