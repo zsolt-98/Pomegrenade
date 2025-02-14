@@ -120,6 +120,16 @@ export default function ResetPassword() {
       if (data.success) {
         setOtp(otpValue);
         setIsOtpSubmitted(true);
+      } else if (
+        data.message.toLowerCase().includes("otp") &&
+        data.message.toLowerCase().includes("expired")
+      ) {
+        clearPersistedState();
+        setEmail("");
+        setIsEmailSent(false);
+        setIsOtpSubmitted(false);
+        setOtp("");
+        toast.error(data.message + ". Please restart the process.");
       } else {
         // Clear OTP inputs and let user try again
         inputRefs.current.forEach((input) => {
