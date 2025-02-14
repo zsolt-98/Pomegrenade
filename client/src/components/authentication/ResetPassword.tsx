@@ -37,6 +37,8 @@ export default function ResetPassword() {
   const [isOtpSubmitted, setIsOtpSubmitted] = useState(
     getInitialState().isOtpSubmitted,
   );
+  const [isOtpResent, setIsOtpResent] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(0);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
@@ -144,6 +146,44 @@ export default function ResetPassword() {
     }
   };
 
+  const handleResendOtp = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/auth/send-reset-otp",
+        { email },
+      );
+      if (data.success) {
+        toast.success(data.message);
+        setIsOtpResent(true);
+        setTimeLeft(120);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error has occurred.");
+    }
+  };
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timerInterval = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+
+      return () => clearInterval(timerInterval);
+    } else if (timeLeft === 0) {
+      setIsOtpResent(false);
+    }
+  }, [timeLeft]);
+
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+  };
+
   const onSubmitNewPassowrd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -240,9 +280,17 @@ export default function ResetPassword() {
               </button>
               <p className="text-tertiary">
                 Didn't receive an email?{" "}
-                <Link to="/register" className="font-semibold underline">
-                  Resend
-                </Link>
+                {!isOtpResent ? (
+                  <Link
+                    to="#"
+                    onClick={handleResendOtp}
+                    className="font-semibold underline"
+                  >
+                    Resend
+                  </Link>
+                ) : (
+                  <span>Resend again in {formatTime(timeLeft)}</span>
+                )}
               </p>
             </form>
           )}

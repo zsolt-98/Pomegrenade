@@ -292,7 +292,7 @@ export const resetPassword = async (req: Request, res: Response) => {
     }
 
     if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
-      return res.json({ success: false, message: "OTP expired" });
+      return res.json({ success: false, message: "Verification code expired" });
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
