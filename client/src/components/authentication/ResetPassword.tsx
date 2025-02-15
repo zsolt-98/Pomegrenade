@@ -5,6 +5,25 @@ import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  ResetPassowrdNewPasswordSchema,
+  ResetPasswordEmailSchema,
+  ResetPasswordOTPSchema,
+} from "../../schemas/ResetPasswordSchema";
+
+interface EmailFormInputs {
+  email: string;
+}
+
+interface OTPFormInputs {
+  otp: string;
+}
+
+interface NewPasswordFormInputs {
+  newPassword: string;
+}
 
 type ResetPasswordState = {
   email: string;
@@ -14,6 +33,7 @@ type ResetPasswordState = {
 };
 
 export default function ResetPassword() {
+  const navigate = useNavigate();
   const { backendUrl } = useContext(AppContext);
   axios.defaults.withCredentials = true;
 
@@ -31,7 +51,6 @@ export default function ResetPassword() {
   };
 
   const [email, setEmail] = useState(getInitialState().email);
-  const [newPassword, setNewPassword] = useState("");
   const [isEmailSent, setIsEmailSent] = useState(getInitialState().isEmailSent);
   const [otp, setOtp] = useState(getInitialState().otp);
   const [isOtpSubmitted, setIsOtpSubmitted] = useState(
@@ -39,9 +58,36 @@ export default function ResetPassword() {
   );
   const [isOtpResent, setIsOtpResent] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
-
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const navigate = useNavigate();
+
+  const {
+    control: emailControl,
+    handleSubmit: handleEmailSubmit,
+    formState: { errors: emailErrors },
+  } = useForm<EmailFormInputs>({
+    resolver: yupResolver(ResetPasswordEmailSchema),
+  });
+
+  const {
+    control: otpControl,
+    handleSubmit: handleOtpSubmit,
+    reset: resetOtp,
+    trigger: triggerOtpValidation,
+  } = useForm<OTPFormInputs>({
+    resolver: yupResolver(ResetPasswordOTPSchema),
+    mode: "onChange",
+    defaultValues: {
+      otp: "",
+    },
+  });
+
+  const {
+    control: newPasswordControl,
+    handleSubmit: handleNewPasswordSubmit,
+    formState: { errors: newPasswordErrors },
+  } = useForm<NewPasswordFormInputs>({
+    resolver: yupResolver(ResetPassowrdNewPasswordSchema),
+  });
 
   useEffect(() => {
     const stateToSave: ResetPasswordState = {
@@ -89,40 +135,36 @@ export default function ResetPassword() {
     });
   };
 
-  const onSubmitEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmitEmail = async (formData: EmailFormInputs) => {
     try {
       const { data } = await axios.post(
-        backendUrl + "/api/auth/send-reset-otp",
-        { email },
+        `${backendUrl}/api/auth/send-reset-otp`,
+        { email: formData.email },
       );
       if (data.success) {
-        toast.success(data.message);
+        setEmail(formData.email);
         setIsEmailSent(true);
+        toast.success(data.message);
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error); // Temporary
+      console.error(error);
       toast.error("An error has occurred.");
     }
   };
 
-  const onSubmitOtp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const otpArray = inputRefs.current.map((e) => e?.value);
-    const otpValue = otpArray.join("");
-
+  const onSubmitOtp = async (formData: OTPFormInputs) => {
     try {
       const { data } = await axios.post(
-        backendUrl + "/api/auth/verify-reset-otp",
-        { email, otp: otpValue },
+        `${backendUrl}/api/auth/verify-reset-otp`,
+        { email, otp: formData.otp },
       );
 
       if (data.success) {
-        toast.success(data.message);
-        setOtp(otpValue);
+        setOtp(formData.otp);
         setIsOtpSubmitted(true);
+        toast.success(data.message);
       } else if (
         data.message.toLowerCase().includes("code") &&
         data.message.toLowerCase().includes("expired")
@@ -132,17 +174,15 @@ export default function ResetPassword() {
         setIsEmailSent(false);
         setIsOtpSubmitted(false);
         setOtp("");
+        resetOtp();
         toast.error(data.message + ". Please restart the process.");
       } else {
-        // Clear OTP inputs and let user try again
-        inputRefs.current.forEach((input) => {
-          if (input) input.value = "";
-        });
+        resetOtp();
         if (inputRefs.current[0]) inputRefs.current[0].focus();
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("An error has occurred.");
     }
   };
@@ -151,7 +191,7 @@ export default function ResetPassword() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        backendUrl + "/api/auth/send-reset-otp",
+        `${backendUrl}/api/auth/send-reset-otp`,
         { email },
       );
       if (data.success) {
@@ -162,7 +202,7 @@ export default function ResetPassword() {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("An error has occurred.");
     }
   };
@@ -185,19 +225,17 @@ export default function ResetPassword() {
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
-  const onSubmitNewPassowrd = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmitNewPassowrd = async (formData: NewPasswordFormInputs) => {
     try {
       const { data } = await axios.post(
-        backendUrl + "/api/auth/reset-password",
-        { email, otp, newPassword },
+        `${backendUrl}/api/auth/reset-password`,
+        { email, otp, newPassword: formData.newPassword },
       );
       if (data.success) {
         toast.success(data.message);
         clearPersistedState();
         navigate("/login");
       } else {
-        // Check if error message contains OTP expired or invalid
         if (
           data.message.toLowerCase().includes("code") &&
           data.message.toLowerCase().includes("expired")
@@ -213,7 +251,7 @@ export default function ResetPassword() {
         }
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("An error has occurred.");
     }
   };
@@ -226,7 +264,7 @@ export default function ResetPassword() {
           {!isEmailSent && (
             <form
               className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-              onSubmit={onSubmitEmail}
+              onSubmit={handleEmailSubmit(onSubmitEmail)}
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-tertiary">
@@ -234,14 +272,19 @@ export default function ResetPassword() {
                   code for password reset.
                 </p>
               </div>
-              <Input
-                type="email"
-                placeholder="Email address"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+              <Controller
+                name="email"
+                control={emailControl}
+                render={({ field }) => (
+                  <Input
+                    type="email"
+                    placeholder="Email address"
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={emailErrors.email?.message}
+                  />
+                )}
               />
-
-              <div className="flex justify-between gap-2"></div>
 
               <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
                 Submit
@@ -252,31 +295,92 @@ export default function ResetPassword() {
           {!isOtpSubmitted && isEmailSent && (
             <form
               className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-              onSubmit={onSubmitOtp}
+              onSubmit={handleOtpSubmit(onSubmitOtp)}
+              noValidate
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-tertiary">
                   Enter the 6-digit code sent to your email address.
                 </p>
               </div>
-              <div className="flex justify-between gap-2" onPaste={handlePaste}>
-                {Array(6)
-                  .fill(0)
-                  .map((_, i) => (
-                    <input
-                      type="text"
-                      maxLength={1}
-                      key={i}
-                      required
-                      className="bg-tertiary-light h-12 w-12 rounded-md text-center text-xl"
-                      ref={(e) => (inputRefs.current[i] = e)}
-                      onChange={(e) => handleInput(e, i)}
-                      onKeyDown={(e) => handleKeyDown(e, i)}
-                    />
-                  ))}
+              <div className="w-full">
+                <Controller
+                  name="otp"
+                  control={otpControl}
+                  rules={{
+                    required: "Please enter the verification code",
+                    pattern: {
+                      value: /^\d{6}$/,
+                      message: "Please enter a valid 6-digit code",
+                    },
+                  }}
+                  render={({
+                    field: { onChange, value },
+                    fieldState: { error },
+                  }) => (
+                    <>
+                      <div
+                        className="flex justify-between gap-2"
+                        onPaste={handlePaste}
+                      >
+                        {Array(6)
+                          .fill(0)
+                          .map((_, i) => (
+                            <input
+                              key={i}
+                              type="text"
+                              inputMode="numeric"
+                              maxLength={1}
+                              ref={(e) => {
+                                inputRefs.current[i] = e;
+                              }}
+                              value={(value || "")[i] || ""}
+                              className={`bg-tertiary-light h-12 w-12 rounded-md border-2 text-center outline-none ${
+                                error
+                                  ? "border-primary-1 text-primary-1 focus:border-primary-1"
+                                  : "text-tertiary border-[rgba(var(--color-tertiary-rgb),0.75)] focus:border-[rgba(var(--color-tertiary-rgb),1)]"
+                              } text-xl`}
+                              onChange={(e) => {
+                                const newVal = e.target.value;
+                                if (newVal.match(/^[0-9]?$/)) {
+                                  const otpArray = value
+                                    ? value.split("")
+                                    : Array(6).fill("");
+                                  otpArray[i] = newVal;
+                                  const newOtp = otpArray.join("");
+                                  onChange(newOtp);
+                                  handleInput(e, i);
+                                  if (newOtp.length === 6) {
+                                    triggerOtpValidation();
+                                  }
+                                }
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === "Backspace") {
+                                  const otpArray = value
+                                    ? value.split("")
+                                    : Array(6).fill("");
+                                  otpArray[i] = "";
+                                  onChange(otpArray.join(""));
+                                  handleKeyDown(e, i);
+                                }
+                              }}
+                            />
+                          ))}
+                      </div>
+                      {error && (
+                        <span className="text-primary-1 mt-2 block text-sm">
+                          {error.message}
+                        </span>
+                      )}
+                    </>
+                  )}
+                />
               </div>
-              <div className="flex justify-between gap-2"></div>
-              <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+              <button
+                type="submit"
+                className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
+              >
                 Submit
               </button>
               <p className="text-tertiary">
@@ -295,20 +399,28 @@ export default function ResetPassword() {
               </p>
             </form>
           )}
+
           {isOtpSubmitted && isEmailSent && (
             <form
               className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-              onSubmit={onSubmitNewPassowrd}
+              onSubmit={handleNewPasswordSubmit(onSubmitNewPassowrd)}
             >
               <div className="flex flex-col items-center justify-center">
                 <p className="text-tertiary">Enter your desired new password</p>
               </div>
 
-              <Input
-                type="password"
-                placeholder="New password"
-                onChange={(e) => setNewPassword(e.target.value)}
-                value={newPassword}
+              <Controller
+                name="newPassword"
+                control={newPasswordControl}
+                render={({ field }) => (
+                  <Input
+                    type="password"
+                    placeholder="New password"
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={newPasswordErrors.newPassword?.message}
+                  />
+                )}
               />
               <div className="flex justify-between gap-2"></div>
               <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
