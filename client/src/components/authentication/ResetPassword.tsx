@@ -120,6 +120,7 @@ export default function ResetPassword() {
       );
 
       if (data.success) {
+        toast.success(data.message);
         setOtp(otpValue);
         setIsOtpSubmitted(true);
       } else if (
