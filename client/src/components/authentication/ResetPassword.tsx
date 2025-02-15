@@ -286,7 +286,7 @@ export default function ResetPassword() {
                 )}
               />
 
-              <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+              <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light o outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
                 Submit
               </button>
             </form>
@@ -379,7 +379,7 @@ export default function ResetPassword() {
               </div>
               <button
                 type="submit"
-                className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
+                className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
               >
                 Submit
               </button>
@@ -389,7 +389,7 @@ export default function ResetPassword() {
                   <Link
                     to="#"
                     onClick={handleResendOtp}
-                    className="font-semibold underline"
+                    className="outline-tertiary font-semibold underline"
                   >
                     Resend
                   </Link>
@@ -423,7 +423,7 @@ export default function ResetPassword() {
                 )}
               />
               <div className="flex justify-between gap-2"></div>
-              <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+              <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
                 Submit
               </button>
             </form>

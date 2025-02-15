@@ -118,25 +118,28 @@ export default function Register() {
 
           <p className="text-tertiary px-5">
             By continuing, you agree to Pomegrenade's{" "}
-            <a href="" className="font-semibold underline">
+            <Link to="#" className="outline-tertiary font-semibold underline">
               Terms of Service
-            </a>{" "}
+            </Link>{" "}
             and{" "}
-            <a href="" className="font-semibold underline">
+            <Link to="#" className="outline-tertiary font-semibold underline">
               Privacy Policy
-            </a>
+            </Link>
           </p>
 
           <button
             type="submit"
-            className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
+            className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
           >
             Register
           </button>
 
           <p className="text-tertiary px-5">
             Already have an account?{" "}
-            <Link to="/login" className="font-semibold underline">
+            <Link
+              to="/login"
+              className="outline-tertiary font-semibold underline"
+            >
               Log in now!
             </Link>
           </p>

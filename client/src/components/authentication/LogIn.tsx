@@ -83,19 +83,22 @@ export default function LogIn() {
               />
             )}
           />
-          <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+          <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
             Log in
           </button>
           <div className="flex flex-col items-center justify-center">
             <p className="text-tertiary">
               Don't have an account?{" "}
-              <Link to="/register" className="font-semibold underline">
+              <Link
+                to="/register"
+                className="outline-tertiary font-semibold underline"
+              >
                 Create one now!
               </Link>
             </p>
             <Link
               to="/reset-password"
-              className="text-tertiary flex font-semibold underline"
+              className="text-tertiary outline-tertiary flex font-semibold underline"
             >
               Forgot your password?
             </Link>

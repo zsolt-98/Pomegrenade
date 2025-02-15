@@ -259,12 +259,12 @@ export const verifyResetOtp = async (req: Request, res: Response) => {
       return res.json({ success: false, message: "User not found" });
     }
 
-    if (user.resetOtp === "" || user.resetOtp !== otp) {
-      return res.json({ success: false, message: "Invalid verification code" });
-    }
-
     if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
       return res.json({ success: false, message: "Verification code expired" });
+    }
+
+    if (user.resetOtp === "" || user.resetOtp !== otp) {
+      return res.json({ success: false, message: "Invalid verification code" });
     }
 
     return res.json({ success: true, message: "Code verification successful" });
