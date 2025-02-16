@@ -13,17 +13,17 @@ import {
   ResetPasswordOTPSchema,
 } from "../../schemas/ResetPasswordSchema";
 
-interface EmailFormInputs {
+type EmailFormInputs = {
   email: string;
-}
+};
 
-interface OTPFormInputs {
+type OTPFormInputs = {
   otp: string;
-}
+};
 
-interface NewPasswordFormInputs {
+type NewPasswordFormInputs = {
   newPassword: string;
-}
+};
 
 type ResetPasswordState = {
   email: string;
