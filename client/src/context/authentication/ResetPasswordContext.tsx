@@ -1,13 +1,6 @@
 /* eslint-disable */ // temporary
 
-import {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { AppContext } from "../AppContext";
+import { createContext, PropsWithChildren, useEffect, useState } from "react";
 
 interface ResetPasswordContextType {
   email: string;
@@ -19,18 +12,26 @@ interface ResetPasswordContextType {
   isOtpSubmitted: boolean;
   setIsOtpSubmitted: (value: boolean) => void;
   clearState: () => void;
-  backendUrl: string;
 }
 
-export const ResetPasswordContext = createContext<
-  ResetPasswordContextType | undefined
->(undefined);
+const defaultContextValue: ResetPasswordContextType = {
+  email: "",
+  setEmail: () => {},
+  isEmailSent: false,
+  setIsEmailSent: () => {},
+  otp: "",
+  setOtp: () => {},
+  isOtpSubmitted: false,
+  setIsOtpSubmitted: () => {},
+  clearState: () => {},
+};
+
+export const ResetPasswordContext =
+  createContext<ResetPasswordContextType>(defaultContextValue);
 
 export const ResetPasswordContextProvider = ({
   children,
 }: PropsWithChildren) => {
-  const { backendUrl } = useContext(AppContext);
-
   const getInitialState = () => {
     const savedState = localStorage.getItem("resetPasswordState");
     if (savedState) {
@@ -79,7 +80,6 @@ export const ResetPasswordContextProvider = ({
     isOtpSubmitted,
     setIsOtpSubmitted,
     clearState,
-    backendUrl,
   };
 
   return (
