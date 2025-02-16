@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import Input from "../shared/Input";
-import AuthLayout from "./AuthLayout";
-import { AppContext } from "../../context/AppContext";
+import Input from "../../shared/Input";
+import AuthLayout from "../AuthLayout";
+import { AppContext } from "../../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
@@ -11,7 +11,7 @@ import {
   ResetPassowrdNewPasswordSchema,
   ResetPasswordEmailSchema,
   ResetPasswordOTPSchema,
-} from "../../schemas/ResetPasswordSchema";
+} from "../../../schemas/ResetPasswordSchema";
 
 type EmailFormInputs = {
   email: string;

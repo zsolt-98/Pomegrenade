@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import LogIn from "./components/authentication/LogIn";
 import VerifyEmail from "./components/authentication/VerifyEmail";
-import ResetPassword from "./components/authentication/ResetPassword";
+import ResetPassword from "./components/authentication/ResetPassword/ResetPassword.js";
 import { AppContextProvider } from "./context/AppContext.js";
 import { ToastContainer } from "react-toastify";
 
