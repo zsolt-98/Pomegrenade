@@ -53,30 +53,32 @@ export default function NewPasswordForm() {
     }
   };
 
-  <form
-    className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-    onSubmit={handleSubmit(onSubmitNewPassowrd)}
-  >
-    <div className="flex flex-col items-center justify-center">
-      <p className="text-tertiary">Enter your desired new password</p>
-    </div>
+  return (
+    <form
+      className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+      onSubmit={handleSubmit(onSubmitNewPassowrd)}
+    >
+      <div className="flex flex-col items-center justify-center">
+        <p className="text-tertiary">Enter your desired new password</p>
+      </div>
 
-    <Controller
-      name="newPassword"
-      control={control}
-      render={({ field }) => (
-        <Input
-          type="password"
-          placeholder="New password"
-          value={field.value}
-          onChange={field.onChange}
-          error={errors.newPassword?.message}
-        />
-      )}
-    />
-    <div className="flex justify-between gap-2"></div>
-    <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
-      Submit
-    </button>
-  </form>;
+      <Controller
+        name="newPassword"
+        control={control}
+        render={({ field }) => (
+          <Input
+            type="password"
+            placeholder="New password"
+            value={field.value}
+            onChange={field.onChange}
+            error={errors.newPassword?.message}
+          />
+        )}
+      />
+      <div className="flex justify-between gap-2"></div>
+      <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+        Submit
+      </button>
+    </form>
+  );
 }

@@ -43,32 +43,34 @@ export default function EmailForm() {
     }
   };
 
-  <form
-    className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-    onSubmit={handleSubmit(onSubmitEmail)}
-  >
-    <div className="flex flex-col items-center justify-center">
-      <p className="text-tertiary">
-        Enter your email address to receive a 6-digit verification code for
-        password reset.
-      </p>
-    </div>
-    <Controller
-      name="email"
-      control={control}
-      render={({ field }) => (
-        <Input
-          type="email"
-          placeholder="Email address"
-          value={field.value}
-          onChange={field.onChange}
-          error={errors.email?.message}
-        />
-      )}
-    />
+  return (
+    <form
+      className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+      onSubmit={handleSubmit(onSubmitEmail)}
+    >
+      <div className="flex flex-col items-center justify-center">
+        <p className="text-tertiary">
+          Enter your email address to receive a 6-digit verification code for
+          password reset.
+        </p>
+      </div>
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <Input
+            type="email"
+            placeholder="Email address"
+            value={field.value}
+            onChange={field.onChange}
+            error={errors.email?.message}
+          />
+        )}
+      />
 
-    <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light o outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
-      Submit
-    </button>
-  </form>;
+      <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light o outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+        Submit
+      </button>
+    </form>
+  );
 }
