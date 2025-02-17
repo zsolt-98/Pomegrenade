@@ -24,3 +24,14 @@ export const ResetPassowrdNewPasswordSchema = yup.object({
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
 });
+
+export const verifyOtpSchema = yup.object({
+  otp: yup
+    .string()
+    .required("Please enter the verification code")
+    .matches(/^\d{6}$/, "Please enter a valid 6-digit code"),
+});
+
+export type VerifyOrResetPasswordOtpFormData = yup.InferType<
+  typeof ResetPasswordEmailSchema
+>;
