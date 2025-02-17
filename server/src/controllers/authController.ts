@@ -127,7 +127,10 @@ export const sendVerifyOtp = async (req: Request, res: Response) => {
     }
 
     if (user.isAccountVerified) {
-      return res.json({ success: false, message: "Account already verified" });
+      return res.json({
+        success: false,
+        message: "The account is already verified",
+      });
     }
 
     const otp = String(Math.floor(100000 + Math.random() * 900000));
@@ -150,7 +153,10 @@ export const sendVerifyOtp = async (req: Request, res: Response) => {
 
     await transporter.sendMail(mailOption);
 
-    res.json({ success: true, message: "Verification OTP sent on Email" });
+    res.json({
+      success: true,
+      message: "6-digit verification code sent to your email address",
+    });
   } catch (error) {
     res.json({ success: false, message: (error as Error).message });
   }
@@ -171,11 +177,11 @@ export const verifyEmail = async (req: Request, res: Response) => {
     }
 
     if (user.verifyOtp === "" || user.verifyOtp !== otp) {
-      return res.json({ success: false, message: "Invalid OTP" });
+      return res.json({ success: false, message: "Invalid verification code" });
     }
 
     if (user.verifyOtpExpireAt && user.verifyOtpExpireAt < Date.now()) {
-      return res.json({ success: false, message: "OTP expired" });
+      return res.json({ success: false, message: "Verification code expired" });
     }
 
     user.isAccountVerified = true;

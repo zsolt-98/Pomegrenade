@@ -66,9 +66,9 @@ export default function VerifyEmail() {
         { otp: formData.otp },
       );
       if (data.success) {
-        toast.success(data.message);
         getUserData();
         navigate("/");
+        toast.success(data.message);
       } else if (
         data.message.toLowerCase().includes("code") &&
         data.message.toLowerCase().includes("expired")
