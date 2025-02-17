@@ -3,7 +3,7 @@ import { ResetPasswordContext } from "../../../context/authentication/ResetPassw
 import { AppContext } from "../../../context/AppContext";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ResetPasswordOTPSchema } from "../../../schemas/ResetPasswordSchema";
+import { verifyOtpSchema } from "../../../schemas/ResetPasswordSchema";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
@@ -27,7 +27,7 @@ export default function OtpForm() {
     reset: resetOtp,
     trigger: triggerOtpValidation,
   } = useForm<OTPFormInputs>({
-    resolver: yupResolver(ResetPasswordOTPSchema),
+    resolver: yupResolver(verifyOtpSchema),
     mode: "onChange",
     defaultValues: {
       otp: "",

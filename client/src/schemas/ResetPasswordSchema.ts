@@ -10,7 +10,7 @@ export const ResetPasswordEmailSchema = yup.object({
     ),
 });
 
-export const ResetPasswordOTPSchema = yup.object({
+export const verifyOtpSchema = yup.object({
   otp: yup
     .string()
     .required("OTP is required")
@@ -23,13 +23,6 @@ export const ResetPassowrdNewPasswordSchema = yup.object({
     .string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
-});
-
-export const verifyOtpSchema = yup.object({
-  otp: yup
-    .string()
-    .required("Please enter the verification code")
-    .matches(/^\d{6}$/, "Please enter a valid 6-digit code"),
 });
 
 export type VerifyOrResetPasswordOtpFormData = yup.InferType<
