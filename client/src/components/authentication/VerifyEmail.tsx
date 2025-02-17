@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import AuthLayout from "./AuthLayout";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
@@ -8,6 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../../schemas/ResetPasswordSchema";
 import OtpInput from "../shared/OtpInput";
+import useResendTimer from "../../hooks/useResendOtpTimer";
 
 type VerifyEmailFormInputs = {
   otp: string;
@@ -17,9 +18,9 @@ export default function VerifyEmail() {
   axios.defaults.withCredentials = true;
   const { backendUrl, isLoggedin, userData, getUserData } =
     useContext(AppContext);
+  const { isResendDisabled, timeLeft, startTimer, formatTime } =
+    useResendTimer();
   const navigate = useNavigate();
-  const [isOtpResent, setIsOtpResent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(0);
 
   const {
     control,
@@ -40,24 +41,6 @@ export default function VerifyEmail() {
     }
   }, [isLoggedin, userData, navigate]);
 
-  useEffect(() => {
-    if (timeLeft > 0) {
-      const timerInterval = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
-
-      return () => clearInterval(timerInterval);
-    } else if (timeLeft === 0) {
-      setIsOtpResent(false);
-    }
-  }, [timeLeft]);
-
-  const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
-
   const handleResendOtp = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
@@ -66,8 +49,7 @@ export default function VerifyEmail() {
       );
       if (data.success) {
         toast.success(data.message);
-        setIsOtpResent(true);
-        setTimeLeft(120); // 2 minutes countdown
+        startTimer();
       } else {
         toast.error(data.message);
       }
@@ -138,7 +120,7 @@ export default function VerifyEmail() {
 
           <p className="text-tertiary">
             Didn't receive an email?{" "}
-            {!isOtpResent ? (
+            {!isResendDisabled ? (
               <Link
                 to="#"
                 onClick={handleResendOtp}
