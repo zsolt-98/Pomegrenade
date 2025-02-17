@@ -73,7 +73,6 @@ export default function Register() {
               />
             )}
           />
-
           <Controller
             name="email"
             control={control}
@@ -87,7 +86,6 @@ export default function Register() {
               />
             )}
           />
-
           <Controller
             name="password"
             control={control}
@@ -101,7 +99,6 @@ export default function Register() {
               />
             )}
           />
-
           <Controller
             name="confirmPassword"
             control={control}
@@ -115,7 +112,6 @@ export default function Register() {
               />
             )}
           />
-
           <p className="text-tertiary px-5">
             By continuing, you agree to Pomegrenade's{" "}
             <Link to="#" className="outline-tertiary font-semibold underline">
@@ -126,14 +122,12 @@ export default function Register() {
               Privacy Policy
             </Link>
           </p>
-
           <button
             type="submit"
             className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
           >
             Register
           </button>
-
           <p className="text-tertiary px-5">
             Already have an account?{" "}
             <Link
