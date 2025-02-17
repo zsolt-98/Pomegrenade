@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { ResetPasswordContext } from "../../../context/authentication/ResetPasswordContext";
 import { AppContext } from "../../../context/AppContext";
 import { Controller, useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
 import OtpInput from "../../shared/OtpInput";
+import useResendTimer from "../../../hooks/useResendOtpTimer";
 
 type OTPFormInputs = {
   otp: string;
@@ -17,9 +18,8 @@ export default function OtpForm() {
   const { email, setOtp, setIsOtpSubmitted, clearState } =
     useContext(ResetPasswordContext);
   const { backendUrl } = useContext(AppContext);
-  const [isOtpResent, setIsOtpResent] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const { isResendDisabled, timeLeft, startTimer, formatTime } =
+    useResendTimer();
 
   const {
     control,
@@ -54,7 +54,6 @@ export default function OtpForm() {
         toast.error(data.message + ". Please restart the process.");
       } else {
         resetOtp();
-        if (inputRefs.current[0]) inputRefs.current[0].focus();
         toast.error(data.message);
       }
     } catch (error) {
@@ -72,8 +71,7 @@ export default function OtpForm() {
       );
       if (data.success) {
         toast.success(data.message);
-        setIsOtpResent(true);
-        setTimeLeft(120);
+        startTimer();
       } else {
         toast.error(data.message);
       }
@@ -81,24 +79,6 @@ export default function OtpForm() {
       console.error(error);
       toast.error("An error has occurred.");
     }
-  };
-
-  useEffect(() => {
-    if (timeLeft > 0) {
-      const timerInterval = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
-      }, 1000);
-
-      return () => clearInterval(timerInterval);
-    } else if (timeLeft === 0) {
-      setIsOtpResent(false);
-    }
-  }, [timeLeft]);
-
-  const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -138,7 +118,7 @@ export default function OtpForm() {
       </button>
       <p className="text-tertiary">
         Didn't receive an email?{" "}
-        {!isOtpResent ? (
+        {!isResendDisabled ? (
           <Link
             to="#"
             onClick={handleResendOtp}

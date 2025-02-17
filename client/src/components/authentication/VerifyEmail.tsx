@@ -74,6 +74,7 @@ export default function VerifyEmail() {
         data.message.toLowerCase().includes("expired")
       ) {
         resetOtp();
+        toast.error(data.message + ". Please restart the process.");
       } else {
         toast.error(data.message);
       }
