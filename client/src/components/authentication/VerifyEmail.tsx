@@ -41,24 +41,6 @@ export default function VerifyEmail() {
     }
   }, [isLoggedin, userData, navigate]);
 
-  const handleResendOtp = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/auth/send-verify-otp`,
-      );
-      if (data.success) {
-        toast.success(data.message);
-        startTimer();
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error has occurred.");
-    }
-  };
-
   const onSubmitOtp = async (formData: VerifyEmailFormInputs) => {
     try {
       const { data } = await axios.post(
@@ -80,6 +62,24 @@ export default function VerifyEmail() {
       }
     } catch (error) {
       console.log(error); // Temporary
+      toast.error("An error has occurred.");
+    }
+  };
+
+  const handleResendOtp = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `${backendUrl}/api/auth/send-verify-otp`,
+      );
+      if (data.success) {
+        toast.success(data.message);
+        startTimer();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
       toast.error("An error has occurred.");
     }
   };

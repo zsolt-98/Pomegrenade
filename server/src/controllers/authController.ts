@@ -75,7 +75,7 @@ export const login = async (req: Request, res: Response) => {
 
     // Temporary
     if (!user) {
-      return res.json({ success: false, message: "Invalid email" });
+      return res.json({ success: false, message: "Invalid email adress" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -295,6 +295,10 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     if (!user) {
       return res.json({ success: false, message: "User not found" });
+    }
+
+    if (!otp) {
+      return res.json({ success: false, message: "Verification failed" });
     }
 
     if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
