@@ -117,9 +117,15 @@ export default function Nav() {
                 onClick={() => setisNavMenuOpen(!isNavMenuOpen)}
               >
                 {isNavMenuOpen ? (
-                  <X size={36} color="var(--color-secondary-light)" />
+                  <X
+                    size={36}
+                    color={`${!isLoggedin && isHomepageRoute ? "var(--color-secondary-light)" : "var(--color-tertiary-light)"}`}
+                  />
                 ) : (
-                  <Menu size={36} color="var(--color-secondary-light)" />
+                  <Menu
+                    size={36}
+                    color={`${!isLoggedin && isHomepageRoute ? "var(--color-secondary-light)" : "var(--color-tertiary-light)"}`}
+                  />
                 )}
               </button>
             )}
