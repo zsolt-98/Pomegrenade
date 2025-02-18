@@ -9,3 +9,7 @@ export interface ButtonHollowPillProps {
   children: string;
   navigateTo?: string;
 }
+
+export type OTPFormInputs = {
+  otp: string;
+};

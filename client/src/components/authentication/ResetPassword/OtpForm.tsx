@@ -9,10 +9,8 @@ import { toast } from "react-toastify";
 
 import useResendTimer from "../../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
-
-type OTPFormInputs = {
-  otp: string;
-};
+import { useSubmitOtp } from "../hooks/useSubmitOtp";
+import { OTPFormInputs } from "../../../types";
 
 export default function OtpForm() {
   const { email, setOtp, setIsOtpSubmitted, clearState } =
@@ -26,6 +24,7 @@ export default function OtpForm() {
     handleSubmit,
     reset: resetOtp,
     trigger: triggerOtpValidation,
+    watch,
   } = useForm<OTPFormInputs>({
     resolver: yupResolver(verifyOtpSchema),
     mode: "onChange",
@@ -34,33 +33,17 @@ export default function OtpForm() {
     },
   });
 
-  const onSubmitOtp = async (formData: OTPFormInputs) => {
-    try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/auth/verify-reset-otp`,
-        { email, otp: formData.otp },
-      );
-
-      if (data.success) {
-        setOtp(formData.otp);
-        setIsOtpSubmitted(true);
-        toast.success(data.message);
-      } else if (
-        data.message.toLowerCase().includes("code") &&
-        data.message.toLowerCase().includes("expired")
-      ) {
-        clearState();
-        resetOtp();
-        toast.error(data.message + ". Please restart the process.");
-      } else {
-        resetOtp();
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error has occurred.");
-    }
-  };
+  const currentOtp = watch("otp");
+  const { submitOtp } = useSubmitOtp({
+    endpoint: "verify-reset-otp",
+    email,
+    resetOtp,
+    onSuccess: () => {
+      setOtp(currentOtp);
+      setIsOtpSubmitted(true);
+    },
+    onExpired: clearState,
+  });
 
   const handleResendOtp = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -83,7 +66,7 @@ export default function OtpForm() {
 
   return (
     <OtpVerificationFormLayout
-      onSubmit={handleSubmit(onSubmitOtp)}
+      onSubmit={handleSubmit(submitOtp)}
       control={control}
       triggerOtpValidation={triggerOtpValidation}
       isResendDisabled={isResendDisabled}
