@@ -23,6 +23,9 @@ export default function NewPasswordForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<NewPasswordFormInputs>({
+    defaultValues: {
+      newPassword: "",
+    },
     resolver: yupResolver(ResetPassowrdNewPasswordSchema),
   });
 
