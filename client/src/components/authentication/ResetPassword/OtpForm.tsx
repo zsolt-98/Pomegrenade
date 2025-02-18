@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { ResetPasswordContext } from "../../../context/authentication/ResetPasswordContext";
 import { AppContext } from "../../../context/AppContext";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../../../schemas/ResetPasswordSchema";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link } from "react-router";
-import OtpInput from "../../shared/OtpInput";
+
 import useResendTimer from "../../../hooks/useResendOtpTimer";
+import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
 
 type OTPFormInputs = {
   otp: string;
@@ -82,46 +82,14 @@ export default function OtpForm() {
   };
 
   return (
-    <form
-      className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+    <OtpVerificationFormLayout
       onSubmit={handleSubmit(onSubmitOtp)}
-      noValidate
-    >
-      <p className="text-tertiary">
-        Enter the 6-digit code sent to your email address.
-      </p>
-      <Controller
-        name="otp"
-        control={control}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <OtpInput
-            value={value}
-            onChange={onChange}
-            error={error?.message}
-            onComplete={triggerOtpValidation}
-          />
-        )}
-      />
-      <button
-        type="submit"
-        className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
-      >
-        Submit
-      </button>
-      <p className="text-tertiary">
-        Didn't receive an email?{" "}
-        {!isResendDisabled ? (
-          <Link
-            to="#"
-            onClick={handleResendOtp}
-            className="outline-tertiary font-semibold underline"
-          >
-            Resend
-          </Link>
-        ) : (
-          <span>Resend again in {formatTime(timeLeft)}</span>
-        )}
-      </p>
-    </form>
+      control={control}
+      triggerOtpValidation={triggerOtpValidation}
+      isResendDisabled={isResendDisabled}
+      handleResendOtp={handleResendOtp}
+      formatTime={formatTime}
+      timeLeft={timeLeft}
+    />
   );
 }
