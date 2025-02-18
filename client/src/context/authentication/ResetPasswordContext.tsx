@@ -64,6 +64,12 @@ export const ResetPasswordContextProvider = ({
 
   const clearState = () => {
     localStorage.removeItem("resetPasswordState");
+
+    // TODO: Temporary solution,
+    setEmail("");
+    setIsEmailSent(false);
+    setOtp("");
+    setIsOtpSubmitted(false);
   };
 
   const value = {

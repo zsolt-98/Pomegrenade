@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../../schemas/ResetPasswordSchema";
 import useResendTimer from "../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "./shared/OtpVerificationFormLayout";
+import { useSubmitOtp } from "./hooks/useSubmitOtp";
 
 type VerifyEmailFormInputs = {
   otp: string;
@@ -35,36 +36,20 @@ export default function VerifyEmail() {
     },
   });
 
+  const { submitOtp } = useSubmitOtp({
+    endpoint: "verify-account",
+    resetOtp,
+    onSuccess: () => {
+      getUserData();
+      navigate("/");
+    },
+  });
+
   useEffect(() => {
     if (isLoggedin && userData && userData.isAccountVerified) {
       navigate("/");
     }
   }, [isLoggedin, userData, navigate]);
-
-  const onSubmitOtp = async (formData: VerifyEmailFormInputs) => {
-    try {
-      const { data } = await axios.post(
-        backendUrl + "/api/auth/verify-account",
-        { otp: formData.otp },
-      );
-      if (data.success) {
-        getUserData();
-        navigate("/");
-        toast.success(data.message);
-      } else if (
-        data.message.toLowerCase().includes("code") &&
-        data.message.toLowerCase().includes("expired")
-      ) {
-        resetOtp();
-        toast.error(data.message + ". Please restart the process.");
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error); // Temporary
-      toast.error("An error has occurred.");
-    }
-  };
 
   const handleResendOtp = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -89,7 +74,7 @@ export default function VerifyEmail() {
       h2="Verify your email"
       content={
         <OtpVerificationFormLayout
-          onSubmit={handleSubmit(onSubmitOtp)}
+          onSubmit={handleSubmit(submitOtp)}
           control={control}
           triggerOtpValidation={triggerOtpValidation}
           isResendDisabled={isResendDisabled}
