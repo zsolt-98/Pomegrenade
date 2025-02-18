@@ -90,17 +90,9 @@ export default function OtpForm() {
       <p className="text-tertiary">
         Enter the 6-digit code sent to your email address.
       </p>
-
       <Controller
         name="otp"
         control={control}
-        rules={{
-          required: "Please enter the verification code",
-          pattern: {
-            value: /^\d{6}$/,
-            message: "Please enter a valid 6-digit code",
-          },
-        }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <OtpInput
             value={value}

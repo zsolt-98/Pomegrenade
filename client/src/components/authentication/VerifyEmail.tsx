@@ -93,12 +93,9 @@ export default function VerifyEmail() {
           onSubmit={handleSubmit(onSubmitOtp)}
           noValidate
         >
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-tertiary">
-              Enter the 6-digit code sent to your email address.
-            </p>
-          </div>
-
+          <p className="text-tertiary">
+            Enter the 6-digit code sent to your email address.
+          </p>
           <Controller
             name="otp"
             control={control}
@@ -111,14 +108,12 @@ export default function VerifyEmail() {
               />
             )}
           />
-
           <button
             type="submit"
             className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
           >
             Verify email
           </button>
-
           <p className="text-tertiary">
             Didn't receive an email?{" "}
             {!isResendDisabled ? (
