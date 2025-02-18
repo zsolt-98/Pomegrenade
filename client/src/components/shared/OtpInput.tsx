@@ -8,21 +8,31 @@ type OtpInputProps = {
 };
 
 export default function OtpInput({
-  value,
+  value = "",
   onChange,
   error,
   onComplete,
 }: OtpInputProps) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleInput = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    if (event.target.value.length > 0 && index < inputRefs.current.length - 1) {
-      inputRefs.current[index + 1]?.focus();
-    }
-  };
+  const handleChange =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newVal = e.target.value;
+      if (newVal.match(/^[0-9]?$/)) {
+        const otpArray = value.split("");
+        otpArray[index] = newVal;
+        const newOtp = otpArray.join("");
+        onChange(newOtp);
+
+        if (newVal.length > 0 && index < inputRefs.current.length - 1) {
+          inputRefs.current[index + 1]?.focus();
+        }
+
+        if (newOtp.length === 6 && !newOtp.includes("")) {
+          onComplete?.();
+        }
+      }
+    };
 
   const handleKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>,
@@ -38,13 +48,21 @@ export default function OtpInput({
   };
 
   const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
+    event.preventDefault();
     const paste = event.clipboardData.getData("text");
-    const pasteArray = paste.split("");
-    pasteArray.forEach((char, index) => {
-      if (inputRefs.current[index]) {
-        inputRefs.current[index].value = char;
-      }
-    });
+    const digits = paste.replace(/\D/g, "").slice(0, 6);
+
+    if (digits.length > 0) {
+      onChange(digits);
+      setTimeout(() => {
+        if (digits.length < 6) {
+          inputRefs.current[digits.length]?.focus();
+        } else {
+          inputRefs.current[5]?.focus();
+          onComplete?.();
+        }
+      }, 0);
+    }
   };
 
   return (
@@ -61,33 +79,14 @@ export default function OtpInput({
               ref={(e) => {
                 inputRefs.current[i] = e;
               }}
-              value={(value || "")[i] || ""}
+              value={value[i] || ""}
               className={`bg-tertiary-light h-12 w-12 rounded-md border-2 text-center outline-none ${
                 error
                   ? "border-primary-1 text-primary-1 focus:border-primary-1"
                   : "text-tertiary border-[rgba(var(--color-tertiary-rgb),0.75)] focus:border-[rgba(var(--color-tertiary-rgb),1)]"
               } text-xl`}
-              onChange={(e) => {
-                const newVal = e.target.value;
-                if (newVal.match(/^[0-9]?$/)) {
-                  const otpArray = value ? value.split("") : Array(6).fill("");
-                  otpArray[i] = newVal;
-                  const newOtp = otpArray.join("");
-                  onChange(newOtp);
-                  handleInput(e, i);
-                  if (newOtp.length === 6) {
-                    onComplete?.();
-                  }
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Backspace") {
-                  const otpArray = value ? value.split("") : Array(6).fill("");
-                  otpArray[i] = "";
-                  onChange(otpArray.join(""));
-                  handleKeyDown(e, i);
-                }
-              }}
+              onChange={handleChange(i)}
+              onKeyDown={(e) => handleKeyDown(e, i)}
             />
           ))}
       </div>

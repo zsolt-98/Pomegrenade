@@ -21,6 +21,9 @@ export default function EmailForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<EmailFormInputs>({
+    defaultValues: {
+      email: "",
+    },
     resolver: yupResolver(ResetPasswordEmailSchema),
   });
 
