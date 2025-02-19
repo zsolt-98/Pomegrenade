@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../../../schemas/ResetPasswordSchema";
 import useResendTimer from "../../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
-import { useSubmitOtp } from "../hooks/useSubmitOtp";
 import { OTPFormInputs } from "../../../types";
 import { useResendOtp } from "../hooks/useResendOtp";
 import { useAuth } from "../hooks/useAuth";
@@ -61,8 +60,8 @@ export default function OtpForm() {
     <OtpVerificationFormLayout
       onSubmit={handleSubmit((formData) => {
         onAuth({
-          email: email,
           otp: formData.otp,
+          email: email,
         });
       })}
       control={control}

@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../../schemas/ResetPasswordSchema";
 import useResendTimer from "../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "./shared/OtpVerificationFormLayout";
-import { useSubmitOtp } from "./hooks/useSubmitOtp";
 import { useResendOtp } from "./hooks/useResendOtp";
 import { useAuth } from "./hooks/useAuth";
 import { ResetPasswordContext } from "../../context/authentication/ResetPasswordContext";
@@ -72,10 +71,9 @@ export default function VerifyEmail() {
       h2="Verify your email"
       content={
         <OtpVerificationFormLayout
-          onSubmit={handleSubmit((formData) => {
+          onSubmit={handleSubmit(() => {
             onAuth({
               email: email,
-              otp: formData.otp,
             });
           })}
           control={control}

@@ -2,9 +2,7 @@ import { Link, useNavigate } from "react-router";
 import Input from "../shared/Input";
 import AuthLayout from "./AuthLayout";
 import { useContext } from "react";
-import axios from "axios";
 import { AppContext } from "../../context/AppContext";
-import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../schemas/RegisterSchema";
@@ -19,7 +17,7 @@ interface RegisterFormInputs {
 
 export default function Register() {
   const navigate = useNavigate();
-  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext);
+  const { setIsLoggedin, getUserData } = useContext(AppContext);
 
   const {
     control,

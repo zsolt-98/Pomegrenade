@@ -13,7 +13,7 @@ type AuthApiResponse = {
 type UseAuthProps = {
   endpoint: string;
   onDataSuccess: (data: AuthApiResponse, formInputData: AuthFormInputs) => void;
-  resetOtp: UseFormReset<OTPFormInputs>;
+  resetOtp?: UseFormReset<OTPFormInputs>;
   onOtpExpired?: () => void;
   onDataFail?: () => void;
 };
@@ -23,6 +23,7 @@ export type AuthFormInputs = {
   name?: string;
   otp?: string;
   password?: string;
+  newPassword?: string;
 };
 
 export function useAuth({
@@ -30,7 +31,6 @@ export function useAuth({
   onDataSuccess,
   resetOtp,
   onOtpExpired,
-  onDataFail,
 }: UseAuthProps) {
   const { backendUrl } = useContext(AppContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,7 +54,9 @@ export function useAuth({
         if (onOtpExpired) {
           onOtpExpired();
         }
-        resetOtp();
+        if (resetOtp) {
+          resetOtp();
+        }
         toast.error(data.message + ". Please restart the process.");
       } else {
         toast.error(data.message);
@@ -62,8 +64,6 @@ export function useAuth({
           resetOtp();
         }
       }
-      // else if (onDataFail) {
-      //   onDataFail(); }
     } catch (error) {
       console.error(error);
       toast.error("An error has occurred.");

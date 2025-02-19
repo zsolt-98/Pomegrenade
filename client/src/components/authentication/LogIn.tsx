@@ -3,8 +3,6 @@ import Input from "../shared/Input";
 import AuthLayout from "./AuthLayout";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import axios from "axios";
-import { toast } from "react-toastify";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LogInSchema } from "../../schemas/LogInSchema";
@@ -17,7 +15,7 @@ interface LoginFormInputs {
 
 export default function LogIn() {
   const navigate = useNavigate();
-  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContext);
+  const { setIsLoggedin, getUserData } = useContext(AppContext);
   const {
     control,
     handleSubmit,

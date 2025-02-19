@@ -1,11 +1,8 @@
 import { useContext } from "react";
 import { ResetPasswordContext } from "../../../context/authentication/ResetPasswordContext";
-import { AppContext } from "../../../context/AppContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { ResetPasswordEmailSchema } from "../../../schemas/ResetPasswordSchema";
-import axios from "axios";
-import { toast } from "react-toastify";
 import Input from "../../shared/Input";
 import { useAuth } from "../hooks/useAuth";
 
@@ -15,7 +12,6 @@ type EmailFormInputs = {
 
 export default function EmailForm() {
   const { setEmail, setIsEmailSent } = useContext(ResetPasswordContext);
-  const { backendUrl } = useContext(AppContext);
 
   const {
     control,
