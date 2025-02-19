@@ -11,6 +11,7 @@ import useResendTimer from "../../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
 import { useSubmitOtp } from "../hooks/useSubmitOtp";
 import { OTPFormInputs } from "../../../types";
+import { useResendOtp } from "../hooks/useResendOtp";
 
 export default function OtpForm() {
   const { email, setOtp, setIsOtpSubmitted, clearState } =
@@ -45,24 +46,11 @@ export default function OtpForm() {
     onExpired: clearState,
   });
 
-  const handleResendOtp = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/auth/send-reset-otp`,
-        { email },
-      );
-      if (data.success) {
-        toast.success(data.message);
-        startTimer();
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error has occurred.");
-    }
-  };
+  const { handleResendOtp } = useResendOtp({
+    endpoint: "send-reset-otp",
+    email,
+    startTimer,
+  });
 
   return (
     <OtpVerificationFormLayout
