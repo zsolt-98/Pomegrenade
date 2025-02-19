@@ -10,7 +10,7 @@ type AuthApiResponse = {
 
 type UseAuthProps = {
   endpoint: string;
-  onDataSuccess: (data: AuthApiResponse) => void;
+  onDataSuccess: (data: AuthApiResponse, formInputData: AuthFormInputs) => void;
   onDataFail?: () => void;
 };
 
@@ -36,7 +36,7 @@ export function useAuth({ endpoint, onDataSuccess, onDataFail }: UseAuthProps) {
 
       if (data.success) {
         toast.success(data.message);
-        onDataSuccess(data);
+        onDataSuccess(data, formData);
       } else {
         toast.error(data.message);
       }

@@ -7,6 +7,7 @@ import { ResetPasswordEmailSchema } from "../../../schemas/ResetPasswordSchema";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Input from "../../shared/Input";
+import { useAuth } from "../hooks/useAuth";
 
 type EmailFormInputs = {
   email: string;
@@ -27,29 +28,37 @@ export default function EmailForm() {
     resolver: yupResolver(ResetPasswordEmailSchema),
   });
 
-  const onSubmitEmail = async (formData: EmailFormInputs) => {
-    try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/auth/send-reset-otp`,
-        { email: formData.email },
-      );
-      if (data.success) {
-        setEmail(formData.email);
-        setIsEmailSent(true);
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error has occurred.");
-    }
-  };
+  const { onAuth, isSubmitting } = useAuth({
+    endpoint: "send-reset-otp",
+    onDataSuccess: (_, formInputData) => {
+      setEmail(formInputData.email);
+      setIsEmailSent(true);
+    },
+  });
+
+  // const onSubmitEmail = async (formData: EmailFormInputs) => {
+  //   try {
+  //     const { data } = await axios.post(
+  //       `${backendUrl}/api/auth/send-reset-otp`,
+  //       { email: formData.email },
+  //     );
+  //     if (data.success) {
+  //       setEmail(formData.email);
+  //       setIsEmailSent(true);
+  //       toast.success(data.message);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("An error has occurred.");
+  //   }
+  // };
 
   return (
     <form
       className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-      onSubmit={handleSubmit(onSubmitEmail)}
+      onSubmit={handleSubmit(onAuth)}
     >
       <div className="flex flex-col items-center justify-center">
         <p className="text-tertiary">
@@ -71,7 +80,10 @@ export default function EmailForm() {
         )}
       />
 
-      <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light o outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+      <button
+        className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light o outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
+        disabled={isSubmitting}
+      >
         Submit
       </button>
     </form>
