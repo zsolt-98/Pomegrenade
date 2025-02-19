@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { UseFormReset } from "react-hook-form";
+import { OTPFormInputs } from "../../../types";
 
 type AuthApiResponse = {
   success: boolean;
@@ -11,6 +13,8 @@ type AuthApiResponse = {
 type UseAuthProps = {
   endpoint: string;
   onDataSuccess: (data: AuthApiResponse, formInputData: AuthFormInputs) => void;
+  resetOtp: UseFormReset<OTPFormInputs>;
+  onOtpExpired?: () => void;
   onDataFail?: () => void;
 };
 
@@ -21,7 +25,13 @@ export type AuthFormInputs = {
   password?: string;
 };
 
-export function useAuth({ endpoint, onDataSuccess, onDataFail }: UseAuthProps) {
+export function useAuth({
+  endpoint,
+  onDataSuccess,
+  resetOtp,
+  onOtpExpired,
+  onDataFail,
+}: UseAuthProps) {
   const { backendUrl } = useContext(AppContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -37,8 +47,20 @@ export function useAuth({ endpoint, onDataSuccess, onDataFail }: UseAuthProps) {
       if (data.success) {
         toast.success(data.message);
         onDataSuccess(data, formData);
+      } else if (
+        data.message.toLowerCase().includes("code") &&
+        data.message.toLowerCase().includes("expired")
+      ) {
+        if (onOtpExpired) {
+          onOtpExpired();
+        }
+        resetOtp();
+        toast.error(data.message + ". Please restart the process.");
       } else {
         toast.error(data.message);
+        if (resetOtp) {
+          resetOtp();
+        }
       }
       // else if (onDataFail) {
       //   onDataFail(); }

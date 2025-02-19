@@ -8,6 +8,7 @@ import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
 import { useSubmitOtp } from "../hooks/useSubmitOtp";
 import { OTPFormInputs } from "../../../types";
 import { useResendOtp } from "../hooks/useResendOtp";
+import { useAuth } from "../hooks/useAuth";
 
 export default function OtpForm() {
   const { email, setOtp, setIsOtpSubmitted, clearState } =
@@ -20,7 +21,6 @@ export default function OtpForm() {
     handleSubmit,
     reset: resetOtp,
     trigger: triggerOtpValidation,
-    watch,
   } = useForm<OTPFormInputs>({
     resolver: yupResolver(verifyOtpSchema),
     mode: "onChange",
@@ -29,17 +29,27 @@ export default function OtpForm() {
     },
   });
 
-  const currentOtp = watch("otp");
-  const { submitOtp } = useSubmitOtp({
+  const { onAuth } = useAuth({
     endpoint: "verify-reset-otp",
-    email,
-    resetOtp,
-    onSuccess: () => {
-      setOtp(currentOtp);
+    onDataSuccess: (_, formInputData) => {
+      setOtp(formInputData.otp as string);
       setIsOtpSubmitted(true);
     },
-    onExpired: clearState,
+    resetOtp,
+    onOtpExpired: clearState,
   });
+
+  // const currentOtp = watch("otp");
+  // const { submitOtp } = useSubmitOtp({
+  //   endpoint: "verify-reset-otp",
+  //   email,
+  //   resetOtp,
+  //   onSuccess: () => {
+  //     setOtp(currentOtp);
+  //     setIsOtpSubmitted(true);
+  //   },
+  //   onExpired: clearState,
+  // });
 
   const { handleResendOtp } = useResendOtp({
     endpoint: "send-reset-otp",
@@ -49,7 +59,12 @@ export default function OtpForm() {
 
   return (
     <OtpVerificationFormLayout
-      onSubmit={handleSubmit(submitOtp)}
+      onSubmit={handleSubmit((formData) => {
+        onAuth({
+          email: email,
+          otp: formData.otp,
+        });
+      })}
       control={control}
       triggerOtpValidation={triggerOtpValidation}
       isResendDisabled={isResendDisabled}

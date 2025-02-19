@@ -10,6 +10,8 @@ import useResendTimer from "../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "./shared/OtpVerificationFormLayout";
 import { useSubmitOtp } from "./hooks/useSubmitOtp";
 import { useResendOtp } from "./hooks/useResendOtp";
+import { useAuth } from "./hooks/useAuth";
+import { ResetPasswordContext } from "../../context/authentication/ResetPasswordContext";
 
 type VerifyEmailFormInputs = {
   otp: string;
@@ -17,6 +19,7 @@ type VerifyEmailFormInputs = {
 
 export default function VerifyEmail() {
   axios.defaults.withCredentials = true;
+  const { email } = useContext(ResetPasswordContext);
   const { isLoggedin, userData, getUserData } = useContext(AppContext);
   const { isResendDisabled, timeLeft, startTimer, formatTime } =
     useResendTimer();
@@ -35,14 +38,23 @@ export default function VerifyEmail() {
     },
   });
 
-  const { submitOtp } = useSubmitOtp({
+  const { onAuth } = useAuth({
     endpoint: "verify-account",
-    resetOtp,
-    onSuccess: () => {
+    onDataSuccess: () => {
       getUserData();
       navigate("/");
     },
+    resetOtp,
   });
+
+  // const { submitOtp } = useSubmitOtp({
+  //   endpoint: "verify-account",
+  //   resetOtp,
+  //   onSuccess: () => {
+  //     getUserData();
+  //     navigate("/");
+  //   },
+  // });
 
   const { handleResendOtp } = useResendOtp({
     endpoint: "send-verify-otp",
@@ -60,7 +72,12 @@ export default function VerifyEmail() {
       h2="Verify your email"
       content={
         <OtpVerificationFormLayout
-          onSubmit={handleSubmit(submitOtp)}
+          onSubmit={handleSubmit((formData) => {
+            onAuth({
+              email: email,
+              otp: formData.otp,
+            });
+          })}
           control={control}
           triggerOtpValidation={triggerOtpValidation}
           isResendDisabled={isResendDisabled}
