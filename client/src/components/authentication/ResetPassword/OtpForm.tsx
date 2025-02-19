@@ -1,12 +1,8 @@
 import { useContext } from "react";
 import { ResetPasswordContext } from "../../../context/authentication/ResetPasswordContext";
-import { AppContext } from "../../../context/AppContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../../../schemas/ResetPasswordSchema";
-import axios from "axios";
-import { toast } from "react-toastify";
-
 import useResendTimer from "../../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
 import { useSubmitOtp } from "../hooks/useSubmitOtp";
@@ -16,7 +12,6 @@ import { useResendOtp } from "../hooks/useResendOtp";
 export default function OtpForm() {
   const { email, setOtp, setIsOtpSubmitted, clearState } =
     useContext(ResetPasswordContext);
-  const { backendUrl } = useContext(AppContext);
   const { isResendDisabled, timeLeft, startTimer, formatTime } =
     useResendTimer();
 
