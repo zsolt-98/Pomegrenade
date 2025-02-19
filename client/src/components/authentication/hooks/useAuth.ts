@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { UseFormReset } from "react-hook-form";
 import { OTPFormInputs } from "../../../types";
 
+// TODO: Add OTP expired reset to Email Verification
+
 type AuthApiResponse = {
   success: boolean;
   message: string;

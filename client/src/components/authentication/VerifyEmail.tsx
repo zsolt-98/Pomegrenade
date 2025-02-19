@@ -71,9 +71,10 @@ export default function VerifyEmail() {
       h2="Verify your email"
       content={
         <OtpVerificationFormLayout
-          onSubmit={handleSubmit(() => {
+          onSubmit={handleSubmit((formData) => {
             onAuth({
               email: email,
+              otp: formData.otp,
             });
           })}
           control={control}
