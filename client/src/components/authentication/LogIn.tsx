@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LogInSchema } from "../../schemas/LogInSchema";
+import { useAuth } from "./hooks/useAuth";
 
 interface LoginFormInputs {
   email: string;
@@ -25,29 +26,38 @@ export default function LogIn() {
     resolver: yupResolver(LogInSchema),
   });
 
-  const onSubmitHandler = async (formData: LoginFormInputs) => {
-    try {
-      axios.defaults.withCredentials = true;
+  const { onAuth, isSubmitting } = useAuth({
+    endpoint: "login",
+    onDataSuccess: () => {
+      setIsLoggedin(true);
+      getUserData();
+      navigate("/");
+    },
+  });
 
-      const { data } = await axios.post(backendUrl + "/api/auth/login", {
-        email: formData.email,
-        password: formData.password,
-      });
+  // const onSubmitHandler = async (formData: LoginFormInputs) => {
+  //   try {
+  //     axios.defaults.withCredentials = true;
 
-      if (data.success) {
-        setIsLoggedin(true);
-        getUserData();
-        navigate("/");
-        toast.success("Successful log in");
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error); // Temporary
-      toast.error("An error occurred during login.");
-      // toast.error(data.message);
-    }
-  };
+  //     const { data } = await axios.post(backendUrl + "/api/auth/login", {
+  //       email: formData.email,
+  //       password: formData.password,
+  //     });
+
+  //     if (data.success) {
+  //       setIsLoggedin(true);
+  //       getUserData();
+  //       navigate("/");
+  //       toast.success("Successful log in");
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error); // Temporary
+  //     toast.error("An error occurred during login.");
+  //     // toast.error(data.message);
+  //   }
+  // };
 
   return (
     <AuthLayout
@@ -55,7 +65,7 @@ export default function LogIn() {
       content={
         <form
           className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
-          onSubmit={handleSubmit(onSubmitHandler)}
+          onSubmit={handleSubmit(onAuth)}
         >
           <Controller
             name="email"
@@ -83,7 +93,10 @@ export default function LogIn() {
               />
             )}
           />
-          <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal">
+          <button
+            className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
+            disabled={isSubmitting}
+          >
             Log in
           </button>
           <div className="flex flex-col items-center justify-center">
