@@ -3,7 +3,7 @@ import { ResetPasswordContext } from "../../../context/authentication/ResetPassw
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { ResetPasswordEmailSchema } from "../schemas/ResetPasswordSchema";
-import Input from "../../shared/Input";
+import Input from "../../global/shared/Input";
 import { useAuth } from "../hooks/useAuth";
 
 type EmailFormInputs = {

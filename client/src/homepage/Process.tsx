@@ -2,7 +2,7 @@ import goals from "../assets/goals-300x300px-bg.png";
 import food from "../assets/food-300x300px-bg.png";
 import success from "../assets/success-300x300px-bg.png";
 import ProcessBadge from "./ProcessBadge";
-import DividerProcess from "../components/svg/DividerProcess";
+import DividerProcess from "../components/global/svg/DividerProcess";
 
 export default function Process() {
   return (

@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import Footer from "./components/Footer";
-import Nav from "./components/Nav";
+import Footer from "./components/global/Footer";
+import Nav from "./components/global/Nav.js";
 import LogIn from "./components/authentication/LogIn";
 import VerifyEmail from "./components/authentication/VerifyEmail";
 import ResetPassword from "./components/authentication/ResetPassword/ResetPassword.js";

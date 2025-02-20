@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router";
-import Input from "../shared/Input";
+import Input from "../global/shared/Input";
 import AuthLayout from "./shared/AuthLayout";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";

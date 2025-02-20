@@ -3,7 +3,7 @@ import { ResetPasswordContext } from "../../../context/authentication/ResetPassw
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "../schemas/ResetPasswordSchema";
-import useResendTimer from "../../../hooks/useResendOtpTimer";
+import useResendTimer from "../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "../shared/OtpVerificationFormLayout";
 import { OTPFormInputs } from "../../../types";
 import { useResendOtp } from "../hooks/useResendOtp";

@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { SVGProps } from "../../types";
+import { SVGProps } from "../../../types";
 
 export default function FiveStars({ fill, size }: SVGProps) {
   return (

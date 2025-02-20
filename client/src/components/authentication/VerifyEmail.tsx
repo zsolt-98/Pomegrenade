@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpSchema } from "./schemas/ResetPasswordSchema";
-import useResendTimer from "../../hooks/useResendOtpTimer";
+import useResendTimer from "./hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "./shared/OtpVerificationFormLayout";
 import { useResendOtp } from "./hooks/useResendOtp";
 import { useAuth } from "./hooks/useAuth";

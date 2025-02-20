@@ -1,5 +1,5 @@
 import placeholder from "../assets/placeholder.png";
-import Divider from "../components/svg/Divider";
+import Divider from "../components/global/svg/Divider";
 
 export default function Hero() {
   return (

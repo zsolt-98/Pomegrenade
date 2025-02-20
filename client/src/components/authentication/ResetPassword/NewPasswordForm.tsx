@@ -4,7 +4,7 @@ import { ResetPasswordContext } from "../../../context/authentication/ResetPassw
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ResetPassowrdNewPasswordSchema } from "../schemas/ResetPasswordSchema";
-import Input from "../../shared/Input";
+import Input from "../../global/shared/Input";
 import { useAuth } from "../hooks/useAuth";
 
 type NewPasswordFormInputs = {

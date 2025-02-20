@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-import pomegrenadeLogoSecondaryLight from "../assets/pomegrenade-logo-secondary-light-636x295px.png";
-import pomegrenadeLogoTertiaryLight from "../assets/pomegrenade-logo-tertiary-light-636x295px.png";
-import { ButtonHollowPillProps } from "../types";
+import pomegrenadeLogoSecondaryLight from "../../assets/pomegrenade-logo-secondary-light-636x295px.png";
+import pomegrenadeLogoTertiaryLight from "../../assets/pomegrenade-logo-tertiary-light-636x295px.png";
+import { ButtonHollowPillProps } from "../../types";
 import { Menu, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useResendOtp } from "./authentication/hooks/useResendOtp";
+import { useResendOtp } from "../authentication/hooks/useResendOtp";
 
 function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
