@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useResendOtp } from "./authentication/hooks/useResendOtp";
 
 function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
@@ -60,6 +61,10 @@ export default function Nav() {
     location.pathname === "/email-verify";
   const isHomepageRoute = location.pathname === "/";
 
+  const { handleResendOtp, isResending } = useResendOtp({
+    endpoint: "send-verify-otp",
+  });
+
   const logout = async () => {
     try {
       axios.defaults.withCredentials = true;
@@ -83,25 +88,25 @@ export default function Nav() {
 
   if (isAuthRoute) return null;
 
-  const sendVerificationOtp = async () => {
-    try {
-      axios.defaults.withCredentials = true;
+  // const sendVerificationOtp = async () => {
+  //   try {
+  //     axios.defaults.withCredentials = true;
 
-      const { data } = await axios.post(
-        backendUrl + "/api/auth/send-verify-otp",
-      );
+  //     const { data } = await axios.post(
+  //       backendUrl + "/api/auth/send-verify-otp",
+  //     );
 
-      if (data.success) {
-        navigate("/email-verify");
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error); // Temporary
-      toast.error("An error has occurred.");
-    }
-  };
+  //     if (data.success) {
+  //       navigate("/email-verify");
+  //       toast.success(data.message);
+  //     } else {
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error); // Temporary
+  //     toast.error("An error has occurred.");
+  //   }
+  // };
 
   return (
     <header
@@ -154,23 +159,25 @@ export default function Nav() {
                 <a className="group relative capitalize underline">
                   {userData.name}
                   <div className="absolute right-0 top-0 z-10 hidden pt-10 group-hover:block">
-                    <ul className="m-0 list-none text-nowrap bg-gray-100 p-2 text-sm">
+                    <div className="m-0 list-none text-nowrap bg-gray-100 p-2 text-sm">
                       {!userData.isAccountVerified && (
-                        <li
+                        <button
+                          type="button"
                           className="px-2 py-1 hover:bg-gray-200"
-                          onClick={sendVerificationOtp}
+                          disabled={isResending}
+                          onClick={handleResendOtp}
                         >
                           Verfiy email
-                        </li>
+                        </button>
                       )}
 
-                      <li
+                      <button
                         onClick={logout}
                         className="px-2 py-1 hover:bg-gray-200"
                       >
                         Log out
-                      </li>
-                    </ul>
+                      </button>
+                    </div>
                   </div>
                 </a>
               </div>

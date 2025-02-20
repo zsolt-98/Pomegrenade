@@ -35,33 +35,6 @@ export default function NewPasswordForm() {
     onOtpExpired: clearState,
   });
 
-  // const onSubmitNewPassowrd = async (formData: NewPasswordFormInputs) => {
-  //   try {
-  //     const { data } = await axios.post(
-  //       `${backendUrl}/api/auth/reset-password`,
-  //       { email, otp, newPassword: formData.newPassword },
-  //     );
-  //     if (data.success) {
-  //       toast.success(data.message);
-  //       clearState();
-  //       navigate("/login");
-  //     } else {
-  //       if (
-  //         data.message.toLowerCase().includes("code") &&
-  //         data.message.toLowerCase().includes("expired")
-  //       ) {
-  //         clearState();
-  //         toast.error(data.message + ". Please restart the process.");
-  //       } else {
-  //         toast.error(data.message);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("An error has occurred.");
-  //   }
-  // };
-
   return (
     <form
       className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"

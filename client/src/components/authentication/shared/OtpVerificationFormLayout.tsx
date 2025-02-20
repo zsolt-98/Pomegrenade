@@ -1,6 +1,5 @@
 import { Control, Controller } from "react-hook-form";
 import OtpInput from "./OtpInput";
-import { Link } from "react-router";
 
 type OtpFormValues = {
   otp: string;
@@ -11,9 +10,10 @@ type OtpVerificationFormLayoutProps = {
   control: Control<OtpFormValues>;
   triggerOtpValidation: () => void;
   isResendDisabled: boolean;
-  handleResendOtp: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  handleResendOtp: (e: React.MouseEvent<HTMLButtonElement>) => void;
   formatTime: (seconds: number) => string;
   timeLeft: number;
+  isResending: boolean;
 };
 
 export default function OtpVerificationFormLayout({
@@ -24,6 +24,7 @@ export default function OtpVerificationFormLayout({
   handleResendOtp,
   formatTime,
   timeLeft,
+  isResending,
 }: OtpVerificationFormLayoutProps) {
   return (
     <form
@@ -55,13 +56,14 @@ export default function OtpVerificationFormLayout({
       <p className="text-tertiary">
         Didn't receive an email?{" "}
         {!isResendDisabled ? (
-          <Link
-            to="#"
+          <button
+            type="button"
+            disabled={isResending}
             onClick={handleResendOtp}
             className="outline-tertiary font-semibold underline"
           >
             Resend
-          </Link>
+          </button>
         ) : (
           <span>Resend again in {formatTime(timeLeft)}</span>
         )}

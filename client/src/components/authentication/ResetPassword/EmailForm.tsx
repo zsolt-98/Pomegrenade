@@ -32,25 +32,6 @@ export default function EmailForm() {
     },
   });
 
-  // const onSubmitEmail = async (formData: EmailFormInputs) => {
-  //   try {
-  //     const { data } = await axios.post(
-  //       `${backendUrl}/api/auth/send-reset-otp`,
-  //       { email: formData.email },
-  //     );
-  //     if (data.success) {
-  //       setEmail(formData.email);
-  //       setIsEmailSent(true);
-  //       toast.success(data.message);
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("An error has occurred.");
-  //   }
-  // };
-
   return (
     <form
       className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"

@@ -133,10 +133,22 @@ export const sendVerifyOtp = async (req: Request, res: Response) => {
       });
     }
 
+    const lastOtpSentAt = user.lastVerifyOtpSentAt || 0;
+    const now = Date.now();
+    const timeSinceLastOtp = now - lastOtpSentAt;
+
+    if (timeSinceLastOtp < 5000) {
+      return res.json({
+        success: false,
+        message: `Please wait ${Math.ceil((5000 - timeSinceLastOtp) / 1000)} seconds before requesting another verification code`,
+      });
+    }
+
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
     user.verifyOtp = otp;
     user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
+    user.lastVerifyOtpSentAt = now;
 
     await user.save();
 
@@ -220,10 +232,22 @@ export const sendResetOtp = async (req: Request, res: Response) => {
       });
     }
 
+    const lastOtpSentAt = user.lastResetOtpSentAt || 0;
+    const now = Date.now();
+    const timeSinceLastOtp = now - lastOtpSentAt;
+
+    if (timeSinceLastOtp < 5000) {
+      return res.json({
+        success: false,
+        message: `Please wait ${Math.ceil((5000 - timeSinceLastOtp) / 1000)} seconds before requesting another verification code`,
+      });
+    }
+
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
     user.resetOtp = otp;
     user.resetOtpExpireAt = Date.now() + 0.5 * 60 * 1000;
+    user.lastResetOtpSentAt = now;
 
     await user.save();
 
@@ -265,12 +289,12 @@ export const verifyResetOtp = async (req: Request, res: Response) => {
       return res.json({ success: false, message: "User not found" });
     }
 
-    if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
-      return res.json({ success: false, message: "Verification code expired" });
-    }
-
     if (user.resetOtp === "" || user.resetOtp !== otp) {
       return res.json({ success: false, message: "Invalid verification code" });
+    }
+
+    if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
+      return res.json({ success: false, message: "Verification code expired" });
     }
 
     return res.json({ success: true, message: "Code verification successful" });

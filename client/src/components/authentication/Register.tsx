@@ -36,30 +36,6 @@ export default function Register() {
     },
   });
 
-  // const onSubmitHandler = async (formData: RegisterFormInputs) => {
-  //   try {
-  //     axios.defaults.withCredentials = true;
-
-  //     const { data } = await axios.post(backendUrl + "/api/auth/register", {
-  //       name: formData.name,
-  //       email: formData.email,
-  //       password: formData.password,
-  //     });
-
-  //     if (data.success) {
-  //       setIsLoggedin(true);
-  //       getUserData();
-  //       navigate("/");
-  //       toast.success("Successful registration");
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("An error occurred during registration.");
-  //   }
-  // };
-
   return (
     <AuthLayout
       h2="Create your account"
@@ -67,6 +43,7 @@ export default function Register() {
         <form
           className="flex w-full max-w-[364px] flex-col items-center justify-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit(onAuth)}
+          noValidate
         >
           <Controller
             name="name"

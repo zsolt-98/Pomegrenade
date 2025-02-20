@@ -33,30 +33,6 @@ export default function LogIn() {
     },
   });
 
-  // const onSubmitHandler = async (formData: LoginFormInputs) => {
-  //   try {
-  //     axios.defaults.withCredentials = true;
-
-  //     const { data } = await axios.post(backendUrl + "/api/auth/login", {
-  //       email: formData.email,
-  //       password: formData.password,
-  //     });
-
-  //     if (data.success) {
-  //       setIsLoggedin(true);
-  //       getUserData();
-  //       navigate("/");
-  //       toast.success("Successful log in");
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     console.log(error); // Temporary
-  //     toast.error("An error occurred during login.");
-  //     // toast.error(data.message);
-  //   }
-  // };
-
   return (
     <AuthLayout
       h2="Log in to your account"
@@ -64,6 +40,7 @@ export default function LogIn() {
         <form
           className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
           onSubmit={handleSubmit(onAuth)}
+          noValidate
         >
           <Controller
             name="email"

@@ -38,18 +38,6 @@ export default function OtpForm() {
     onOtpExpired: clearState,
   });
 
-  // const currentOtp = watch("otp");
-  // const { submitOtp } = useSubmitOtp({
-  //   endpoint: "verify-reset-otp",
-  //   email,
-  //   resetOtp,
-  //   onSuccess: () => {
-  //     setOtp(currentOtp);
-  //     setIsOtpSubmitted(true);
-  //   },
-  //   onExpired: clearState,
-  // });
-
   const { handleResendOtp } = useResendOtp({
     endpoint: "send-reset-otp",
     email,

@@ -55,7 +55,7 @@ export default function VerifyEmail() {
   //   },
   // });
 
-  const { handleResendOtp } = useResendOtp({
+  const { handleResendOtp, isResending } = useResendOtp({
     endpoint: "send-verify-otp",
     startTimer,
   });
@@ -83,6 +83,7 @@ export default function VerifyEmail() {
           handleResendOtp={handleResendOtp}
           formatTime={formatTime}
           timeLeft={timeLeft}
+          isResending={isResending}
         />
       }
     />
