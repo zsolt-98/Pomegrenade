@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import pomegrenadeLogoSecondaryLight from "../assets/pomegrenade-logo-secondary-light-636x295px.png";
 import pomegrenadeLogoTertiaryLight from "../assets/pomegrenade-logo-tertiary-light-636x295px.png";
-
 import { ButtonHollowPillProps } from "../types";
 import { Menu, X } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
@@ -61,9 +60,11 @@ export default function Nav() {
     location.pathname === "/email-verify";
   const isHomepageRoute = location.pathname === "/";
 
-  const { handleResendOtp, isResending } = useResendOtp({
-    endpoint: "send-verify-otp",
-  });
+  useEffect(() => {
+    if (!isUnderMDScreen) {
+      setisNavMenuOpen(false);
+    }
+  }, [isUnderMDScreen]);
 
   const logout = async () => {
     try {
@@ -75,38 +76,16 @@ export default function Nav() {
         navigate("/");
       }
     } catch (error) {
-      console.log(error); // Temporary
+      console.log(error);
       toast.error("An error has occurred.");
     }
   };
 
-  useEffect(() => {
-    if (!isUnderMDScreen) {
-      setisNavMenuOpen(false);
-    }
-  }, [isUnderMDScreen]);
+  const { handleResendOtp, isResending } = useResendOtp({
+    endpoint: "send-verify-otp",
+  });
 
   if (isAuthRoute) return null;
-
-  // const sendVerificationOtp = async () => {
-  //   try {
-  //     axios.defaults.withCredentials = true;
-
-  //     const { data } = await axios.post(
-  //       backendUrl + "/api/auth/send-verify-otp",
-  //     );
-
-  //     if (data.success) {
-  //       navigate("/email-verify");
-  //       toast.success(data.message);
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     console.log(error); // Temporary
-  //     toast.error("An error has occurred.");
-  //   }
-  // };
 
   return (
     <header

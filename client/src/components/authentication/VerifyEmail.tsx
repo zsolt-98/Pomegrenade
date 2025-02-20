@@ -46,15 +46,6 @@ export default function VerifyEmail() {
     resetOtp,
   });
 
-  // const { submitOtp } = useSubmitOtp({
-  //   endpoint: "verify-account",
-  //   resetOtp,
-  //   onSuccess: () => {
-  //     getUserData();
-  //     navigate("/");
-  //   },
-  // });
-
   const { handleResendOtp, isResending } = useResendOtp({
     endpoint: "send-verify-otp",
     startTimer,

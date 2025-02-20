@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AppContext } from "../../../context/AppContext";
+import { useNavigate } from "react-router";
 
 type UseResendOtpProps = {
   endpoint: string;
   email?: string;
-  onSuccess;
   startTimer?: () => void;
 };
 
@@ -16,6 +16,7 @@ export const useResendOtp = ({
   startTimer,
 }: UseResendOtpProps) => {
   const { backendUrl } = useContext(AppContext);
+  const navigate = useNavigate();
   const [isResending, setIsResending] = useState(false);
 
   const handleResendOtp = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,6 +35,9 @@ export const useResendOtp = ({
         toast.success(data.message);
         if (startTimer) {
           startTimer();
+        }
+        if (endpoint === "send-verify-otp") {
+          navigate("/email-verify");
         }
       } else {
         toast.error(data.message);

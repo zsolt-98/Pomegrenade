@@ -38,7 +38,7 @@ export default function OtpForm() {
     onOtpExpired: clearState,
   });
 
-  const { handleResendOtp } = useResendOtp({
+  const { handleResendOtp, isResending } = useResendOtp({
     endpoint: "send-reset-otp",
     email,
     startTimer,
@@ -58,6 +58,7 @@ export default function OtpForm() {
       handleResendOtp={handleResendOtp}
       formatTime={formatTime}
       timeLeft={timeLeft}
+      isResending={isResending}
     />
   );
 }
