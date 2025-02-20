@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import pomegrenadeLogo from "../../assets/pomegrenade-logo-tertiary-light-636x295px.png";
+import pomegrenadeLogo from "../../../assets/pomegrenade-logo-tertiary-light-636x295px.png";
 
 interface AuthLayoutProps {
   h2: string;

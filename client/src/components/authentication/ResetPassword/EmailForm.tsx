@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ResetPasswordContext } from "../../../context/authentication/ResetPasswordContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { ResetPasswordEmailSchema } from "../../../schemas/ResetPasswordSchema";
+import { ResetPasswordEmailSchema } from "../schemas/ResetPasswordSchema";
 import Input from "../../shared/Input";
 import { useAuth } from "../hooks/useAuth";
 
@@ -36,6 +36,7 @@ export default function EmailForm() {
     <form
       className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
       onSubmit={handleSubmit(onAuth)}
+      noValidate
     >
       <div className="flex flex-col items-center justify-center">
         <p className="text-tertiary">

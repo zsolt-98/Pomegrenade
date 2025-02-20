@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router";
 import Input from "../shared/Input";
-import AuthLayout from "./AuthLayout";
+import AuthLayout from "./shared/AuthLayout";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerSchema } from "../../schemas/RegisterSchema";
+import { registerSchema } from "./schemas/RegisterSchema";
 import { useAuth } from "./hooks/useAuth";
 
 interface RegisterFormInputs {

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import AuthLayout from "../AuthLayout";
+import AuthLayout from "../shared/AuthLayout";
 import axios from "axios";
 import {
   ResetPasswordContext,

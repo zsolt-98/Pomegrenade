@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { ResetPasswordContext } from "../../../context/authentication/ResetPasswordContext";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ResetPassowrdNewPasswordSchema } from "../../../schemas/ResetPasswordSchema";
+import { ResetPassowrdNewPasswordSchema } from "../schemas/ResetPasswordSchema";
 import Input from "../../shared/Input";
 import { useAuth } from "../hooks/useAuth";
 
@@ -38,6 +38,7 @@ export default function NewPasswordForm() {
   return (
     <form
       className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+      noValidate
       onSubmit={handleSubmit((formData) => {
         onAuth({
           email: email,

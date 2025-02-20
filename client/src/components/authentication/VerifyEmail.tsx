@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
-import AuthLayout from "./AuthLayout";
+import AuthLayout from "./shared/AuthLayout";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { verifyOtpSchema } from "../../schemas/ResetPasswordSchema";
+import { verifyOtpSchema } from "./schemas/ResetPasswordSchema";
 import useResendTimer from "../../hooks/useResendOtpTimer";
 import OtpVerificationFormLayout from "./shared/OtpVerificationFormLayout";
 import { useResendOtp } from "./hooks/useResendOtp";
