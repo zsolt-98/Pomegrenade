@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
-import { ButtonHollowPillProps } from "../types";
-import DividerReviews from "../components/global/svg/DividerReviews";
+import { ButtonHollowPillProps } from "../../../types";
+import DividerReviews from "../../global/svg/DividerReviews";
 
 function ButtonHollowPillGetStarted({
   children,
