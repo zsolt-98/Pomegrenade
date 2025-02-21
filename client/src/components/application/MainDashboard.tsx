@@ -33,10 +33,10 @@ export default function MainDashboard() {
             onSubmit={handleSearch}
             className="h-100 mt-20 w-full bg-white p-6"
           >
-            <div className="">
+            <div className="flex justify-between">
               <h3 className="mb-3 text-xl font-semibold">Breakfast:</h3>
               <div className="flex">
-                <input
+                {/* <input
                   type="text"
                   placeholder="search for foods"
                   className="flex-1 rounded-l border px-4 py-2"
@@ -50,6 +50,9 @@ export default function MainDashboard() {
                   disabled={isLoading}
                 >
                   {isLoading ? "Searching..." : "Search"}
+                </button> */}
+                <button className="bg-tertiary rounded-4xl text-tertiary-light p-3">
+                  Add food
                 </button>
               </div>
             </div>

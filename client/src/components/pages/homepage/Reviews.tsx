@@ -24,7 +24,7 @@ export default function Reviews() {
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute top-54 right-10 rotate-[13deg] xl:top-4 xl:left-110 md:top-7 md:left-60 md:rotate-[-4deg]  `}
             bgColor="bg-tertiary-light"
-            starColor="var(--color-secondary)"
+            starColor="var(--color-secondary-orange)"
             pColor="text-tertiary"
             pText="Super intuitive app! I lost 10 pounds without feeling like I was dieting at all. The interface is smooth, adding foods is effortless, and I love how it breaks down my macros in a way that actually makes sense. It’s like having a personal nutrition coach in my pocket!"
             hColor="text-tertiary"
@@ -33,7 +33,7 @@ export default function Reviews() {
 
           <ReviewsCard
             cardClassName={`border-3 border-tertiary absolute top-88 left-10  rotate-[-14deg] xl:top-27 xl:left-198 md:top-40 md:left-90 md:rotate-[17deg] `}
-            bgColor="bg-secondary"
+            bgColor="bg-secondary-orange"
             starColor="var(--color-tertiary)"
             pColor="text-tertiary-light"
             pText="Finally, a calorie tracker that doesn’t feel like a chore! Other apps felt clunky and overwhelming, but Pomegrenade is refreshingly simple while still being powerful. I can log my meals in seconds, see my trends at a glance, and actually stay on track without getting frustrated."
