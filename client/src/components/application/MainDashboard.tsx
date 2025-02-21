@@ -72,7 +72,7 @@ export default function MainDashboard() {
     <main className="bg-tertiary-light relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex h-full max-w-7xl flex-col">
         <div className="h-[75vh] w-full">
-          <div className="rounded-4xl border-tertiary divide-tertiary mx-5 mt-20 h-full divide-y-2 border-2">
+          <div className="rounded-4xl border-tertiary divide-tertiary h-full divide-y-2 border-2">
             <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
               <div className="w-[25%] py-5">
                 <h4 className="">Budget</h4>
