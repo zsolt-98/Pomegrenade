@@ -71,13 +71,29 @@ export default function MainDashboard() {
   return (
     <main className="bg-tertiary-light relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex h-full max-w-7xl flex-col">
-        <div className="border-tertiary rounded-4xl bg-secondary-light-2 h-[75vh] w-full border-2">
-          <form className="h-100 mt-20 w-full bg-white p-6">
-            <div className="flex justify-between">
-              <h3 className="mb-3 text-xl font-semibold">Breakfast:</h3>
+        <div className="h-[75vh] w-full">
+          <form className="rounded-4xl divide-tertiary mx-5 mt-20 h-60 divide-y">
+            <div className="divide-tertiary flex justify-between divide-x text-center">
+              <div className="w-[25%]">
+                <h4 className="">Budget</h4>
+              </div>
+              <div className="w-[25%]">
+                <h4 className="">Food</h4>
+              </div>
+              <div className="w-[25%]">
+                <h4 className="">Exercise</h4>
+              </div>
+              <div className="w-[25%]">
+                <h4 className="">Net</h4>
+              </div>
+            </div>
+            <div className="flex items-center justify-between px-5 pb-5">
+              <h3 className="text-primary-1 text-2xl font-semibold">
+                Breakfast: 0
+              </h3>
               <div className="relative origin-top-right">
                 <Dialog>
-                  <DialogTrigger className="bg-tertiary rounded-4xl text-tertiary-light p-3">
+                  <DialogTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
                     Add food
                   </DialogTrigger>
                   <DialogContent
