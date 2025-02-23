@@ -9,6 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 type Food = {
   food_id: string;
@@ -22,6 +27,7 @@ export default function MainDashboard() {
   const [searchResults, setSearchResults] = useState<Food[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const itemsPerPage = 7;
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
@@ -96,90 +102,86 @@ export default function MainDashboard() {
                 <h3 className="text-primary-1 text-2xl font-semibold">
                   Breakfast: 0
                 </h3>
-                <div className="relative origin-top-right">
-                  <Dialog>
-                    <DialogTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+                <div className="relative">
+                  <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+                    <DropdownMenuTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
                       Add food
-                    </DialogTrigger>
-                    <DialogContent
-                      onPointerDownOutside={(e) => e.preventDefault()}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      onInteractOutside={(e) => e.preventDefault()}
                     >
-                      <DialogHeader>
-                        <DialogTitle>Search for a food</DialogTitle>
-                        {/* <DialogDescription>
-                          This action cannot be undone. This will permanently
-                          delete your account and remove your data from our
-                          servers.
-                        </DialogDescription> */}
-                      </DialogHeader>
-                      <div className="flex">
-                        <input
-                          type="text"
-                          placeholder="search for foods"
-                          className="flex-1 rounded-l border px-4 py-2"
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          disabled={isLoading}
-                        />
-                        {isLoading && (
-                          <div className="ml-2 flex items-center">
-                            <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-blue-500"></div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="">
-                        {searchResults.length > 0 ? (
-                          <>
-                            <ul className="divide-y">
-                              {paginatedResults.map((food) => (
-                                <li key={food.food_id} className="py-2">
-                                  <div className="font-medium">
-                                    {food.food_name}
-                                  </div>
-                                  {food.food_description && (
-                                    <div className="text-sm text-gray-500">
-                                      {food.food_description}
-                                    </div>
-                                  )}
-                                </li>
-                              ))}
-                            </ul>
-                            {/* Pagination controls */}
-                            <div className="mt-4 flex items-center justify-between">
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  setCurrentPage((p) => Math.max(0, p - 1))
-                                }
-                                disabled={currentPage === 0}
-                                className="rounded bg-gray-200 px-3 py-1 disabled:opacity-50"
-                              >
-                                Previous
-                              </button>
-                              <span className="text-sm">
-                                Page {currentPage + 1} of {pageCount}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  setCurrentPage((p) =>
-                                    Math.min(pageCount - 1, p + 1),
-                                  )
-                                }
-                                disabled={currentPage >= pageCount - 1}
-                                className="rounded bg-gray-200 px-3 py-1 disabled:opacity-50"
-                              >
-                                Next
-                              </button>
+                      <div className="space-y-4">
+                        <h3 className="font-semibold">Search for a food</h3>
+                        <div className="flex">
+                          <input
+                            type="text"
+                            placeholder="search for foods"
+                            className="flex-1 rounded-l border px-4 py-2"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            disabled={isLoading}
+                          />
+                          {isLoading && (
+                            <div className="ml-2 flex items-center">
+                              <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-blue-500"></div>
                             </div>
-                          </>
-                        ) : (
-                          searchQuery &&
-                          !isLoading && <div className="">No results found</div>
-                        )}
+                          )}
+                        </div>
+                        <div className="max-h-64 overflow-y-auto">
+                          {searchResults.length > 0 ? (
+                            <>
+                              <ul className="divide-y">
+                                {paginatedResults.map((food) => (
+                                  <li key={food.food_id} className="py-2">
+                                    <div className="font-medium">
+                                      {food.food_name}
+                                    </div>
+                                    {food.food_description && (
+                                      <div className="text-sm text-gray-500">
+                                        {food.food_description}
+                                      </div>
+                                    )}
+                                  </li>
+                                ))}
+                              </ul>
+                              <div className="mt-4 flex items-center justify-between">
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setCurrentPage((p) => Math.max(0, p - 1))
+                                  }
+                                  disabled={currentPage === 0}
+                                  className="rounded bg-gray-200 px-3 py-1 disabled:opacity-50"
+                                >
+                                  Previous
+                                </button>
+                                <span className="text-sm">
+                                  Page {currentPage + 1} of {pageCount}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setCurrentPage((p) =>
+                                      Math.min(pageCount - 1, p + 1),
+                                    )
+                                  }
+                                  disabled={currentPage >= pageCount - 1}
+                                  className="rounded bg-gray-200 px-3 py-1 disabled:opacity-50"
+                                >
+                                  Next
+                                </button>
+                              </div>
+                            </>
+                          ) : (
+                            searchQuery &&
+                            !isLoading && (
+                              <div className="">No results found</div>
+                            )
+                          )}
+                        </div>
                       </div>
-                    </DialogContent>
-                  </Dialog>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </div>
               <div className="bg-secondary-light p-5 pt-0">
