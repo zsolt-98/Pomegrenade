@@ -21,12 +21,23 @@ export default function MainDashboard() {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const itemsPerPage = 7;
+  const itemsPerPage = 3;
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
   const paginatedResults = searchResults.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage,
   );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    if (value.trim()) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+      setSearchResults([]);
+    }
+  };
 
   useEffect(() => {
     setCurrentPage(0);
@@ -48,7 +59,6 @@ export default function MainDashboard() {
           },
         );
 
-        // Access the nested food array
         const foodResults = response.data.foods.food || [];
         setSearchResults(foodResults);
       } catch (error) {
@@ -101,6 +111,8 @@ export default function MainDashboard() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       onInteractOutside={(e) => e.preventDefault()}
+                      align="end"
+                      className="min-w-130"
                     >
                       <div className="space-y-4">
                         <h3 className="font-semibold">Search for a food</h3>
@@ -110,8 +122,7 @@ export default function MainDashboard() {
                             placeholder="search for foods"
                             className="flex-1 rounded-l border px-4 py-2"
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            disabled={isLoading}
+                            onChange={handleSearchChange}
                           />
                           {isLoading && (
                             <div className="ml-2 flex items-center">
