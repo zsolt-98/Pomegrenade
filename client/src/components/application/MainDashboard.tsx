@@ -177,7 +177,9 @@ export default function MainDashboard() {
                           ) : (
                             searchQuery &&
                             !isLoading && (
-                              <div className="">No results found</div>
+                              <div className="text-primary-1 font-medium">
+                                No results found
+                              </div>
                             )
                           )}
                         </div>
