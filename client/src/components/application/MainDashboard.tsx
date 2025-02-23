@@ -22,7 +22,7 @@ export default function MainDashboard() {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
   const paginatedResults = searchResults.slice(
     currentPage * itemsPerPage,
@@ -113,7 +113,7 @@ export default function MainDashboard() {
                     <DropdownMenuContent
                       onInteractOutside={(e) => e.preventDefault()}
                       align="end"
-                      className="min-w-130 bg-tertiary-light border-tertiary border-2"
+                      className="min-w-110 bg-tertiary-light border-tertiary border-2"
                     >
                       <div className="space-y-4">
                         <div className="flex">
@@ -129,17 +129,17 @@ export default function MainDashboard() {
                             </div>
                           )}
                         </div>
-                        <div className="min-h-100 relative overflow-y-auto">
+                        <div className="min-h-95 relative overflow-y-auto">
                           {searchResults.length > 0 ? (
                             <>
                               <ul className="divide-y">
                                 {paginatedResults.map((food) => (
-                                  <li key={food.food_id} className="py-2">
-                                    <div className="text-primary-1 font-medium">
+                                  <li key={food.food_id} className="py-0.5">
+                                    <div className="text-primary-1 text-sm font-medium">
                                       {food.food_name}
                                     </div>
                                     {food.food_description && (
-                                      <div className="text-tertiary text-sm">
+                                      <div className="text-tertiary text-xs">
                                         {food.food_description}
                                       </div>
                                     )}
