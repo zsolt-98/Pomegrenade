@@ -1,4 +1,3 @@
-// src/components/application/MainDashboard.tsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -6,6 +5,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
+import Input from "../global/shared/Input";
 
 type Food = {
   food_id: string;
@@ -21,7 +22,7 @@ export default function MainDashboard() {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
   const paginatedResults = searchResults.slice(
     currentPage * itemsPerPage,
@@ -112,15 +113,13 @@ export default function MainDashboard() {
                     <DropdownMenuContent
                       onInteractOutside={(e) => e.preventDefault()}
                       align="end"
-                      className="min-w-130"
+                      className="min-w-130 bg-tertiary-light border-tertiary border-2"
                     >
                       <div className="space-y-4">
-                        <h3 className="font-semibold">Search for a food</h3>
                         <div className="flex">
-                          <input
+                          <Input
                             type="text"
-                            placeholder="search for foods"
-                            className="flex-1 rounded-l border px-4 py-2"
+                            placeholder="Search for a food to add"
                             value={searchQuery}
                             onChange={handleSearchChange}
                           />
@@ -130,38 +129,38 @@ export default function MainDashboard() {
                             </div>
                           )}
                         </div>
-                        <div className="max-h-64 overflow-y-auto">
+                        <div className="min-h-100 relative overflow-y-auto">
                           {searchResults.length > 0 ? (
                             <>
                               <ul className="divide-y">
                                 {paginatedResults.map((food) => (
                                   <li key={food.food_id} className="py-2">
-                                    <div className="font-medium">
+                                    <div className="text-primary-1 font-medium">
                                       {food.food_name}
                                     </div>
                                     {food.food_description && (
-                                      <div className="text-sm text-gray-500">
+                                      <div className="text-tertiary text-sm">
                                         {food.food_description}
                                       </div>
                                     )}
                                   </li>
                                 ))}
                               </ul>
-                              <div className="mt-4 flex items-center justify-between">
-                                <button
+                              <div className="absolute bottom-0 left-0 right-0 mt-4 flex items-center justify-between">
+                                <Button
                                   type="button"
                                   onClick={() =>
                                     setCurrentPage((p) => Math.max(0, p - 1))
                                   }
                                   disabled={currentPage === 0}
-                                  className="rounded bg-gray-200 px-3 py-1 disabled:opacity-50"
+                                  className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5"
                                 >
                                   Previous
-                                </button>
-                                <span className="text-sm">
+                                </Button>
+                                <span className="text-tertiary text-sm">
                                   Page {currentPage + 1} of {pageCount}
                                 </span>
-                                <button
+                                <Button
                                   type="button"
                                   onClick={() =>
                                     setCurrentPage((p) =>
@@ -169,10 +168,10 @@ export default function MainDashboard() {
                                     )
                                   }
                                   disabled={currentPage >= pageCount - 1}
-                                  className="rounded bg-gray-200 px-3 py-1 disabled:opacity-50"
+                                  className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5"
                                 >
                                   Next
-                                </button>
+                                </Button>
                               </div>
                             </>
                           ) : (
