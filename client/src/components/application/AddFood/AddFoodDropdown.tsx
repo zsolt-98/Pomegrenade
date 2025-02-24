@@ -68,7 +68,7 @@ export function AddFoodDropDown() {
               {isLoading && (
                 <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
               )}
-              {searchResults.length > 0 ? (
+              {!isLoading && searchResults.length > 0 ? (
                 <>
                   <SearchResults />
                   <ResultsPagination />

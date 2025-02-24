@@ -12,7 +12,7 @@ export function ServingsView() {
         onClick={handleBackToSearch}
         className="bg-tertiary rounded-4xl text-tertiary-light mb-4"
       >
-        Back to search
+        Back
       </Button>
       <div className="text-primary-1 text-lg font-medium">
         {selectedFood.food_name}
