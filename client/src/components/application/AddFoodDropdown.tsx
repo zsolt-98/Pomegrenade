@@ -15,6 +15,8 @@ type Food = {
   food_description: string;
 };
 
+type View = "search" | "servings";
+
 export function AddFoodDropDown() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,8 +24,9 @@ export function AddFoodDropDown() {
   const [currentPage, setCurrentPage] = useState(0);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
-  const itemsPerPage = 8;
+  const [currentView, setCurrentView] = useState<View>("search");
+  const [selectedFood, setSelectedFood] = useState<Food | null>(null);
+  const itemsPerPage = 7;
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
   const paginatedResults = searchResults.slice(
     currentPage * itemsPerPage,
@@ -39,6 +42,16 @@ export function AddFoodDropDown() {
       setIsLoading(false);
       setSearchResults([]);
     }
+  };
+
+  const handleFoodSelect = (food: Food) => {
+    setSelectedFood(food);
+    setCurrentView("servings");
+  };
+
+  const handleBackToSearch = () => {
+    setCurrentView("search");
+    setSelectedFood(null);
   };
 
   useEffect(() => {
@@ -82,7 +95,11 @@ export function AddFoodDropDown() {
     return (
       <ul className="my-2 divide-y">
         {paginatedResults.map((food) => (
-          <li key={food.food_id} className="hover:bg-secondary-light-2 py-0.5">
+          <li
+            key={food.food_id}
+            className="hover:bg-secondary-light-2 cursor-pointer py-0.5"
+            onClick={() => handleFoodSelect(food)}
+          >
             <div className="text-primary-1 text-sm font-medium">
               {food.food_name}
             </div>
@@ -104,7 +121,7 @@ export function AddFoodDropDown() {
           type="button"
           onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
           disabled={currentPage === 0}
-          className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5"
+          className="bg-tertiary rounded-4xl text-tertiary-light w-20"
         >
           Previous
         </Button>
@@ -115,10 +132,21 @@ export function AddFoodDropDown() {
           type="button"
           onClick={() => setCurrentPage((p) => Math.min(pageCount - 1, p + 1))}
           disabled={currentPage >= pageCount - 1}
-          className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5"
+          className="bg-tertiary rounded-4xl text-tertiary-light w-20"
         >
           Next
         </Button>
+      </div>
+    );
+  }
+
+  function ServingsView() {
+    if (!selectedFood) return null;
+
+    return (
+      <div className="">
+        <Button onClick={handleBackToSearch}>Back to search</Button>
+        <div className="">{selectedFood.food_name}</div>
       </div>
     );
   }
@@ -130,34 +158,46 @@ export function AddFoodDropDown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="min-w-120 bg-tertiary-light border-tertiary border-2"
+        className="w-120 bg-tertiary-light border-tertiary border-2 p-0"
       >
-        <div>
-          <div className="mb-0 flex">
-            <Input
-              type="text"
-              placeholder="Search for a food to add"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
+        <div
+          className="flex transition-transform duration-300 ease-in-out"
+          style={{
+            transform:
+              currentView === "servings" ? "translateX(-50%)" : "translateX(0)",
+            width: "200%",
+          }}
+        >
+          <div className="w-1/2 p-1">
+            <div className="mb-0 flex">
+              <Input
+                type="text"
+                placeholder="Search for a food to add"
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+            </div>
+            <div className="min-h-90 relative flex flex-col justify-between">
+              {isLoading && (
+                <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
+              )}
+              {searchResults.length > 0 ? (
+                <>
+                  <SearchResults />
+                  <ResultsPagination />
+                </>
+              ) : (
+                searchQuery &&
+                !isLoading && (
+                  <div className="text-primary-1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-medium">
+                    No results found
+                  </div>
+                )
+              )}
+            </div>
           </div>
-          <div className="min-h-90 relative flex flex-col justify-between">
-            {isLoading && (
-              <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
-            )}
-            {searchResults.length > 0 ? (
-              <>
-                <SearchResults />
-                <ResultsPagination />
-              </>
-            ) : (
-              searchQuery &&
-              !isLoading && (
-                <div className="text-primary-1 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-medium">
-                  No results found
-                </div>
-              )
-            )}
+          <div className="w-1/2 p-1">
+            <ServingsView />
           </div>
         </div>
       </DropdownMenuContent>
