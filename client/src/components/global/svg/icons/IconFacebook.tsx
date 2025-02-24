@@ -1,4 +1,4 @@
-import { SVGProps } from "../../../types";
+import { SVGProps } from "@/types";
 
 export default function IconFacebook({
   size,
