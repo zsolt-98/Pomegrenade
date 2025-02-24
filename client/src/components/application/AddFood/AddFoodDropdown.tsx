@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Input from "../global/shared/Input";
-import { Button } from "../ui/button";
+import Input from "../../global/shared/Input";
+import { Button } from "../../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "../../ui/dropdown-menu";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
 

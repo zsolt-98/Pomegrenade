@@ -5,6 +5,7 @@ import LogIn from "./components/authentication/LogIn";
 import VerifyEmail from "./components/authentication/VerifyEmail";
 import ResetPassword from "./components/authentication/ResetPassword/ResetPassword.js";
 import { AppContextProvider } from "./context/AppContext.js";
+import { LogFoodContextProvider } from "./context/application/LogFoodContext";
 import { ToastContainer } from "react-toastify";
 
 import Register from "./components/authentication/Register";
@@ -15,18 +16,20 @@ function App() {
     <>
       <BrowserRouter>
         <AppContextProvider>
-          <Nav />
-          <ToastContainer />
-          <Routes>
-            <Route path="/" element={<ProtectedHomepage />} />
-            <Route path="login" element={<LogIn />} />
-            <Route path="email-verify" element={<VerifyEmail />} />
-            <Route path="reset-password" element={<ResetPassword />} />
-            <Route path="register" element={<Register />} />
-            <Route path="profile" element={<Register />} />
-            <Route path="*" element={<Navigate replace to="/" />} />
-          </Routes>
-          <Footer />
+          <LogFoodContextProvider>
+            <Nav />
+            <ToastContainer />
+            <Routes>
+              <Route path="/" element={<ProtectedHomepage />} />
+              <Route path="login" element={<LogIn />} />
+              <Route path="email-verify" element={<VerifyEmail />} />
+              <Route path="reset-password" element={<ResetPassword />} />
+              <Route path="register" element={<Register />} />
+              <Route path="profile" element={<Register />} />
+              <Route path="*" element={<Navigate replace to="/" />} />
+            </Routes>
+            <Footer />
+          </LogFoodContextProvider>
         </AppContextProvider>
       </BrowserRouter>
     </>

@@ -1,4 +1,4 @@
-import { AddFoodDropDown } from "./AddFoodDropdown";
+import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
 
 export default function MainDashboard() {
   return (
