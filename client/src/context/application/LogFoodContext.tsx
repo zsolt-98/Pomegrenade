@@ -1,5 +1,10 @@
 import axios from "axios";
-import React, { createContext, PropsWithChildren, useState } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useState,
+} from "react";
 
 type Food = {
   food_id: string;
@@ -64,7 +69,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     setSelectedFood(null);
   };
 
-  const performSearch = async () => {
+  const performSearch = useCallback(async () => {
     if (!debouncedSearchTerm.trim()) return;
     setIsLoading(true);
     try {
@@ -83,7 +88,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [debouncedSearchTerm]);
 
   const value = {
     searchQuery,

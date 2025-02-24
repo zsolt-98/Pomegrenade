@@ -1,4 +1,9 @@
-export default function SearchResults() {
+import { useLogFood } from "@/context/application/LogFoodContext";
+
+// Components/AddFoodDropdown/SearchResults.tsx
+export function SearchResults() {
+  const { searchResults, handleFoodSelect, currentPage } = useLogFood();
+  const itemsPerPage = 7;
   const paginatedResults = searchResults.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage,
