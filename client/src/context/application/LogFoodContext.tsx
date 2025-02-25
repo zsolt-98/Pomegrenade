@@ -82,6 +82,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
 
       const foodResults = response.data.foods.food || [];
       setSearchResults(foodResults);
+      console.log(foodResults);
     } catch (error) {
       console.error("Error searching:", error);
       setSearchResults([]);
