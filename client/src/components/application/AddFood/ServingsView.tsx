@@ -7,20 +7,35 @@ export function ServingsView() {
 
   if (!selectedFood) return null;
 
-  const data = [
+  const nutritionData = selectedFood.food_description || "";
+  // const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
+  const carbsMatch = nutritionData.match(/Carbs:\s+([\d.]+)g/);
+  const fatMatch = nutritionData.match(/Fat:\s+([\d.]+)g/);
+  const proteinMatch = nutritionData.match(/Protein:\s+([\d.]+)g/);
+
+  // const calories = caloriesMatch ? parseFloat(caloriesMatch[1]) : 0;
+  const carbsGrams = carbsMatch ? parseFloat(carbsMatch[1]) : 0;
+  const fatGrams = fatMatch ? parseFloat(fatMatch[1]) : 0;
+  const proteinGrams = proteinMatch ? parseFloat(proteinMatch[1]) : 0;
+
+  const fatCalories = fatGrams * 9;
+  const carbsCalories = carbsGrams * 4;
+  const proteinCalories = proteinGrams * 4;
+
+  const chartData = [
     {
       name: "Carbs",
-      value: 14,
+      value: carbsCalories,
       color: "var(--color-tertiary)",
     },
     {
       name: "Fat",
-      value: 0.7,
+      value: fatCalories,
       color: "var(--color-secondary-orange)",
     },
     {
       name: "Protein",
-      value: 38.5,
+      value: proteinCalories,
       color: "var(--color-primary-1)",
     },
   ];
@@ -40,11 +55,7 @@ export function ServingsView() {
         <div className="flex justify-between">
           <h4 className="">Serving size:</h4>
           <p className="">
-            {
-              (selectedFood.food_description.split("Per ")[1] || "").split(
-                " -",
-              )[0]
-            }
+            {(nutritionData.split("Per ")[1] || "").split(" -")[0]}
           </p>
         </div>
         <div className="flex justify-between">
@@ -59,7 +70,7 @@ export function ServingsView() {
       <div className="flex">
         <PieChart width={300} height={250}>
           <Pie
-            data={data}
+            data={chartData}
             dataKey="value"
             nameKey="name"
             cx="50%"
@@ -67,10 +78,10 @@ export function ServingsView() {
             labelLine={false}
             innerRadius={50}
             outerRadius={70}
-            fill="#82ca9d"
+            fill="var(--color-tertiary)"
             label
           >
-            {data.map((entry, index) => (
+            {chartData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
