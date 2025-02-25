@@ -1,62 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { useLogFood } from "@/context/application/LogFoodContext";
-import { Pie, PieChart } from "recharts";
+import { Cell, Pie, PieChart } from "recharts";
 
 export function ServingsView() {
   const { selectedFood, handleBackToSearch } = useLogFood();
 
   if (!selectedFood) return null;
 
-  const data01 = [
+  const data = [
     {
-      name: "Group A",
-      value: 400,
+      name: "Carbs",
+      value: 14,
+      color: "var(--color-tertiary)",
     },
     {
-      name: "Group B",
-      value: 300,
+      name: "Fat",
+      value: 0.7,
+      color: "var(--color-secondary-orange)",
     },
     {
-      name: "Group C",
-      value: 300,
-    },
-    {
-      name: "Group D",
-      value: 200,
-    },
-    {
-      name: "Group E",
-      value: 278,
-    },
-    {
-      name: "Group F",
-      value: 189,
-    },
-  ];
-  const data02 = [
-    {
-      name: "Group A",
-      value: 2400,
-    },
-    {
-      name: "Group B",
-      value: 4567,
-    },
-    {
-      name: "Group C",
-      value: 1398,
-    },
-    {
-      name: "Group D",
-      value: 9800,
-    },
-    {
-      name: "Group E",
-      value: 3908,
-    },
-    {
-      name: "Group F",
-      value: 4800,
+      name: "Protein",
+      value: 38.5,
+      color: "var(--color-primary-1)",
     },
   ];
 
@@ -94,16 +59,21 @@ export function ServingsView() {
       <div className="flex">
         <PieChart width={300} height={250}>
           <Pie
-            data={data02}
+            data={data}
             dataKey="value"
             nameKey="name"
             cx="50%"
             cy="50%"
-            innerRadius={60}
-            outerRadius={80}
+            labelLine={false}
+            innerRadius={50}
+            outerRadius={70}
             fill="#82ca9d"
             label
-          />
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
         </PieChart>
       </div>
     </div>
