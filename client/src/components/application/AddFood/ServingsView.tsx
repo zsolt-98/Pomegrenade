@@ -18,9 +18,9 @@ export function ServingsView() {
   const fatGrams = fatMatch ? parseFloat(fatMatch[1]) : 0;
   const proteinGrams = proteinMatch ? parseFloat(proteinMatch[1]) : 0;
 
-  const fatCalories = fatGrams * 9;
-  const carbsCalories = carbsGrams * 4;
-  const proteinCalories = proteinGrams * 4;
+  const fatCalories = parseFloat((fatGrams * 9).toFixed(1));
+  const carbsCalories = parseFloat((carbsGrams * 4).toFixed(1));
+  const proteinCalories = parseFloat((proteinGrams * 4).toFixed(1));
 
   const chartData = [
     {
