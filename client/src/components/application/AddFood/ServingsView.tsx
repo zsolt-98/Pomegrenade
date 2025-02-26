@@ -28,10 +28,11 @@ export function ServingsView() {
   const carbsCalories = parseFloat((carbsGrams * 4).toFixed(1));
   const fatCalories = parseFloat((fatGrams * 9).toFixed(1));
   const proteinCalories = parseFloat((proteinGrams * 4).toFixed(1));
+  const totalCalories = carbsCalories + fatCalories + proteinCalories;
 
-  const carbsPercentage = Math.round((carbsCalories / calories) * 100);
-  const fatPercentage = Math.round((fatCalories / calories) * 100);
-  const proteinPercentage = Math.round((proteinCalories / calories) * 100);
+  const carbsPercentage = Math.round((carbsCalories / totalCalories) * 100);
+  const fatPercentage = Math.round((fatCalories / totalCalories) * 100);
+  const proteinPercentage = Math.round((proteinCalories / totalCalories) * 100);
 
   const chartData = [
     {
@@ -52,7 +53,7 @@ export function ServingsView() {
   ];
 
   return (
-    <div className="flex h-full flex-col justify-start gap-0">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <Button
           onClick={handleBackToSearch}
@@ -93,6 +94,8 @@ export function ServingsView() {
               innerRadius={40}
               outerRadius={55}
               fill="var(--color-tertiary)"
+              animationDuration={500}
+              animationBegin={100}
             >
               {chartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} />
@@ -104,7 +107,6 @@ export function ServingsView() {
                 className="text-md font-semibold"
               />
             </Pie>
-            {/* <Tooltip formatter={(value) => `${value} cal`} /> */}
             <Legend
               verticalAlign="middle"
               layout="vertical"
@@ -114,7 +116,7 @@ export function ServingsView() {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div className="mt-auto flex items-center justify-end">
+      <div className="flex items-center justify-end">
         <Button
           type="button"
           className="bg-tertiary rounded-4xl text-tertiary-light w-20"
