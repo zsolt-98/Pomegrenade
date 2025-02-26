@@ -27,40 +27,43 @@ export function ServingsView() {
   const baseFatGrams = fatMatch ? parseFloat(fatMatch[1]) : 0;
   const baseProteinGrams = proteinMatch ? parseFloat(proteinMatch[1]) : 0;
 
-  const calories = parseFloat((baseCalories * servings).toFixed(1));
-  const carbsGrams = parseFloat((baseCarbsGrams * servings).toFixed(1));
-  const fatGrams = parseFloat((baseFatGrams * servings).toFixed(1));
-  const proteinGrams = parseFloat((baseProteinGrams * servings).toFixed(1));
+  const calories = parseFloat((baseCalories * servings).toFixed(1)) || 0;
+  const carbsGrams = parseFloat((baseCarbsGrams * servings).toFixed(1)) || 0;
+  const fatGrams = parseFloat((baseFatGrams * servings).toFixed(1)) || 0;
+  const proteinGrams =
+    parseFloat((baseProteinGrams * servings).toFixed(1)) || 0;
 
   const carbsCalories = parseFloat((carbsGrams * 4).toFixed(1));
   const fatCalories = parseFloat((fatGrams * 9).toFixed(1));
   const proteinCalories = parseFloat((proteinGrams * 4).toFixed(1));
   const totalCalories = carbsCalories + fatCalories + proteinCalories;
 
-  const carbsPercentage = Math.round((carbsCalories / totalCalories) * 100);
-  const fatPercentage = Math.round((fatCalories / totalCalories) * 100);
-  const proteinPercentage = Math.round((proteinCalories / totalCalories) * 100);
+  const carbsPercentage =
+    Math.round((carbsCalories / totalCalories) * 100) || 0;
+  const fatPercentage = Math.round((fatCalories / totalCalories) * 100) || 0;
+  const proteinPercentage =
+    Math.round((proteinCalories / totalCalories) * 100) || 0;
 
   const chartData = [
     {
       name: `Carbs: ${carbsGrams}g  (${carbsPercentage}%)`,
-      value: carbsCalories,
+      value: carbsCalories || 0.01,
       color: "var(--color-tertiary)",
     },
     {
       name: `Fat: ${fatGrams}g (${fatPercentage}%)`,
-      value: fatCalories,
+      value: fatCalories || 0.01,
       color: "var(--color-secondary-orange)",
     },
     {
       name: `Protein: ${proteinGrams}g (${proteinPercentage}%)`,
-      value: proteinCalories,
+      value: proteinCalories || 0.01,
       color: "var(--color-primary-1)",
     },
   ];
 
   const handleServingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value) || 1;
+    const value = parseFloat(e.target.value);
     setServings(value);
   };
 
@@ -92,6 +95,7 @@ export function ServingsView() {
             placeholder="1"
             value={servings}
             onChange={handleServingsChange}
+            step="any"
           />
         </div>
       </div>
