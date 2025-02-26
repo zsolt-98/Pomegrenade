@@ -34,7 +34,7 @@ export default function MainDashboard() {
                 </div>
               </div>
               <div className="bg-secondary-light p-2 pt-0">
-                <div className="bg-tertiary-light h-20 rounded-lg"></div>
+                <div className="bg-tertiary-light h-20 rounded-lg">results</div>
               </div>
             </div>
             <div className=""></div>
