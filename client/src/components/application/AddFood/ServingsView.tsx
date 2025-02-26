@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLogFood } from "@/context/application/LogFoodContext";
+import { useState } from "react";
 import {
   Cell,
   Label,
@@ -11,6 +12,7 @@ import {
 
 export function ServingsView() {
   const { selectedFood, handleBackToSearch } = useLogFood();
+  const [servings, setServings] = useState(1);
 
   if (!selectedFood) return null;
 
@@ -20,10 +22,15 @@ export function ServingsView() {
   const fatMatch = nutritionData.match(/Fat:\s+([\d.]+)g/);
   const proteinMatch = nutritionData.match(/Protein:\s+([\d.]+)g/);
 
-  const calories = caloriesMatch ? parseFloat(caloriesMatch[1]) : 0;
-  const carbsGrams = carbsMatch ? parseFloat(carbsMatch[1]) : 0;
-  const fatGrams = fatMatch ? parseFloat(fatMatch[1]) : 0;
-  const proteinGrams = proteinMatch ? parseFloat(proteinMatch[1]) : 0;
+  const baseCalories = caloriesMatch ? parseFloat(caloriesMatch[1]) : 0;
+  const baseCarbsGrams = carbsMatch ? parseFloat(carbsMatch[1]) : 0;
+  const baseFatGrams = fatMatch ? parseFloat(fatMatch[1]) : 0;
+  const baseProteinGrams = proteinMatch ? parseFloat(proteinMatch[1]) : 0;
+
+  const calories = parseFloat((baseCalories * servings).toFixed(1));
+  const carbsGrams = parseFloat((baseCarbsGrams * servings).toFixed(1));
+  const fatGrams = parseFloat((baseFatGrams * servings).toFixed(1));
+  const proteinGrams = parseFloat((baseProteinGrams * servings).toFixed(1));
 
   const carbsCalories = parseFloat((carbsGrams * 4).toFixed(1));
   const fatCalories = parseFloat((fatGrams * 9).toFixed(1));
@@ -52,6 +59,11 @@ export function ServingsView() {
     },
   ];
 
+  const handleServingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value) || 1;
+    setServings(value);
+  };
+
   return (
     <div className="flex h-full flex-col justify-between">
       <div>
@@ -78,6 +90,8 @@ export function ServingsView() {
             type="number"
             className="border-tertiary w-17 text-tertiary rounded-sm border-2 p-1"
             placeholder="1"
+            value={servings}
+            onChange={handleServingsChange}
           />
         </div>
       </div>
@@ -121,7 +135,7 @@ export function ServingsView() {
           type="button"
           className="bg-tertiary rounded-4xl text-tertiary-light w-20"
         >
-          Next
+          Add
         </Button>
       </div>
     </div>
