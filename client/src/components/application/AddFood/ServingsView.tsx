@@ -64,7 +64,7 @@ export function ServingsView() {
 
   const handleServingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setServings(value);
+    setServings(Math.min(value, 99));
   };
 
   return (
@@ -96,6 +96,8 @@ export function ServingsView() {
             value={servings}
             onChange={handleServingsChange}
             step="any"
+            min="0"
+            max="999"
           />
         </div>
       </div>
