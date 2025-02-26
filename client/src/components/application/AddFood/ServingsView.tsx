@@ -97,7 +97,7 @@ export function ServingsView() {
             onChange={handleServingsChange}
             step="any"
             min="0"
-            max="999"
+            max="99"
           />
         </div>
       </div>
