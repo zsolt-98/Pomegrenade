@@ -10,7 +10,8 @@ type Food = {
   food_id: string;
   food_name: string;
   food_description: string;
-  servings: string;
+  servingSize: string;
+  servings: number;
 };
 
 type View = "search" | "servings";
@@ -35,7 +36,7 @@ interface LogFoodContextType {
   handleBackToSearch: () => void;
   performSearch: () => Promise<void>;
   addedFoods: Food[];
-  addFood: (food: Food, servings: string) => void;
+  addFood: (food: Food, servingSize: string, servings: number) => void;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
@@ -51,7 +52,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
   const [currentView, setCurrentView] = useState<View>("search");
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
   const [addedFoods, setAddedFoods] = useState<
-    Array<Food & { servings: string }>
+    Array<Food & { servings: number }>
   >([]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,8 +98,8 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [debouncedSearchTerm]);
 
-  const addFood = (food: Food, servings: string) => {
-    setAddedFoods((prev) => [...prev, { ...food, servings }]);
+  const addFood = (food: Food, servingSize: string, servings: number) => {
+    setAddedFoods((prev) => [...prev, { ...food, servings, servingSize }]);
   };
 
   const value = {

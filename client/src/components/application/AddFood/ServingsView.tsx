@@ -139,7 +139,7 @@ export function ServingsView() {
         <Button
           type="button"
           className="bg-tertiary rounded-4xl text-tertiary-light w-20"
-          onClick={() => addFood(selectedFood, servingSize)}
+          onClick={() => addFood(selectedFood, servingSize, servings)}
         >
           Add
         </Button>

@@ -4,6 +4,35 @@ import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
 export default function MainDashboard() {
   const { addedFoods } = useLogFood();
 
+  const calculateDisplayAmount = (
+    servingSize: string,
+    servings: number,
+  ): string => {
+    const servingSizeMatch = servingSize.match(/^([\d./]+)?\s*(.*)$/);
+
+    if (!servingSizeMatch) {
+      return `${servings} x ${servingSize}`;
+    }
+
+    const numericPart = servingSizeMatch[1];
+    const unit = servingSizeMatch[2];
+
+    const baseAmount = numericPart.includes("/")
+      ? parseFloat(numericPart.split("/")[0]) /
+        parseFloat(numericPart.split("/")[1])
+      : parseFloat(numericPart);
+
+    return `${baseAmount * servings} ${unit}`;
+  };
+
+  const calculateCalories = (
+    nutritionData: string,
+    servings: number,
+  ): number => {
+    const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
+    return caloriesMatch ? parseFloat(caloriesMatch[1]) * servings : 0;
+  };
+
   return (
     <main className="bg-tertiary-light relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex h-full max-w-7xl flex-col">
@@ -40,13 +69,24 @@ export default function MainDashboard() {
                 <div className="bg-tertiary-light h-20 rounded-lg">
                   {addedFoods.length > 0 ? (
                     <ul>
-                      {addedFoods.map((food, _) => {
+                      {addedFoods.map((food) => {
+                        const displayAmount = calculateDisplayAmount(
+                          food.servingSize,
+                          food.servings,
+                        );
+                        const calories = calculateCalories(
+                          food.food_description || "",
+                          food.servings,
+                        );
                         return (
-                          <li key={food.food_id}>
+                          <li
+                            key={food.food_id}
+                            className="border-tertiary flex justify-between border-b p-2"
+                          >
                             <span>
-                              {food.food_name} ({food.servings} serving)
+                              {food.food_name} ({displayAmount})
                             </span>
-                            <span></span>
+                            <span>{calories.toFixed(0)} cal</span>
                           </li>
                         );
                       })}
