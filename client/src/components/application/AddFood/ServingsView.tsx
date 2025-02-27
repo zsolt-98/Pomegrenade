@@ -11,12 +11,13 @@ import {
 } from "recharts";
 
 export function ServingsView() {
-  const { selectedFood, handleBackToSearch } = useLogFood();
+  const { selectedFood, handleBackToSearch, addFood } = useLogFood();
   const [servings, setServings] = useState(1);
 
   if (!selectedFood) return null;
 
   const nutritionData = selectedFood.food_description || "";
+  const servingSize = (nutritionData.split("Per ")[1] || "").split(" -")[0];
   const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
   const carbsMatch = nutritionData.match(/Carbs:\s+([\d.]+)g/);
   const fatMatch = nutritionData.match(/Fat:\s+([\d.]+)g/);
@@ -83,9 +84,7 @@ export function ServingsView() {
       <div className="text-tertiary flex flex-col gap-3">
         <div className="mt-3 flex justify-between">
           <h4 className="">Serving size:</h4>
-          <p className="">
-            {(nutritionData.split("Per ")[1] || "").split(" -")[0]}
-          </p>
+          <p className="">{servingSize}</p>
         </div>
         <div className="flex items-center justify-between">
           <h4 className="">Number of servings:</h4>
@@ -140,6 +139,7 @@ export function ServingsView() {
         <Button
           type="button"
           className="bg-tertiary rounded-4xl text-tertiary-light w-20"
+          onClick={() => addFood(selectedFood, servingSize)}
         >
           Add
         </Button>

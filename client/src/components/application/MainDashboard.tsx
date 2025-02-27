@@ -1,6 +1,9 @@
+import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
 
 export default function MainDashboard() {
+  const { addedFoods } = useLogFood();
+
   return (
     <main className="bg-tertiary-light relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex h-full max-w-7xl flex-col">
@@ -34,7 +37,24 @@ export default function MainDashboard() {
                 </div>
               </div>
               <div className="bg-secondary-light p-2 pt-0">
-                <div className="bg-tertiary-light h-20 rounded-lg">results</div>
+                <div className="bg-tertiary-light h-20 rounded-lg">
+                  {addedFoods.length > 0 ? (
+                    <ul>
+                      {addedFoods.map((food, _) => {
+                        return (
+                          <li key={food.food_id}>
+                            <span>
+                              {food.food_name} ({food.servings} serving)
+                            </span>
+                            <span></span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <div className="">No food added yet</div>
+                  )}
+                </div>
               </div>
             </div>
             <div className=""></div>
