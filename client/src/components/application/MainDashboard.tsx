@@ -65,10 +65,10 @@ export default function MainDashboard() {
                   <AddFoodDropDown />
                 </div>
               </div>
-              <div className="bg-secondary-light p-2 pt-0">
-                <div className="bg-tertiary-light h-20 rounded-lg">
-                  {addedFoods.length > 0 ? (
-                    <ul>
+              <div className="bg-secondary-light">
+                <div className="bg-tertiary-light m-2 mt-0 rounded-lg">
+                  {addedFoods.length > 0 && (
+                    <ul className="divide-y-2">
                       {addedFoods.map((food) => {
                         const displayAmount = calculateDisplayAmount(
                           food.servingSize,
@@ -81,18 +81,18 @@ export default function MainDashboard() {
                         return (
                           <li
                             key={food.food_id}
-                            className="border-tertiary flex justify-between border-b p-2"
+                            className="border-tertiary hover:bg-secondary-light-2 flex cursor-pointer justify-between p-2"
                           >
-                            <span>
+                            <span className="text-tertiary font-medium">
                               {food.food_name} ({displayAmount})
                             </span>
-                            <span>{calories.toFixed(0)} cal</span>
+                            <span className="text-tertiary font-medium">
+                              {calories.toFixed(0)}
+                            </span>
                           </li>
                         );
                       })}
                     </ul>
-                  ) : (
-                    <div className="">No food added yet</div>
                   )}
                 </div>
               </div>
