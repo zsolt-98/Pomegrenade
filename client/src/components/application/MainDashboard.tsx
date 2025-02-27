@@ -68,7 +68,7 @@ export default function MainDashboard() {
               <div className="bg-secondary-light">
                 <div className="bg-tertiary-light m-2 mt-0 rounded-lg">
                   {addedFoods.length > 0 && (
-                    <ul className="divide-y-2">
+                    <ul className="divide-tertiary divide-y-1 border-tertiary rounded-lg border px-2">
                       {addedFoods.map((food) => {
                         const displayAmount = calculateDisplayAmount(
                           food.servingSize,
@@ -81,7 +81,7 @@ export default function MainDashboard() {
                         return (
                           <li
                             key={food.food_id}
-                            className="border-tertiary hover:bg-secondary-light-2 flex cursor-pointer justify-between p-2"
+                            className="hover:bg-secondary-light-2 flex cursor-pointer justify-between p-2"
                           >
                             <span className="text-tertiary font-medium">
                               {food.food_name} ({displayAmount})

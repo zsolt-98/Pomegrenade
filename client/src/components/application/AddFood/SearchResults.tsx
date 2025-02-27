@@ -10,7 +10,7 @@ export function SearchResults() {
   );
 
   return (
-    <ul className="my-2 divide-y">
+    <ul className="divide-tertiary my-2 divide-y">
       {paginatedResults.map((food) => (
         <li
           key={food.food_id}
