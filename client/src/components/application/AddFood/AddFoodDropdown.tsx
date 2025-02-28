@@ -9,7 +9,7 @@ import SearchView from "./SearchView";
 import { useEffect, useRef, useState } from "react";
 
 export function AddFoodDropDown() {
-  const { currentView, addedFoods } = useLogFood();
+  const { currentView, addedFoods, resetAddFoodState } = useLogFood();
 
   const [isOpen, setIsOpen] = useState(false);
   const prevFoodsLengthRef = useRef(addedFoods.length);
@@ -17,11 +17,12 @@ export function AddFoodDropDown() {
 
   useEffect(() => {
     if (addedFoods.length > prevFoodsLengthRef.current && isOpen) {
-      setSkipAnimation(true);
       setIsOpen(false);
+      setSkipAnimation(true);
+      resetAddFoodState();
     }
     prevFoodsLengthRef.current = addedFoods.length;
-  }, [addedFoods, isOpen]);
+  }, [addedFoods, isOpen, resetAddFoodState]);
 
   const handleOpenChange = (open: boolean) => {
     if (open) {
@@ -36,6 +37,7 @@ export function AddFoodDropDown() {
         Add food
       </DropdownMenuTrigger>
       <DropdownMenuContent
+        onAnimationEnd={resetAddFoodState}
         align="end"
         className={`w-120 bg-tertiary-light border-tertiary border-2 p-0 ${skipAnimation ? "!animate-none !opacity-0 !transition-none" : ""}`}
       >

@@ -37,6 +37,7 @@ interface LogFoodContextType {
   performSearch: () => Promise<void>;
   addedFoods: Food[];
   addFood: (food: Food, servingSize: string, servings: number) => void;
+  resetAddFoodState: () => void;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
@@ -100,6 +101,9 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
 
   const addFood = (food: Food, servingSize: string, servings: number) => {
     setAddedFoods((prev) => [...prev, { ...food, servings, servingSize }]);
+  };
+
+  const resetAddFoodState = () => {
     setSearchQuery("");
     setSearchResults([]);
     setCurrentPage(0);
@@ -129,6 +133,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     performSearch,
     addedFoods,
     addFood,
+    resetAddFoodState,
   };
 
   return (
