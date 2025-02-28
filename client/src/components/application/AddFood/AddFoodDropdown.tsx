@@ -6,12 +6,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import SearchView from "./SearchView";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function AddFoodDropDown() {
-  const { currentView } = useLogFood();
+  const { currentView, addedFoods } = useLogFood();
 
   const [isOpen, setIsOpen] = useState(false);
+  const prevFoodsLengthRef = useRef(addedFoods.length);
+
+  // Close the dropdown when a new food is added
+  useEffect(() => {
+    if (addedFoods.length > prevFoodsLengthRef.current) {
+      setIsOpen(false);
+    }
+    prevFoodsLengthRef.current = addedFoods.length;
+  }, [addedFoods]);
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>

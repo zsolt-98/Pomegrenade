@@ -100,6 +100,12 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
 
   const addFood = (food: Food, servingSize: string, servings: number) => {
     setAddedFoods((prev) => [...prev, { ...food, servings, servingSize }]);
+    setSearchQuery("");
+    setSearchResults([]);
+    setCurrentPage(0);
+    setDebouncedSearchTerm("");
+    setCurrentView("search");
+    setSelectedFood(null);
   };
 
   const value = {
