@@ -13,23 +13,31 @@ export function AddFoodDropDown() {
 
   const [isOpen, setIsOpen] = useState(false);
   const prevFoodsLengthRef = useRef(addedFoods.length);
+  const [skipAnimation, setSkipAnimation] = useState(false);
 
-  // Close the dropdown when a new food is added
   useEffect(() => {
-    if (addedFoods.length > prevFoodsLengthRef.current) {
+    if (addedFoods.length > prevFoodsLengthRef.current && isOpen) {
+      setSkipAnimation(true);
       setIsOpen(false);
     }
     prevFoodsLengthRef.current = addedFoods.length;
-  }, [addedFoods]);
+  }, [addedFoods, isOpen]);
+
+  const handleOpenChange = (open: boolean) => {
+    if (open) {
+      setSkipAnimation(false);
+    }
+    setIsOpen(open);
+  };
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={handleOpenChange}>
       <DropdownMenuTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
         Add food
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-120 bg-tertiary-light border-tertiary border-2 p-0"
+        className={`w-120 bg-tertiary-light border-tertiary border-2 p-0 ${skipAnimation ? "!animate-none !opacity-0 !transition-none" : ""}`}
       >
         <div
           className="flex transition-transform duration-300 ease-in-out"
