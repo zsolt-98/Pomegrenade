@@ -83,7 +83,7 @@ export default function MainDashboard() {
                         return (
                           <li
                             key={food.food_id}
-                            className="hover:bg-secondary-light-2 hover: flex cursor-pointer justify-between p-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
+                            className="hover:bg-secondary-light-2 hover: flex cursor-pointer justify-between px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
                           >
                             <span className="text-tertiary font-medium">
                               {food.food_name} ({displayAmount})

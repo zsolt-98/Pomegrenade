@@ -39,7 +39,7 @@ export default function SearchView() {
           onChange={handleSearchChange}
         />
       </div>
-      <div className="min-h-75 relative flex flex-col justify-between">
+      <div className="relative flex min-h-12 flex-col justify-between">
         {isLoading && (
           <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
         )}
