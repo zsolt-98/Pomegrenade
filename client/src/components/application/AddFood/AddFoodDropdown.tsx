@@ -13,33 +13,23 @@ export function AddFoodDropDown() {
 
   const [isOpen, setIsOpen] = useState(false);
   const prevFoodsLengthRef = useRef(addedFoods.length);
-  const [skipAnimation, setSkipAnimation] = useState(false);
 
   useEffect(() => {
     if (addedFoods.length > prevFoodsLengthRef.current && isOpen) {
       setIsOpen(false);
-      setSkipAnimation(true);
-      resetAddFoodState();
     }
     prevFoodsLengthRef.current = addedFoods.length;
   }, [addedFoods, isOpen, resetAddFoodState]);
 
-  const handleOpenChange = (open: boolean) => {
-    if (open) {
-      setSkipAnimation(false);
-    }
-    setIsOpen(open);
-  };
-
   return (
-    <DropdownMenu open={isOpen} onOpenChange={handleOpenChange}>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
         Add food
       </DropdownMenuTrigger>
       <DropdownMenuContent
         onAnimationEnd={resetAddFoodState}
         align="end"
-        className={`w-120 bg-tertiary-light border-tertiary border-2 p-0 ${skipAnimation ? "!animate-none !opacity-0 !transition-none" : ""}`}
+        className="w-120 bg-tertiary-light border-tertiary border-2 p-0"
       >
         <div
           className="flex transition-transform duration-300 ease-in-out"
