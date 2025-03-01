@@ -3,8 +3,12 @@ import React, {
   createContext,
   PropsWithChildren,
   useCallback,
+  useContext,
+  useEffect,
   useState,
 } from "react";
+import { AppContext } from "../AppContext";
+import { toast } from "react-toastify";
 
 type Food = {
   food_id: string;
@@ -38,6 +42,7 @@ interface LogFoodContextType {
   addedFoods: Food[];
   addFood: (food: Food, servingSize: string, servings: number) => void;
   resetAddFoodState: () => void;
+  loadUserFoods: () => Promise<void>;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
@@ -55,6 +60,26 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
   const [addedFoods, setAddedFoods] = useState<
     Array<Food & { servings: number }>
   >([]);
+  const { backendUrl } = useContext(AppContext);
+
+  const loadUserFoods = useCallback(async () => {
+    axios.defaults.withCredentials = true;
+    try {
+      const { data } = await axios.get(`${backendUrl}/api/food/entries`);
+      if (data.success) {
+        setAddedFoods(data.foodEntries || []);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error has occurred.");
+    }
+  }, [backendUrl]);
+
+  useEffect(() => {
+    loadUserFoods();
+  }, [loadUserFoods]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -82,7 +107,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/fatsecret/foods.search",
+        `${backendUrl}/api/fatsecret/foods.search`,
         {
           params: { search_expression: debouncedSearchTerm },
         },
@@ -97,10 +122,31 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     } finally {
       setIsLoading(false);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, backendUrl]);
 
-  const addFood = (food: Food, servingSize: string, servings: number) => {
-    setAddedFoods((prev) => [...prev, { ...food, servings, servingSize }]);
+  const addFood = async (food: Food, servingSize: string, servings: number) => {
+    axios.defaults.withCredentials = true;
+    try {
+      const { data } = await axios.post(`${backendUrl}/api/food/add`, {
+        food_id: food.food_id,
+        food_name: food.food_name,
+        food_description: food.food_description,
+        servingSize,
+        servings,
+      });
+
+      if (data.success) {
+        setAddedFoods((prev) => [
+          ...prev,
+          { ...food, servingSize, servings, ...data.foodEntry },
+        ]);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error has occurred.");
+    }
   };
 
   const resetAddFoodState = () => {
@@ -134,6 +180,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     addedFoods,
     addFood,
     resetAddFoodState,
+    loadUserFoods,
   };
 
   return (

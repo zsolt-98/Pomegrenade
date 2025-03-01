@@ -1,8 +1,13 @@
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
+import { useEffect } from "react";
 
 export default function MainDashboard() {
-  const { addedFoods } = useLogFood();
+  const { addedFoods, loadUserFoods } = useLogFood();
+
+  useEffect(() => {
+    loadUserFoods();
+  }, [loadUserFoods]);
 
   const calculateDisplayAmount = (
     servingSize: string,
