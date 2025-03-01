@@ -1,6 +1,7 @@
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
 import { useEffect } from "react";
+import { Button } from "../ui/button";
 
 export default function MainDashboard() {
   const { addedFoods, loadUserFoods } = useLogFood();
@@ -93,9 +94,18 @@ export default function MainDashboard() {
                             <span className="text-tertiary font-medium">
                               {food.food_name} ({displayAmount})
                             </span>
-                            <span className="text-tertiary font-medium">
-                              {calories.toFixed(0)}
-                            </span>
+                            <div className="flex items-center gap-3">
+                              <span className="text-tertiary font-medium">
+                                {calories.toFixed(0)}
+                              </span>
+                              <Button className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5">
+                                Edit
+                              </Button>
+
+                              <Button className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5">
+                                Delete
+                              </Button>
+                            </div>
                           </li>
                         );
                       })}
