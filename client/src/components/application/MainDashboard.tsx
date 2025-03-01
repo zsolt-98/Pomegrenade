@@ -89,22 +89,23 @@ export default function MainDashboard() {
                         return (
                           <li
                             key={food.food_id}
-                            className="hover:bg-secondary-light-2 hover: flex cursor-pointer justify-between px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
+                            className="hover:bg-secondary-light-2 group relative flex cursor-pointer justify-between overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
                           >
                             <span className="text-tertiary font-medium">
                               {food.food_name} ({displayAmount})
                             </span>
-                            <div className="flex items-center gap-3">
-                              <span className="text-tertiary font-medium">
+                            <div className="flex items-center">
+                              <span className="text-tertiary font-medium transition-transform duration-300 ease-in-out group-hover:translate-x-[-100px]">
                                 {calories.toFixed(0)}
                               </span>
-                              <Button className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5">
-                                Edit
-                              </Button>
-
-                              <Button className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5">
-                                Delete
-                              </Button>
+                              <div className="absolute right-2 flex translate-x-full transform gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100">
+                                <Button className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5">
+                                  Edit
+                                </Button>
+                                <Button className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5">
+                                  Delete
+                                </Button>
+                              </div>
                             </div>
                           </li>
                         );
