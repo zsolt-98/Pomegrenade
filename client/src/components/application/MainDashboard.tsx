@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Button } from "../ui/button";
 
 export default function MainDashboard() {
-  const { addedFoods, loadUserFoods } = useLogFood();
+  const { addedFoods, loadUserFoods, deleteFood } = useLogFood();
 
   useEffect(() => {
     loadUserFoods();
@@ -102,7 +102,14 @@ export default function MainDashboard() {
                                 <Button className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5">
                                   Edit
                                 </Button>
-                                <Button className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5">
+                                <Button
+                                  className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5"
+                                  onClick={() => {
+                                    if (food._id) {
+                                      deleteFood(food._id);
+                                    }
+                                  }}
+                                >
                                   Delete
                                 </Button>
                               </div>
