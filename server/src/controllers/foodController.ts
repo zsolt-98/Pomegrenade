@@ -47,7 +47,6 @@ export const addFoodEntry = async (req: Request, res: Response) => {
 export const getUserFoodEntries = async (req: Request, res: Response) => {
   const { userId } = req.body;
 
-  // TODO: Change sorting
   try {
     const entries = await foodModel.find({ userId }).sort({ addedAt: 1 });
 

@@ -1,11 +1,12 @@
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
 export default function MainDashboard() {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
     useLogFood();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     loadUserFoods();
@@ -90,32 +91,42 @@ export default function MainDashboard() {
                         return (
                           <li
                             key={food.food_id}
-                            className="hover:bg-secondary-light-2 group relative flex cursor-pointer justify-between overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
+                            className="hover:bg-secondary-light-2 group relative flex cursor-pointer flex-col justify-between overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
                           >
-                            <span className="text-tertiary font-medium">
-                              {food.food_name} ({displayAmount})
-                            </span>
-                            <div className="flex items-center">
-                              <span className="text-tertiary font-medium transition-transform duration-300 ease-in-out group-hover:translate-x-[-100px]">
-                                {calories.toFixed(0)}
+                            <div className="flex justify-between">
+                              <span className="text-tertiary font-medium">
+                                {food.food_name} ({displayAmount})
                               </span>
-                              <div className="absolute right-2 flex translate-x-full transform gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100">
-                                <Button className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5">
-                                  Edit
-                                </Button>
-                                <Button
-                                  className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5"
-                                  onClick={() => {
-                                    if (food._id) {
-                                      deleteFood(food._id);
+                              <div className="flex items-center">
+                                <span className="text-tertiary font-medium transition-transform duration-300 ease-in-out group-hover:translate-x-[-100px]">
+                                  {calories.toFixed(0)}
+                                </span>
+                                <div className="absolute right-2 flex translate-x-full transform gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100">
+                                  <Button
+                                    className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5"
+                                    onClick={() =>
+                                      setIsOpen((prevState) => !prevState)
                                     }
-                                  }}
-                                  disabled={isDeletingEntry}
-                                >
-                                  Delete
-                                </Button>
+                                  >
+                                    Edit
+                                  </Button>
+                                  <Button
+                                    className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5"
+                                    onClick={() => {
+                                      if (food._id) {
+                                        deleteFood(food._id);
+                                      }
+                                    }}
+                                    disabled={isDeletingEntry}
+                                  >
+                                    Delete
+                                  </Button>
+                                </div>
                               </div>
                             </div>
+                            {isOpen && (
+                              <div className="h-100 w-100 bg-tertiary"></div>
+                            )}
                           </li>
                         );
                       })}
