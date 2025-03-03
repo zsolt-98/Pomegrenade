@@ -42,6 +42,7 @@ interface LogFoodContextType {
   performSearch: () => Promise<void>;
   addedFoods: Food[];
   addFood: (food: Food, servingSize: string, servings: number) => void;
+  isSavingEntry: boolean;
   resetAddFoodState: () => void;
   deleteFood: (entryId: string) => Promise<void>;
   isDeletingEntry: boolean;

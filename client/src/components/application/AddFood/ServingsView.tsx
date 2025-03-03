@@ -11,7 +11,8 @@ import {
 } from "recharts";
 
 export function ServingsView() {
-  const { selectedFood, handleBackToSearch, addFood } = useLogFood();
+  const { selectedFood, handleBackToSearch, addFood, isSavingEntry } =
+    useLogFood();
   const [servings, setServings] = useState(1);
 
   if (!selectedFood) return null;
@@ -140,6 +141,7 @@ export function ServingsView() {
           type="button"
           className="bg-tertiary rounded-4xl text-tertiary-light w-20"
           onClick={() => addFood(selectedFood, servingSize, servings)}
+          disabled={isSavingEntry}
         >
           Add
         </Button>
