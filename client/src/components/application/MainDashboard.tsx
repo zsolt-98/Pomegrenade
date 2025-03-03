@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 export default function MainDashboard() {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
     useLogFood();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<string | null>(null);
 
   useEffect(() => {
     loadUserFoods();
@@ -88,6 +88,7 @@ export default function MainDashboard() {
                           food.food_description || "",
                           food.servings,
                         );
+                        const dropdownId = food.food_id;
                         return (
                           <li
                             key={food.food_id}
@@ -105,7 +106,11 @@ export default function MainDashboard() {
                                   <Button
                                     className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5"
                                     onClick={() =>
-                                      setIsOpen((prevState) => !prevState)
+                                      setIsOpen(
+                                        isOpen === dropdownId
+                                          ? null
+                                          : dropdownId,
+                                      )
                                     }
                                   >
                                     Edit
@@ -124,7 +129,7 @@ export default function MainDashboard() {
                                 </div>
                               </div>
                             </div>
-                            {isOpen && (
+                            {isOpen === dropdownId && (
                               <div className="h-100 w-100 bg-tertiary"></div>
                             )}
                           </li>
