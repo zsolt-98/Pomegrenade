@@ -44,6 +44,7 @@ interface LogFoodContextType {
   addFood: (food: Food, servingSize: string, servings: number) => void;
   resetAddFoodState: () => void;
   deleteFood: (entryId: string) => Promise<void>;
+  isDeletingEntry: boolean;
   loadUserFoods: () => Promise<void>;
 }
 
@@ -59,6 +60,8 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [currentView, setCurrentView] = useState<View>("search");
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
+  const [isSavingEntry, setIsSavingEntry] = useState(false);
+  const [isDeletingEntry, setIsDeletingEntry] = useState(false);
   const [addedFoods, setAddedFoods] = useState<
     Array<Food & { servings: number }>
   >([]);
@@ -128,6 +131,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
 
   const addFood = async (food: Food, servingSize: string, servings: number) => {
     axios.defaults.withCredentials = true;
+    setIsSavingEntry(true);
     try {
       const { data } = await axios.post(`${backendUrl}/api/food/add`, {
         food_id: food.food_id,
@@ -148,6 +152,8 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     } catch (error) {
       console.error(error);
       toast.error("An error has occurred.");
+    } finally {
+      setIsSavingEntry(false);
     }
   };
 
@@ -162,6 +168,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
 
   const deleteFood = async (entryId: string) => {
     axios.defaults.withCredentials = true;
+    setIsDeletingEntry(true);
     try {
       const { data } = await axios.delete(`${backendUrl}/api/food/delete`, {
         data: { entryId },
@@ -175,6 +182,8 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     } catch (error) {
       console.error(error);
       toast.error("An error has occurred.");
+    } finally {
+      setIsDeletingEntry(false);
     }
   };
 
@@ -200,7 +209,9 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     addedFoods,
     addFood,
     resetAddFoodState,
+    isSavingEntry,
     deleteFood,
+    isDeletingEntry,
     loadUserFoods,
   };
 

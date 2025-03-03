@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { Button } from "../ui/button";
 
 export default function MainDashboard() {
-  const { addedFoods, loadUserFoods, deleteFood } = useLogFood();
+  const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
+    useLogFood();
 
   useEffect(() => {
     loadUserFoods();
@@ -109,6 +110,7 @@ export default function MainDashboard() {
                                       deleteFood(food._id);
                                     }
                                   }}
+                                  disabled={isDeletingEntry}
                                 >
                                   Delete
                                 </Button>
