@@ -131,7 +131,7 @@ export default function MainDashboard() {
                               </div>
                             </div>
                             {isOpen === dropdownId && (
-                              <div className="flex h-20 justify-end">
+                              <div className="flex justify-end">
                                 <div className="">
                                   <EditFoodEntry
                                     food={food}

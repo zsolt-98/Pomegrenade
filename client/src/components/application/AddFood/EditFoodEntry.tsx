@@ -1,9 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { Food } from "@/types";
-import { PieChart } from "lucide-react";
 import { useState } from "react";
-import { Cell, Label, Legend, Pie, ResponsiveContainer } from "recharts";
+import {
+  Cell,
+  Label,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+} from "recharts";
 
 type EditFoodEntryProps = {
   food: Food;
