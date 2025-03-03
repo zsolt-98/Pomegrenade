@@ -9,15 +9,7 @@ import React, {
 } from "react";
 import { AppContext } from "../AppContext";
 import { toast } from "react-toastify";
-
-type Food = {
-  _id?: string;
-  food_id: string;
-  food_name: string;
-  food_description: string;
-  servingSize: string;
-  servings: number;
-};
+import { Food } from "@/types";
 
 type View = "search" | "servings";
 
@@ -46,6 +38,7 @@ interface LogFoodContextType {
   resetAddFoodState: () => void;
   deleteFood: (entryId: string) => Promise<void>;
   isDeletingEntry: boolean;
+  updateFood: (entryId: string, servingSize: string, servings: number) => void;
   loadUserFoods: () => Promise<void>;
 }
 
@@ -188,6 +181,34 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const updateFood = async (
+    entryId: string,
+    servingSize: string,
+    servings: number,
+  ) => {
+    axios.defaults.withCredentials = true;
+    try {
+      const { data } = await axios.put(`${backendUrl}/api/food/update`, {
+        entryId,
+        servingSize,
+        servings,
+      });
+
+      if (data.success) {
+        setAddedFoods((prev) =>
+          prev.map((food) =>
+            food._id === entryId ? { ...food, servingSize, servings } : food,
+          ),
+        );
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error has occurred.");
+    }
+  };
+
   const value = {
     searchQuery,
     setSearchQuery,
@@ -214,6 +235,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     deleteFood,
     isDeletingEntry,
     loadUserFoods,
+    updateFood,
   };
 
   return (

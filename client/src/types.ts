@@ -13,3 +13,12 @@ export interface ButtonHollowPillProps {
 export type OTPFormInputs = {
   otp: string;
 };
+
+export type Food = {
+  _id?: string;
+  food_id: string;
+  food_name: string;
+  food_description: string;
+  servingSize: string;
+  servings: number;
+};

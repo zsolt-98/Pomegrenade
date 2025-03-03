@@ -2,7 +2,7 @@ import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { ServingsView } from "./AddFood/ServingsView";
+import { EditFoodEntry } from "./AddFood/EditFoodEntry";
 
 export default function MainDashboard() {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
@@ -133,7 +133,10 @@ export default function MainDashboard() {
                             {isOpen === dropdownId && (
                               <div className="flex h-20 justify-end">
                                 <div className="">
-                                  <ServingsView />
+                                  <EditFoodEntry
+                                    food={food}
+                                    onClose={() => setIsOpen(null)}
+                                  />
                                 </div>
                               </div>
                             )}
