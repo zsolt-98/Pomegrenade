@@ -49,7 +49,7 @@ export const getUserFoodEntries = async (req: Request, res: Response) => {
 
   // TODO: Change sorting
   try {
-    const entries = await foodModel.find({ userId }).sort({ addedAt: -1 });
+    const entries = await foodModel.find({ userId }).sort({ addedAt: 1 });
 
     if (!entries) {
       return res.json({
