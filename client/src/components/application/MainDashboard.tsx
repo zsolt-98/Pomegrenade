@@ -2,6 +2,7 @@ import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFood/AddFoodDropdown";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { ServingsView } from "./AddFood/ServingsView";
 
 export default function MainDashboard() {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
@@ -92,7 +93,7 @@ export default function MainDashboard() {
                         return (
                           <li
                             key={food.food_id}
-                            className="hover:bg-secondary-light-2 group relative flex cursor-pointer flex-col justify-between overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
+                            className="hover:bg-secondary-light-2 group relative flex cursor-pointer flex-col overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
                           >
                             <div className="flex justify-between">
                               <span className="text-tertiary font-medium">
@@ -130,7 +131,11 @@ export default function MainDashboard() {
                               </div>
                             </div>
                             {isOpen === dropdownId && (
-                              <div className="h-100 w-100 bg-tertiary"></div>
+                              <div className="flex h-20 justify-end">
+                                <div className="">
+                                  <ServingsView />
+                                </div>
+                              </div>
                             )}
                           </li>
                         );

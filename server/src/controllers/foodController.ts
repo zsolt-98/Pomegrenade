@@ -104,3 +104,46 @@ export const deleteFoodEntry = async (req: Request, res: Response) => {
     res.json({ success: false, message: (error as Error).message });
   }
 };
+
+export const updateFoodEntry = async (req: Request, res: Response) => {
+  const { userId, entryId, servingSize, servings } = req.body;
+
+  if (!entryId) {
+    return res.json({
+      success: false,
+      message: "Food entry not found",
+    });
+  }
+
+  if (!userId) {
+    return res.json({
+      success: false,
+      message: "You are not authorized to update this entry",
+    });
+  }
+
+  try {
+    const entry = await foodModel.findOne({ _id: entryId, userId });
+
+    if (!entry) {
+      return res.json({
+        success: false,
+        message:
+          "Food entry not found or you don't have permission to update it",
+      });
+    }
+
+    entry.servingSize = servingSize;
+    entry.servings = servings;
+
+    await entry.save();
+
+    return res.json({
+      success: true,
+      message: "Food entry updated successfully",
+      foodEntry: entry,
+    });
+  } catch (error) {
+    res.json({ success: false, message: (error as Error).message });
+  }
+};
