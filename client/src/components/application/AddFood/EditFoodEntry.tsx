@@ -80,10 +80,7 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-2">
-      <h3 className="text-primary-1 border-tertiary border-b-1 pb-2 text-base font-semibold">
-        Edit {food.food_name}
-      </h3>
+    <div className="flex flex-col gap-4">
       <div className="text-tertiary flex flex-col gap-2">
         <div className="flex justify-between">
           <h4 className="">Serving size:</h4>
@@ -103,14 +100,14 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
           />
         </div>
       </div>
-      <div className="w-full">
-        <ResponsiveContainer width="100%" height={120}>
+      <div className="min-w-85">
+        <ResponsiveContainer width="100%" height={100}>
           <PieChart>
             <Pie
               data={chartData}
               dataKey="value"
               nameKey="name"
-              cx="45%"
+              cx="60%"
               cy="50%"
               labelLine={false}
               innerRadius={30}
@@ -132,8 +129,8 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
             <Legend
               verticalAlign="middle"
               layout="vertical"
-              align="right"
-              wrapperStyle={{ right: "15%" }}
+              align="left"
+              wrapperStyle={{ left: "0%" }}
             />
           </PieChart>
         </ResponsiveContainer>

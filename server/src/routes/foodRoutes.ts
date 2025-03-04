@@ -12,6 +12,6 @@ const foodRouter = express.Router();
 foodRouter.post("/add", userAuth, addFoodEntry);
 foodRouter.get("/entries", userAuth, getUserFoodEntries);
 foodRouter.delete("/delete", userAuth, deleteFoodEntry);
-foodRouter.put("update", userAuth, updateFoodEntry);
+foodRouter.put("/update", userAuth, updateFoodEntry);
 
 export default foodRouter;
