@@ -32,9 +32,9 @@ export default function MainDashboard() {
       : parseFloat(numericPart);
 
     const calculatedAmt = baseAmount * servings;
-    const formattedAmt = Math.round(calculatedAmt);
+    const fixedAmt = parseFloat(calculatedAmt.toFixed(2));
 
-    return `${formattedAmt} ${unit}`;
+    return `${fixedAmt} ${unit}`;
   };
 
   const calculateCalories = (
