@@ -131,7 +131,7 @@ export default function MainDashboard() {
                               </div>
                             </div>
                             {isOpen === dropdownId && (
-                              <div className="border-t-1 border-tertiary mt-2 flex justify-end pt-2">
+                              <div className="flex justify-end pt-2">
                                 <div className="border-1 border-tertiary rounded-lg p-2">
                                   <EditFoodEntry
                                     food={food}
