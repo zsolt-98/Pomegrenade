@@ -9,42 +9,28 @@ import {
   PieChart,
   ResponsiveContainer,
 } from "recharts";
+import { useNutritionCalculator } from "../hooks/useNutritionCalculator";
 
 export function ServingsView() {
   const { selectedFood, handleBackToSearch, addFood, isSavingEntry } =
     useLogFood();
   const [servings, setServings] = useState(1);
 
+  const {
+    servingSize,
+    calories,
+    carbsGrams,
+    fatGrams,
+    proteinGrams,
+    carbsCalories,
+    fatCalories,
+    proteinCalories,
+    carbsPercentage,
+    fatPercentage,
+    proteinPercentage,
+  } = useNutritionCalculator(selectedFood, servings);
+
   if (!selectedFood) return null;
-
-  const nutritionData = selectedFood.food_description || "";
-  const servingSize = (nutritionData.split("Per ")[1] || "").split(" -")[0];
-  const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
-  const carbsMatch = nutritionData.match(/Carbs:\s+([\d.]+)g/);
-  const fatMatch = nutritionData.match(/Fat:\s+([\d.]+)g/);
-  const proteinMatch = nutritionData.match(/Protein:\s+([\d.]+)g/);
-
-  const baseCalories = caloriesMatch ? parseFloat(caloriesMatch[1]) : 0;
-  const baseCarbsGrams = carbsMatch ? parseFloat(carbsMatch[1]) : 0;
-  const baseFatGrams = fatMatch ? parseFloat(fatMatch[1]) : 0;
-  const baseProteinGrams = proteinMatch ? parseFloat(proteinMatch[1]) : 0;
-
-  const calories = parseFloat((baseCalories * servings).toFixed(1)) || 0;
-  const carbsGrams = parseFloat((baseCarbsGrams * servings).toFixed(1)) || 0;
-  const fatGrams = parseFloat((baseFatGrams * servings).toFixed(1)) || 0;
-  const proteinGrams =
-    parseFloat((baseProteinGrams * servings).toFixed(1)) || 0;
-
-  const carbsCalories = parseFloat((carbsGrams * 4).toFixed(1));
-  const fatCalories = parseFloat((fatGrams * 9).toFixed(1));
-  const proteinCalories = parseFloat((proteinGrams * 4).toFixed(1));
-  const totalCalories = carbsCalories + fatCalories + proteinCalories;
-
-  const carbsPercentage =
-    Math.round((carbsCalories / totalCalories) * 100) || 0;
-  const fatPercentage = Math.round((fatCalories / totalCalories) * 100) || 0;
-  const proteinPercentage =
-    Math.round((proteinCalories / totalCalories) * 100) || 0;
 
   const chartData = [
     {
