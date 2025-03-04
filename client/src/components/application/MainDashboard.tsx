@@ -31,7 +31,10 @@ export default function MainDashboard() {
         parseFloat(numericPart.split("/")[1])
       : parseFloat(numericPart);
 
-    return `${baseAmount * servings} ${unit}`;
+    const calculatedAmt = baseAmount * servings;
+    const formattedAmt = Math.round(calculatedAmt);
+
+    return `${formattedAmt} ${unit}`;
   };
 
   const calculateCalories = (
@@ -106,6 +109,7 @@ export default function MainDashboard() {
                                 <div className="absolute right-2 flex translate-x-full transform gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100">
                                   <Button
                                     className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5"
+                                    disabled={isOpen === dropdownId}
                                     onClick={() =>
                                       setIsOpen(
                                         isOpen === dropdownId
