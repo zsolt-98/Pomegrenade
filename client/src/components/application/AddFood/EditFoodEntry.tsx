@@ -2,15 +2,8 @@ import { Button } from "@/components/ui/button";
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { Food } from "@/types";
 import { useState } from "react";
-import {
-  Cell,
-  Label,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-} from "recharts";
 import { useNutritionCalculator } from "../hooks/useNutritionCalculator";
+import { MacrosPieChart } from "./MacrosPieChart";
 
 type EditFoodEntryProps = {
   food: Food;
@@ -23,35 +16,35 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
 
   const {
     servingSize,
-    calories,
-    carbsGrams,
-    fatGrams,
-    proteinGrams,
-    carbsCalories,
-    fatCalories,
-    proteinCalories,
-    carbsPercentage,
-    fatPercentage,
-    proteinPercentage,
+    // calories,
+    // carbsGrams,
+    // fatGrams,
+    // proteinGrams,
+    // carbsCalories,
+    // fatCalories,
+    // proteinCalories,
+    // carbsPercentage,
+    // fatPercentage,
+    // proteinPercentage,
   } = useNutritionCalculator(food, servings);
 
-  const chartData = [
-    {
-      name: `Carbs: ${carbsGrams}g  (${carbsPercentage}%)`,
-      value: carbsCalories || 0.01,
-      color: "var(--color-tertiary)",
-    },
-    {
-      name: `Fat: ${fatGrams}g (${fatPercentage}%)`,
-      value: fatCalories || 0.01,
-      color: "var(--color-secondary-orange)",
-    },
-    {
-      name: `Protein: ${proteinGrams}g (${proteinPercentage}%)`,
-      value: proteinCalories || 0.01,
-      color: "var(--color-primary-1)",
-    },
-  ];
+  // const chartData = [
+  //   {
+  //     name: `Carbs: ${carbsGrams}g  (${carbsPercentage}%)`,
+  //     value: carbsCalories || 0.01,
+  //     color: "var(--color-tertiary)",
+  //   },
+  //   {
+  //     name: `Fat: ${fatGrams}g (${fatPercentage}%)`,
+  //     value: fatCalories || 0.01,
+  //     color: "var(--color-secondary-orange)",
+  //   },
+  //   {
+  //     name: `Protein: ${proteinGrams}g (${proteinPercentage}%)`,
+  //     value: proteinCalories || 0.01,
+  //     color: "var(--color-primary-1)",
+  //   },
+  // ];
 
   const handleServingsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
@@ -87,7 +80,8 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
         </div>
       </div>
       <div className="min-w-85">
-        <ResponsiveContainer width="100%" height={100}>
+        <MacrosPieChart food={food} servings={servings} />
+        {/* <ResponsiveContainer width="100%" height={100}>
           <PieChart>
             <Pie
               data={chartData}
@@ -119,7 +113,7 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
               wrapperStyle={{ left: "0%" }}
             />
           </PieChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer> */}
       </div>
       <div className="flex items-center justify-end gap-2">
         <Button
