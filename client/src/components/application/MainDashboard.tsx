@@ -24,10 +24,10 @@ export default function MainDashboard() {
                 <p className="">-</p>
               </div>
             </div>
-            <Meal />
-            <Meal />
-            <Meal />
-            <Meal />
+            <Meal mealTypeHeading="Breakfast" />
+            <Meal mealTypeHeading="Lunch" />
+            <Meal mealTypeHeading="Dinner" />
+            <Meal mealTypeHeading="Snacks" />
             <div className=""></div>
           </div>
         </div>

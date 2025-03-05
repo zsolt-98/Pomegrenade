@@ -1,4 +1,6 @@
-import mongoose, { Document, Schema, Model, mongo } from "mongoose";
+import mongoose, { Document, Schema, Model } from "mongoose";
+
+type MealType = "Breakfast" | "Lunch" | "Dinner" | "Snacks";
 
 interface FoodEntry extends Document {
   userId: Schema.Types.ObjectId;
@@ -7,6 +9,7 @@ interface FoodEntry extends Document {
   food_description: string;
   servingSize: string;
   servings: number;
+  mealType: MealType;
   addedAt: Date;
 }
 
@@ -17,6 +20,11 @@ const foodEntrySchema = new Schema<FoodEntry>({
   food_description: { type: String, required: true },
   servingSize: { type: String, required: true },
   servings: { type: Number, required: true },
+  mealType: {
+    type: String,
+    required: true,
+    enum: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+  },
   addedAt: { type: Date, default: Date.now },
 });
 

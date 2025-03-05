@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EditFoodEntry } from "./EditFoodEntry";
 
-export default function Meal() {
+type MealProps = {
+  mealTypeHeading: string;
+};
+
+export default function Meal({ mealTypeHeading }: MealProps) {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
     useLogFood();
   const [isOpen, setIsOpen] = useState<string | null>(null);
@@ -48,7 +52,9 @@ export default function Meal() {
   return (
     <div className="bg-secondary-light flex flex-col">
       <div className="flex items-center justify-between p-2">
-        <h3 className="text-primary-1 text-2xl font-semibold">Breakfast: 0</h3>
+        <h3 className="text-primary-1 text-2xl font-semibold">
+          {mealTypeHeading}: 0
+        </h3>
         <div className="relative">
           <AddFoodDropDown />
         </div>
