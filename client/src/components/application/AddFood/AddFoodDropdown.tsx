@@ -7,9 +7,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import SearchView from "./SearchView";
 import { useEffect, useRef, useState } from "react";
+import { MealType } from "@/types";
 
-export function AddFoodDropDown() {
-  const { currentView, addedFoods, resetAddFoodState } = useLogFood();
+type AddFoodDropdownProps = {
+  mealType: MealType;
+};
+
+export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
+  const { currentView, addedFoods, resetAddFoodState, setCurrentMealType } =
+    useLogFood();
 
   const [isOpen, setIsOpen] = useState(false);
   const prevFoodsLengthRef = useRef(addedFoods.length);
@@ -21,8 +27,15 @@ export function AddFoodDropDown() {
     prevFoodsLengthRef.current = addedFoods.length;
   }, [addedFoods, isOpen, resetAddFoodState]);
 
+  const handleAddFoodDropdown = (open: boolean) => {
+    if (open) {
+      setCurrentMealType(mealType);
+    }
+    setIsOpen(open);
+  };
+
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={handleAddFoodDropdown}>
       <DropdownMenuTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
         Add food
       </DropdownMenuTrigger>

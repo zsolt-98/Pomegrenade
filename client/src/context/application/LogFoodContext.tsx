@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { AppContext } from "../AppContext";
 import { toast } from "react-toastify";
-import { Food } from "@/types";
+import { Food, MealType } from "@/types";
 
 type View = "search" | "servings";
 
@@ -33,13 +33,20 @@ interface LogFoodContextType {
   handleBackToSearch: () => void;
   performSearch: () => Promise<void>;
   addedFoods: Food[];
-  addFood: (food: Food, servingSize: string, servings: number) => void;
+  addFood: (
+    food: Food,
+    servingSize: string,
+    servings: number,
+    mealType: string,
+  ) => void;
   isSavingEntry: boolean;
   resetAddFoodState: () => void;
   deleteFood: (entryId: string) => Promise<void>;
   isDeletingEntry: boolean;
   updateFood: (entryId: string, servingSize: string, servings: number) => void;
   loadUserFoods: () => Promise<void>;
+  currentMealType: MealType;
+  setCurrentMealType: (mealType: MealType) => void;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
@@ -59,6 +66,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
   const [addedFoods, setAddedFoods] = useState<
     Array<Food & { servings: number }>
   >([]);
+  const [currentMealType, setCurrentMealType] = useState<MealType>("Breakfast");
   const { backendUrl } = useContext(AppContext);
 
   const loadUserFoods = useCallback(async () => {
@@ -123,7 +131,12 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [debouncedSearchTerm, backendUrl]);
 
-  const addFood = async (food: Food, servingSize: string, servings: number) => {
+  const addFood = async (
+    food: Food,
+    servingSize: string,
+    servings: number,
+    mealType: string,
+  ) => {
     axios.defaults.withCredentials = true;
     setIsSavingEntry(true);
     try {
@@ -133,12 +146,13 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
         food_description: food.food_description,
         servingSize,
         servings,
+        mealType,
       });
 
       if (data.success) {
         setAddedFoods((prev) => [
           ...prev,
-          { ...food, servingSize, servings, ...data.foodEntry },
+          { ...food, servingSize, servings, mealType, ...data.foodEntry },
         ]);
       } else {
         toast.error(data.message);
@@ -236,6 +250,8 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     isDeletingEntry,
     loadUserFoods,
     updateFood,
+    currentMealType,
+    setCurrentMealType,
   };
 
   return (

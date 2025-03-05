@@ -5,8 +5,13 @@ import { useNutritionCalculator } from "../hooks/useNutritionCalculator";
 import { MacrosPieChart } from "./MacrosPieChart";
 
 export function ServingsView() {
-  const { selectedFood, handleBackToSearch, addFood, isSavingEntry } =
-    useLogFood();
+  const {
+    selectedFood,
+    handleBackToSearch,
+    addFood,
+    isSavingEntry,
+    currentMealType,
+  } = useLogFood();
   const [servings, setServings] = useState(1);
 
   const { servingSize } = useNutritionCalculator(selectedFood, servings);
@@ -67,7 +72,9 @@ export function ServingsView() {
         <Button
           type="button"
           className="bg-tertiary rounded-4xl text-tertiary-light w-20"
-          onClick={() => addFood(selectedFood, servingSize, servings)}
+          onClick={() =>
+            addFood(selectedFood, servingSize, servings, currentMealType)
+          }
           disabled={isSavingEntry}
         >
           Add

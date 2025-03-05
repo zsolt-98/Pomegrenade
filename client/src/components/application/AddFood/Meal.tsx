@@ -3,9 +3,10 @@ import { AddFoodDropDown } from "./AddFoodDropdown";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EditFoodEntry } from "./EditFoodEntry";
+import { MealType } from "@/types";
 
 type MealProps = {
-  mealTypeHeading: string;
+  mealTypeHeading: MealType;
 };
 
 export default function Meal({ mealTypeHeading }: MealProps) {
@@ -16,6 +17,10 @@ export default function Meal({ mealTypeHeading }: MealProps) {
   useEffect(() => {
     loadUserFoods();
   }, [loadUserFoods]);
+
+  const mealFoods = addedFoods.filter(
+    (food) => food.mealType === mealTypeHeading,
+  );
 
   const calculateDisplayAmount = (
     servingSize: string,
@@ -56,16 +61,16 @@ export default function Meal({ mealTypeHeading }: MealProps) {
           {mealTypeHeading}: 0
         </h3>
         <div className="relative">
-          <AddFoodDropDown />
+          <AddFoodDropDown mealType={mealTypeHeading} />
         </div>
       </div>
       <div
-        className={`bg-secondary-light ${addedFoods.length > 0 ? "" : "h-0"}`}
+        className={`bg-secondary-light ${mealFoods.length > 0 ? "" : "h-0"}`}
       >
         <div className="bg-tertiary-light m-2 mt-0 rounded-lg">
-          {addedFoods.length > 0 && (
+          {mealFoods.length > 0 && (
             <ul className="divide-tertiary divide-y-1 border-tertiary rounded-lg border">
-              {addedFoods.map((food) => {
+              {mealFoods.map((food) => {
                 const displayAmount = calculateDisplayAmount(
                   food.servingSize,
                   food.servings,
