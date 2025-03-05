@@ -1,6 +1,6 @@
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { AddFoodDropDown } from "./AddFoodDropdown";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EditFoodEntry } from "./EditFoodEntry";
 import { MealType } from "@/types";
@@ -14,13 +14,13 @@ export default function Meal({ mealTypeHeading }: MealProps) {
     useLogFood();
   const [isOpen, setIsOpen] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadUserFoods();
-  }, [loadUserFoods]);
-
-  const mealFoods = addedFoods.filter(
-    (food) => food.mealType === mealTypeHeading,
-  );
+  const calculateCalories = (
+    nutritionData: string,
+    servings: number,
+  ): number => {
+    const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
+    return caloriesMatch ? parseFloat(caloriesMatch[1]) * servings : 0;
+  };
 
   const calculateDisplayAmount = (
     servingSize: string,
@@ -46,19 +46,27 @@ export default function Meal({ mealTypeHeading }: MealProps) {
     return `${fixedAmt} ${unit}`;
   };
 
-  const calculateCalories = (
-    nutritionData: string,
-    servings: number,
-  ): number => {
-    const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
-    return caloriesMatch ? parseFloat(caloriesMatch[1]) * servings : 0;
-  };
+  useEffect(() => {
+    loadUserFoods();
+  }, [loadUserFoods]);
+
+  const mealFoods = useMemo(() => {
+    return addedFoods.filter((food) => food.mealType === mealTypeHeading);
+  }, [addedFoods, mealTypeHeading]);
+
+  const totalCalories = useMemo(() => {
+    return mealFoods.reduce((total, food) => {
+      return (
+        total + calculateCalories(food.food_description || "", food.servings)
+      );
+    }, 0);
+  }, [mealFoods]);
 
   return (
     <div className="bg-secondary-light flex flex-col">
       <div className="flex items-center justify-between p-2">
         <h3 className="text-primary-1 text-2xl font-semibold">
-          {mealTypeHeading}: 0
+          {mealTypeHeading}: {totalCalories.toFixed(0)}
         </h3>
         <div className="relative">
           <AddFoodDropDown mealType={mealTypeHeading} />
