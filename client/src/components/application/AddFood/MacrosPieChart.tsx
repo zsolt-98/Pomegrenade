@@ -12,9 +12,26 @@ import { Food } from "@/types";
 type MacrosPieChartProps = {
   food: Food | null;
   servings: number;
+  height: number;
+  cx: string;
+  innerRadius: number;
+  outerRadius: number;
+  labelClassName: string;
+  legendAlign: "left" | "center" | "right";
+  legendWrapperStyle: { [key: string]: string | number };
 };
 
-export function MacrosPieChart({ food, servings }: MacrosPieChartProps) {
+export function MacrosPieChart({
+  food,
+  servings,
+  height,
+  cx,
+  innerRadius,
+  outerRadius,
+  labelClassName,
+  legendAlign,
+  legendWrapperStyle,
+}: MacrosPieChartProps) {
   const {
     calories,
     carbsGrams,
@@ -47,17 +64,17 @@ export function MacrosPieChart({ food, servings }: MacrosPieChartProps) {
   ];
 
   return (
-    <ResponsiveContainer width="100%" height={100}>
+    <ResponsiveContainer width="100%" height={height}>
       <PieChart>
         <Pie
           data={chartData}
           dataKey="value"
           nameKey="name"
-          cx="60%"
+          cx={cx}
           cy="50%"
           labelLine={false}
-          innerRadius={30}
-          outerRadius={45}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
           fill="var(--color-tertiary)"
           animationDuration={500}
           animationBegin={100}
@@ -69,14 +86,14 @@ export function MacrosPieChart({ food, servings }: MacrosPieChartProps) {
             value={`${calories.toFixed(0)} cal`}
             position="center"
             fill="var(--color-primary-1)"
-            className="text-sm font-semibold"
+            className={`font-semibold ${labelClassName}`}
           />
         </Pie>
         <Legend
           verticalAlign="middle"
           layout="vertical"
-          align="left"
-          wrapperStyle={{ left: "0%" }}
+          align={legendAlign}
+          wrapperStyle={legendWrapperStyle}
         />
       </PieChart>
     </ResponsiveContainer>
