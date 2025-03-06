@@ -72,10 +72,13 @@ export default function Meal({ mealTypeHeading }: MealProps) {
           <AddFoodDropDown mealType={mealTypeHeading} />
         </div>
       </div>
-      <div
-        className={`bg-secondary-light ${mealFoods.length > 0 ? "" : "h-0"}`}
-      >
+      <div className="bg-secondary-light">
         <div className="bg-tertiary-light m-2 mt-0 rounded-lg">
+          {mealFoods.length === 0 && (
+            <p className="border-tertiary border-1 text-tertiary rounded-lg px-4 py-2 font-medium">
+              No food logged for {mealTypeHeading}
+            </p>
+          )}
           {mealFoods.length > 0 && (
             <ul className="divide-tertiary divide-y-1 border-tertiary rounded-lg border">
               {mealFoods.map((food) => {
