@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 
 import Register from "./components/authentication/Register";
 import ProtectedHomepage from "./routes/ProtectedHomepage.js";
+import Goals from "./components/application/Goals/Goals.js";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="reset-password" element={<ResetPassword />} />
               <Route path="register" element={<Register />} />
               <Route path="profile" element={<Register />} />
+              <Route path="goals" element={<Goals />} />
               <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
             <Footer />

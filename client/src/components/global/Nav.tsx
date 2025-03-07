@@ -38,9 +38,20 @@ function NavbarLinks({ className }: NavbarLinksProps) {
     <div
       className={`${className || ""} ${!isLoggedin && isHomepageRoute ? "text-secondary-light" : "text-tertiary-light"} text-xl`}
     >
-      <a href="">Process</a>
-      <a href="">Reviews</a>
-      <a href="">Help</a>
+      {/* TODO: change  */}
+      {!isLoggedin ? (
+        <>
+          <a href="#process">Process</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#help">Help</a>
+        </>
+      ) : (
+        <>
+          <Link to="/">Dashboard</Link>
+          <Link to="goals">Goals</Link>
+          <Link to="help">Help</Link>
+        </>
+      )}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import DividerProcess from "../../global/svg/DividerProcess";
 
 export default function Process() {
   return (
-    <section className="bg-tertiary-light relative">
+    <section className="bg-tertiary-light relative" id="process">
       <div className="container mx-auto flex max-w-7xl justify-center">
         <div className="mx-5 flex w-full flex-col items-center">
           <h2 className="text-primary-1 mb-10 inline-block text-center text-3xl font-semibold lg:mb-20 lg:text-5xl">

@@ -2,7 +2,7 @@ import ReviewsCard from "./ReviewsCard";
 
 export default function Reviews() {
   return (
-    <section className="bg-secondary-light">
+    <section className="bg-secondary-light" id="reviews">
       <div className="container mx-auto flex max-w-7xl flex-col items-center justify-center text-center">
         {/* Cards */}
         <h2 className="text-primary-1 mb-10 mt-5 inline-block text-3xl font-semibold lg:mb-20 lg:mt-0 lg:text-5xl">
