@@ -14,7 +14,7 @@ export default function Goals() {
   };
 
   return (
-    <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
+    <main className="bg-tertiary-light relative w-full flex-grow items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col">
         <div className="my-20 w-full">
           <div className="rounded-4xl border-tertiary divide-tertiary bg-secondary-light border-2">

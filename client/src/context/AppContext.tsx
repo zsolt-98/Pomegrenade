@@ -71,5 +71,9 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     getUserData,
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+      <div className="flex min-h-screen flex-col">{children}</div>
+    </AppContext.Provider>
+  );
 };
