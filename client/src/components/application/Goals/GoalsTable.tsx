@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 type GoalsData = {
   title: string;
   labels: string[];
@@ -21,6 +23,11 @@ export default function GoalsTable({ data }: GoalsTableProps) {
             <p className="">{data.values[i]}</p>
           </div>
         ))}
+        <div className="mt-10 flex justify-end">
+          <Button className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+            Edit
+          </Button>
+        </div>
       </div>
     </div>
   );
