@@ -13,7 +13,7 @@ type GoalsTableProps = {
 export default function GoalsTable({ data }: GoalsTableProps) {
   return (
     <div className="w-[50%]">
-      <div className="border-tertiary h-[52px] border-b-2 py-2 leading-none">
+      <div className="border-tertiary flex h-[52px] items-center justify-center border-b-2 py-2 leading-none">
         <h4 className="">{data.title}</h4>
       </div>
       <div className="p-2">
@@ -23,7 +23,7 @@ export default function GoalsTable({ data }: GoalsTableProps) {
             <p className="">{data.values[i]}</p>
           </div>
         ))}
-        <div className="mt-10 flex justify-end">
+        <div className="mt-5 flex justify-end">
           <Button className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
             Edit
           </Button>
