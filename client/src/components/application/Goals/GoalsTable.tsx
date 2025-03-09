@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -22,8 +23,11 @@ function EditGoalsModal({ data }: GoalsTableProps) {
       {data.labels.map((label, i) => (
         <div key={label} className="flex items-center justify-between">
           <h4 className="">{label}</h4>
-          <input type="number" />
-          <p className="">{data.values[i]}</p>
+          <input
+            type="number"
+            className="text-tertiary"
+            placeholder={data.values[i]}
+          />
         </div>
       ))}
     </div>
@@ -48,11 +52,19 @@ export default function GoalsTable({ data }: GoalsTableProps) {
             <DialogTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
               Edit
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-secondary-light text-primary-1 border-tertiary border-2">
               <DialogHeader>
                 <DialogTitle>Edit goals</DialogTitle>
               </DialogHeader>
               <EditGoalsModal data={data} />
+              <div className="flex justify-end gap-2">
+                <Button className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+                  Cancel
+                </Button>
+                <Button className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+                  Update
+                </Button>
+              </div>
             </DialogContent>
           </Dialog>
         </div>
