@@ -81,3 +81,121 @@ export const getUserGoals = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateWeightGoals = async (req: Request, res: Response) => {
+  const userId = req.body.userId;
+  const { startingWeight, currentWeight, goalWeight, weeklyGoal } = req.body;
+
+  try {
+    if (!userId) {
+      return res.json({
+        success: false,
+        message: "Not authenticated",
+      });
+    }
+
+    let userGoals = await userGoalsModel.findOne({ userId });
+
+    if (!userGoals) {
+      return res.json({
+        success: false,
+        message: "User goals not found",
+      });
+    }
+
+    userGoals.weightGoals.startingWeight = startingWeight;
+    userGoals.weightGoals.currentWeight = currentWeight;
+    userGoals.weightGoals.goalWeight = goalWeight;
+    userGoals.weightGoals.weeklyGoal = weeklyGoal;
+
+    await userGoals.save();
+
+    const updatedGoals = {
+      weightGoals: {
+        title: "Weight Goals",
+        labels: [
+          "Starting weight",
+          "Current weight",
+          "Goal weight",
+          "Weekly goal",
+        ],
+        values: [
+          `${userGoals.weightGoals.startingWeight} kg`,
+          `${userGoals.weightGoals.currentWeight} kg`,
+          `${userGoals.weightGoals.goalWeight} kg`,
+          userGoals.weightGoals.weeklyGoal,
+        ],
+        rawValues: {
+          startingWeight: userGoals.weightGoals.startingWeight,
+          currentWeight: userGoals.weightGoals.currentWeight,
+          goalWeight: userGoals.weightGoals.goalWeight,
+          weeklyGoal: userGoals.weightGoals.weeklyGoal,
+        },
+      },
+    };
+
+    return res.json({ success: true, data: updatedGoals });
+  } catch (error) {
+    console.error("Error updating weight goals:", error);
+    return res.json({
+      success: false,
+      message: "Failed to update weight goals",
+    });
+  }
+};
+
+export const updateNutritionGoals = async (req: Request, res: Response) => {
+  const userId = req.body.userId;
+  const { calories, carbohydrates, protein, fat } = req.body;
+
+  try {
+    if (!userId) {
+      return res.json({
+        success: false,
+        message: "Not authenticated",
+      });
+    }
+
+    let userGoals = await userGoalsModel.findOne({ userId });
+
+    if (!userGoals) {
+      return res.json({
+        success: false,
+        message: "User goals not found",
+      });
+    }
+
+    userGoals.nutritionGoals.calories = calories;
+    userGoals.nutritionGoals.carbohydrates = carbohydrates;
+    userGoals.nutritionGoals.protein = protein;
+    userGoals.nutritionGoals.fat = fat;
+
+    await userGoals.save();
+
+    const updatedGoals = {
+      nutritionGoals: {
+        title: "Nutrition Goals",
+        labels: ["Calories", "Carbohydrates", "Protein", "Fat"],
+        values: [
+          `${userGoals.nutritionGoals.calories}`,
+          `${userGoals.nutritionGoals.carbohydrates}g`,
+          `${userGoals.nutritionGoals.protein}g`,
+          `${userGoals.nutritionGoals.fat}g`,
+        ],
+        rawValues: {
+          calories: userGoals.nutritionGoals.calories,
+          carbohydrates: userGoals.nutritionGoals.carbohydrates,
+          protein: userGoals.nutritionGoals.protein,
+          fat: userGoals.nutritionGoals.fat,
+        },
+      },
+    };
+    return res.json({ success: true, data: updatedGoals });
+  } catch (error) {
+    console.error("Error updating nutrition goals:", error);
+    return res.json({
+      success: false,
+      message: "Failed to update nutrition goals",
+    });
+  }
+};
