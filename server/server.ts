@@ -8,6 +8,7 @@ import authRouter from "./src/routes/authRoutes.js";
 import userRouter from "./src/routes/userRoutes.js";
 import fatSecretRouter from "./src/routes/fatSecretRoutes.js";
 import foodRouter from "./src/routes/foodRoutes.js";
+import userGoalsRouter from "./src/routes/userGoalsRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -25,5 +26,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/fatsecret", fatSecretRouter);
 app.use("/api/food", foodRouter);
+app.use("/api/goals", userGoalsRouter);
 
 app.listen(port, () => console.log(`Server started on PORT:${port}`));
