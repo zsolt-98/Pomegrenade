@@ -2,6 +2,7 @@ import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -63,9 +64,9 @@ export default function GoalsTable({ data }: GoalsTableProps) {
               </DialogHeader>
               <EditGoalsModal data={data} />
               <div className="flex justify-end gap-2">
-                <Button className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+                <DialogClose className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
                   Cancel
-                </Button>
+                </DialogClose>
                 <Button className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
                   Update
                 </Button>
