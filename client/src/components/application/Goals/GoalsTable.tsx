@@ -21,7 +21,7 @@ type GoalsTableProps = {
 
 function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
   const { backendUrl } = useContext(AppContext);
-  const [formValues, setFormValues] = useState<Record<string, number>>(
+  const [formValues, setFormValues] = useState<Record<string, number | string>>(
     data.rawValues || {},
   );
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
   const handleChange = (key: string, value: string): void => {
     setFormValues((prev) => ({
       ...prev,
-      [key]: Number(value),
+      [key]: value,
     }));
   };
 
