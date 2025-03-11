@@ -21,7 +21,7 @@ export const getUserGoals = async (req: Request, res: Response) => {
           startingWeight: 0,
           currentWeight: 0,
           goalWeight: 0,
-          weeklyGoal: "0",
+          weeklyGoal: 0,
         },
         nutritionGoals: {
           calories: 0,
@@ -45,7 +45,7 @@ export const getUserGoals = async (req: Request, res: Response) => {
           `${userGoals.weightGoals.startingWeight} kg`,
           `${userGoals.weightGoals.currentWeight} kg`,
           `${userGoals.weightGoals.goalWeight} kg`,
-          userGoals.weightGoals.weeklyGoal,
+          `${userGoals.weightGoals.weeklyGoal} kg`,
         ],
         rawValues: {
           startingWeight: userGoals.weightGoals.startingWeight,

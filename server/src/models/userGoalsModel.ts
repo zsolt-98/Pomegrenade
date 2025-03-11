@@ -4,7 +4,7 @@ interface WeightGoals {
   startingWeight: number;
   currentWeight: number;
   goalWeight: number;
-  weeklyGoal: string;
+  weeklyGoal: number;
 }
 
 interface NutritionGoals {
@@ -26,7 +26,7 @@ const WeightGoalsSchema = new Schema<WeightGoals>({
   startingWeight: { type: Number, required: true },
   currentWeight: { type: Number, required: true },
   goalWeight: { type: Number, required: true },
-  weeklyGoal: { type: String, required: true },
+  weeklyGoal: { type: Number, required: true },
 });
 
 const NutritionGoalsSchema = new Schema<NutritionGoals>({

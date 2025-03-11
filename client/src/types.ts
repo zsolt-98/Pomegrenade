@@ -25,3 +25,12 @@ export type Food = {
 };
 
 export type MealType = "Breakfast" | "Lunch" | "Dinner" | "Snacks";
+
+export type GoalsData = {
+  title: string;
+  labels: string[];
+  values: string[];
+  rawValues?: {
+    [key: string]: number;
+  };
+};

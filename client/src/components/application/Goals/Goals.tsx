@@ -1,14 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import GoalsTable from "./GoalsTable";
 import axios from "axios";
 import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
-
-type GoalsData = {
-  title: string;
-  labels: string[];
-  values: string[];
-};
+import { GoalsData } from "@/types";
 
 type GoalsResponse = {
   weightGoals: GoalsData;
@@ -38,27 +33,27 @@ export default function Goals() {
     },
   };
 
-  useEffect(() => {
-    const fetchGoals = async () => {
-      try {
-        setIsLoading(true);
-        const { data } = await axios.get(`${backendUrl}/api/goals/get`);
+  const fetchGoals = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(`${backendUrl}/api/goals/get`);
 
-        if (data.success) {
-          setGoals(data.data);
-        } else {
-          toast.error(data.message || "Failed to fetch goals");
-        }
-      } catch (error) {
-        console.log(error); // Temporary
-        toast.error("An error has occurred.");
-      } finally {
-        setIsLoading(false);
+      if (data.success) {
+        setGoals(data.data);
+      } else {
+        toast.error(data.message || "Failed to fetch goals");
       }
-    };
-
-    fetchGoals();
+    } catch (error) {
+      console.log(error); // Temporary
+      toast.error("An error has occurred.");
+    } finally {
+      setIsLoading(false);
+    }
   }, [backendUrl]);
+
+  useEffect(() => {
+    fetchGoals();
+  }, [fetchGoals]);
 
   const weightGoalsData = goals?.weightGoals || defaultGoals.weightGoals;
   const nutritionGoalsData =
@@ -74,8 +69,14 @@ export default function Goals() {
                 <div className=""></div>
               ) : (
                 <>
-                  <GoalsTable data={weightGoalsData} />
-                  <GoalsTable data={nutritionGoalsData} />
+                  <GoalsTable
+                    data={weightGoalsData}
+                    refetchGoals={fetchGoals}
+                  />
+                  <GoalsTable
+                    data={nutritionGoalsData}
+                    refetchGoals={fetchGoals}
+                  />
                 </>
               )}
             </div>
