@@ -53,3 +53,7 @@ export const calculateMacroPercentages = (
     fat: Math.round((totalFatCalories / calories) * 100),
   };
 };
+
+export const calculateTotalPercentage = (percentages: MacroNutrients) => {
+  return percentages.carbohydrates + percentages.protein + percentages.fat;
+};
