@@ -34,3 +34,9 @@ export type GoalsData = {
     [key: string]: number;
   };
 };
+
+export type MacroNutrients = {
+  carbohydrates: number;
+  protein: number;
+  fat: number;
+};
