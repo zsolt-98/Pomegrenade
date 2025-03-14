@@ -96,7 +96,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
 
       setFormValues((prev) => ({
         ...prev,
-        carboHydrates: calculatedGrams.carbohydrates,
+        carbohydrates: calculatedGrams.carbohydrates,
         protein: calculatedGrams.protein,
         fat: calculatedGrams.fat,
       }));
@@ -162,7 +162,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
                     {gramsCalculated[key as keyof MacroNutrients]}g
                   </p>
                 )}
-                {!isNutritionGoals ? (
+                {!isNutritionGoals || key === "calories" ? (
                   <Input
                     type="number"
                     className="max-w-21 text-tertiary"
@@ -182,6 +182,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
                     }
                   />
                 )}
+
                 {isNutritionGoals && data.labels[index] !== "Calories" && (
                   <p className="absolute right-[-17px]">%</p>
                 )}
