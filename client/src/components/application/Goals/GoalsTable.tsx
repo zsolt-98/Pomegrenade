@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import {
   calculateMacroPercentages,
   calculateMacrosInGrams,
+  calculateTotalPercentage,
   defaultMacroPercentages,
 } from "../utils/nutritionUtils";
 
@@ -78,6 +79,29 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
     formValues.fat,
     isNutritionGoals,
   ]);
+
+  useEffect(() => {
+    if (isNutritionGoals) {
+      setTotalPercentage(calculateTotalPercentage(percentages));
+    }
+  }, [percentages, isNutritionGoals]);
+
+  useEffect(() => {
+    if (isNutritionGoals && formValues.calories) {
+      const caloriesValue = Number(formValues.calories);
+      const calculatedGrams = calculateMacrosInGrams(
+        caloriesValue,
+        percentages,
+      );
+
+      setFormValues((prev) => ({
+        ...prev,
+        carboHydrates: calculatedGrams.carbohydrates,
+        protein: calculatedGrams.protein,
+        fat: calculatedGrams.fat,
+      }));
+    }
+  }, [percentages, formValues.calories, isNutritionGoals]);
 
   const handleChange = (key: string, value: string): void => {
     setFormValues((prev) => ({
