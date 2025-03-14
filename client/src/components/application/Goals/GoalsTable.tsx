@@ -64,21 +64,28 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
           Object.keys(data.rawValues).map((key, index) => (
             <div key={key} className="flex items-center justify-between">
               <h4 className="font-semibold">{data.labels[index]}</h4>
-              <div className="my-1.5 me-4 flex items-center justify-start gap-1 font-semibold">
-                <p className="">250</p>
+              <div className="relative my-1.5 me-4 flex items-center justify-start gap-1 font-semibold">
+                {data.title === "Nutrition Goals" &&
+                  data.labels[index] !== "Calories" && (
+                    <p className="me-3">250g</p>
+                  )}
                 <Input
                   type="number"
-                  className="max-w-21 text-tertiary relative"
+                  className="max-w-21 text-tertiary"
                   value={formValues[key]}
                   onChange={(e) => handleChange(key, e.target.value)}
                 />
-                {data.labels[index] !== "Calories" && (
-                  <p className="absolute right-6">%</p>
-                )}
+                {data.title === "Nutrition Goals" &&
+                  data.labels[index] !== "Calories" && (
+                    <p className="absolute right-[-17px]">%</p>
+                  )}
               </div>
             </div>
           ))}
       </div>
+      {data.title === "Nutrition Goals" && (
+        <p className="text-sm">*Macronutrients must equal 100%</p>
+      )}
       <div className="flex justify-end gap-2">
         <DialogClose className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
           Cancel
