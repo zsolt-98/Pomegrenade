@@ -34,3 +34,22 @@ export const calculateMacrosInGrams = (
     fat: fatGrams,
   };
 };
+
+export const calculateMacroPercentages = (
+  calories: number,
+  macrosInGrams: MacroNutrients,
+) => {
+  if (!calories || calories <= 0) {
+    return defaultPercentages;
+  }
+
+  const totalCarbCalories = macrosInGrams.carbohydrates * carbCaloriesPerGram;
+  const totalProteinCalories = macrosInGrams.protein * proteinCaloriesPerGram;
+  const totalFatCalories = macrosInGrams.fat * fatCaloriesPerGram;
+
+  return {
+    carboHydrates: Math.round((totalCarbCalories / calories) * 100),
+    protein: Math.round((totalProteinCalories / calories) * 100),
+    fat: Math.round((totalFatCalories / calories) * 100),
+  };
+};
