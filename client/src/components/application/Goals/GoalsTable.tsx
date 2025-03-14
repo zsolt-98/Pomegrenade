@@ -110,6 +110,21 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
     }));
   };
 
+  const handlePercentageChange = (
+    macro: keyof MacroNutrients,
+    value: string,
+  ) => {
+    if (!isNutritionGoals) return;
+
+    const newValue = Number(value);
+    if (newValue < 0) return;
+
+    setPercentages((prev) => ({
+      ...prev,
+      [macro]: newValue,
+    }));
+  };
+
   const handleUpdate = async () => {
     setIsLoading(true);
 
@@ -142,26 +157,47 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
             <div key={key} className="flex items-center justify-between">
               <h4 className="font-semibold">{data.labels[index]}</h4>
               <div className="relative my-1.5 me-4 flex items-center justify-start gap-1 font-semibold">
-                {data.title === "Nutrition Goals" &&
-                  data.labels[index] !== "Calories" && (
-                    <p className="me-3">250g</p>
-                  )}
-                <Input
-                  type="number"
-                  className="max-w-21 text-tertiary"
-                  value={formValues[key]}
-                  onChange={(e) => handleChange(key, e.target.value)}
-                />
-                {data.title === "Nutrition Goals" &&
-                  data.labels[index] !== "Calories" && (
-                    <p className="absolute right-[-17px]">%</p>
-                  )}
+                {isNutritionGoals && data.labels[index] !== "Calories" && (
+                  <p className="min-w-16">
+                    {gramsCalculated[key as keyof MacroNutrients]}g
+                  </p>
+                )}
+                {!isNutritionGoals ? (
+                  <Input
+                    type="number"
+                    className="max-w-21 text-tertiary"
+                    value={formValues[key]}
+                    onChange={(e) => handleChange(key, e.target.value)}
+                  />
+                ) : (
+                  <Input
+                    type="number"
+                    className="max-w-21 text-tertiary"
+                    value={percentages[key as keyof MacroNutrients]}
+                    onChange={(e) =>
+                      handlePercentageChange(
+                        key as keyof MacroNutrients,
+                        e.target.value,
+                      )
+                    }
+                  />
+                )}
+                {isNutritionGoals && data.labels[index] !== "Calories" && (
+                  <p className="absolute right-[-17px]">%</p>
+                )}
               </div>
             </div>
           ))}
       </div>
-      {data.title === "Nutrition Goals" && (
-        <p className="text-sm">*Macronutrients must equal 100%</p>
+      {isNutritionGoals && (
+        <div className="flex flex-col items-start justify-between">
+          <p className="text-sm">*Macronutrients must equal 100%</p>
+          <p
+            className={`${totalPercentage < 100 ? "text-primary-1" : "text-tertiary"} text-2xl font-semibold`}
+          >
+            {totalPercentage}%
+          </p>
+        </div>
       )}
       <div className="flex justify-end gap-2">
         <DialogClose className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
@@ -170,7 +206,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         <Button
           className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5"
           onClick={handleUpdate}
-          disabled={isLoading}
+          disabled={isLoading || (isNutritionGoals && totalPercentage !== 100)}
         >
           {isLoading ? "Saving..." : "Save"}
         </Button>
