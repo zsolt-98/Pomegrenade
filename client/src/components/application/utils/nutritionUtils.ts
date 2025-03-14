@@ -4,7 +4,7 @@ export const carbCaloriesPerGram = 4;
 export const proteinCaloriesPerGram = 4;
 export const fatCaloriesPerGram = 9;
 
-export const defaultPercentages = {
+export const defaultMacroPercentages = {
   carbohydrates: 50,
   protein: 25,
   fat: 25,
@@ -40,7 +40,7 @@ export const calculateMacroPercentages = (
   macrosInGrams: MacroNutrients,
 ) => {
   if (!calories || calories <= 0) {
-    return defaultPercentages;
+    return defaultMacroPercentages;
   }
 
   const totalCarbCalories = macrosInGrams.carbohydrates * carbCaloriesPerGram;
@@ -48,7 +48,7 @@ export const calculateMacroPercentages = (
   const totalFatCalories = macrosInGrams.fat * fatCaloriesPerGram;
 
   return {
-    carboHydrates: Math.round((totalCarbCalories / calories) * 100),
+    carbohydrates: Math.round((totalCarbCalories / calories) * 100),
     protein: Math.round((totalProteinCalories / calories) * 100),
     fat: Math.round((totalFatCalories / calories) * 100),
   };

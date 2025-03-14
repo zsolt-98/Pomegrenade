@@ -9,10 +9,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { AppContext } from "@/context/AppContext";
-import { GoalsData } from "@/types";
+import { GoalsData, MacroNutrients } from "@/types";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import {
+  calculateMacroPercentages,
+  calculateMacrosInGrams,
+  defaultMacroPercentages,
+} from "../utils/nutritionUtils";
 
 type GoalsTableProps = {
   data: GoalsData;
@@ -24,7 +29,55 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
   const [formValues, setFormValues] = useState<Record<string, number | string>>(
     data.rawValues || {},
   );
+  const isNutritionGoals = data.title === "Nutrition Goals";
   const [isLoading, setIsLoading] = useState(false);
+  const [percentages, setPercentages] = useState<MacroNutrients>(
+    defaultMacroPercentages,
+  );
+  const [gramsCalculated, setGramsCalculated] = useState<MacroNutrients>({
+    carbohydrates: 0,
+    protein: 0,
+    fat: 0,
+  });
+  const [totalPercentage, setTotalPercentage] = useState(100);
+
+  useEffect(() => {
+    if (isNutritionGoals && formValues.calories) {
+      if (formValues.carbohydrates && formValues.protein && formValues.fat) {
+        const macrosInGrams = {
+          carbohydrates: Number(formValues.carbohydrates),
+          protein: Number(formValues.protein),
+          fat: Number(formValues.fat),
+        };
+
+        const calculatedPercentages = calculateMacroPercentages(
+          Number(formValues.calories),
+          macrosInGrams,
+        );
+
+        setPercentages(calculatedPercentages);
+        setGramsCalculated(macrosInGrams);
+      } else {
+        const calculatedGrams = calculateMacrosInGrams(
+          Number(formValues.calories),
+          defaultMacroPercentages,
+        );
+        setGramsCalculated(calculatedGrams);
+        setFormValues((prev) => ({
+          ...prev,
+          carbohydrates: calculatedGrams.carbohydrates,
+          protein: calculatedGrams.protein,
+          fat: calculatedGrams.fat,
+        }));
+      }
+    }
+  }, [
+    formValues.calories,
+    formValues.carbohydrates,
+    formValues.protein,
+    formValues.fat,
+    isNutritionGoals,
+  ]);
 
   const handleChange = (key: string, value: string): void => {
     setFormValues((prev) => ({
