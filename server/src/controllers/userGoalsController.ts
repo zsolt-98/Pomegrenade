@@ -21,7 +21,6 @@ export const getUserGoals = async (req: Request, res: Response) => {
           startingWeight: 0,
           currentWeight: 0,
           goalWeight: 0,
-          weeklyGoal: 0,
         },
         nutritionGoals: {
           calories: 0,
@@ -35,23 +34,16 @@ export const getUserGoals = async (req: Request, res: Response) => {
     const formattedGoals = {
       weightGoals: {
         title: "Weight Goals",
-        labels: [
-          "Starting weight",
-          "Current weight",
-          "Goal weight",
-          "Weekly goal",
-        ],
+        labels: ["Starting weight", "Current weight", "Goal weight"],
         values: [
           `${userGoals.weightGoals.startingWeight} kg`,
           `${userGoals.weightGoals.currentWeight} kg`,
           `${userGoals.weightGoals.goalWeight} kg`,
-          `${userGoals.weightGoals.weeklyGoal} kg`,
         ],
         rawValues: {
           startingWeight: userGoals.weightGoals.startingWeight,
           currentWeight: userGoals.weightGoals.currentWeight,
           goalWeight: userGoals.weightGoals.goalWeight,
-          weeklyGoal: userGoals.weightGoals.weeklyGoal,
         },
       },
       nutritionGoals: {
@@ -84,7 +76,7 @@ export const getUserGoals = async (req: Request, res: Response) => {
 
 export const updateWeightGoals = async (req: Request, res: Response) => {
   const userId = req.body.userId;
-  const { startingWeight, currentWeight, goalWeight, weeklyGoal } = req.body;
+  const { startingWeight, currentWeight, goalWeight } = req.body;
 
   try {
     if (!userId) {
@@ -106,30 +98,22 @@ export const updateWeightGoals = async (req: Request, res: Response) => {
     userGoals.weightGoals.startingWeight = startingWeight;
     userGoals.weightGoals.currentWeight = currentWeight;
     userGoals.weightGoals.goalWeight = goalWeight;
-    userGoals.weightGoals.weeklyGoal = weeklyGoal;
 
     await userGoals.save();
 
     const updatedGoals = {
       weightGoals: {
         title: "Weight Goals",
-        labels: [
-          "Starting weight",
-          "Current weight",
-          "Goal weight",
-          "Weekly goal",
-        ],
+        labels: ["Starting weight", "Current weight", "Goal weight"],
         values: [
           `${userGoals.weightGoals.startingWeight} kg`,
           `${userGoals.weightGoals.currentWeight} kg`,
           `${userGoals.weightGoals.goalWeight} kg`,
-          userGoals.weightGoals.weeklyGoal,
         ],
         rawValues: {
           startingWeight: userGoals.weightGoals.startingWeight,
           currentWeight: userGoals.weightGoals.currentWeight,
           goalWeight: userGoals.weightGoals.goalWeight,
-          weeklyGoal: userGoals.weightGoals.weeklyGoal,
         },
       },
     };

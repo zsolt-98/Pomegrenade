@@ -18,13 +18,8 @@ export default function Goals() {
   const defaultGoals = {
     weightGoals: {
       title: "Weight Goals",
-      labels: [
-        "Starting weight",
-        "Current weight",
-        "Goal weight",
-        "Weekly goal",
-      ],
-      values: ["82 kg", "78 kg", "70 kg", "0.5 kg loss"],
+      labels: ["Starting weight", "Current weight", "Goal weight"],
+      values: ["82 kg", "78 kg", "70 kg"],
     },
     nutritionGoals: {
       title: "Nutrition Goals",
