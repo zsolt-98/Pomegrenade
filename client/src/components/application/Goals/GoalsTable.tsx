@@ -11,7 +11,7 @@ import {
 import { AppContext } from "@/context/AppContext";
 import { GoalsData, MacroNutrients } from "@/types";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import {
   calculateMacroPercentages,
@@ -42,7 +42,14 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
   });
   const [totalPercentage, setTotalPercentage] = useState(100);
 
+  const caloriesChanged = useRef(false);
+  const firstRender = useRef(true);
+
   useEffect(() => {
+    if (!firstRender.current) {
+      return;
+    }
+
     if (isNutritionGoals && formValues.calories) {
       if (formValues.carbohydrates && formValues.protein && formValues.fat) {
         const macrosInGrams = {
@@ -72,6 +79,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         }));
       }
     }
+    firstRender.current = false;
   }, [
     formValues.calories,
     formValues.carbohydrates,
@@ -87,12 +95,14 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
   }, [percentages, isNutritionGoals]);
 
   useEffect(() => {
-    if (isNutritionGoals && formValues.calories) {
+    if (isNutritionGoals && formValues.calories && !caloriesChanged.current) {
       const caloriesValue = Number(formValues.calories);
       const calculatedGrams = calculateMacrosInGrams(
         caloriesValue,
         percentages,
       );
+
+      setGramsCalculated(calculatedGrams);
 
       setFormValues((prev) => ({
         ...prev,
@@ -101,13 +111,41 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         fat: calculatedGrams.fat,
       }));
     }
-  }, [percentages, formValues.calories, isNutritionGoals]);
+
+    caloriesChanged.current = false;
+  }, [percentages, isNutritionGoals, formValues.calories]);
 
   const handleChange = (key: string, value: string): void => {
-    setFormValues((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    if (isNutritionGoals && key === "calories") {
+      caloriesChanged.current = true;
+
+      setFormValues((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+
+      if (value) {
+        const newCalories = Number(value);
+        const calculatedGrams = calculateMacrosInGrams(
+          newCalories,
+          percentages,
+        );
+        setGramsCalculated(calculatedGrams);
+
+        setFormValues((prev) => ({
+          ...prev,
+          [key]: value,
+          carbohydrates: calculatedGrams.carbohydrates,
+          protein: calculatedGrams.protein,
+          fat: calculatedGrams.fat,
+        }));
+      }
+    } else {
+      setFormValues((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+    }
   };
 
   const handlePercentageChange = (
@@ -194,7 +232,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         <div className="flex flex-col items-start justify-between">
           <p className="text-sm">*Macronutrients must equal 100%</p>
           <p
-            className={`${totalPercentage < 100 ? "text-primary-1" : "text-tertiary"} text-2xl font-semibold`}
+            className={`${totalPercentage !== 100 ? "text-red-500" : "text-tertiary"} text-2xl font-semibold`}
           >
             {totalPercentage}%
           </p>
