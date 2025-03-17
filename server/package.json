@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "echo 'Skipping TypeScript build - using existing JS files'",
+    "build": "tsc",
     "start": "node server.js",
     "dev": "nodemon --exec \"node --no-warnings --loader ts-node/esm\" server.ts"
   },
