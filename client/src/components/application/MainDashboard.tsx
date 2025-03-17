@@ -21,9 +21,12 @@ function DashboardHeadings({
   return (
     <>
       {data.map((item) => (
-        <div key={item.heading} className="w-[50%] py-2 leading-none">
+        <div
+          key={item.heading}
+          className="flex w-[50%] flex-col gap-2 py-2 leading-none"
+        >
           <h4 className="">{item.heading}</h4>
-          <p className="">{item.value}</p>
+          <p className="text-tertiary">{item.value} cal</p>
         </div>
       ))}
     </>
@@ -81,7 +84,7 @@ export default function MainDashboard() {
             <Meal mealTypeHeading="Dinner" />
             <Meal mealTypeHeading="Snacks" />
             <div className="bg-secondary-light rounded-b-4xl leading-none">
-              <div className="flex h-[52px] justify-end">
+              <div className="flex h-[60px] justify-end">
                 <a href="https://www.fatsecret.com">
                   <img
                     src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.png"
