@@ -16,7 +16,7 @@ connectDB();
 
 const allowedOrigins =
   process.env.NODE_ENV === "production"
-    ? [process.env.FRONTEND_URL || "pomegrenade-production.up.railway.app"]
+    ? [process.env.FRONTEND_URL || "pomegrenade-production-b9ea.up.railway.app"]
     : ["http://localhost:5173"];
 
 app.use(express.json());
