@@ -29,13 +29,13 @@ export default function MainDashboard() {
   useEffect(() => {
     const fetchNutritionGoals = async () => {
       try {
-        const { data: response } = await axios.get(
+        const { data: apiResponse } = await axios.get(
           `${backendUrl}/api/goals/get`,
         );
 
-        if (response.success) {
+        if (apiResponse.success) {
           setCaloriesBudget(
-            Number(response.data.nutritionGoals.rawValues.calories),
+            Number(apiResponse.data.nutritionGoals.rawValues.calories),
           );
         }
       } catch (error) {

@@ -31,12 +31,14 @@ export default function Goals() {
   const fetchGoals = useCallback(async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get(`${backendUrl}/api/goals/get`);
+      const { data: apiResponse } = await axios.get(
+        `${backendUrl}/api/goals/get`,
+      );
 
-      if (data.success) {
-        setGoals(data.data);
+      if (apiResponse.success) {
+        setGoals(apiResponse.data);
       } else {
-        toast.error(data.message || "Failed to fetch goals");
+        toast.error(apiResponse.message || "Failed to fetch goals");
       }
     } catch (error) {
       console.log(error); // Temporary

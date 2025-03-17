@@ -50,10 +50,10 @@ export const getUserGoals = async (req: Request, res: Response) => {
         title: "Nutrition Goals",
         labels: ["Calories", "Carbohydrates", "Protein", "Fat"],
         values: [
-          `${userGoals.nutritionGoals.calories}`,
-          `${userGoals.nutritionGoals.carbohydrates}g`,
-          `${userGoals.nutritionGoals.protein}g`,
-          `${userGoals.nutritionGoals.fat}g`,
+          `${userGoals.nutritionGoals.calories} cal`,
+          `${userGoals.nutritionGoals.carbohydrates} g`,
+          `${userGoals.nutritionGoals.protein} g`,
+          `${userGoals.nutritionGoals.fat} g`,
         ],
         rawValues: {
           calories: userGoals.nutritionGoals.calories,

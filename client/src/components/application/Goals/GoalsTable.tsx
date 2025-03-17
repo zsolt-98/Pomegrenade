@@ -197,7 +197,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
               <div className="relative my-1.5 me-4 flex items-center justify-start gap-1 font-semibold">
                 {isNutritionGoals && data.labels[index] !== "Calories" && (
                   <p className="min-w-16">
-                    {gramsCalculated[key as keyof MacroNutrients]}g
+                    {gramsCalculated[key as keyof MacroNutrients]} g
                   </p>
                 )}
                 {!isNutritionGoals || key === "calories" ? (
