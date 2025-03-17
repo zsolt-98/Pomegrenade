@@ -4,6 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EditFoodEntry } from "./EditFoodEntry";
 import { MealType } from "@/types";
+import {
+  calculateCalories,
+  calculateDisplayAmount,
+} from "../utils/nutritionUtils";
 
 type MealProps = {
   mealTypeHeading: MealType;
@@ -13,38 +17,6 @@ export default function Meal({ mealTypeHeading }: MealProps) {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
     useLogFood();
   const [isOpen, setIsOpen] = useState<string | null>(null);
-
-  const calculateCalories = (
-    nutritionData: string,
-    servings: number,
-  ): number => {
-    const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
-    return caloriesMatch ? parseFloat(caloriesMatch[1]) * servings : 0;
-  };
-
-  const calculateDisplayAmount = (
-    servingSize: string,
-    servings: number,
-  ): string => {
-    const servingSizeMatch = servingSize.match(/^([\d./]+)?\s*(.*)$/);
-
-    if (!servingSizeMatch) {
-      return `${servings} x ${servingSize}`;
-    }
-
-    const numericPart = servingSizeMatch[1];
-    const unit = servingSizeMatch[2];
-
-    const baseAmount = numericPart.includes("/")
-      ? parseFloat(numericPart.split("/")[0]) /
-        parseFloat(numericPart.split("/")[1])
-      : parseFloat(numericPart);
-
-    const calculatedAmt = baseAmount * servings;
-    const fixedAmt = parseFloat(calculatedAmt.toFixed(2));
-
-    return `${fixedAmt} ${unit}`;
-  };
 
   useEffect(() => {
     loadUserFoods();

@@ -1,5 +1,39 @@
 import { MacroNutrients } from "@/types";
 
+export const calculateCalories = (
+  nutritionData: string,
+  servings: number,
+): number => {
+  const caloriesMatch = nutritionData.match(/Calories:\s+([\d.]+)kcal/);
+  return caloriesMatch ? parseFloat(caloriesMatch[1]) * servings : 0;
+};
+
+export const calculateDisplayAmount = (
+  servingSize: string,
+  servings: number,
+): string => {
+  const servingSizeMatch = servingSize.match(/^([\d./]+)?\s*(.*)$/);
+
+  if (!servingSizeMatch) {
+    return `${servings} x ${servingSize}`;
+  }
+
+  const numericPart = servingSizeMatch[1];
+  const unit = servingSizeMatch[2];
+
+  const baseAmount = numericPart.includes("/")
+    ? parseFloat(numericPart.split("/")[0]) /
+      parseFloat(numericPart.split("/")[1])
+    : parseFloat(numericPart);
+
+  const calculatedAmt = baseAmount * servings;
+  const fixedAmt = parseFloat(calculatedAmt.toFixed(2));
+
+  return `${fixedAmt} ${unit}`;
+};
+
+// // // // // // //
+
 export const carbCaloriesPerGram = 4;
 export const proteinCaloriesPerGram = 4;
 export const fatCaloriesPerGram = 9;

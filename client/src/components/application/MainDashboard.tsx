@@ -2,18 +2,26 @@ import { useContext, useEffect, useState } from "react";
 import Meal from "./AddFood/Meal";
 import { AppContext } from "@/context/AppContext";
 import axios from "axios";
+import { calculateCalories } from "./utils/nutritionUtils";
+import { useLogFood } from "@/context/application/LogFoodContext";
 
-function DashboardHeadings({ caloriesBudget }: { caloriesBudget: number }) {
+type DashboardHeadingsProps = {
+  caloriesBudget: number;
+  totalFoodCalories: number;
+};
+
+function DashboardHeadings({
+  caloriesBudget,
+  totalFoodCalories,
+}: DashboardHeadingsProps) {
   const data = [
     { heading: "Budget", value: caloriesBudget || 0 },
-    { heading: "Food", value: 0 },
-    { heading: "Exercise", value: 0 },
-    { heading: "Net", value: 0 },
+    { heading: "Food", value: totalFoodCalories || 0 },
   ];
   return (
     <>
       {data.map((item) => (
-        <div key={item.heading} className="w-[25%] py-2 leading-none">
+        <div key={item.heading} className="w-[50%] py-2 leading-none">
           <h4 className="">{item.heading}</h4>
           <p className="">{item.value}</p>
         </div>
@@ -24,7 +32,9 @@ function DashboardHeadings({ caloriesBudget }: { caloriesBudget: number }) {
 
 export default function MainDashboard() {
   const { backendUrl } = useContext(AppContext);
+  const { addedFoods } = useLogFood();
   const [caloriesBudget, setCaloriesBudget] = useState<number>(0);
+  const [totalFoodCalories, setTotalFoodCalories] = useState<number>(0);
 
   useEffect(() => {
     const fetchNutritionGoals = async () => {
@@ -45,13 +55,26 @@ export default function MainDashboard() {
     fetchNutritionGoals();
   }, [backendUrl]);
 
+  useEffect(() => {
+    const totalCalories = addedFoods.reduce((total, food) => {
+      return (
+        total + calculateCalories(food.food_description || "", food.servings)
+      );
+    }, 0);
+
+    setTotalFoodCalories(Math.round(totalCalories));
+  }, [addedFoods]);
+
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col">
         <div className="my-20 w-full">
           <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
             <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
-              <DashboardHeadings caloriesBudget={caloriesBudget} />
+              <DashboardHeadings
+                caloriesBudget={caloriesBudget}
+                totalFoodCalories={totalFoodCalories}
+              />
             </div>
             <Meal mealTypeHeading="Breakfast" />
             <Meal mealTypeHeading="Lunch" />
