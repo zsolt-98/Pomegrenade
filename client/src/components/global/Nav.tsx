@@ -150,22 +150,27 @@ export default function Nav() {
                 Hello,{" "}
                 <a className="group relative capitalize underline">
                   {userData.name}
-                  <div className="absolute right-0 top-0 z-10 hidden pt-10 group-hover:block">
-                    <div className="m-0 list-none text-nowrap bg-gray-100 p-2 text-sm">
+                  <div className="absolute right-[-2.5rem] top-0 z-10 h-0 overflow-hidden pt-5 transition-[height] duration-300 ease-in-out group-hover:h-[128px]">
+                    <div className="bg-tertiary rounded-b-4xl w-39.5 m-0 flex list-none flex-col items-start text-nowrap p-2 text-sm">
                       {!userData.isAccountVerified && (
                         <button
                           type="button"
-                          className="px-2 py-1 hover:bg-gray-200"
+                          className="hover:text-primary-1 hover:border-tertiary mx-2 my-1 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
                           disabled={isResending}
                           onClick={handleResendOtp}
                         >
                           Verfiy email
                         </button>
                       )}
-
+                      <button
+                        // onClick={logout}
+                        className="hover:text-primary-1 hover:border-tertiary mx-2 my-1 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                      >
+                        My profile
+                      </button>
                       <button
                         onClick={logout}
-                        className="px-2 py-1 hover:bg-gray-200"
+                        className="hover:text-primary-1 hover:border-tertiary mx-2 my-1 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
                       >
                         Log out
                       </button>
