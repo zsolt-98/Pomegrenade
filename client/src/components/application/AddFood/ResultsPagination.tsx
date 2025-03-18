@@ -12,7 +12,7 @@ export function ResultsPagination() {
         type="button"
         onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
         disabled={currentPage === 0}
-        className="bg-tertiary rounded-4xl text-tertiary-light w-20"
+        className="border-tertiary text-tertiary bg-tertiary-light hover:bg-tertiary hover:text-tertiary-light w-20 rounded-full border-2 px-3 py-1.5"
       >
         Previous
       </Button>
@@ -23,7 +23,7 @@ export function ResultsPagination() {
         type="button"
         onClick={() => setCurrentPage(Math.min(pageCount - 1, currentPage + 1))}
         disabled={currentPage >= pageCount - 1}
-        className="bg-tertiary rounded-4xl text-tertiary-light w-20"
+        className="border-tertiary text-tertiary bg-tertiary-light hover:bg-tertiary hover:text-tertiary-light w-20 rounded-full border-2 px-3 py-1.5"
       >
         Next
       </Button>

@@ -8,6 +8,7 @@ import {
 import SearchView from "./SearchView";
 import { useEffect, useRef, useState } from "react";
 import { MealType } from "@/types";
+import { Button } from "@/components/ui/button";
 
 type AddFoodDropdownProps = {
   mealType: MealType;
@@ -36,8 +37,10 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={handleAddFoodDropdown}>
-      <DropdownMenuTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
-        Add food
+      <DropdownMenuTrigger asChild>
+        <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent">
+          Add food
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         onAnimationEnd={resetAddFoodState}

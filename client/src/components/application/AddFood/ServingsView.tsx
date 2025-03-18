@@ -28,7 +28,7 @@ export function ServingsView() {
       <div>
         <Button
           onClick={handleBackToSearch}
-          className="bg-tertiary rounded-4xl text-tertiary-light mb-4"
+          className="border-tertiary text-tertiary bg-tertiary-light hover:bg-tertiary hover:text-tertiary-light mb-4 rounded-full border-2 px-3 py-1.5"
         >
           Back
         </Button>
@@ -71,7 +71,7 @@ export function ServingsView() {
       <div className="flex items-center justify-end">
         <Button
           type="button"
-          className="bg-tertiary rounded-4xl text-tertiary-light w-20"
+          className="border-tertiary text-tertiary bg-tertiary-light hover:bg-tertiary hover:text-tertiary-light rounded-full border-2 px-3 py-1.5"
           onClick={() =>
             addFood(selectedFood, servingSize, servings, currentMealType)
           }
