@@ -36,12 +36,14 @@ function NavbarLinks({ className }: NavbarLinksProps) {
 
   return (
     <div
-      className={`${className || ""} ${!isLoggedin && isHomepageRoute ? "text-secondary-light" : "text-tertiary-light"} text-xl`}
+      className={`${className || ""} ${!isLoggedin && isHomepageRoute ? "text-secondary-light" : "text-tertiary-light"} [&>a]:hover:text-primary-1 text-xl`}
     >
       {/* TODO: change  */}
       {!isLoggedin ? (
         <>
-          <a href="#process">Process</a>
+          <a className="" href="#process">
+            Process
+          </a>
           <a href="#reviews">Reviews</a>
           <a href="#help">Help</a>
         </>
