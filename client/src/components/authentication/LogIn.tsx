@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import Input from "../global/shared/Input";
 import AuthLayout from "./shared/AuthLayout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,7 +15,7 @@ interface LoginFormInputs {
 
 export default function LogIn() {
   const navigate = useNavigate();
-  const { setIsLoggedin, getUserData } = useContext(AppContext);
+  const { setIsLoggedin, getUserData, isLoggedin } = useContext(AppContext);
   const {
     control,
     handleSubmit,
@@ -23,6 +23,12 @@ export default function LogIn() {
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(LogInSchema),
   });
+
+  useEffect(() => {
+    if (isLoggedin) {
+      navigate("/");
+    }
+  }, [isLoggedin, navigate]);
 
   const { onAuth, isSubmitting } = useAuth({
     endpoint: "login",

@@ -24,6 +24,12 @@ export default function VerifyEmail() {
     useResendTimer();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!isLoggedin) {
+      navigate("/");
+    }
+  }, [isLoggedin, navigate]);
+
   const {
     control,
     handleSubmit,

@@ -27,6 +27,7 @@ function App() {
               <Route path="reset-password" element={<ResetPassword />} />
               <Route path="register" element={<Register />} />
               <Route path="profile" element={<Register />} />
+              {/* TODO: add protected route to profile */}
               <Route path="goals" element={<Goals />} />
               <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>

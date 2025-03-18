@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import Input from "../global/shared/Input";
 import AuthLayout from "./shared/AuthLayout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,7 +17,13 @@ interface RegisterFormInputs {
 
 export default function Register() {
   const navigate = useNavigate();
-  const { setIsLoggedin, getUserData } = useContext(AppContext);
+  const { setIsLoggedin, getUserData, isLoggedin } = useContext(AppContext);
+
+  useEffect(() => {
+    if (isLoggedin) {
+      navigate("/");
+    }
+  }, [isLoggedin, navigate]);
 
   const {
     control,
