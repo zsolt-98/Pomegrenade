@@ -148,8 +148,10 @@ export default function Nav() {
                 className={`${!isLoggedin ? "text-secondary-light" : "text-tertiary-light"} text-lg`}
               >
                 Hello,{" "}
-                <a className="group relative capitalize underline">
-                  {userData.name}
+                <a className="group relative capitalize">
+                  <span className="group-hover:text-primary-1">
+                    {userData.name}
+                  </span>
                   <div className="absolute right-[-2.5rem] top-0 z-10 h-0 overflow-hidden pt-5 transition-[height] duration-300 ease-in-out group-hover:h-[128px]">
                     <div className="bg-tertiary rounded-b-4xl w-39.5 m-0 flex list-none flex-col items-start text-nowrap p-2 text-sm">
                       {!userData.isAccountVerified && (
