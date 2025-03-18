@@ -4,6 +4,7 @@ import axios from "axios";
 import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
 import { GoalsData } from "@/types";
+import { useNavigate } from "react-router";
 
 type GoalsResponse = {
   weightGoals: GoalsData;
@@ -11,9 +12,10 @@ type GoalsResponse = {
 };
 
 export default function Goals() {
-  const { backendUrl } = useContext(AppContext);
+  const { backendUrl, isLoggedin } = useContext(AppContext);
   const [goals, setGoals] = useState<GoalsResponse | null>(null);
   const [isloading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const defaultGoals = {
     weightGoals: {
@@ -27,6 +29,12 @@ export default function Goals() {
       values: ["2030", "254g", "102g", "68g"],
     },
   };
+
+  useEffect(() => {
+    if (!isLoggedin) {
+      navigate("/");
+    }
+  }, [isLoggedin, navigate]);
 
   const fetchGoals = useCallback(async () => {
     try {
@@ -49,8 +57,10 @@ export default function Goals() {
   }, [backendUrl]);
 
   useEffect(() => {
-    fetchGoals();
-  }, [fetchGoals]);
+    if (isLoggedin) {
+      fetchGoals();
+    }
+  }, [fetchGoals, isLoggedin]);
 
   const weightGoalsData = goals?.weightGoals || defaultGoals.weightGoals;
   const nutritionGoalsData =
