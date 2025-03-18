@@ -73,12 +73,12 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                         {food.food_name} ({displayAmount})
                       </span>
                       <div className="flex items-center">
-                        <span className="text-tertiary font-medium transition-transform duration-300 ease-in-out group-hover:translate-x-[-100px]">
+                        <span className="text-tertiary font-medium transition-transform duration-300 ease-in-out group-hover:translate-x-[-105px]">
                           {calories.toFixed(0)}
                         </span>
                         <div className="absolute right-2 flex translate-x-full transform gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100">
                           <Button
-                            className="rounded-4xl bg-tertiary text-tertiary-light h-auto px-1.5 py-0.5"
+                            className="rounded-4xl text-tertiary hover:text-primary-1-light hover:bg-tertiary border-tertiary h-auto border-2 bg-transparent px-1.5 py-0.5"
                             disabled={isOpen === dropdownId}
                             onClick={() =>
                               setIsOpen(
@@ -89,7 +89,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                             Edit
                           </Button>
                           <Button
-                            className="rounded-4xl bg-primary-1 text-tertiary-light h-auto px-1.5 py-0.5"
+                            className="rounded-4xl border-primary-1 hover:bg-primary-1 hover:text-primary-1-light text-primary-1 h-auto border-2 bg-transparent px-1.5 py-0.5"
                             onClick={() => {
                               if (food._id) {
                                 deleteFood(food._id);
