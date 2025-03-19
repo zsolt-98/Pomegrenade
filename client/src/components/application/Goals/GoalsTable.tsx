@@ -256,8 +256,8 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
 
 export default function GoalsTable({ data, refetchGoals }: GoalsTableProps) {
   return (
-    <div className="w-[50%]">
-      <div className="border-tertiary flex h-[52px] items-center justify-center border-b-2 py-2 leading-none">
+    <div className="w-full sm:w-[50%]">
+      <div className="border-tertiary flex h-[52px] items-center justify-center py-2 leading-none sm:border-b-2">
         <h4 className="">{data.title}</h4>
       </div>
       <div className="flex h-[calc(100%-52px)] flex-col justify-between p-2">

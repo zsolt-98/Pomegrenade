@@ -63,6 +63,7 @@ export default function Nav() {
   const { userData, backendUrl, setUserData, setIsLoggedin, isLoggedin } =
     useContext(AppContext);
   const isUnderMDScreen = useMediaQuery({ maxWidth: 767 });
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -78,6 +79,10 @@ export default function Nav() {
       setisNavMenuOpen(false);
     }
   }, [isUnderMDScreen]);
+
+  const handleOpenProfileMenu = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
 
   const logout = async () => {
     try {
@@ -149,7 +154,10 @@ export default function Nav() {
               >
                 Hello,{" "}
                 <a className="group relative capitalize">
-                  <span className="group-hover:text-primary-1">
+                  <span
+                    className={`group-hover:text-primary-1 ${isProfileMenuOpen ? "text-primary-1" : ""}`}
+                    onClick={handleOpenProfileMenu}
+                  >
                     {userData.name}
                   </span>
                   <div className="absolute right-[-2.5rem] top-0 z-10 h-0 overflow-hidden pt-5 transition-[height] duration-300 ease-in-out group-hover:h-[128px]">

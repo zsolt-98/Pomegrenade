@@ -71,9 +71,9 @@ export default function Goals() {
       <div className="container mx-auto flex max-w-7xl flex-col px-5 2xl:px-0">
         <div className="my-20 w-full">
           <div className="rounded-4xl border-tertiary divide-tertiary bg-secondary-light border-2">
-            <div className="divide-tertiary bg-secondary-light rounded-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
+            <div className="divide-tertiary bg-secondary-light rounded-4xl text-primary-1 flex flex-col justify-between divide-y-2 text-center text-lg font-semibold sm:flex-row sm:divide-x-2 sm:divide-y-0">
               {isloading ? (
-                <div className=""></div>
+                <div className="">Loading...</div>
               ) : (
                 <>
                   <GoalsTable
