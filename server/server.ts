@@ -14,17 +14,20 @@ const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 
-const allowedOrigins =
-  process.env.NODE_ENV === "production"
-    ? [
-        process.env.FRONTEND_URL ||
-          "https://pomegrenade-production-b9ea.up.railway.app",
-      ]
-    : ["http://localhost:5173"];
+let allowedOrigins: string[] = ["http://localhost:5173"];
+
+if (process.env.NODE_ENV === "production" && process.env.FRONTEND_URL) {
+  allowedOrigins = [process.env.FRONTEND_URL];
+}
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 
 // API endpoints
 app.get("/", (req, res) => res.send("API is Working Now"));
