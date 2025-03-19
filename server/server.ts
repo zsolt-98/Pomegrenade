@@ -17,7 +17,11 @@ connectDB();
 let allowedOrigins: string[] = ["http://localhost:5173"];
 
 if (process.env.NODE_ENV === "production" && process.env.FRONTEND_URL) {
-  allowedOrigins = [process.env.FRONTEND_URL];
+  allowedOrigins = [
+    process.env.FRONTEND_URL,
+    "https://pomegrenade.xyz",
+    "https://www.pomegrenade.xyz",
+  ];
 }
 
 app.use(express.json());
