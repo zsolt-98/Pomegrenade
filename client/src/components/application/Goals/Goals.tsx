@@ -68,7 +68,7 @@ export default function Goals() {
 
   return (
     <main className="bg-tertiary-light relative w-full flex-grow items-center justify-center overflow-hidden">
-      <div className="container mx-auto flex max-w-7xl flex-col">
+      <div className="container mx-auto flex max-w-7xl flex-col px-5">
         <div className="my-20 w-full">
           <div className="rounded-4xl border-tertiary divide-tertiary bg-secondary-light border-2">
             <div className="divide-tertiary bg-secondary-light rounded-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
