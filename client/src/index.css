@@ -33,6 +33,7 @@ a {
   --color-tertiary-light: #e1f4f4;
 
   --breakpoint-3xl: 112rem;
+  --text-md: 1rem;
 }
 
 /* ShadCN */

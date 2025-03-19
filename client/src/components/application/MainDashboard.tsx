@@ -25,7 +25,7 @@ function DashboardHeadings({
           key={item.heading}
           className="flex w-[50%] flex-col gap-2 py-2 leading-none"
         >
-          <h4 className="">{item.heading}</h4>
+          <h4 className="text-lg leading-3">{item.heading}</h4>
           <p className="text-tertiary">{item.value} cal</p>
         </div>
       ))}
