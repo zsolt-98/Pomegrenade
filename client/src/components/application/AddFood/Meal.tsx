@@ -17,6 +17,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
   const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
     useLogFood();
   const [isOpen, setIsOpen] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
   useEffect(() => {
     loadUserFoods();
@@ -33,6 +34,14 @@ export default function Meal({ mealTypeHeading }: MealProps) {
       );
     }, 0);
   }, [mealFoods]);
+
+  const handleItemClick = (foodId: string) => {
+    if (activeItem === foodId) {
+      setActiveItem(null);
+    } else {
+      setActiveItem(foodId);
+    }
+  };
 
   return (
     <div className="bg-secondary-light flex flex-col">
@@ -63,34 +72,53 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                   food.servings,
                 );
                 const dropdownId = food.food_id;
+                const isActive = activeItem === dropdownId;
+
                 return (
                   <li
                     key={food.food_id}
-                    className="hover:bg-secondary-light-2 group relative flex cursor-pointer flex-col overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg"
+                    className={`hover:bg-secondary-light-2 group relative flex cursor-pointer flex-col overflow-hidden px-4 py-2 first:hover:rounded-t-lg last:hover:rounded-b-lg ${
+                      isActive
+                        ? "bg-secondary-light-2 first:rounded-t-lg last:rounded-b-lg"
+                        : ""
+                    }`}
+                    onClick={() => handleItemClick(dropdownId)}
                   >
                     <div className="flex justify-between">
                       <span className="text-tertiary font-medium">
                         {food.food_name} ({displayAmount})
                       </span>
                       <div className="flex items-center">
-                        <span className="text-tertiary font-medium transition-transform duration-300 ease-in-out group-hover:translate-x-[-105px]">
+                        <span
+                          className={`text-tertiary font-medium transition-transform duration-300 ease-in-out ${
+                            isActive ? "translate-x-[-105px]" : ""
+                          }`}
+                        >
                           {calories.toFixed(0)}
                         </span>
-                        <div className="absolute right-2 flex translate-x-full transform gap-2 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:opacity-100">
+                        <div
+                          className={`absolute right-2 flex transform gap-2 transition-all duration-300 ease-in-out ${
+                            isActive
+                              ? "translate-x-0 opacity-100"
+                              : "translate-x-full opacity-0"
+                          }`}
+                        >
                           <Button
                             className="rounded-4xl text-tertiary hover:text-primary-1-light hover:bg-tertiary border-tertiary h-auto border-2 bg-transparent px-1.5 py-0.5"
                             disabled={isOpen === dropdownId}
-                            onClick={() =>
+                            onClick={(e) => {
+                              e.stopPropagation();
                               setIsOpen(
                                 isOpen === dropdownId ? null : dropdownId,
-                              )
-                            }
+                              );
+                            }}
                           >
                             Edit
                           </Button>
                           <Button
                             className="rounded-4xl border-primary-1 hover:bg-primary-1 hover:text-primary-1-light text-primary-1 h-auto border-2 bg-transparent px-1.5 py-0.5"
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               if (food._id) {
                                 deleteFood(food._id);
                               }
