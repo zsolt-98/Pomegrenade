@@ -45,7 +45,7 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
       <DropdownMenuContent
         onAnimationEnd={resetAddFoodState}
         align="end"
-        className="w-120 bg-tertiary-light border-tertiary border-2 p-0"
+        className="sm:w-120 bg-tertiary-light border-tertiary w-[calc(100vw-3.75rem)] border-2 p-0"
       >
         <div
           className="flex transition-transform duration-300 ease-in-out"
