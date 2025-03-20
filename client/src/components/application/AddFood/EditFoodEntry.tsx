@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { Food } from "@/types";
 import { useState } from "react";
@@ -8,9 +7,10 @@ import { MacrosPieChart } from "./MacrosPieChart";
 type EditFoodEntryProps = {
   food: Food;
   onClose: () => void;
+  isActive: boolean;
 };
 
-export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
+export function EditFoodEntry({ food, onClose, isActive }: EditFoodEntryProps) {
   const { updateFood } = useLogFood();
   const [servings, setServings] = useState(food.servings);
 
@@ -62,21 +62,21 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
           legendWrapperStyle={{ left: "0%" }}
         />
       </div>
-      <div className="flex items-center justify-end gap-2">
-        <Button
+      <div className="flex items-center justify-end gap-1 sm:gap-2">
+        <button
           type="button"
-          className="bg-tertiary-light border-tertiary text-tertiary rounded-4xl h-auto border px-3 py-1"
+          className="border-tertiary text-tertiary sm:text-md rounded-4xl h-[26px] border bg-transparent px-2 py-0.5 text-sm font-medium sm:h-[28px]"
           onClick={onClose}
         >
           Cancel
-        </Button>
-        <Button
+        </button>
+        <button
           type="button"
-          className="bg-tertiary rounded-4xl text-tertiary-light h-auto px-3 py-1"
+          className={`bg-tertiary rounded-4xl ${isActive ? "text-primary-1-light" : "text-tertiary-light"} sm:text-md h-[26px] px-2 py-0.5 text-sm font-medium sm:h-[28px]`}
           onClick={handleUpdate}
         >
           Update
-        </Button>
+        </button>
       </div>
     </div>
   );

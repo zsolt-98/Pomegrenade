@@ -138,6 +138,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                           <EditFoodEntry
                             food={food}
                             onClose={() => setIsOpen(null)}
+                            isActive={isActive}
                           />
                         </div>
                       </div>
