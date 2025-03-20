@@ -71,7 +71,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                   food.food_description || "",
                   food.servings,
                 );
-                const dropdownId = food.food_id;
+                const dropdownId = `${food.food_id}-${food._id}`;
                 const isActive = activeItem === dropdownId;
 
                 return (
