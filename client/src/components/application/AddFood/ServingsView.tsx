@@ -3,6 +3,7 @@ import { useLogFood } from "@/context/application/LogFoodContext";
 import { useState } from "react";
 import { useNutritionCalculator } from "../hooks/useNutritionCalculator";
 import { MacrosPieChart } from "./MacrosPieChart";
+import { useMediaQuery } from "react-responsive";
 
 export function ServingsView() {
   const {
@@ -13,6 +14,7 @@ export function ServingsView() {
     currentMealType,
   } = useLogFood();
   const [servings, setServings] = useState(1);
+  const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
 
   const { servingSize } = useNutritionCalculator(selectedFood, servings);
 
@@ -65,7 +67,9 @@ export function ServingsView() {
           outerRadius={55}
           labelClassName="text-md"
           legendAlign="right"
-          legendWrapperStyle={{ right: "17%" }}
+          legendWrapperStyle={
+            isUnderSmScreen ? { right: "0%" } : { right: "17%" }
+          }
         />
       </div>
       <div className="flex items-center justify-end">
