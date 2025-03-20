@@ -36,7 +36,11 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
   };
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={handleAddFoodDropdown}>
+    <DropdownMenu
+      modal={false}
+      open={isOpen}
+      onOpenChange={handleAddFoodDropdown}
+    >
       <DropdownMenuTrigger asChild>
         <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent">
           Add food
