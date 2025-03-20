@@ -40,8 +40,9 @@ export const register = async (req: Request, res: Response) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
-      domain: ".pomegrenade.xyz",
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "none",
+      domain:
+        process.env.NODE_ENV === "production" ? ".pomegrenade.xyz" : undefined,
       maxAge: 24 * 60 * 60 * 1000,
       path: "/",
     });
@@ -93,8 +94,9 @@ export const login = async (req: Request, res: Response) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
-      domain: ".pomegrenade.xyz",
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "none",
+      domain:
+        process.env.NODE_ENV === "production" ? ".pomegrenade.xyz" : undefined,
       maxAge: 24 * 60 * 60 * 1000,
       path: "/",
     });
@@ -110,8 +112,9 @@ export const logout = async (req: Request, res: Response) => {
     res.clearCookie("token", {
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
-      domain: ".pomegrenade.xyz",
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "none",
+      domain:
+        process.env.NODE_ENV === "production" ? ".pomegrenade.xyz" : undefined,
       path: "/",
     });
 
