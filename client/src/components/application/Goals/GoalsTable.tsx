@@ -274,7 +274,7 @@ export default function GoalsTable({ data, refetchGoals }: GoalsTableProps) {
             <DialogTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
               Edit
             </DialogTrigger>
-            <DialogContent className="bg-secondary-light text-primary-1 border-tertiary border-3">
+            <DialogContent className="bg-secondary-light text-primary-1 border-tertiary border-3 rounded-lg max-sm:w-[calc(100vw-2.5rem)]">
               <DialogHeader>
                 <DialogTitle className="border-b-1 border-tertiary pb-2 text-2xl">
                   Edit goals
