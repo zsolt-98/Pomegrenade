@@ -93,6 +93,7 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         (sum, value: number | string) => {
           return sum + (value === "" ? 0 : Number(value));
         },
+        0,
       );
       setTotalPercentage(total);
     }
