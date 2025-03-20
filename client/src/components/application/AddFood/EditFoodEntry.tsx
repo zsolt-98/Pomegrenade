@@ -49,7 +49,7 @@ export function EditFoodEntry({ food, onClose }: EditFoodEntryProps) {
           />
         </div>
       </div>
-      <div className="min-w-85">
+      <div className="sm:min-w-85 w-full">
         <MacrosPieChart
           food={food}
           servings={servings}

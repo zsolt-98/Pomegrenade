@@ -134,7 +134,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                     </div>
                     {isOpen === dropdownId && (
                       <div className="flex justify-center pt-2 sm:justify-end">
-                        <div className="border-1 border-tertiary rounded-lg p-2">
+                        <div className="border-1 border-tertiary rounded-lg p-2 max-sm:w-full">
                           <EditFoodEntry
                             food={food}
                             onClose={() => setIsOpen(null)}
