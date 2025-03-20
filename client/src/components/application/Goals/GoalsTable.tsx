@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import {
   calculateMacroPercentages,
   calculateMacrosInGrams,
-  calculateTotalPercentage,
   defaultMacroPercentages,
 } from "../utils/nutritionUtils";
 
@@ -90,7 +89,12 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
 
   useEffect(() => {
     if (isNutritionGoals) {
-      setTotalPercentage(calculateTotalPercentage(percentages));
+      const total = Object.values(percentages).reduce(
+        (sum, value: number | string) => {
+          return sum + (value === "" ? 0 : Number(value));
+        },
+      );
+      setTotalPercentage(total);
     }
   }, [percentages, isNutritionGoals]);
 
@@ -154,12 +158,9 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
   ) => {
     if (!isNutritionGoals) return;
 
-    const newValue = Number(value);
-    if (newValue < 0) return;
-
     setPercentages((prev) => ({
       ...prev,
-      [macro]: newValue,
+      [macro]: value === "" ? "" : Number(value) < 0 ? 0 : Number(value),
     }));
   };
 
