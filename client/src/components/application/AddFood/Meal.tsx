@@ -77,14 +77,14 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                 return (
                   <li
                     key={food.food_id}
-                    className={`hover:bg-secondary-light-2 group relative flex h-[34px] cursor-pointer flex-col overflow-hidden px-1 py-1.5 first:hover:rounded-t-lg last:hover:rounded-b-lg sm:h-auto sm:px-4 sm:py-2 ${
+                    className={`hover:bg-secondary-light-2 group relative flex min-h-[34px] cursor-pointer flex-col overflow-hidden px-1 py-1.5 first:hover:rounded-t-lg last:hover:rounded-b-lg sm:h-auto sm:px-4 sm:py-2 ${
                       isActive
                         ? "bg-secondary-light-2 first:rounded-t-lg last:rounded-b-lg"
                         : ""
                     }`}
                     onClick={() => handleItemClick(dropdownId)}
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex h-full items-center justify-between">
                       <span className="text-tertiary text-sm font-medium sm:text-lg">
                         {food.food_name} ({displayAmount})
                       </span>
@@ -133,7 +133,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
                       </div>
                     </div>
                     {isOpen === dropdownId && (
-                      <div className="flex justify-end pt-2">
+                      <div className="flex justify-center pt-2 sm:justify-end">
                         <div className="border-1 border-tertiary rounded-lg p-2">
                           <EditFoodEntry
                             food={food}
