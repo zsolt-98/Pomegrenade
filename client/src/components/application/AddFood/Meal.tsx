@@ -36,7 +36,7 @@ export default function Meal({ mealTypeHeading }: MealProps) {
   }, [mealFoods]);
 
   const handleItemClick = (foodId: string) => {
-    if (activeItem === foodId) {
+    if (activeItem === foodId && !isOpen) {
       setActiveItem(null);
     } else {
       setActiveItem(foodId);
