@@ -239,11 +239,11 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         </div>
       )}
       <div className="flex justify-end gap-2">
-        <DialogClose className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+        <DialogClose className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent px-3 py-1.5 text-sm font-medium">
           Cancel
         </DialogClose>
         <Button
-          className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5"
+          className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent px-3 py-1.5 text-sm font-medium"
           onClick={handleUpdate}
           disabled={isLoading || (isNutritionGoals && totalPercentage !== 100)}
         >
@@ -271,7 +271,7 @@ export default function GoalsTable({ data, refetchGoals }: GoalsTableProps) {
         </div>
         <div className="mt-5 flex justify-end">
           <Dialog>
-            <DialogTrigger className="bg-tertiary rounded-4xl text-tertiary-light px-3 py-1.5">
+            <DialogTrigger className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent px-3 py-1.5 text-sm font-medium">
               Edit
             </DialogTrigger>
             <DialogContent className="bg-secondary-light text-primary-1 border-tertiary border-3 rounded-lg max-sm:w-[calc(100vw-2.5rem)]">
