@@ -10,9 +10,9 @@ interface AppContextType {
   setIsLoggedin: (value: boolean) => void;
   isAuthLoading: boolean;
 
-  userData: false | { name: string; isAccountVerified: boolean };
+  userData: false | { name: string; email: string; isAccountVerified: boolean };
   setUserData: (
-    value: false | { name: string; isAccountVerified: boolean },
+    value: false | { name: string; email: string; isAccountVerified: boolean },
   ) => void;
   getUserData: () => void;
 }
@@ -36,7 +36,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [userData, setUserData] = useState<
-    false | { name: string; isAccountVerified: boolean }
+    false | { name: string; email: string; isAccountVerified: boolean }
   >(false);
 
   const getAuthState = async () => {
