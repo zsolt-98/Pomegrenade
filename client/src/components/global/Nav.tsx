@@ -192,12 +192,12 @@ export default function Nav() {
                           Verfiy email
                         </button>
                       )}
-                      <button
-                        // onClick={logout}
+                      <Link
+                        to="user"
                         className="text-tertiary-light hover:text-primary-1 mx-2 my-1"
                       >
                         My profile
-                      </button>
+                      </Link>
                       <button
                         onClick={logout}
                         className="text-tertiary-light hover:text-primary-1 mx-2 my-1"
