@@ -9,6 +9,7 @@ import { AppContext } from "../../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useResendOtp } from "../authentication/hooks/useResendOtp";
+import { MouseEvent } from "react";
 
 function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   const navigate = useNavigate();
@@ -25,11 +26,12 @@ function ButtonHollowPillNav({ children, navigateTo }: ButtonHollowPillProps) {
   );
 }
 
-interface NavbarLinksProps {
+type NavbarLinksProps = {
   className: string;
-}
+  handleLinkClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
+};
 
-function NavbarLinks({ className }: NavbarLinksProps) {
+function NavbarLinks({ className, handleLinkClick }: NavbarLinksProps) {
   const { isLoggedin } = useContext(AppContext);
   const location = useLocation();
   const isHomepageRoute = location.pathname === "/";
@@ -38,20 +40,29 @@ function NavbarLinks({ className }: NavbarLinksProps) {
     <div
       className={`${className || ""} ${!isLoggedin && isHomepageRoute ? "text-secondary-light" : "text-tertiary-light"} [&>a]:hover:text-primary-1 text-xl`}
     >
-      {/* TODO: change  */}
       {!isLoggedin ? (
         <>
-          <a className="" href="#process">
+          <a className="" href="#process" onClick={handleLinkClick}>
             Process
           </a>
-          <a href="#reviews">Reviews</a>
-          <a href="#help">Help</a>
+          <a href="#reviews" onClick={handleLinkClick}>
+            Reviews
+          </a>
+          <a href="#help" onClick={handleLinkClick}>
+            Help
+          </a>
         </>
       ) : (
         <>
-          <Link to="/">Dashboard</Link>
-          <Link to="goals">Goals</Link>
-          <Link to="help">Help</Link>
+          <Link onClick={handleLinkClick} to="/">
+            Dashboard
+          </Link>
+          <Link onClick={handleLinkClick} to="goals">
+            Goals
+          </Link>
+          <Link onClick={handleLinkClick} to="help">
+            Help
+          </Link>
         </>
       )}
     </div>
@@ -82,6 +93,12 @@ export default function Nav() {
 
   const handleOpenProfileMenu = () => {
     setIsProfileMenuOpen((prevState) => !prevState);
+  };
+
+  const handleLinkClick = () => {
+    if (isNavMenuOpen) {
+      setisNavMenuOpen(false);
+    }
   };
 
   const logout = async () => {
@@ -131,7 +148,7 @@ export default function Nav() {
                 )}
               </button>
             )}
-            <Link to="/" className="">
+            <Link to="/" className="" onClick={handleLinkClick}>
               <img
                 src={
                   !isLoggedin && isHomepageRoute
@@ -144,7 +161,10 @@ export default function Nav() {
             </Link>
           </div>
           {!isUnderMDScreen && (
-            <NavbarLinks className="flex gap-10 lg:gap-20" />
+            <NavbarLinks
+              handleLinkClick={handleLinkClick}
+              className="flex gap-10 lg:gap-20"
+            />
           )}
 
           {userData ? (
@@ -204,7 +224,10 @@ export default function Nav() {
           }`}
         >
           <div className="px-5 py-4">
-            <NavbarLinks className="flex flex-col gap-4" />
+            <NavbarLinks
+              className="flex flex-col gap-4"
+              handleLinkClick={handleLinkClick}
+            />
           </div>
         </div>
       </nav>
