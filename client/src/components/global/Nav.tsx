@@ -174,7 +174,7 @@ export default function Nav() {
               >
                 Hello,{" "}
                 <a
-                  className={`relative ${isProfileMenuOpen ? "text-primary-1" : ""}`}
+                  className={`hover:text-primary-1 relative ${isProfileMenuOpen ? "text-primary-1" : ""}`}
                   onClick={handleOpenProfileMenu}
                 >
                   {userData.name}
