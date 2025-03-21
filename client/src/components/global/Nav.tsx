@@ -81,7 +81,7 @@ export default function Nav() {
   }, [isUnderMDScreen]);
 
   const handleOpenProfileMenu = () => {
-    setIsProfileMenuOpen(!isProfileMenuOpen);
+    setIsProfileMenuOpen((prevState) => !prevState);
   };
 
   const logout = async () => {
@@ -153,19 +153,19 @@ export default function Nav() {
                 className={`${!isLoggedin ? "text-secondary-light" : "text-tertiary-light"} text-lg`}
               >
                 Hello,{" "}
-                <a className="group relative capitalize">
-                  <span
-                    className={`group-hover:text-primary-1 ${isProfileMenuOpen ? "text-primary-1" : ""}`}
-                    onClick={handleOpenProfileMenu}
+                <a
+                  className={`relative ${isProfileMenuOpen ? "text-primary-1" : ""}`}
+                  onClick={handleOpenProfileMenu}
+                >
+                  {userData.name}
+                  <div
+                    className={`absolute right-[-1.22rem] top-0 z-10 overflow-hidden pt-5 transition-[height] duration-300 ease-in-out lg:right-[-2.5rem] ${isProfileMenuOpen ? "h-[128px]" : "h-0"} `}
                   >
-                    {userData.name}
-                  </span>
-                  <div className="absolute right-[-2.5rem] top-0 z-10 h-0 overflow-hidden pt-5 transition-[height] duration-300 ease-in-out group-hover:h-[128px]">
                     <div className="bg-tertiary rounded-b-4xl w-39.5 m-0 flex list-none flex-col items-start text-nowrap p-2 text-sm">
                       {!userData.isAccountVerified && (
                         <button
                           type="button"
-                          className="hover:text-primary-1 hover:border-tertiary mx-2 my-1 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                          className="text-tertiary-light hover:text-primary-1 mx-2 my-1"
                           disabled={isResending}
                           onClick={handleResendOtp}
                         >
@@ -174,13 +174,13 @@ export default function Nav() {
                       )}
                       <button
                         // onClick={logout}
-                        className="hover:text-primary-1 hover:border-tertiary mx-2 my-1 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                        className="text-tertiary-light hover:text-primary-1 mx-2 my-1"
                       >
                         My profile
                       </button>
                       <button
                         onClick={logout}
-                        className="hover:text-primary-1 hover:border-tertiary mx-2 my-1 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+                        className="text-tertiary-light hover:text-primary-1 mx-2 my-1"
                       >
                         Log out
                       </button>
