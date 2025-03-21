@@ -8,7 +8,7 @@ export default function User() {
 
   useEffect(() => {
     if (!isAuthLoading && !isLoggedin) {
-      navigate("/");
+      navigate("/login");
     }
   });
 
