@@ -8,6 +8,8 @@ interface AppContextType {
   backendUrl: string;
   isLoggedin: boolean;
   setIsLoggedin: (value: boolean) => void;
+  isAuthLoading: boolean;
+
   userData: false | { name: string; isAccountVerified: boolean };
   setUserData: (
     value: false | { name: string; isAccountVerified: boolean },
@@ -20,6 +22,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const defaultContextValue: AppContextType = {
   backendUrl,
   isLoggedin: false,
+  isAuthLoading: true,
   setIsLoggedin: () => {},
   userData: false,
   setUserData: () => {},
@@ -31,12 +34,14 @@ export const AppContext = createContext<AppContextType>(defaultContextValue);
 export const AppContextProvider = ({ children }: PropsWithChildren) => {
   axios.defaults.withCredentials = true;
   const [isLoggedin, setIsLoggedin] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [userData, setUserData] = useState<
     false | { name: string; isAccountVerified: boolean }
   >(false);
 
   const getAuthState = async () => {
     try {
+      setIsAuthLoading(true);
       const { data } = await axios.get(backendUrl + "/api/auth/is-auth");
       if (data.success) {
         setIsLoggedin(true);
@@ -45,6 +50,8 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     } catch (error) {
       console.log(error); // Temporary
       toast.error("An error has occurred.");
+    } finally {
+      setIsAuthLoading(false);
     }
   };
 
@@ -66,6 +73,7 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     backendUrl,
     isLoggedin,
     setIsLoggedin,
+    isAuthLoading,
     userData,
     setUserData,
     getUserData,

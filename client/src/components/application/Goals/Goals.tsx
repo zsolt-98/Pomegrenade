@@ -12,7 +12,7 @@ type GoalsResponse = {
 };
 
 export default function Goals() {
-  const { backendUrl, isLoggedin } = useContext(AppContext);
+  const { backendUrl, isLoggedin, isAuthLoading } = useContext(AppContext);
   const [goals, setGoals] = useState<GoalsResponse | null>(null);
   const [isloading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -31,10 +31,11 @@ export default function Goals() {
   };
 
   useEffect(() => {
-    if (!isLoggedin) {
+    console.log("Login state:", isLoggedin);
+    if (!isLoggedin && !isAuthLoading) {
       navigate("/");
     }
-  }, [isLoggedin, navigate]);
+  }, [isLoggedin, navigate, isAuthLoading]);
 
   const fetchGoals = useCallback(async () => {
     try {
