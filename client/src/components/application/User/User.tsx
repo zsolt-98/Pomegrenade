@@ -1,6 +1,7 @@
 import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import { AppContext } from "@/context/AppContext";
+import { Camera } from "lucide-react";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 
@@ -20,7 +21,11 @@ export default function User() {
         <div className="my-20 flex w-full flex-col gap-5">
           <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10">
             <div className="flex flex-col items-center gap-5">
-              <div className="w-50 h-50 rounded-full bg-amber-500"></div>
+              <div className="w-50 h-50 relative rounded-full bg-amber-500">
+                <button className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-0 right-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2">
+                  <Camera className="stroke-tertiary group-hover:stroke-tertiary-light" />
+                </button>
+              </div>
               <div className="bg-tertiary h-[2px] w-full"></div>
               <div className="[&>a]:hover:text-primary-1 text-tertiary flex flex-col font-medium">
                 <a className="">About us</a>
