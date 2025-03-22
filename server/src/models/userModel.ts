@@ -4,6 +4,10 @@ interface User extends Document {
   name: string;
   email: string;
   password: string;
+  profilePhoto?: {
+    data: string;
+    contentType: string;
+  };
   verifyOtp?: string;
   lastVerifyOtpSentAt?: number;
   verifyOtpExpireAt?: number;
@@ -17,6 +21,10 @@ const userSchema = new Schema<User>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  profilePhoto: {
+    data: String,
+    contentType: String,
+  },
   verifyOtp: { type: String, default: "" },
   lastVerifyOtpSentAt: { type: Number, default: 0 },
   verifyOtpExpireAt: { type: Number, default: 0 },

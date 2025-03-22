@@ -59,7 +59,7 @@ export const register = async (req: Request, res: Response) => {
 
     return res.json({ success: true, message: "Successful registration" });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 
@@ -103,7 +103,7 @@ export const login = async (req: Request, res: Response) => {
 
     return res.json({ success: true, message: "Successful log in" });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 
@@ -120,7 +120,7 @@ export const logout = async (req: Request, res: Response) => {
 
     return res.json({ success: true, message: "Logged Out" });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 
@@ -179,7 +179,7 @@ export const sendVerifyOtp = async (req: Request, res: Response) => {
       message: "6-digit verification code sent to your email address",
     });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 

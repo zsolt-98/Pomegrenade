@@ -43,7 +43,7 @@ export const addFoodEntry = async (req: Request, res: Response) => {
       foodEntry: newFoodEntry,
     });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 
@@ -65,7 +65,7 @@ export const getUserFoodEntries = async (req: Request, res: Response) => {
       foodEntries: entries,
     });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 
@@ -104,7 +104,7 @@ export const deleteFoodEntry = async (req: Request, res: Response) => {
       message: "Food entry deleted successfully",
     });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
 
@@ -147,6 +147,6 @@ export const updateFoodEntry = async (req: Request, res: Response) => {
       foodEntry: entry,
     });
   } catch (error) {
-    res.json({ success: false, message: (error as Error).message });
+    return res.json({ success: false, message: (error as Error).message });
   }
 };
