@@ -2,7 +2,7 @@ import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import { AppContext } from "@/context/AppContext";
 import axios from "axios";
-import { Camera } from "lucide-react";
+import { Camera, Loader2 } from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -13,11 +13,13 @@ export default function User() {
   const { backendUrl } = useContext(AppContext);
   const [profilePhotoUrl, setProfilePhotoUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const [isFetchingPhoto, setIsFetchingPhoto] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // TODO: Implement case where the photo hasn't been uploaded yet
     const fetchProfilePhoto = async () => {
+      setIsFetchingPhoto(true);
       try {
         const { data } = await axios.get(
           `${backendUrl}/api/user/profile-photo`,
@@ -27,6 +29,8 @@ export default function User() {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsFetchingPhoto(false);
       }
     };
 
@@ -96,19 +100,26 @@ export default function User() {
         <div className="my-20 flex w-full flex-col gap-5">
           <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10">
             <div className="flex flex-col items-center gap-5">
-              <div className="w-50 h-50 relative rounded-full bg-amber-500">
-                <img
-                  src={profilePhotoUrl}
-                  alt="Profile photo"
-                  className="h-full w-full rounded-full object-cover"
-                />
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileUpload}
-                  accept="image/*"
-                  className="hidden"
-                />
+              <div className="w-50 h-50 bg-tertiary-light relative rounded-full">
+                {isFetchingPhoto && (
+                  <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
+                )}
+                {profilePhotoUrl && (
+                  <>
+                    <img
+                      src={profilePhotoUrl}
+                      alt="Profile photo"
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileUpload}
+                      accept="image/*"
+                      className="hidden"
+                    />
+                  </>
+                )}
                 <button
                   className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-0 right-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2"
                   onClick={handleUploadClick}

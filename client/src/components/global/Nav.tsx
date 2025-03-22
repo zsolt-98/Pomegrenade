@@ -173,8 +173,8 @@ export default function Nav() {
                 className={`${!isLoggedin ? "text-secondary-light" : "text-tertiary-light"} text-lg`}
               >
                 Hello,{" "}
-                <a
-                  className={`hover:text-primary-1 relative ${isProfileMenuOpen ? "text-primary-1" : ""}`}
+                <div
+                  className={`hover:text-primary-1 relative inline ${isProfileMenuOpen ? "text-primary-1" : ""}`}
                   onClick={handleOpenProfileMenu}
                 >
                   {userData.name}
@@ -206,7 +206,7 @@ export default function Nav() {
                       </button>
                     </div>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
           ) : (
