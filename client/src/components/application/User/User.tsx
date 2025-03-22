@@ -1,19 +1,72 @@
 import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import { AppContext } from "@/context/AppContext";
+import axios from "axios";
 import { Camera } from "lucide-react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function User() {
   const { isLoggedin, isAuthLoading, userData } = useContext(AppContext);
   const navigate = useNavigate();
+  const { backendUrl } = useContext(AppContext);
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (!isAuthLoading && !isLoggedin) {
       navigate("/login");
     }
   });
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select an image file");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("File size must be less than 5MB");
+      return;
+    }
+
+    try {
+      setIsUploading(true);
+      const base64 = await fileToBase64(file);
+
+      const { data } = await axios.post(
+        `${backendUrl}/api/user/profile-photo`,
+        { image: base64, fileType: file.type },
+      );
+
+      if (data.success) {
+        setProfilePhotoUrl(base64);
+        toast.success("Profile photo updated successfully");
+      } else {
+        toast.error(data.message || "Failed to upload profile photo");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error has occurred.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // TODO:
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
