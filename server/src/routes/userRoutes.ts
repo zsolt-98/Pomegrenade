@@ -10,12 +10,7 @@ const userRouter = express.Router();
 
 userRouter.get("/data", userAuth, getUserData);
 
-userRouter.post(
-  "/profile-photo",
-  express.json({ limit: "10mb" }),
-  userAuth,
-  uploadProfilePhoto,
-);
+userRouter.post("/profile-photo", userAuth, uploadProfilePhoto);
 userRouter.get("/profile-photo", userAuth, getProfilePhoto);
 
 export default userRouter;

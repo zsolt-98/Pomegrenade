@@ -13,13 +13,35 @@ export default function User() {
   const { backendUrl } = useContext(AppContext);
   const [profilePhotoUrl, setProfilePhotoUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    // TODO: Implement case where the photo hasn't been uploaded yet
+    const fetchProfilePhoto = async () => {
+      try {
+        const { data } = await axios.get(
+          `${backendUrl}/api/user/profile-photo`,
+        );
+        if (data.success && data.profilePhoto) {
+          setProfilePhotoUrl(data.profilePhoto);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (!isAuthLoading && !isLoggedin) {
       navigate("/login");
+    } else if (isLoggedin) {
+      fetchProfilePhoto();
     }
-  });
+  }, [isAuthLoading, isLoggedin, navigate, backendUrl]);
+
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -75,7 +97,23 @@ export default function User() {
           <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10">
             <div className="flex flex-col items-center gap-5">
               <div className="w-50 h-50 relative rounded-full bg-amber-500">
-                <button className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-0 right-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2">
+                <img
+                  src={profilePhotoUrl}
+                  alt="Profile photo"
+                  className="h-full w-full rounded-full object-cover"
+                />
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  accept="image/*"
+                  className="hidden"
+                />
+                <button
+                  className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-0 right-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2"
+                  onClick={handleUploadClick}
+                  disabled={isUploading}
+                >
                   <Camera className="stroke-tertiary group-hover:stroke-secondary-light" />
                 </button>
               </div>
