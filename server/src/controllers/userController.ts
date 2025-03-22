@@ -53,3 +53,34 @@ export const uploadProfilePhoto = async (req: Request, res: Response) => {
     return res.json({ success: false, message: (error as Error).message });
   }
 };
+
+export const getProfilePhoto = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.body;
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    if (!user.profilePhoto || !user.profilePhoto.data) {
+      return res.json({
+        success: false,
+        message: "No profile photo found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      profilePhoto: user.profilePhoto.data,
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: (error as Error).message,
+    });
+  }
+};
