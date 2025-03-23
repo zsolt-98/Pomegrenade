@@ -100,7 +100,7 @@ export default function User() {
         <div className="my-20 flex flex-col gap-5 lg:w-full">
           <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10 max-lg:h-auto max-lg:flex-col max-lg:p-5">
             <div className="flex flex-col items-center gap-5">
-              <div className="w-50 h-50 bg-tertiary-light relative rounded-full">
+              <div className="w-50 h-50 border-tertiary bg-tertiary-light relative rounded-full border-2">
                 {isFetchingPhoto && (
                   <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
                 )}
