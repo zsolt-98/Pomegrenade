@@ -2,13 +2,7 @@ import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import { AppContext } from "@/context/AppContext";
 import axios from "axios";
-import {
-  Camera,
-  CircleUser,
-  CircleUserRound,
-  Loader2,
-  UserRound,
-} from "lucide-react";
+import { Camera, CircleUserRound, Loader2 } from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -104,7 +98,7 @@ export default function User() {
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col px-5 2xl:px-0">
         <div className="my-20 flex w-full flex-col gap-5">
-          <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10">
+          <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10 max-lg:h-auto max-lg:flex-col max-lg:p-5">
             <div className="flex flex-col items-center gap-5">
               <div className="w-50 h-50 bg-tertiary-light relative rounded-full">
                 {isFetchingPhoto && (
@@ -141,14 +135,14 @@ export default function User() {
                   <Camera className="stroke-tertiary group-hover:stroke-secondary-light" />
                 </button>
               </div>
-              <div className="bg-tertiary h-[2px] w-full"></div>
+              <div className="bg-tertiary h-[2px] w-full max-xl:h-[1px]"></div>
               <div className="[&>a]:hover:text-primary-1 text-tertiary flex flex-col font-medium">
                 <a className="">About us</a>
                 <a className="">Contact us</a>
                 <a className="">Help center</a>
               </div>
             </div>
-            <div className="bg-tertiary h-full w-[2px]"></div>
+            <div className="bg-tertiary max-lg:h-[2px] max-lg:w-full lg:h-full lg:w-[1px] xl:w-[2px]"></div>
             <div className="text-primary-1 flex h-full min-w-80 flex-col justify-between gap-10">
               <h3 className="text-2xl font-semibold">Personal information</h3>
               <div className="flex w-full flex-col">
@@ -170,7 +164,7 @@ export default function User() {
                 </div>
               </div>
             </div>
-            <div className="bg-tertiary h-full w-[2px]"></div>
+            <div className="bg-tertiary max-lg:h-[2px] max-lg:w-full lg:h-full lg:w-[1px] xl:w-[2px]"></div>
 
             <div className="text-primary-1 flex h-full flex-col justify-between gap-10">
               <h3 className="text-2xl font-semibold">Password</h3>
