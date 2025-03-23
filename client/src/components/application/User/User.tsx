@@ -111,15 +111,15 @@ export default function User() {
                       alt="Profile photo"
                       className="h-full w-full rounded-full object-cover"
                     />
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handleFileUpload}
-                      accept="image/*"
-                      className="hidden"
-                    />
                   </>
                 )}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  accept="image/*"
+                  className="hidden"
+                />
                 <button
                   className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-0 right-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2"
                   onClick={handleUploadClick}
