@@ -2,7 +2,13 @@ import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import { AppContext } from "@/context/AppContext";
 import axios from "axios";
-import { Camera, Loader2 } from "lucide-react";
+import {
+  Camera,
+  CircleUser,
+  CircleUserRound,
+  Loader2,
+  UserRound,
+} from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -104,6 +110,13 @@ export default function User() {
                 {isFetchingPhoto && (
                   <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
                 )}
+                {!profilePhotoUrl && !isFetchingPhoto && (
+                  <CircleUserRound
+                    className="stroke-tertiary absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    strokeWidth={0.22}
+                    size={237}
+                  />
+                )}
                 {profilePhotoUrl && (
                   <>
                     <img
@@ -121,7 +134,7 @@ export default function User() {
                   className="hidden"
                 />
                 <button
-                  className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-0 right-6 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2"
+                  className="border-tertiary bg-secondary-light right hover:bg-tertiary group absolute bottom-1 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2"
                   onClick={handleUploadClick}
                   disabled={isUploading}
                 >
