@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const registerSchema = yup.object({
+export const updatePersonalInfoSchema = yup.object({
   name: yup
     .string()
     .required("Name is required")
@@ -15,16 +15,8 @@ export const registerSchema = yup.object({
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
       "Invalid email address",
     ),
-
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters long"),
-
-  confirmPassword: yup
-    .string()
-    .required("Please confirm your password")
-    .oneOf([yup.ref("password")], "Passwords do not match"),
 });
 
-export type RegisterFormData = yup.InferType<typeof registerSchema>;
+export type UpdatePersonalInfoFormData = yup.InferType<
+  typeof updatePersonalInfoSchema
+>;
