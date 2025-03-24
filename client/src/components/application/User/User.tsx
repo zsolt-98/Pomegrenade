@@ -16,12 +16,14 @@ export default function User() {
   const [isUploading, setIsUploading] = useState(false);
   const [isFetchingPhoto, setIsFetchingPhoto] = useState(false);
   const [name, setName] = useState("");
-  const [isUpdatingName, setIsUpdatingName] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isUpdatingPersonalInfo, setIsUpdatingPersonalInfo] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (userData) {
       setName(userData.name);
+      setEmail(userData.email);
     }
   }, [userData]);
 
@@ -104,22 +106,26 @@ export default function User() {
 
   const handleNameChange = async () => {
     try {
-      setIsUpdatingName(true);
-      const { data } = await axios.post(`${backendUrl}/api/user/change-name`, {
-        name,
-      });
+      setIsUpdatingPersonalInfo(true);
+      const { data } = await axios.post(
+        `${backendUrl}/api/user/update-personal-info`,
+        {
+          name,
+          email,
+        },
+      );
 
       if (data.success) {
         setUserData(data.userData);
         toast.success(data.message);
       } else {
-        toast.error(data.message || "Failed to update name");
+        toast.error(data.message || "Failed to update personal information");
       }
     } catch (error) {
       console.log(error);
       toast.error("An error has occurred.");
     } finally {
-      setIsUpdatingName(false);
+      setIsUpdatingPersonalInfo(false);
     }
   };
 
@@ -189,6 +195,8 @@ export default function User() {
                   <Input
                     type="email"
                     placeholder={userData ? userData.email : ""}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="mt-5 flex justify-end gap-2">
@@ -198,8 +206,9 @@ export default function User() {
                   <Button
                     className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium"
                     onClick={handleNameChange}
+                    disabled={isUpdatingPersonalInfo}
                   >
-                    Save changes
+                    {isUpdatingPersonalInfo ? "Saving..." : "Save changes"}
                   </Button>
                 </div>
               </div>

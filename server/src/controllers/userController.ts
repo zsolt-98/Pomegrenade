@@ -85,9 +85,17 @@ export const getProfilePhoto = async (req: Request, res: Response) => {
   }
 };
 
-export const changeFirstName = async (req: Request, res: Response) => {
+export const updatePersonalInfo = async (req: Request, res: Response) => {
   try {
-    const { userId, name } = req.body;
+    const { userId, name, email } = req.body;
+
+    if (!name) {
+      return res.json({ success: false, message: "Name is required" });
+    }
+
+    if (!email) {
+      return res.json({ success: false, message: "Email is required" });
+    }
 
     const user = await userModel.findById(userId);
     if (!user) {
@@ -96,16 +104,14 @@ export const changeFirstName = async (req: Request, res: Response) => {
         message: "User not found",
       });
     }
-    if (!name) {
-      return res.json({ success: false, message: "Name is required" });
-    }
 
     user.name = name;
+    user.email = email;
     await user.save();
 
     return res.json({
       success: true,
-      message: "First name updated successfully",
+      message: "Personal information updated successfully",
       userData: {
         name: user.name,
         email: user.email,
