@@ -270,8 +270,8 @@ export default function User() {
             <div className="text-primary-1 flex h-full w-80 flex-col justify-between gap-10 max-sm:w-60">
               <h3 className="text-2xl font-semibold">Password</h3>
               <div className="">
-                <p className="font-medium">Password</p>
-                <Input type="password" value="************" />
+                <p className="font-medium">Password:</p>
+                <Input type="password" placeholder="************" disabled />
                 <div className="flex justify-end">
                   <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light mt-5 rounded-full border-2 bg-transparent text-sm font-medium">
                     Reset password

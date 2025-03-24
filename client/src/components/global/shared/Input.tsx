@@ -5,6 +5,7 @@ interface InputProps {
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  disabled?: boolean;
 }
 
 export default function Input({
@@ -14,6 +15,7 @@ export default function Input({
   value,
   onChange,
   error,
+  disabled = false,
 }: InputProps) {
   return (
     <div className="w-full">
@@ -27,6 +29,7 @@ export default function Input({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
       {error && <span className="text-primary-1 ms-2 text-sm">{error}</span>}
     </div>
