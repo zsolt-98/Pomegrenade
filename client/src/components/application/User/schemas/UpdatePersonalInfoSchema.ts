@@ -4,6 +4,7 @@ export const updatePersonalInfoSchema = yup.object({
   name: yup
     .string()
     .required("Name is required")
+    .matches(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces")
     .min(2, "Name must be at least 2 characters long")
     .max(20, "Name can't be longer than 20 characters")
     .matches(/^[A-Za-z\s]+$/, "Name can only contain letters and spaces"),

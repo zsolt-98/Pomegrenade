@@ -1,11 +1,14 @@
 import Input from "@/components/global/shared/Input";
 import { Button } from "@/components/ui/button";
 import { AppContext } from "@/context/AppContext";
+import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Camera, CircleUserRound, Loader2 } from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { updatePersonalInfoSchema } from "./schemas/UpdatePersonalInfoSchema";
 
 export default function User() {
   const { isLoggedin, isAuthLoading, userData, setUserData } =
@@ -20,12 +23,27 @@ export default function User() {
   const [isUpdatingPersonalInfo, setIsUpdatingPersonalInfo] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const {
+    formState: { errors },
+    setValue,
+    trigger,
+  } = useForm({
+    resolver: yupResolver(updatePersonalInfoSchema),
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  });
+
   useEffect(() => {
     if (userData) {
       setName(userData.name);
       setEmail(userData.email);
+      setValue("name", userData.name);
+      setValue("email", userData.email);
     }
-  }, [userData]);
+  }, [userData, setValue]);
 
   useEffect(() => {
     const fetchProfilePhoto = async () => {
@@ -94,7 +112,6 @@ export default function User() {
     }
   };
 
-  // TODO:
   const fileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -104,7 +121,24 @@ export default function User() {
     });
   };
 
-  const handleNameChange = async () => {
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setName(value);
+    setValue("name", value);
+    trigger("name");
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setValue("email", value);
+    trigger("email");
+  };
+
+  const handleUpdatePersonalInfo = async () => {
+    const isValid = await trigger();
+    if (!isValid) return;
+
     try {
       setIsUpdatingPersonalInfo(true);
       const { data } = await axios.post(
@@ -167,7 +201,11 @@ export default function User() {
                   onClick={handleUploadClick}
                   disabled={isUploading}
                 >
-                  <Camera className="stroke-tertiary group-hover:stroke-secondary-light" />
+                  {isUploading ? (
+                    <Loader2 className="text-tertiary h-5 w-5 animate-spin" />
+                  ) : (
+                    <Camera className="stroke-tertiary group-hover:stroke-secondary-light" />
+                  )}
                 </button>
               </div>
               <div className="bg-tertiary h-[2px] w-full max-xl:h-[1px]"></div>
@@ -178,35 +216,49 @@ export default function User() {
               </div>
             </div>
             <div className="bg-tertiary max-lg:h-[1px] max-lg:w-full lg:h-full lg:w-[1px] xl:w-[2px]"></div>
-            <div className="text-primary-1 flex h-full min-w-80 flex-col justify-between gap-10 max-sm:min-w-60">
+            <div className="text-primary-1 max-sm:w-w-60 flex h-full w-80 flex-col justify-between">
               <h3 className="text-2xl font-semibold">Personal information</h3>
               <div className="flex w-full flex-col">
                 <div className="w-full">
                   <p className="font-medium">First name:</p>
                   <Input
                     type="text"
-                    placeholder={userData ? userData.name : ""}
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={handleNameChange}
+                    error={errors.name?.message}
                   />
                 </div>
                 <div className="mt-5">
                   <p className="font-medium">Email:</p>
                   <Input
                     type="email"
-                    placeholder={userData ? userData.email : ""}
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleEmailChange}
+                    error={errors.email?.message}
                   />
                 </div>
                 <div className="mt-5 flex justify-end gap-2">
-                  <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium">
+                  <Button
+                    type="button"
+                    className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium"
+                    onClick={() => {
+                      if (userData) {
+                        setName(userData.name);
+                        setEmail(userData.email);
+                        setValue("name", userData.name);
+                        setValue("email", userData.email);
+                      }
+                    }}
+                  >
                     Cancel
                   </Button>
                   <Button
+                    type="button"
                     className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium"
-                    onClick={handleNameChange}
-                    disabled={isUpdatingPersonalInfo}
+                    onClick={handleUpdatePersonalInfo}
+                    disabled={
+                      isUpdatingPersonalInfo || !!errors.name || !!errors.email
+                    }
                   >
                     {isUpdatingPersonalInfo ? "Saving..." : "Save changes"}
                   </Button>
@@ -215,7 +267,7 @@ export default function User() {
             </div>
             <div className="bg-tertiary max-lg:h-[1px] max-lg:w-full lg:h-full lg:w-[1px] xl:w-[2px]"></div>
 
-            <div className="text-primary-1 flex h-full min-w-80 flex-col justify-between gap-10 max-sm:min-w-60">
+            <div className="text-primary-1 flex h-full w-80 flex-col justify-between gap-10 max-sm:w-60">
               <h3 className="text-2xl font-semibold">Password</h3>
               <div className="">
                 <p className="font-medium">Password</p>
