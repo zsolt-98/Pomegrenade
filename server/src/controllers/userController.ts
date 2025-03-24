@@ -84,3 +84,38 @@ export const getProfilePhoto = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const changeFirstName = async (req: Request, res: Response) => {
+  try {
+    const { userId, name } = req.body;
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    if (!name) {
+      return res.json({ success: false, message: "Name is required" });
+    }
+
+    user.name = name;
+    await user.save();
+
+    return res.json({
+      success: true,
+      message: "First name updated successfully",
+      userData: {
+        name: user.name,
+        email: user.email,
+        isAccountVerified: user.isAccountVerified,
+      },
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: (error as Error).message,
+    });
+  }
+};

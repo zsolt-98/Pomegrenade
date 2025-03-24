@@ -8,16 +8,24 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 export default function User() {
-  const { isLoggedin, isAuthLoading, userData } = useContext(AppContext);
+  const { isLoggedin, isAuthLoading, userData, setUserData } =
+    useContext(AppContext);
   const navigate = useNavigate();
   const { backendUrl } = useContext(AppContext);
   const [profilePhotoUrl, setProfilePhotoUrl] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [isFetchingPhoto, setIsFetchingPhoto] = useState(false);
+  const [name, setName] = useState("");
+  const [isUpdatingName, setIsUpdatingName] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // TODO: Implement case where the photo hasn't been uploaded yet
+    if (userData) {
+      setName(userData.name);
+    }
+  }, [userData]);
+
+  useEffect(() => {
     const fetchProfilePhoto = async () => {
       setIsFetchingPhoto(true);
       try {
@@ -94,6 +102,27 @@ export default function User() {
     });
   };
 
+  const handleNameChange = async () => {
+    try {
+      setIsUpdatingName(true);
+      const { data } = await axios.post(`${backendUrl}/api/user/change-name`, {
+        name,
+      });
+
+      if (data.success) {
+        setUserData(data.userData);
+        toast.success(data.message);
+      } else {
+        toast.error(data.message || "Failed to update name");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error has occurred.");
+    } finally {
+      setIsUpdatingName(false);
+    }
+  };
+
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col items-center px-5 2xl:px-0">
@@ -148,17 +177,28 @@ export default function User() {
               <div className="flex w-full flex-col">
                 <div className="w-full">
                   <p className="font-medium">First name:</p>
-                  <Input type="text" value={userData ? userData.name : ""} />
+                  <Input
+                    type="text"
+                    placeholder={userData ? userData.name : ""}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </div>
                 <div className="mt-5">
                   <p className="font-medium">Email:</p>
-                  <Input type="email" value={userData ? userData.email : ""} />
+                  <Input
+                    type="email"
+                    placeholder={userData ? userData.email : ""}
+                  />
                 </div>
                 <div className="mt-5 flex justify-end gap-2">
                   <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium">
                     Cancel
                   </Button>
-                  <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium">
+                  <Button
+                    className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium"
+                    onClick={handleNameChange}
+                  >
                     Save changes
                   </Button>
                 </div>
