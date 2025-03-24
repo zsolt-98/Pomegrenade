@@ -174,7 +174,7 @@ export default function Nav() {
               >
                 Hello,{" "}
                 <div
-                  className={`hover:text-primary-1 relative inline ${isProfileMenuOpen ? "text-primary-1" : ""}`}
+                  className={`hover:text-primary-1 relative inline cursor-pointer ${isProfileMenuOpen ? "text-primary-1" : ""}`}
                   onClick={handleOpenProfileMenu}
                 >
                   {userData.name}
