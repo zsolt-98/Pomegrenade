@@ -241,20 +241,6 @@ export default function User() {
                   <Button
                     type="button"
                     className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium"
-                    onClick={() => {
-                      if (userData) {
-                        setName(userData.name);
-                        setEmail(userData.email);
-                        setValue("name", userData.name);
-                        setValue("email", userData.email);
-                      }
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type="button"
-                    className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light rounded-full border-2 bg-transparent text-sm font-medium"
                     onClick={handleUpdatePersonalInfo}
                     disabled={
                       isUpdatingPersonalInfo || !!errors.name || !!errors.email

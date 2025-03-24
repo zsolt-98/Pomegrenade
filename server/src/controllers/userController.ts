@@ -105,6 +105,13 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
       });
     }
 
+    if (user.name === name && user.email === email) {
+      return res.json({
+        success: false,
+        message: "No changes detected",
+      });
+    }
+
     user.name = name;
     user.email = email;
     await user.save();
