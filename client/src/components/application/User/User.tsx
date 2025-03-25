@@ -163,8 +163,24 @@ export default function User() {
     }
   };
 
-  const handleResetPassword = () => {
-    navigate("/reset-password");
+  const handleResetPassword = async () => {
+    try {
+      if (userData) {
+        const { data } = await axios.post(
+          `${backendUrl}/api/auth/send-reset-otp`,
+          { email: userData.email },
+        );
+        if (data.success) {
+          toast.success(data.message);
+          navigate("/reset-password");
+        } else {
+          toast.error(data.message || "Failed to send verification code");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An error occurred while sending the reset code");
+    }
   };
 
   return (

@@ -6,13 +6,10 @@ import EmailForm from "./EmailForm";
 import NewPasswordForm from "./NewPasswordForm";
 import OtpForm from "./OtpForm";
 import { AppContext } from "@/context/AppContext";
-import { useNavigate } from "react-router";
 
 export default function ResetPassword() {
   const { isLoggedin, userData } = useContext(AppContext);
   const { setIsEmailSent, setEmail } = useContext(ResetPasswordContext);
-
-  const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
@@ -21,7 +18,7 @@ export default function ResetPassword() {
       setEmail(userData.email);
       setIsEmailSent(true);
     }
-  }, [isLoggedin, navigate, setIsEmailSent, setEmail, userData]);
+  }, [isLoggedin, userData, setEmail, setIsEmailSent]);
 
   function ResetPasswordForms() {
     const { isEmailSent, isOtpSubmitted } = useContext(ResetPasswordContext);
