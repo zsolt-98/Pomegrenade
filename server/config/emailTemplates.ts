@@ -119,9 +119,7 @@ export const PASSWORD_RESET_TEMPLATE = `
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--[if !mso]><!-->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet" type="text/css">
-  <!--<![endif]-->
   <style type="text/css">
     body {
       margin: 0;
@@ -176,49 +174,42 @@ export const PASSWORD_RESET_TEMPLATE = `
       }
     }
   </style>
-  <!--[if mso]>
-  <style type="text/css">
-    body, table, td {
-      font-family: Arial, Helvetica, sans-serif !important;
-    }
-  </style>
-  <![endif]-->
 </head>
-<body style="margin: 0; padding: 0; background-color: #e1f4f4; font-family: 'Fredoka', Arial, 'Helvetica Neue', Helvetica, sans-serif;">
-  <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#e1f4f4" style="background-color: #e1f4f4;">
+<body>
+  <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#e1f4f4">
     <tbody>
       <tr>
         <td valign="top" align="center">
           <div class="container-wrapper">
-            <div class="container" style="background-color: #ffd2ad; border: 2px solid #379999; border-radius: 32px; overflow: hidden;">
+            <div class="container">
               <table width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tbody>
                   <tr>
-                    <td class="main-content" style="padding: 48px 30px 40px; color: #ff5c5c; font-family: 'Fredoka', Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                    <td class="main-content">
                       <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tbody>
                           <tr>
-                            <td style="padding: 0 0 24px; font-size: 18px; line-height: 150%; font-weight: bold; color: #ff5c5c;">
+                            <td style="padding: 0 0 24px; font-size: 18px; line-height: 150%; font-weight: bold;">
                               Forgot your password?
                             </td>
                           </tr>
                           <tr>
-                            <td style="padding: 0 0 10px; font-size: 14px; line-height: 150%; color: #ff5c5c;">
-                              We received a password reset request for your account: <span class="email-highlight" style="color: #379999; font-weight: bold;">{{email}}</span>.
+                            <td style="padding: 0 0 10px; font-size: 14px; line-height: 150%;">
+                              We received a password reset request for your account: <span class="email-highlight">{{email}}</span>.
                             </td>
                           </tr>
                           <tr>
-                            <td style="padding: 0 0 16px; font-size: 14px; line-height: 150%; font-weight: 700; color: #ff5c5c;">
+                            <td style="padding: 0 0 16px; font-size: 14px; line-height: 150%; font-weight: 700;">
                               Use the verification code below to reset the password.
                             </td>
                           </tr>
                           <tr>
                             <td style="padding: 0 0 24px; text-align: center;">
-                              <div class="button" style="display: inline-block; width: 100%; max-width: 200px; padding: 10px 0; background-color: transparent; color: #379999; font-size: 14px; text-align: center; font-weight: bold; text-decoration: none; border: 2px solid #379999; border-radius: 9999px;">{{otp}}</div>
+                              <div class="button">{{otp}}</div>
                             </td>
                           </tr>
                           <tr>
-                            <td style="padding: 0 0 10px; font-size: 14px; line-height: 150%; color: #ff5c5c;">
+                            <td style="padding: 0 0 10px; font-size: 14px; line-height: 150%;">
                               The verification code is only valid for the next 15 minutes.
                             </td>
                           </tr>
