@@ -179,7 +179,7 @@ export default function User() {
       }
     } catch (error) {
       console.log(error);
-      toast.error("An error occurred while sending the reset code");
+      toast.error("An error occurred while sending the verification code");
     }
   };
 
