@@ -255,7 +255,7 @@ export const sendResetOtp = async (req: Request, res: Response) => {
     const otp = String(Math.floor(100000 + Math.random() * 900000));
 
     user.resetOtp = otp;
-    user.resetOtpExpireAt = Date.now() + 0.5 * 60 * 1000;
+    user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
     user.lastResetOtpSentAt = now;
 
     await user.save();
@@ -298,12 +298,12 @@ export const verifyResetOtp = async (req: Request, res: Response) => {
       return res.json({ success: false, message: "User not found" });
     }
 
-    if (user.resetOtp === "" || user.resetOtp !== otp) {
-      return res.json({ success: false, message: "Invalid verification code" });
-    }
-
     if (user.resetOtpExpireAt && user.resetOtpExpireAt < Date.now()) {
       return res.json({ success: false, message: "Verification code expired" });
+    }
+
+    if (user.resetOtp === "" || user.resetOtp !== otp) {
+      return res.json({ success: false, message: "Invalid verification code" });
     }
 
     return res.json({ success: true, message: "Code verification successful" });

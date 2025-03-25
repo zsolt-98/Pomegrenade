@@ -163,6 +163,10 @@ export default function User() {
     }
   };
 
+  const handleResetPassword = () => {
+    navigate("/reset-password");
+  };
+
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col items-center px-5 2xl:px-0">
@@ -259,7 +263,10 @@ export default function User() {
                 <p className="font-medium">Password:</p>
                 <Input type="password" placeholder="************" disabled />
                 <div className="flex justify-end">
-                  <Button className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light mt-5 rounded-full border-2 bg-transparent text-sm font-medium">
+                  <Button
+                    className="border-tertiary hover:bg-tertiary text-tertiary hover:text-secondary-light mt-5 rounded-full border-2 bg-transparent text-sm font-medium"
+                    onClick={handleResetPassword}
+                  >
                     Reset password
                   </Button>
                 </div>
