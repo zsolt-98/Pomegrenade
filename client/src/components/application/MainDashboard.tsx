@@ -4,14 +4,14 @@ import { AppContext } from "@/context/AppContext";
 import axios from "axios";
 import { calculateCalories } from "./utils/nutritionUtils";
 import { useLogFood } from "@/context/application/LogFoodContext";
-import { DisplayDate } from "./DisplayDate/DisplayDate";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "../ui/carousel";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 type DashboardHeadingsProps = {
   caloriesBudget: number;
@@ -46,6 +46,7 @@ export default function MainDashboard() {
   const { addedFoods } = useLogFood();
   const [caloriesBudget, setCaloriesBudget] = useState<number>(0);
   const [totalFoodCalories, setTotalFoodCalories] = useState<number>(0);
+  const [api, setApi] = useState<CarouselApi>();
 
   useEffect(() => {
     const fetchNutritionGoals = async () => {
@@ -76,15 +77,40 @@ export default function MainDashboard() {
     setTotalFoodCalories(Math.round(totalCalories));
   }, [addedFoods]);
 
+  const handleCarouselScroll = (direction: "prev" | "next") => {
+    if (api) {
+      if (direction === "prev") {
+        api.scrollPrev();
+      } else {
+        api.scrollNext();
+      }
+    }
+  };
+
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col px-5 2xl:px-0">
-        <Carousel opts={{ loop: true }}>
+        <Carousel opts={{ loop: true }} setApi={setApi}>
+          <div className="text-primary-1 flex items-center justify-center gap-8 text-2xl font-semibold">
+            <Button
+              variant="ghost"
+              onClick={() => handleCarouselScroll("prev")}
+            >
+              <ChevronLeft size={32} />
+            </Button>
+            <div className="flex gap-5">
+              <h3 className="">Today - 21/03/2025</h3>
+            </div>
+            <Button
+              variant="ghost"
+              onClick={() => handleCarouselScroll("next")}
+            >
+              <ChevronRight size={32} />
+            </Button>
+          </div>
           <CarouselContent>
             <CarouselItem>
               <div className="my-20 flex w-full flex-col gap-5">
-                <DisplayDate />
-
                 <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
                   <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
                     <DashboardHeadings
@@ -112,8 +138,6 @@ export default function MainDashboard() {
             </CarouselItem>
             <CarouselItem>
               <div className="my-20 flex w-full flex-col gap-5">
-                <DisplayDate />
-
                 <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
                   <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
                     <DashboardHeadings
@@ -140,8 +164,6 @@ export default function MainDashboard() {
               </div>
             </CarouselItem>
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
         </Carousel>
       </div>
     </main>
