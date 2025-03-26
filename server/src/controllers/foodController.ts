@@ -10,6 +10,7 @@ export const addFoodEntry = async (req: Request, res: Response) => {
     servingSize,
     servings,
     mealType,
+    entryDate,
   } = req.body;
 
   if (
@@ -19,7 +20,8 @@ export const addFoodEntry = async (req: Request, res: Response) => {
     !food_description ||
     !servingSize ||
     !servings ||
-    !mealType
+    !mealType ||
+    !entryDate
   ) {
     return res.json({ success: false, message: "Missing food entry details" });
   }
@@ -33,6 +35,7 @@ export const addFoodEntry = async (req: Request, res: Response) => {
       servingSize,
       servings,
       mealType,
+      entryDate,
     });
 
     await newFoodEntry.save();

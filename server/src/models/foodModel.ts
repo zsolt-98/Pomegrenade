@@ -11,6 +11,7 @@ interface FoodEntry extends Document {
   servings: number;
   mealType: MealType;
   addedAt: Date;
+  entryDate: Date;
 }
 
 const foodEntrySchema = new Schema<FoodEntry>({
@@ -26,6 +27,7 @@ const foodEntrySchema = new Schema<FoodEntry>({
     enum: ["Breakfast", "Lunch", "Dinner", "Snacks"],
   },
   addedAt: { type: Date, default: Date.now },
+  entryDate: { type: Date, default: Date.now },
 });
 
 const foodModel: Model<FoodEntry> =
