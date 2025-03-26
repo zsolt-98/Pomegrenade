@@ -22,7 +22,7 @@ function App() {
           <LogFoodContextProvider>
             <ResetPasswordContextProvider>
               <Nav />
-              <ToastContainer />
+              <ToastContainer position="bottom-right" />
               <Routes>
                 <Route path="/" element={<ProtectedHomepage />} />
                 <Route path="login" element={<LogIn />} />

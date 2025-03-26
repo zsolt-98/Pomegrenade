@@ -236,7 +236,7 @@ export default function User() {
               </div>
             </div>
             <div className="bg-tertiary max-lg:h-[1px] max-lg:w-full lg:h-full lg:w-[1px] xl:w-[2px]"></div>
-            <div className="text-primary-1 max-sm:w-w-60 flex h-full w-80 flex-col justify-between">
+            <div className="text-primary-1 flex h-full w-80 flex-col justify-between gap-10 max-sm:w-60">
               <h3 className="text-2xl font-semibold">Personal information</h3>
               <div className="flex w-full flex-col">
                 <div className="w-full">
