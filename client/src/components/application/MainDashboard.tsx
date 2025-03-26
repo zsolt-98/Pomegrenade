@@ -11,7 +11,6 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "../ui/button";
 
 type DashboardHeadingsProps = {
   caloriesBudget: number;
@@ -88,29 +87,33 @@ export default function MainDashboard() {
   };
 
   return (
-    <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
-      <div className="container mx-auto flex max-w-7xl flex-col px-5 2xl:px-0">
-        <Carousel opts={{ loop: true }} setApi={setApi}>
-          <div className="text-primary-1 flex items-center justify-center gap-8 text-2xl font-semibold">
-            <Button
-              variant="ghost"
-              onClick={() => handleCarouselScroll("prev")}
-            >
-              <ChevronLeft size={32} />
-            </Button>
-            <div className="flex gap-5">
-              <h3 className="">Today - 21/03/2025</h3>
-            </div>
-            <Button
-              variant="ghost"
-              onClick={() => handleCarouselScroll("next")}
-            >
-              <ChevronRight size={32} />
-            </Button>
+    <main className="bg-tertiary-light relative flex w-full items-center justify-center">
+      <div className="container mx-auto flex max-w-7xl flex-col px-5 py-20 2xl:px-0">
+        <div className="text-primary-1 mb-5 flex items-center justify-center gap-8 text-2xl font-semibold">
+          <button
+            onClick={() => handleCarouselScroll("prev")}
+            className="cursor-pointer"
+          >
+            <ChevronLeft size={32} />
+          </button>
+          <div className="flex gap-5">
+            <h3 className="">Today - 21/03/2025</h3>
           </div>
+          <button
+            onClick={() => handleCarouselScroll("next")}
+            className="cursor-pointer"
+          >
+            <ChevronRight size={32} />
+          </button>
+        </div>
+        <Carousel
+          opts={{ loop: true }}
+          setApi={setApi}
+          className="h-auto w-full"
+        >
           <CarouselContent>
             <CarouselItem>
-              <div className="my-20 flex w-full flex-col gap-5">
+              <div className="flex w-full flex-col gap-5">
                 <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
                   <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
                     <DashboardHeadings
@@ -137,7 +140,7 @@ export default function MainDashboard() {
               </div>
             </CarouselItem>
             <CarouselItem>
-              <div className="my-20 flex w-full flex-col gap-5">
+              <div className="flex w-full flex-col gap-5">
                 <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
                   <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
                     <DashboardHeadings
