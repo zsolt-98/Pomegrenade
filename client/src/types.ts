@@ -22,6 +22,7 @@ export type Food = {
   servingSize: string;
   servings: number;
   mealType: string;
+  addedAt: Date;
 };
 
 export type MealType = "Breakfast" | "Lunch" | "Dinner" | "Snacks";

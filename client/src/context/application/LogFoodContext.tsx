@@ -46,7 +46,9 @@ interface LogFoodContextType {
   updateFood: (entryId: string, servingSize: string, servings: number) => void;
   loadUserFoods: () => Promise<void>;
   currentMealType: MealType;
-  setCurrentMealType: (mealType: MealType) => void;
+  // setCurrentMealType: (mealType: MealType) => void;
+  // selectedDate: Date;
+  // setSelectedDate: (date: Date) => void;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
@@ -67,6 +69,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     Array<Food & { servings: number }>
   >([]);
   const [currentMealType, setCurrentMealType] = useState<MealType>("Breakfast");
+  // const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const { backendUrl } = useContext(AppContext);
 
   const loadUserFoods = useCallback(async () => {
@@ -83,6 +86,15 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
       toast.error("An error has occurred.");
     }
   }, [backendUrl]);
+
+  // const getFoodsByDate = useCallback((mealType: MealType, date: Date) => {
+  //   return addedFoods.filter((food) => {
+  //     const foodDate = new Date(food.addedAt);
+  //     return (
+  //       food.mealType === mealType && foodDate.getDate() === date.getDate() && food.getMonth() ===
+  //     );
+  //   });
+  // }, []);
 
   useEffect(() => {
     loadUserFoods();

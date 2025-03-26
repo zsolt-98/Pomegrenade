@@ -112,60 +112,35 @@ export default function MainDashboard() {
           className="h-auto w-full"
         >
           <CarouselContent>
-            <CarouselItem>
-              <div className="flex w-full flex-col gap-5">
-                <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
-                  <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
-                    <DashboardHeadings
-                      caloriesBudget={caloriesBudget}
-                      totalFoodCalories={totalFoodCalories}
-                    />
-                  </div>
-                  <Meal mealTypeHeading="Breakfast" />
-                  <Meal mealTypeHeading="Lunch" />
-                  <Meal mealTypeHeading="Dinner" />
-                  <Meal mealTypeHeading="Snacks" />
-                  <div className="bg-secondary-light rounded-b-4xl leading-none">
-                    <div className="flex h-[60px] justify-end">
-                      <a href="https://www.fatsecret.com">
-                        <img
-                          src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.png"
-                          srcSet="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_2x.png 2x, https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_3x.png 3x"
-                          style={{ border: 0 }}
-                        />
-                      </a>
+            {[0, 1].map((i) => (
+              <CarouselItem key={i}>
+                <div className="flex w-full flex-col gap-5">
+                  <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
+                    <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
+                      <DashboardHeadings
+                        caloriesBudget={caloriesBudget}
+                        totalFoodCalories={totalFoodCalories}
+                      />
+                    </div>
+                    <Meal mealTypeHeading="Breakfast" />
+                    <Meal mealTypeHeading="Lunch" />
+                    <Meal mealTypeHeading="Dinner" />
+                    <Meal mealTypeHeading="Snacks" />
+                    <div className="bg-secondary-light rounded-b-4xl leading-none">
+                      <div className="flex h-[60px] justify-end">
+                        <a href="https://www.fatsecret.com">
+                          <img
+                            src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.png"
+                            srcSet="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_2x.png 2x, https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_3x.png 3x"
+                            style={{ border: 0 }}
+                          />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div className="flex w-full flex-col gap-5">
-                <div className="rounded-4xl border-tertiary divide-tertiary divide-y-2 border-2">
-                  <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
-                    <DashboardHeadings
-                      caloriesBudget={caloriesBudget}
-                      totalFoodCalories={totalFoodCalories}
-                    />
-                  </div>
-                  <Meal mealTypeHeading="Breakfast" />
-                  <Meal mealTypeHeading="Lunch" />
-                  <Meal mealTypeHeading="Dinner" />
-                  <Meal mealTypeHeading="Snacks" />
-                  <div className="bg-secondary-light rounded-b-4xl leading-none">
-                    <div className="flex h-[60px] justify-end">
-                      <a href="https://www.fatsecret.com">
-                        <img
-                          src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.png"
-                          srcSet="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_2x.png 2x, https://platform.fatsecret.com/api/static/images/powered_by_fatsecret_3x.png 3x"
-                          style={{ border: 0 }}
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CarouselItem>
+              </CarouselItem>
+            ))}
           </CarouselContent>
         </Carousel>
       </div>
