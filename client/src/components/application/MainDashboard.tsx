@@ -183,6 +183,7 @@ export default function MainDashboard() {
           opts={{
             loop: true,
             watchDrag: false,
+            duration: 20,
           }}
           setApi={setApi}
           className="h-auto w-full"
