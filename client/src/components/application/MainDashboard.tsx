@@ -59,7 +59,7 @@ export default function MainDashboard() {
     const handleSelect = () => {
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 1000);
+      }, 500);
     };
 
     api.on("select", handleSelect);
@@ -167,7 +167,7 @@ export default function MainDashboard() {
             <ChevronLeft size={32} />
           </button>
           <div className="flex justify-center gap-5 max-sm:w-full sm:min-w-80">
-            <h3 className="max-sm:text-lg">
+            <h3 className="max-sm:text-md">
               {getDayDescription(currentDate)} - {formatDate(currentDate)}
             </h3>
           </div>
