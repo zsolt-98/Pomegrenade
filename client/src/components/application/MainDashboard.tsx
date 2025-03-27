@@ -188,14 +188,14 @@ export default function MainDashboard() {
             {[0, 1].map((i) => (
               <CarouselItem key={i}>
                 <div className="flex w-full flex-col gap-5">
-                  <div className="rounded-4xl border-tertiary divide-tertiary flex h-[80vh] flex-col divide-y-2 border-2">
+                  <div className="rounded-4xl border-tertiary divide-tertiary flex h-[100dvh] flex-col divide-y-2 border-2">
                     <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
                       <DashboardHeadings
                         caloriesBudget={caloriesBudget}
                         totalFoodCalories={totalFoodCalories}
                       />
                     </div>
-                    <div className="bg-secondary-light divide-tertiary divide-y-2 overflow-y-scroll">
+                    <div className="bg-secondary-light divide-tertiary h-full divide-y-2 overflow-y-scroll">
                       <Meal
                         mealTypeHeading="Breakfast"
                         selectedDate={currentDate}

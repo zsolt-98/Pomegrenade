@@ -45,7 +45,7 @@ export default function Meal({ mealTypeHeading, selectedDate }: MealProps) {
   };
 
   return (
-    <div className="bg-secondary-light flex flex-col">
+    <div className="bg-secondary-light flex min-h-[25%] flex-col">
       <div className="flex items-center justify-between p-2">
         <h3 className="text-primary-1 text-xl font-semibold sm:text-2xl">
           {mealTypeHeading}: {totalCalories.toFixed(0)}
@@ -54,10 +54,10 @@ export default function Meal({ mealTypeHeading, selectedDate }: MealProps) {
           <AddFoodDropDown mealType={mealTypeHeading} />
         </div>
       </div>
-      <div className="bg-secondary-light">
-        <div className="bg-tertiary-light m-2 mt-0 rounded-lg">
+      <div className="bg-secondary-light flex flex-grow flex-col justify-center">
+        <div className="bg-tertiary-light m-2 mt-0 flex h-full flex-col rounded-lg">
           {mealFoods.length === 0 && (
-            <p className="border-tertiary border-1 text-tertiary h-[34px] rounded-lg px-1 py-1.5 text-sm font-medium sm:h-auto sm:px-4 sm:py-2 sm:text-lg">
+            <p className="border-tertiary border-1 text-tertiary h-full rounded-lg px-1 py-1.5 text-sm font-medium sm:h-auto sm:px-4 sm:py-2 sm:text-lg">
               No food logged for {mealTypeHeading}
             </p>
           )}
