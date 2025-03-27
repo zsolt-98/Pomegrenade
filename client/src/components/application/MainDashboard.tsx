@@ -195,7 +195,7 @@ export default function MainDashboard() {
                         totalFoodCalories={totalFoodCalories}
                       />
                     </div>
-                    <div className="divide-tertiary divide-y-2 overflow-y-scroll">
+                    <div className="bg-secondary-light divide-tertiary divide-y-2 overflow-y-scroll">
                       <Meal
                         mealTypeHeading="Breakfast"
                         selectedDate={currentDate}
