@@ -157,7 +157,7 @@ export default function MainDashboard() {
 
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center">
-      <div className="container mx-auto flex max-w-7xl flex-col px-5 py-20 2xl:px-0">
+      <div className="container mx-auto flex max-w-7xl flex-col px-5 py-5 2xl:px-0">
         <div className="text-primary-1 mb-5 flex items-center justify-center gap-8 text-2xl font-semibold">
           <button
             onClick={() => changeDate("prev")}
@@ -188,7 +188,7 @@ export default function MainDashboard() {
             {[0, 1].map((i) => (
               <CarouselItem key={i}>
                 <div className="flex w-full flex-col gap-5">
-                  <div className="rounded-4xl border-tertiary divide-tertiary flex h-[504px] flex-col divide-y-2 border-2">
+                  <div className="rounded-4xl border-tertiary divide-tertiary flex h-[80vh] flex-col divide-y-2 border-2">
                     <div className="divide-tertiary bg-secondary-light rounded-t-4xl text-primary-1 flex justify-between divide-x-2 text-center text-lg font-semibold">
                       <DashboardHeadings
                         caloriesBudget={caloriesBudget}
