@@ -164,8 +164,8 @@ export default function MainDashboard() {
           >
             <ChevronLeft size={32} />
           </button>
-          <div className="flex gap-5">
-            <h3 className="">
+          <div className="flex justify-center gap-5 max-sm:w-full sm:min-w-80">
+            <h3 className="max-sm:text-lg">
               {getDayDescription(currentDate)} - {formatDate(currentDate)}
             </h3>
           </div>
