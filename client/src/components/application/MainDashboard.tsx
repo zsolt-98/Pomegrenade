@@ -11,6 +11,7 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AlertVerifyEmail } from "./User/AlertVerifyEmail";
 
 type DashboardHeadingsProps = {
   caloriesBudget: number;
@@ -157,7 +158,10 @@ export default function MainDashboard() {
 
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center">
-      <div className="container mx-auto flex max-w-7xl flex-col px-5 py-5 2xl:px-0">
+      <div className="container mx-auto flex max-w-7xl flex-col items-center px-5 py-5 2xl:px-0">
+        <div className="">
+          <AlertVerifyEmail />
+        </div>
         <div className="text-primary-1 mb-5 flex items-center justify-center gap-8 text-2xl font-semibold">
           <button
             onClick={() => changeDate("prev")}
