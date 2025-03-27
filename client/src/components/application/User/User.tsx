@@ -186,7 +186,7 @@ export default function User() {
   return (
     <main className="bg-tertiary-light relative flex w-full items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-col items-center px-5 2xl:px-0">
-        <div className="my-20 flex w-full flex-col gap-5">
+        <div className="my-5 flex w-full flex-col gap-5 sm:my-20">
           <div className="rounded-4xl border-tertiary bg-secondary-light h-100 flex items-center justify-around gap-10 border-2 px-20 py-10 max-lg:h-auto max-lg:flex-col max-lg:p-5">
             <div className="flex flex-col items-center gap-5">
               <div className="w-50 h-50 border-tertiary bg-tertiary-light relative rounded-full border-2">
