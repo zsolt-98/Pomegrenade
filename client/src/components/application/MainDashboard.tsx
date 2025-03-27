@@ -57,7 +57,9 @@ export default function MainDashboard() {
     if (!api) return;
 
     const handleSelect = () => {
-      setIsTransitioning(false);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 1000);
     };
 
     api.on("select", handleSelect);
