@@ -5,6 +5,7 @@ import { AppContext } from "@/context/AppContext";
 import { toast } from "react-toastify";
 import { GoalsData } from "@/types";
 import { useNavigate } from "react-router";
+import { AlertVerifyEmail } from "../User/AlertVerifyEmail";
 
 type GoalsResponse = {
   weightGoals: GoalsData;
@@ -71,6 +72,9 @@ export default function Goals() {
     <main className="bg-tertiary-light relative flex w-full flex-grow items-center justify-center overflow-hidden">
       <div className="container mx-auto flex max-w-7xl flex-grow flex-col px-5 2xl:px-0">
         <div className="my-5 w-full sm:my-20">
+          <div className="flex w-full justify-center">
+            <AlertVerifyEmail />
+          </div>
           <div className="rounded-4xl border-tertiary divide-tertiary bg-secondary-light border-2">
             <div className="divide-tertiary bg-secondary-light rounded-4xl text-primary-1 flex flex-col justify-between divide-y-2 text-center text-lg font-semibold sm:flex-row sm:divide-x-2 sm:divide-y-0">
               {isloading ? (

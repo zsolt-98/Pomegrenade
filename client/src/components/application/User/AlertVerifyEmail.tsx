@@ -14,12 +14,5 @@ export function AlertVerifyEmail() {
         </div>
       </div>
     </div>
-    // <Alert variant="destructive">
-    //   <AlertCircle className="h-4 w-4" />
-    //   <AlertTitle>Verify your email address</AlertTitle>
-    //   <AlertDescription>
-    //
-    //   </AlertDescription>
-    // </Alert>
   );
 }
