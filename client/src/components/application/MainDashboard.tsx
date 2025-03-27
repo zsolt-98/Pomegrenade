@@ -180,7 +180,10 @@ export default function MainDashboard() {
           </button>
         </div>
         <Carousel
-          opts={{ loop: true }}
+          opts={{
+            loop: true,
+            watchDrag: false,
+          }}
           setApi={setApi}
           className="h-auto w-full"
         >
@@ -195,7 +198,7 @@ export default function MainDashboard() {
                         totalFoodCalories={totalFoodCalories}
                       />
                     </div>
-                    <div className="bg-secondary-light divide-tertiary h-full divide-y-2 overflow-y-scroll">
+                    <div className="bg-secondary-light divide-tertiary h-full divide-y-2 overflow-y-auto">
                       <Meal
                         mealTypeHeading="Breakfast"
                         selectedDate={currentDate}
