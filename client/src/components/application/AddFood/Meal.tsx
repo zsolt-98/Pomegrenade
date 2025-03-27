@@ -11,10 +11,11 @@ import {
 
 type MealProps = {
   mealTypeHeading: MealType;
+  selectedDate: Date;
 };
 
-export default function Meal({ mealTypeHeading }: MealProps) {
-  const { addedFoods, loadUserFoods, deleteFood, isDeletingEntry } =
+export default function Meal({ mealTypeHeading, selectedDate }: MealProps) {
+  const { loadUserFoods, deleteFood, isDeletingEntry, getFoodsByDate } =
     useLogFood();
   const [isOpen, setIsOpen] = useState<string | null>(null);
   const [activeItem, setActiveItem] = useState<string | null>(null);
@@ -24,8 +25,8 @@ export default function Meal({ mealTypeHeading }: MealProps) {
   }, [loadUserFoods]);
 
   const mealFoods = useMemo(() => {
-    return addedFoods.filter((food) => food.mealType === mealTypeHeading);
-  }, [addedFoods, mealTypeHeading]);
+    return getFoodsByDate(mealTypeHeading, selectedDate);
+  }, [mealTypeHeading, selectedDate, getFoodsByDate]);
 
   const totalCalories = useMemo(() => {
     return mealFoods.reduce((total, food) => {

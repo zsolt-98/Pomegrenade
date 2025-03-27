@@ -193,10 +193,13 @@ export default function MainDashboard() {
                         totalFoodCalories={totalFoodCalories}
                       />
                     </div>
-                    <Meal mealTypeHeading="Breakfast" />
-                    <Meal mealTypeHeading="Lunch" />
-                    <Meal mealTypeHeading="Dinner" />
-                    <Meal mealTypeHeading="Snacks" />
+                    <Meal
+                      mealTypeHeading="Breakfast"
+                      selectedDate={currentDate}
+                    />
+                    <Meal mealTypeHeading="Lunch" selectedDate={currentDate} />
+                    <Meal mealTypeHeading="Dinner" selectedDate={currentDate} />
+                    <Meal mealTypeHeading="Snacks" selectedDate={currentDate} />
                     <div className="bg-secondary-light rounded-b-4xl leading-none">
                       <div className="flex h-[60px] justify-end">
                         <a href="https://www.fatsecret.com">

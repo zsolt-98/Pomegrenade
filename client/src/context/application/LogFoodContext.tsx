@@ -49,6 +49,10 @@ interface LogFoodContextType {
   setCurrentMealType: (mealType: MealType) => void;
   selectedDate: Date;
   setSelectedDate: (date: Date) => void;
+  getFoodsByDate: (
+    mealType: MealType,
+    date: Date,
+  ) => Array<Food & { servings: number }>;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
