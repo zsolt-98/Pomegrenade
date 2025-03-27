@@ -42,10 +42,52 @@ function DashboardHeadings({
 
 export default function MainDashboard() {
   const { backendUrl } = useContext(AppContext);
-  const { addedFoods } = useLogFood();
+  const { addedFoods, setSelectedDate } = useLogFood();
   const [caloriesBudget, setCaloriesBudget] = useState<number>(0);
   const [totalFoodCalories, setTotalFoodCalories] = useState<number>(0);
   const [api, setApi] = useState<CarouselApi>();
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    setSelectedDate(currentDate);
+  }, [currentDate, setSelectedDate]);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const handleSelect = () => {
+      setIsTransitioning(false);
+    };
+
+    api.on("select", handleSelect);
+
+    return () => {
+      api.off("select", handleSelect);
+    };
+  });
+
+  const changeDate = (direction: "prev" | "next") => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+
+    const newDate = new Date(currentDate);
+    if (direction === "prev") {
+      newDate.setDate(newDate.getDate() - 1);
+    } else {
+      newDate.setDate(newDate.getDate() + 1);
+    }
+
+    setCurrentDate(newDate);
+
+    if (api) {
+      if (direction === "prev") {
+        api.scrollPrev();
+      } else {
+        api.scrollNext();
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchNutritionGoals = async () => {
@@ -68,22 +110,47 @@ export default function MainDashboard() {
 
   useEffect(() => {
     const totalCalories = addedFoods.reduce((total, food) => {
-      return (
-        total + calculateCalories(food.food_description || "", food.servings)
-      );
+      const foodDate = new Date(food.entryDate);
+
+      if (
+        foodDate.getDate() === currentDate.getDate() &&
+        foodDate.getMonth() === currentDate.getMonth() &&
+        foodDate.getFullYear() === currentDate.getFullYear()
+      ) {
+        return (
+          total + calculateCalories(food.food_description || "", food.servings)
+        );
+      }
+      return total;
     }, 0);
 
     setTotalFoodCalories(Math.round(totalCalories));
-  }, [addedFoods]);
+  }, [addedFoods, currentDate]);
 
-  const handleCarouselScroll = (direction: "prev" | "next") => {
-    if (api) {
-      if (direction === "prev") {
-        api.scrollPrev();
-      } else {
-        api.scrollNext();
-      }
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
+  const getDayDescription = (date: Date) => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    if (date.toDateString() === today.toDateString()) {
+      return "Today";
+    } else if (date.toDateString() === tomorrow.toDateString()) {
+      return "Tomorrow";
+    } else if (date.toDateString() === yesterday.toDateString()) {
+      return "Yesterday";
     }
+
+    return date.toLocaleDateString("en-US", { weekday: "long" });
   };
 
   return (
@@ -91,16 +158,20 @@ export default function MainDashboard() {
       <div className="container mx-auto flex max-w-7xl flex-col px-5 py-20 2xl:px-0">
         <div className="text-primary-1 mb-5 flex items-center justify-center gap-8 text-2xl font-semibold">
           <button
-            onClick={() => handleCarouselScroll("prev")}
+            onClick={() => changeDate("prev")}
+            disabled={isTransitioning}
             className="cursor-pointer"
           >
             <ChevronLeft size={32} />
           </button>
           <div className="flex gap-5">
-            <h3 className="">Today - 21/03/2025</h3>
+            <h3 className="">
+              {getDayDescription(currentDate)} - {formatDate(currentDate)}
+            </h3>
           </div>
           <button
-            onClick={() => handleCarouselScroll("next")}
+            onClick={() => changeDate("next")}
+            disabled={isTransitioning}
             className="cursor-pointer"
           >
             <ChevronRight size={32} />

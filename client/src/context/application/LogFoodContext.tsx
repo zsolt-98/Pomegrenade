@@ -46,9 +46,9 @@ interface LogFoodContextType {
   updateFood: (entryId: string, servingSize: string, servings: number) => void;
   loadUserFoods: () => Promise<void>;
   currentMealType: MealType;
-  // setCurrentMealType: (mealType: MealType) => void;
-  // selectedDate: Date;
-  // setSelectedDate: (date: Date) => void;
+  setCurrentMealType: (mealType: MealType) => void;
+  selectedDate: Date;
+  setSelectedDate: (date: Date) => void;
 }
 
 export const LogFoodContext = createContext<LogFoodContextType | undefined>(
@@ -69,7 +69,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     Array<Food & { servings: number }>
   >([]);
   const [currentMealType, setCurrentMealType] = useState<MealType>("Breakfast");
-  // const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const { backendUrl } = useContext(AppContext);
 
   const loadUserFoods = useCallback(async () => {
@@ -87,14 +87,20 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     }
   }, [backendUrl]);
 
-  // const getFoodsByDate = useCallback((mealType: MealType, date: Date) => {
-  //   return addedFoods.filter((food) => {
-  //     const foodDate = new Date(food.addedAt);
-  //     return (
-  //       food.mealType === mealType && foodDate.getDate() === date.getDate() && food.getMonth() ===
-  //     );
-  //   });
-  // }, []);
+  const getFoodsByDate = useCallback(
+    (mealType: MealType, date: Date) => {
+      return addedFoods.filter((food) => {
+        const foodDate = new Date(food.entryDate);
+        return (
+          food.mealType === mealType &&
+          foodDate.getDate() === date.getDate() &&
+          foodDate.getMonth() === date.getMonth() &&
+          foodDate.getFullYear() === date.getFullYear()
+        );
+      });
+    },
+    [addedFoods],
+  );
 
   useEffect(() => {
     loadUserFoods();
@@ -152,6 +158,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     axios.defaults.withCredentials = true;
     setIsSavingEntry(true);
     try {
+      const formattedDate = selectedDate.toISOString();
       const { data } = await axios.post(`${backendUrl}/api/food/add`, {
         food_id: food.food_id,
         food_name: food.food_name,
@@ -159,12 +166,20 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
         servingSize,
         servings,
         mealType,
+        entryDate: formattedDate,
       });
 
       if (data.success) {
         setAddedFoods((prev) => [
           ...prev,
-          { ...food, servingSize, servings, mealType, ...data.foodEntry },
+          {
+            ...food,
+            servingSize,
+            servings,
+            mealType,
+            entryDate: formattedDate,
+            ...data.foodEntry,
+          },
         ]);
       } else {
         toast.error(data.message);
@@ -264,6 +279,9 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
     updateFood,
     currentMealType,
     setCurrentMealType,
+    selectedDate,
+    setSelectedDate,
+    getFoodsByDate,
   };
 
   return (
