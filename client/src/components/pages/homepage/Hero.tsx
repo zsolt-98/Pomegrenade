@@ -1,6 +1,6 @@
 import Divider from "../../global/svg/Divider";
 
-import emptyDashboard from "../../../../public/homepage-carousel-functionality/1-empty-dashboard-924x510px.png";
+import emptyDashboard from "../../../../public/homepage-carousel-functionality/1.png";
 // import emptyDashboardAddFood from "../../../../public/homepage-carousel-functionality/2-empty-dashboard-add-food-924x510px.png";
 // import emptyDashboardSelectedFood from "../../../../public/homepage-carousel-functionality/3-empty-dashboard-selected-food-924x510px.png";
 // import dashboardWithAddedFoods from "../../../../public/homepage-carousel-functionality/4-dashboard-with-added-foods-924x510px.png";
@@ -38,20 +38,20 @@ export default function Hero() {
         </div>
       </div>
       <Divider className="absolute top-0" fill="var(--color-secondary-light)" />
-      <div className="rotate-5 w-scree4 z-10 mt-10 flex gap-10">
+      <div className="rotate-5 z-10 mt-10 flex w-screen gap-10">
         <img
           src={emptyDashboard}
-          className="border-tertiary rounded-4xl border-3"
+          className=""
           // alt={`image of ${image}`}
         />
         <img
           src={emptyDashboard}
-          className="border-tertiary rounded-4xl border-3"
+          className=""
           // alt={`image of ${image}`}
         />
         <img
           src={emptyDashboard}
-          className="border-tertiary rounded-4xl border-3"
+          className=""
           // alt={`image of ${image}`}
         />
       </div>
