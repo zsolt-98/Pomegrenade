@@ -11,7 +11,7 @@ export default function AlertSetGoals() {
           <h4 className="font-semibold">Set your goals</h4>
           <h5 className="">
             Define your weight target, daily calorie intake, and macronutrient
-            balance to start tracking your progress
+            balance to start tracking your progress.
           </h5>
         </div>
       </div>
