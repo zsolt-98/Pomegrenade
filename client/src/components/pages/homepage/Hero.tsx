@@ -1,6 +1,7 @@
 import Divider from "../../global/svg/Divider";
-
+import { motion, useScroll, useTransform } from "framer-motion";
 import emptyDashboard from "../../../../public/homepage-carousel-functionality/1.png";
+import { useRef } from "react";
 // import emptyDashboardAddFood from "../../../../public/homepage-carousel-functionality/2-empty-dashboard-add-food-924x510px.png";
 // import emptyDashboardSelectedFood from "../../../../public/homepage-carousel-functionality/3-empty-dashboard-selected-food-924x510px.png";
 // import dashboardWithAddedFoods from "../../../../public/homepage-carousel-functionality/4-dashboard-with-added-foods-924x510px.png";
@@ -23,8 +24,20 @@ export default function Hero() {
   //   userProfile,
   // ];
 
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.9", "end 0.1"],
+  });
+
+  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["0%", "-150%"]);
+
   return (
-    <main className="bg-tertiary-light relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center overflow-hidden lg:pb-20">
+    <main
+      className="bg-tertiary-light relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center overflow-hidden lg:pb-20"
+      ref={containerRef}
+    >
       <div className="bg-tertiary-light container relative mx-auto my-20 flex max-w-7xl flex-col">
         <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
           <div className="mx-5">
@@ -38,7 +51,10 @@ export default function Hero() {
         </div>
       </div>
       <Divider className="absolute top-0" fill="var(--color-secondary-light)" />
-      <div className="rotate-5 z-10 mt-10 flex w-screen gap-10">
+      <motion.div
+        className="rotate-5 z-10 mt-10 flex w-screen gap-10"
+        style={{ x: scrollBasedX }}
+      >
         <img
           src={emptyDashboard}
           className=""
@@ -54,7 +70,27 @@ export default function Hero() {
           className=""
           // alt={`image of ${image}`}
         />
-      </div>
+        <img
+          src={emptyDashboard}
+          className=""
+          // alt={`image of ${image}`}
+        />
+        <img
+          src={emptyDashboard}
+          className=""
+          // alt={`image of ${image}`}
+        />
+        <img
+          src={emptyDashboard}
+          className=""
+          // alt={`image of ${image}`}
+        />
+        <img
+          src={emptyDashboard}
+          className=""
+          // alt={`image of ${image}`}
+        />
+      </motion.div>
     </main>
   );
 }
