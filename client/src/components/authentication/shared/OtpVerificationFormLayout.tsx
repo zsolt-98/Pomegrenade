@@ -28,7 +28,7 @@ export default function OtpVerificationFormLayout({
 }: OtpVerificationFormLayoutProps) {
   return (
     <form
-      className="flex w-full max-w-[364px] flex-col items-center justify-center gap-3 text-sm md:text-lg"
+      className="flex w-full max-w-[364px] flex-col items-center justify-center gap-6 text-sm md:text-lg"
       onSubmit={onSubmit}
       noValidate
     >
@@ -49,7 +49,7 @@ export default function OtpVerificationFormLayout({
       />
       <button
         type="submit"
-        className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary mt-7 w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
+        className="border-tertiary text-tertiary hover:bg-tertiary hover:text-secondary-light outline-tertiary w-full rounded-full border-2 px-5 py-2 text-2xl font-normal"
       >
         Submit
       </button>
