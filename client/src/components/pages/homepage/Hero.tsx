@@ -31,11 +31,11 @@ export default function Hero() {
     offset: ["start 0.9", "end 0.1"],
   });
 
-  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["0%", "-150%"]);
+  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["45%", "-150%"]);
 
   return (
     <main
-      className="bg-tertiary-light relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center overflow-hidden lg:pb-20"
+      className="bg-tertiary-light lg:pb-30 relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center overflow-hidden"
       ref={containerRef}
     >
       <div className="bg-tertiary-light container relative mx-auto my-20 flex max-w-7xl flex-col">
