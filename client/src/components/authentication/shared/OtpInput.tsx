@@ -66,8 +66,11 @@ export default function OtpInput({
   };
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between gap-2" onPaste={handlePaste}>
+    <div className="sm:w-full">
+      <div
+        className="flex justify-between gap-1.5 sm:gap-2"
+        onPaste={handlePaste}
+      >
         {Array(6)
           .fill(0)
           .map((_, i) => (
@@ -80,7 +83,7 @@ export default function OtpInput({
                 inputRefs.current[i] = e;
               }}
               value={value[i] || ""}
-              className={`bg-tertiary-light h-12 w-12 rounded-md border-2 text-center outline-none ${
+              className={`bg-tertiary-light h-12 w-12 rounded-md border-2 text-center outline-none max-sm:h-10 max-sm:w-10 ${
                 error
                   ? "border-primary-1 text-primary-1 focus:border-primary-1"
                   : "text-tertiary border-[rgba(var(--color-tertiary-rgb),0.75)] focus:border-[rgba(var(--color-tertiary-rgb),1)]"
