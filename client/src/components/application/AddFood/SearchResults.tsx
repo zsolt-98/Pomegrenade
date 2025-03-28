@@ -44,7 +44,7 @@ export function SearchResults() {
                 {pageItems.map((food) => (
                   <li
                     key={food.food_id}
-                    className="hover:bg-secondary-light-2 cursor-pointer py-2"
+                    className="hover:bg-secondary-light-2 cursor-pointer p-2"
                     onClick={() => handleFoodSelect(food)}
                   >
                     <div className="text-primary-1 text-sm font-medium">
