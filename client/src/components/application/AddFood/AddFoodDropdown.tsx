@@ -71,7 +71,8 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
         <Carousel
           setApi={setApi}
           opts={{
-            dragFree: false,
+            watchDrag: false,
+            duration: 20,
           }}
         >
           <CarouselContent>

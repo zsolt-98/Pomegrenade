@@ -76,7 +76,7 @@ export function MacrosPieChart({
           innerRadius={innerRadius}
           outerRadius={outerRadius}
           fill="var(--color-tertiary)"
-          animationDuration={500}
+          animationDuration={400}
           animationBegin={100}
         >
           {chartData.map((entry, index) => (

@@ -23,7 +23,13 @@ export function SearchResults() {
   }, [api, currentPage]);
 
   return (
-    <Carousel setApi={setApi}>
+    <Carousel
+      opts={{
+        watchDrag: false,
+        duration: 15,
+      }}
+      setApi={setApi}
+    >
       <CarouselContent>
         {pages.map((pageIndex) => {
           const startIndex = pageIndex * itemsPerPage;
