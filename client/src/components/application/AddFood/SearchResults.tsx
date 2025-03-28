@@ -1,9 +1,11 @@
 import { useLogFood } from "@/context/application/LogFoodContext";
+import { useMediaQuery } from "react-responsive";
 
 // Components/AddFoodDropdown/SearchResults.tsx
 export function SearchResults() {
+  const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
   const { searchResults, handleFoodSelect, currentPage } = useLogFood();
-  const itemsPerPage = 7;
+  const itemsPerPage = isUnderSmScreen ? 4 : 5;
   const paginatedResults = searchResults.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage,

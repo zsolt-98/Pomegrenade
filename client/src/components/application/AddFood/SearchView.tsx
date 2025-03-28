@@ -31,7 +31,7 @@ export default function SearchView() {
 
   return (
     <>
-      <div className="mb-0 flex">
+      <div className="mb-0 flex p-2 pb-0">
         <Input
           type="text"
           placeholder="Search for a food to add"
@@ -39,7 +39,7 @@ export default function SearchView() {
           onChange={handleSearchChange}
         />
       </div>
-      <div className="relative flex min-h-12 flex-col justify-between">
+      <div className="relative flex min-h-12 flex-col justify-between p-2">
         {isLoading && (
           <Loader2 className="text-primary-1 absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full" />
         )}

@@ -9,6 +9,12 @@ import SearchView from "./SearchView";
 import { useEffect, useRef, useState } from "react";
 import { MealType } from "@/types";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselApi,
+} from "@/components/ui/carousel";
 
 type AddFoodDropdownProps = {
   mealType: MealType;
@@ -19,6 +25,7 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
     useLogFood();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [api, setApi] = useState<CarouselApi>();
   const prevFoodsLengthRef = useRef(addedFoods.length);
 
   useEffect(() => {
@@ -27,6 +34,16 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
     }
     prevFoodsLengthRef.current = addedFoods.length;
   }, [addedFoods, isOpen, resetAddFoodState]);
+
+  useEffect(() => {
+    if (!api) return;
+
+    if (currentView === "search") {
+      api.scrollTo(0);
+    } else if (currentView === "servings") {
+      api.scrollTo(1);
+    }
+  }, [api, currentView]);
 
   const handleAddFoodDropdown = (open: boolean) => {
     if (open) {
@@ -51,21 +68,22 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
         align="end"
         className="sm:w-120 bg-tertiary-light border-tertiary w-[calc(100vw-3.75rem)] border-2 p-0"
       >
-        <div
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{
-            transform:
-              currentView === "servings" ? "translateX(-50%)" : "translateX(0)",
-            width: "200%",
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: "start",
+            dragFree: false,
           }}
         >
-          <div className="w-1/2 p-1">
-            <SearchView />
-          </div>
-          <div className="w-1/2 p-1">
-            <ServingsView />
-          </div>
-        </div>
+          <CarouselContent>
+            <CarouselItem>
+              <SearchView />
+            </CarouselItem>
+            <CarouselItem>
+              <ServingsView />
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
       </DropdownMenuContent>
     </DropdownMenu>
   );

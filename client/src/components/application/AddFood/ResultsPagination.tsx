@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { useLogFood } from "@/context/application/LogFoodContext";
+import { useMediaQuery } from "react-responsive";
 
 export function ResultsPagination() {
+  const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
   const { setCurrentPage, currentPage, searchResults } = useLogFood();
-  const itemsPerPage = 7;
+  const itemsPerPage = isUnderSmScreen ? 4 : 5;
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
 
   return (

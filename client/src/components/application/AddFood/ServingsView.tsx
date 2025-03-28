@@ -26,7 +26,7 @@ export function ServingsView() {
   };
 
   return (
-    <div className="flex h-full flex-col justify-between">
+    <div className="flex h-full flex-col justify-between p-2">
       <div>
         <Button
           onClick={handleBackToSearch}
