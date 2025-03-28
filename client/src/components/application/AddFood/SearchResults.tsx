@@ -1,7 +1,6 @@
 import { useLogFood } from "@/context/application/LogFoodContext";
 import { useMediaQuery } from "react-responsive";
 
-// Components/AddFoodDropdown/SearchResults.tsx
 export function SearchResults() {
   const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
   const { searchResults, handleFoodSelect, currentPage } = useLogFood();

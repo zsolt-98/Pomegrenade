@@ -71,7 +71,6 @@ export function AddFoodDropDown({ mealType }: AddFoodDropdownProps) {
         <Carousel
           setApi={setApi}
           opts={{
-            align: "start",
             dragFree: false,
           }}
         >
