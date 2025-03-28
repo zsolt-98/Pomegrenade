@@ -14,7 +14,7 @@ interface AppContextType {
   setUserData: (
     value: false | { name: string; email: string; isAccountVerified: boolean },
   ) => void;
-  getUserData: () => void;
+  getUserData: () => void | Promise<void>;
 }
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;

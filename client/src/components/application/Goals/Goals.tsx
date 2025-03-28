@@ -32,7 +32,6 @@ export default function Goals() {
   };
 
   useEffect(() => {
-    console.log("Login state:", isLoggedin);
     if (!isLoggedin && !isAuthLoading) {
       navigate("/");
     }

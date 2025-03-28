@@ -35,10 +35,10 @@ export default function Register() {
 
   const { onAuth, isSubmitting } = useAuth({
     endpoint: "register",
-    onDataSuccess: () => {
+    onDataSuccess: async () => {
       setIsLoggedin(true);
-      getUserData();
-      navigate("/");
+      await getUserData();
+      navigate("/goals");
     },
   });
 
