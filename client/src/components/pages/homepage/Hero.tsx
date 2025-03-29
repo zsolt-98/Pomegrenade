@@ -1,29 +1,18 @@
 import Divider from "../../global/svg/Divider";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import pic1 from "../../../../public/homepage-carousel-functionality/1.png";
-import pic2 from "../../../../public/homepage-carousel-functionality/2.png";
-import pic3 from "../../../../public/homepage-carousel-functionality/3.png";
+import dashboardWithAddedFoods from "../../../../public/homepage-carousel-functionality/1-dashboard-with-added-foods-813x586px.png";
+import emptyDashboardAddFood from "../../../../public/homepage-carousel-functionality/2-empty-dashboard-add-food-813x586px.png";
+import dashboardEditAddedFood from "../../../../public/homepage-carousel-functionality/3-dashboard-edit-added-food-813x586px.png";
 import { useMediaQuery } from "react-responsive";
-// import dashboardEditAddedFood from "../../../../public/homepage-carousel-functionality/5-dashboard-edit-added-food-924x510px.png";
-// import userGoals from "../../../../public/homepage-carousel-functionality/6-user-goals-924x510px.png";
-// import userGoalsEditWeight from "../../../../public/homepage-carousel-functionality/7-user-goals-edit-weight-924x510px.png";
-// import userGoalsEditMacronutrients from "../../../../public/homepage-carousel-functionality/8-user-goals-edit-macronutrients-924x510px.png";
-// import userProfile from "../../../../public/homepage-carousel-functionality/9-user-profile-924x510px.png";
 
 export default function Hero() {
   const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
-  // const carouselImages = [
-  //   emptyDashboard,
-  //   emptyDashboardAddFood,
-  //   emptyDashboardSelectedFood,
-  //   dashboardWithAddedFoods,
-  //   dashboardEditAddedFood,
-  //   userGoals,
-  //   userGoalsEditWeight,
-  //   userGoalsEditMacronutrients,
-  //   userProfile,
-  // ];
+  const scrollImages = [
+    dashboardWithAddedFoods,
+    emptyDashboardAddFood,
+    dashboardEditAddedFood,
+  ];
 
   const containerRef = useRef(null);
 
@@ -66,36 +55,13 @@ export default function Hero() {
         className="rotate-4 z-10 flex w-screen gap-10 pb-10 sm:mt-10 sm:max-lg:pb-20"
         style={{ x: scrollBasedX }}
       >
-        <img
-          src={pic1}
-          className="w-auto max-sm:max-h-60"
-          // alt={`image of ${image}`}
-        />
-        <img
-          src={pic2}
-          className="w-auto max-sm:max-h-60"
-          // alt={`image of ${image}`}
-        />
-        <img
-          src={pic3}
-          className="w-auto max-sm:max-h-60"
-          // alt={`image of ${image}`}
-        />
-        <img
-          src={pic1}
-          className="w-auto max-sm:max-h-60"
-          // alt={`image of ${image}`}
-        />
-        <img
-          src={pic2}
-          className="w-auto max-sm:max-h-60"
-          // alt={`image of ${image}`}
-        />
-        <img
-          src={pic3}
-          className="w-auto max-sm:max-h-60"
-          // alt={`image of ${image}`}
-        />
+        {scrollImages.map((image) => (
+          <img
+            src={image}
+            className="w-auto max-sm:max-h-60"
+            alt={`image of ${image}`}
+          />
+        ))}
       </motion.div>
     </main>
   );
