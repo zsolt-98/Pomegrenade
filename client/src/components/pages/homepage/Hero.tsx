@@ -40,51 +40,56 @@ export default function Hero() {
       <div className="bg-tertiary-light container relative mx-auto mt-10 flex max-w-7xl flex-col pb-10 sm:mt-20 sm:pb-20">
         <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
           <div className="mx-5">
-            <h2 className="text-tertiary text-lg font-semibold md:text-3xl">
+            <h2 className="text-tertiary text-xl font-semibold md:text-3xl">
               A lightweight
             </h2>
-            <h1 className="text-primary-1 text-nowrap text-4xl font-bold leading-none md:text-7xl">
+            <h1 className="text-primary-1 text-nowrap text-5xl font-bold leading-none md:text-7xl">
               calorie counter <br /> with a bang.
             </h1>
           </div>
         </div>
       </div>
       <Divider className="absolute top-0" fill="var(--color-secondary-light)" />
-      <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-tertiary-light rounded-full border-2 px-5 py-2 text-2xl font-normal">
-        Get started now
-      </button>
+      <div className="flex flex-col gap-6">
+        <h3 className="text-tertiary font-medium">
+          Are you ready for a healthier you?
+        </h3>
+        <button className="border-tertiary text-tertiary hover:bg-tertiary hover:text-tertiary-light rounded-full border-2 px-5 py-2 text-2xl font-normal">
+          Get started now
+        </button>
+      </div>
       <motion.div
         className="rotate-4 z-10 flex w-screen gap-10 pb-10 sm:mt-10"
         style={{ x: scrollBasedX }}
       >
         <img
           src={pic1}
-          className="w-auto"
+          className="w-auto max-sm:max-h-60"
           // alt={`image of ${image}`}
         />
         <img
           src={pic2}
-          className="w-auto"
+          className="w-auto max-sm:max-h-60"
           // alt={`image of ${image}`}
         />
         <img
           src={pic3}
-          className="w-auto"
+          className="w-auto max-sm:max-h-60"
           // alt={`image of ${image}`}
         />
         <img
           src={pic1}
-          className="w-auto"
+          className="w-auto max-sm:max-h-60"
           // alt={`image of ${image}`}
         />
         <img
           src={pic2}
-          className="w-auto"
+          className="w-auto max-sm:max-h-60"
           // alt={`image of ${image}`}
         />
         <img
           src={pic3}
-          className="w-auto"
+          className="w-auto max-sm:max-h-60"
           // alt={`image of ${image}`}
         />
       </motion.div>
