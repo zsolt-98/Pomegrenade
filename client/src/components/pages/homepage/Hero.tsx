@@ -40,10 +40,10 @@ export default function Hero() {
       <div className="bg-tertiary-light container relative mx-auto mt-10 flex max-w-7xl flex-col pb-10 sm:mt-20 sm:pb-20">
         <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
           <div className="mx-5">
-            <h2 className="text-tertiary text-xl font-semibold md:text-3xl">
+            <h2 className="text-tertiary text-lg font-semibold md:text-3xl">
               A lightweight
             </h2>
-            <h1 className="text-primary-1 text-nowrap text-5xl font-semibold leading-none md:text-7xl">
+            <h1 className="text-primary-1 text-nowrap text-4xl font-semibold leading-none md:text-7xl">
               calorie counter <br /> with a bang.
             </h1>
           </div>
