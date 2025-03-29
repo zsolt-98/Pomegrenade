@@ -34,16 +34,16 @@ export default function Hero() {
 
   return (
     <main
-      className="bg-tertiary-light lg:pb-30 relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-center overflow-hidden"
+      className="bg-tertiary-light lg:pb-30 relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-start justify-start overflow-hidden"
       ref={containerRef}
     >
       <div className="bg-tertiary-light container relative mx-auto mt-20 flex max-w-7xl flex-col pb-20">
         <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
           <div className="mx-5">
-            <h2 className="text-tertiary text-3xl font-semibold">
+            <h2 className="text-tertiary text-xl font-semibold md:text-3xl">
               A lightweight
             </h2>
-            <h1 className="text-primary-1 text-nowrap text-7xl font-bold leading-none">
+            <h1 className="text-primary-1 text-nowrap text-5xl font-bold leading-none md:text-7xl">
               calorie counter <br /> with a bang.
             </h1>
           </div>
