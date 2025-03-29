@@ -1,6 +1,6 @@
 import Divider from "../../global/svg/Divider";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import dashboardWithAddedFoods from "../../../../public/homepage-carousel-functionality/1-dashboard-with-added-foods-813x586px.png";
 import emptyDashboardAddFood from "../../../../public/homepage-carousel-functionality/2-empty-dashboard-add-food-813x586px.png";
 import dashboardEditAddedFood from "../../../../public/homepage-carousel-functionality/3-dashboard-edit-added-food-813x586px.png";
@@ -8,11 +8,17 @@ import { useMediaQuery } from "react-responsive";
 
 export default function Hero() {
   const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
-  const scrollImages = [
+  const isUnderMdScreen = useMediaQuery({ maxWidth: 767 });
+  const isUnderLgScreen = useMediaQuery({ maxWidth: 1023 });
+  const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
+  const isUnder2XLScreen = useMediaQuery({ maxWidth: 1535 });
+
+  const images = [
     dashboardWithAddedFoods,
     emptyDashboardAddFood,
     dashboardEditAddedFood,
   ];
+  const imagesToScroll = [...images, ...images];
 
   const containerRef = useRef(null);
 
@@ -21,7 +27,37 @@ export default function Hero() {
     offset: ["start 0.7", "end 0.1"],
   });
 
-  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["75%", "-125%"]);
+  const getScrollValues = useMemo(() => {
+    if (isUnderSmScreen) {
+      return { start: "150%", end: "-150%" };
+    }
+
+    if (isUnderMdScreen) {
+      return { start: "280%", end: "-500%" };
+    }
+
+    if (isUnderLgScreen) {
+      return { start: "200%", end: "-350%" };
+    }
+
+    if (isUnderXLScreen) {
+      return { start: "125%", end: "-250%" };
+    }
+
+    if (isUnder2XLScreen) {
+      return { start: "100%", end: "-175%" };
+    }
+    return {
+      start: "85%",
+      end: "-125%",
+    };
+  }, [isUnder2XLScreen, isUnderXLScreen, isUnderLgScreen, isUnderMdScreen]);
+
+  const scrollBasedX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [getScrollValues.start, getScrollValues.end],
+  );
 
   return (
     <main
@@ -55,7 +91,7 @@ export default function Hero() {
         className="rotate-4 z-10 flex w-screen gap-10 pb-10 sm:mt-10 sm:max-lg:pb-20"
         style={{ x: scrollBasedX }}
       >
-        {scrollImages.map((image) => (
+        {imagesToScroll.map((image) => (
           <img
             src={image}
             className="w-auto max-sm:max-h-60"
