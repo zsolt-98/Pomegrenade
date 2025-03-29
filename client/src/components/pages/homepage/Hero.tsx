@@ -1,10 +1,9 @@
 import Divider from "../../global/svg/Divider";
 import { motion, useScroll, useTransform } from "framer-motion";
-import emptyDashboard from "../../../../public/homepage-carousel-functionality/1.png";
 import { useRef } from "react";
-// import emptyDashboardAddFood from "../../../../public/homepage-carousel-functionality/2-empty-dashboard-add-food-924x510px.png";
-// import emptyDashboardSelectedFood from "../../../../public/homepage-carousel-functionality/3-empty-dashboard-selected-food-924x510px.png";
-// import dashboardWithAddedFoods from "../../../../public/homepage-carousel-functionality/4-dashboard-with-added-foods-924x510px.png";
+import pic1 from "../../../../public/homepage-carousel-functionality/1.png";
+import pic2 from "../../../../public/homepage-carousel-functionality/2.png";
+import pic3 from "../../../../public/homepage-carousel-functionality/3.png";
 // import dashboardEditAddedFood from "../../../../public/homepage-carousel-functionality/5-dashboard-edit-added-food-924x510px.png";
 // import userGoals from "../../../../public/homepage-carousel-functionality/6-user-goals-924x510px.png";
 // import userGoalsEditWeight from "../../../../public/homepage-carousel-functionality/7-user-goals-edit-weight-924x510px.png";
@@ -28,10 +27,10 @@ export default function Hero() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "end 0.1"],
+    offset: ["start 0.7", "end 0.1"],
   });
 
-  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["45%", "-150%"]);
+  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["75%", "-125%"]);
 
   return (
     <main
@@ -52,41 +51,36 @@ export default function Hero() {
       </div>
       <Divider className="absolute top-0" fill="var(--color-secondary-light)" />
       <motion.div
-        className="rotate-5 z-10 mt-10 flex w-screen gap-10"
+        className="rotate-4 z-10 mt-10 flex w-screen gap-10"
         style={{ x: scrollBasedX }}
       >
         <img
-          src={emptyDashboard}
+          src={pic1}
           className=""
           // alt={`image of ${image}`}
         />
         <img
-          src={emptyDashboard}
+          src={pic2}
           className=""
           // alt={`image of ${image}`}
         />
         <img
-          src={emptyDashboard}
+          src={pic3}
           className=""
           // alt={`image of ${image}`}
         />
         <img
-          src={emptyDashboard}
+          src={pic1}
           className=""
           // alt={`image of ${image}`}
         />
         <img
-          src={emptyDashboard}
+          src={pic2}
           className=""
           // alt={`image of ${image}`}
         />
         <img
-          src={emptyDashboard}
-          className=""
-          // alt={`image of ${image}`}
-        />
-        <img
-          src={emptyDashboard}
+          src={pic3}
           className=""
           // alt={`image of ${image}`}
         />

@@ -9,7 +9,7 @@ export function ResultsPagination() {
   const pageCount = Math.ceil(searchResults.length / itemsPerPage);
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between px-2">
       <Button
         type="button"
         onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
