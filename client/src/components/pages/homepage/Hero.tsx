@@ -36,7 +36,7 @@ export default function Hero() {
 
   return (
     <main
-      className="bg-tertiary-light lg:pb-30 relative flex min-h-[calc(100vh-6rem)] w-full flex-col items-center justify-between gap-10 overflow-hidden"
+      className="bg-tertiary-light lg:pb-30 relative flex w-full flex-col items-center justify-between overflow-hidden max-sm:gap-10 sm:min-h-[calc(100vh-6rem)]"
       ref={containerRef}
     >
       <div className="bg-tertiary-light container relative mx-auto mt-10 flex max-w-7xl flex-col pb-10 sm:mt-20 sm:pb-20">
