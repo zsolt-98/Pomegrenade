@@ -29,7 +29,7 @@ export default function Hero() {
 
   const getScrollValues = useMemo(() => {
     if (isUnderSmScreen) {
-      return { start: "150%", end: "-150%" };
+      return { start: "185%", end: "-305%" };
     }
 
     if (isUnderMdScreen) {
