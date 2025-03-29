@@ -2,13 +2,27 @@ import { SVGProps } from "@/types";
 import { useMediaQuery } from "react-responsive";
 
 export default function Divider({ className, fill }: SVGProps) {
-  const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
+  const isUnderXLScreen = useMediaQuery({ maxWidth: 1280 });
 
-  return (
+  return isUnderXLScreen ? (
     <svg
-      className={`w-full ${className || ""}`}
+      className={`h-1/3 w-full ${className || ""}`}
+      viewBox="0 0 1260 1260"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0 0H1260V630C1260 978.528 978.528 1260 630 1260C281.472 1260 0 978.528 0 630V0Z"
+        fill={fill}
+      />
+    </svg>
+  ) : (
+    <svg
+      className={`h-1/3 w-full ${className || ""}`}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1000 179"
+      preserveAspectRatio="none"
     >
       <path
         d="M0 0v7.14s250 171.55 500 171.55 500-171.55 500-171.55V0H0Z"
@@ -16,36 +30,21 @@ export default function Divider({ className, fill }: SVGProps) {
       ></path>
     </svg>
   );
-
-  // isUnderXLScreen ?
-  // return (
-  //   <svg
-  //     className={`h-[40%] w-full ${className || ""}`}
-  //     viewBox="0 0 1260 1260"
-  //     fill="none"
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     preserveAspectRatio="none"
-  //   >
-  //     <path
-  //       d="M0 0H1260V630C1260 978.528 978.528 1260 630 1260C281.472 1260 0 978.528 0 630V0Z"
-  //       fill={fill}
-  //     />
-  //   </svg>
-  // );
-  // ) : (
-  //   <svg
-  //     className={`h-[75vh] w-full ${className || ""}`}
-  //     viewBox="0 0 1924 820"
-  //     preserveAspectRatio="none"
-  //     fill="none"
-  //     xmlns="http://www.w3.org/2000/svg"
-  //   >
-  //     <path
-  //       d="M1 1H1481H1923V443C1923 443 1611.72 88.0011 1307 327C1002.28 565.999 912.269 819 525 819C237 819 1 559 1 559V1Z"
-  //       fill={fill}
-  //       stroke={fill}
-  //       strokeWidth="3"
-  //     />
-  //   </svg>
-  // );
 }
+
+//  : (
+//   <svg
+//     className={`h-[75vh] w-full ${className || ""}`}
+//     viewBox="0 0 1924 820"
+//     preserveAspectRatio="none"
+//     fill="none"
+//     xmlns="http://www.w3.org/2000/svg"
+//   >
+//     <path
+//       d="M1 1H1481H1923V443C1923 443 1611.72 88.0011 1307 327C1002.28 565.999 912.269 819 525 819C237 819 1 559 1 559V1Z"
+//       fill={fill}
+//       stroke={fill}
+//       strokeWidth="3"
+//     />
+//   </svg>
+// );
