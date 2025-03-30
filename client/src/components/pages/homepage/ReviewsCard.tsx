@@ -36,7 +36,7 @@ export default function ReviewsCard({
           ? {
               y: 0,
               opacity: 1,
-              scale: isActive ? 1.1 : 1,
+              scale: isActive ? 1.03 : 1,
               zIndex: isActive ? 9999 : 1,
               transition: {
                 y: { duration: 0.3, delay },
