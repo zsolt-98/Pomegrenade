@@ -8,10 +8,6 @@ import { useMediaQuery } from "react-responsive";
 
 export default function Hero() {
   const isUnderSmScreen = useMediaQuery({ maxWidth: 639 });
-  const isUnderMdScreen = useMediaQuery({ maxWidth: 767 });
-  const isUnderLgScreen = useMediaQuery({ maxWidth: 1023 });
-  const isUnderXLScreen = useMediaQuery({ maxWidth: 1279 });
-  const isUnder2XLScreen = useMediaQuery({ maxWidth: 1535 });
 
   const images = [
     dashboardWithAddedFoods,
@@ -27,37 +23,7 @@ export default function Hero() {
     offset: ["start 0.7", "end 0.1"],
   });
 
-  const getScrollValues = useMemo(() => {
-    if (isUnderSmScreen) {
-      return { start: "185%", end: "-305%" };
-    }
-
-    if (isUnderMdScreen) {
-      return { start: "280%", end: "-500%" };
-    }
-
-    if (isUnderLgScreen) {
-      return { start: "200%", end: "-350%" };
-    }
-
-    if (isUnderXLScreen) {
-      return { start: "125%", end: "-250%" };
-    }
-
-    if (isUnder2XLScreen) {
-      return { start: "100%", end: "-175%" };
-    }
-    return {
-      start: "85%",
-      end: "-125%",
-    };
-  }, [isUnder2XLScreen, isUnderXLScreen, isUnderLgScreen, isUnderMdScreen]);
-
-  const scrollBasedX = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [getScrollValues.start, getScrollValues.end],
-  );
+  const scrollBasedX = useTransform(scrollYProgress, [0, 1], ["85%", "-125%"]);
 
   return (
     <main
