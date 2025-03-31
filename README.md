@@ -74,45 +74,35 @@ Access the app at: http://localhost:{port}
 
 Where {port} is the dynamic port provided by Vite (typically 5173, visible in terminal when running npm run dev).
 
-## 🔍 Core Features
-
-### User Authentication Flow
-
-- Form validation with Formik/Yup
-- Mock user session
-- Protected routes using React Router
-
-### Booking Flow
-
-- Vehicle selection
-- Date/time/location scheduling
-- Booking summary preview
-
-### Profile Management
-
-- Update personal information (username, email, first name)
-- Password reset functionality
-- View/cancel active bookings
-
 ## 🛠️ Technology Stack
 
-| Category         | Technologies       |
-| ---------------- | ------------------ |
-| Core Framework   | React 18 + Vite    |
-| State Management | Zustand            |
-| Routing          | React Router v6    |
-| Styling          | Bootstrap 5 + Sass |
-| Forms            | Formik + Yup       |
-| Notifications    | React Hot Toast    |
+### Frontend (Client): ###
 
-## ⚠️ Current Limitations
+| Category          | Technologies       |
+| ----------------  | ------------------ |
+| Core              | React 18 + Vite    |
+| Core              | TypeScript         |
+| Styling           | Tailwind CSS       |
+| Component library | ShadCN             |
+| Forms             | React Hook Form    |
+| Recharts          | Charts             |
+| Notifications     | Toastify           |
+| API Requests      | Axios              |
+| Animations        | (Framer) Motion    |
 
-- **Security**: localStorage used for mock user authentication (may trigger browser password manager warnings. These can safely be ignored)
+### Backend (Server): ###
 
-## 🌟 Future Roadmap
-
-- Backend API integration
-- Admin dashboard
+| Category          | Technologies       |
+| ----------------  | ------------------ |
+| Runtime           | Node.js            |
+| Node.js framework | Express            |
+| Database          | MongoDB            |
+| ODM for MongoDB   | Mongoose           |
+| JWT               | Authentication     |
+| Nodemailer        | Email services     |
+| Notifications     | Toastify           |
+| API Requests      | Axios              |
+| Animations        | (Framer) Motion    |
 
 ## 📫 Contact
 
