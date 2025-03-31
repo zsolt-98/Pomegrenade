@@ -64,7 +64,7 @@ FATSECRET_CLIENT_ID={your_fatsecret_client_id}
 FATSECRET_CLIENT_SECRET={your_fatsecret_client_secret}
 ```
 
-Running the Application
+### Running the Application
 ```bash
 # Run server (from server directory)
 npm run dev
