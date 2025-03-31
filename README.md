@@ -37,12 +37,42 @@ cd pomegrenade
 cd client && npm install
 cd ../server && npm install
 ```
+**Environment Setup**
 
+Create **.env** files in both client and server directories:
+
+**Client (.env):**
+```bash
+VITE_BACKEND_URL="http://localhost:4000"
+```
+
+**Server (.env):**
+```bash
+PORT=4000
+MONGODB_URI={your__mongodb__uri}
+JWT_SECRET={your_jwt_secret}
+NODE_ENV="development"
+
+SMTP_USER={your_smtp_user}
+SMTP_PASS={your_smtp_password}
+
+SENDER_EMAIL={your_smtp_sender_email}
+
+FATSECRET_CLIENT_ID={your__fatsecret_client_id}
+FATSECRET_CLIENT_SECRET={your__fatsecret_client_secret}
+```
+
+Running the Application
+```bash
+# Run server (from server directory)
+npm run dev
+
+# Run client (from client directory)
+npm run dev
+```
 Access the app at: http://localhost:{port}
 
 Where {port} is the dynamic port provided by Vite (typically 5173, visible in terminal when running npm run dev).
-
-⚠️ Important: This is frontend-only - no backend required!
 
 ## 🔍 Core Features
 
