@@ -108,4 +108,4 @@ Where {port} is the dynamic port provided by Vite (typically 5173, visible in te
 
 ## 📫 Contact
 
-- **Email**: [zsolt.nagy998@gmail.com]
+- **Email**: zsolt.nagy998@gmail.com
