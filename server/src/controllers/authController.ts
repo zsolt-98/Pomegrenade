@@ -76,7 +76,6 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await userModel.findOne({ email });
 
-    // Temporary
     if (!user) {
       return res.json({ success: false, message: "Invalid email adress" });
     }
@@ -86,7 +85,6 @@ export const login = async (req: Request, res: Response) => {
     if (!isMatch) {
       return res.json({ success: false, message: "Invalid password" });
     }
-    // Temporary
     const token = jwt.sign({ id: user._id }, JWT_SECRET, {
       expiresIn: "7d",
     });

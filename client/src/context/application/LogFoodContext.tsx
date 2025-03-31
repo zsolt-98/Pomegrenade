@@ -87,7 +87,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred while fetching food entries");
     }
   }, [backendUrl]);
 
@@ -146,7 +146,8 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
       setSearchResults(foodResults);
       console.log(foodResults);
     } catch (error) {
-      console.error("Error searching:", error);
+      console.error(error);
+      toast.error("An error has occurred while searching for foods");
       setSearchResults([]);
     } finally {
       setIsLoading(false);
@@ -190,7 +191,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred while adding food");
     } finally {
       setIsSavingEntry(false);
     }
@@ -220,7 +221,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred while deleting food entry");
     } finally {
       setIsDeletingEntry(false);
     }
@@ -250,7 +251,7 @@ export const LogFoodContextProvider = ({ children }: PropsWithChildren) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred while updating food entry");
     }
   };
 

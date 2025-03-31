@@ -50,8 +50,8 @@ export default function Goals() {
         toast.error(apiResponse.message || "Failed to fetch goals");
       }
     } catch (error) {
-      console.log(error); // Temporary
-      toast.error("An error has occurred.");
+      console.log(error);
+      toast.error("An error has occurred while fetching user goals");
     } finally {
       setIsLoading(false);
     }

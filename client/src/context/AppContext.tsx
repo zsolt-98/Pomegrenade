@@ -1,5 +1,3 @@
-/* eslint-disable */ // temporary
-
 import axios from "axios";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -39,35 +37,38 @@ export const AppContextProvider = ({ children }: PropsWithChildren) => {
     false | { name: string; email: string; isAccountVerified: boolean }
   >(false);
 
-  const getAuthState = async () => {
-    try {
-      setIsAuthLoading(true);
-      const { data } = await axios.get(backendUrl + "/api/auth/is-auth");
-      if (data.success) {
-        setIsLoggedin(true);
-        getUserData();
+  useEffect(() => {
+    const getAuthState = async () => {
+      try {
+        setIsAuthLoading(true);
+        const { data } = await axios.get(backendUrl + "/api/auth/is-auth");
+        if (data.success) {
+          setIsLoggedin(true);
+          getUserData();
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("An error has occurred while authenticating user");
+      } finally {
+        setIsAuthLoading(false);
       }
-    } catch (error) {
-      console.log(error); // Temporary
-      toast.error("An error has occurred.");
-    } finally {
-      setIsAuthLoading(false);
-    }
-  };
+    };
+    getAuthState();
+  }, []);
 
   const getUserData = async () => {
     try {
       const { data } = await axios.get(backendUrl + "/api/user/data");
-      data.success ? setUserData(data.userData) : toast.error(data.message);
+      if (data.success) {
+        setUserData(data.userData);
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
-      console.log(error); // Temporary
-      toast.error("An error has occurred.");
+      console.log(error);
+      toast.error("An error has occurred while fetching user data");
     }
   };
-
-  useEffect(() => {
-    getAuthState();
-  }, []);
 
   const value = {
     backendUrl,

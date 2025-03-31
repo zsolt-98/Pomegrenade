@@ -66,7 +66,7 @@ export function useAuth({
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred during user authentication");
     } finally {
       setIsSubmitting(false);
     }

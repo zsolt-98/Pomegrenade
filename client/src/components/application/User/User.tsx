@@ -57,6 +57,7 @@ export default function User() {
         }
       } catch (error) {
         console.log(error);
+        toast.error("An error has occurred while fetching your profile photo");
       } finally {
         setIsFetchingPhoto(false);
       }
@@ -106,7 +107,9 @@ export default function User() {
       }
     } catch (error) {
       console.log(error);
-      toast.error("An error has occurred.");
+      toast.error(
+        "An error has occurred while trying to upload your profile photo",
+      );
     } finally {
       setIsUploading(false);
     }
@@ -157,7 +160,9 @@ export default function User() {
       }
     } catch (error) {
       console.log(error);
-      toast.error("An error has occurred.");
+      toast.error(
+        "An error has occurred while trying to update your personal information",
+      );
     } finally {
       setIsUpdatingPersonalInfo(false);
     }

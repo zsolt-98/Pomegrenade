@@ -12,6 +12,7 @@ import {
 } from "../ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AlertVerifyEmail } from "./User/AlertVerifyEmail";
+import { toast } from "react-toastify";
 
 type DashboardHeadingsProps = {
   caloriesBudget: number;
@@ -105,7 +106,8 @@ export default function MainDashboard() {
           );
         }
       } catch (error) {
-        console.error("Error fetching nutrition goals:", error);
+        console.error(error);
+        toast.error("An error has occurred while fetching user goals");
       }
     };
     fetchNutritionGoals();

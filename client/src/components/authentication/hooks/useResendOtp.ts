@@ -44,7 +44,7 @@ export const useResendOtp = ({
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred while sending the verification code");
     } finally {
       setIsResending(false);
     }

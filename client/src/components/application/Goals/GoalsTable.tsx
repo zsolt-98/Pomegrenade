@@ -182,8 +182,8 @@ function EditGoalsModal({ data, refetchGoals }: GoalsTableProps) {
         toast.error(response.message || "Failed to update goals");
       }
     } catch (error) {
-      console.error("Error updating goals:", error);
-      toast.error("Something went wrong. Please try again.");
+      console.error(error);
+      toast.error("An error has occurred while trying to update user goals");
     } finally {
       setIsLoading(false);
     }

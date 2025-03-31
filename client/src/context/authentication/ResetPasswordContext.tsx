@@ -1,5 +1,3 @@
-/* eslint-disable */ // temporary
-
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 
 interface ResetPasswordContextType {
@@ -65,7 +63,6 @@ export const ResetPasswordContextProvider = ({
   const clearState = () => {
     localStorage.removeItem("resetPasswordState");
 
-    // TODO: Temporary solution,
     setEmail("");
     setIsEmailSent(false);
     setOtp("");

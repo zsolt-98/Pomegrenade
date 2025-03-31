@@ -112,7 +112,7 @@ export default function Nav() {
       }
     } catch (error) {
       console.log(error);
-      toast.error("An error has occurred.");
+      toast.error("An error has occurred while logging out");
     }
   };
 
