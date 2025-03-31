@@ -102,9 +102,6 @@ Where {port} is the dynamic port provided by Vite (typically 5173, visible in te
 | ODM for MongoDB   | Mongoose           |
 | JWT               | Authentication     |
 | Nodemailer        | Email services     |
-| Notifications     | Toastify           |
-| API Requests      | Axios              |
-| Animations        | (Framer) Motion    |
 
 ## 📫 Contact
 
