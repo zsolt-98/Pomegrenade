@@ -51,7 +51,7 @@ VITE_BACKEND_URL="http://localhost:4000"
 **Server (.env):**
 ```bash
 PORT=4000
-MONGODB_URI={your__mongodb__uri}
+MONGODB_URI={your_mongodb__uri}
 JWT_SECRET={your_jwt_secret}
 NODE_ENV="development"
 
@@ -60,8 +60,8 @@ SMTP_PASS={your_smtp_password}
 
 SENDER_EMAIL={your_smtp_sender_email}
 
-FATSECRET_CLIENT_ID={your__fatsecret_client_id}
-FATSECRET_CLIENT_SECRET={your__fatsecret_client_secret}
+FATSECRET_CLIENT_ID={your_fatsecret_client_id}
+FATSECRET_CLIENT_SECRET={your_fatsecret_client_secret}
 ```
 
 Running the Application
