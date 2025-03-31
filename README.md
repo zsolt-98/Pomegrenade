@@ -1,6 +1,6 @@
 # Pomegrenade - A Lightweight Calorie Counter With A Bang 
 
-- **Live Demo**: [https://pomegrenade.xyz/]
+- **Live Demo**: https://pomegrenade.xyz/
 
 ---
 
