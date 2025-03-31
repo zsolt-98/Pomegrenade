@@ -1,9 +1,9 @@
 import Divider from "../../global/svg/Divider";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import dashboardWithAddedFoods from "../../../../public/homepage-carousel-functionality/1-dashboard-with-added-foods-813x586px.png";
-import emptyDashboardAddFood from "../../../../public/homepage-carousel-functionality/2-empty-dashboard-add-food-813x586px.png";
-import dashboardEditAddedFood from "../../../../public/homepage-carousel-functionality/3-dashboard-edit-added-food-813x586px.png";
+import dashboardWithAddedFoods from "../../../assets/homepage-carousel-functionality/1-dashboard-with-added-foods-813x586px.png";
+import emptyDashboardAddFood from "../../../assets/homepage-carousel-functionality/2-empty-dashboard-add-food-813x586px.png";
+import dashboardEditAddedFood from "../../../assets/homepage-carousel-functionality/3-dashboard-edit-added-food-813x586px.png";
 import { useMediaQuery } from "react-responsive";
 
 export default function Hero() {
