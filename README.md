@@ -51,7 +51,7 @@ VITE_BACKEND_URL="http://localhost:4000"
 **Server (.env):**
 ```bash
 PORT=4000
-MONGODB_URI={your_mongodb__uri}
+MONGODB_URI={your_mongodb_uri}
 JWT_SECRET={your_jwt_secret}
 NODE_ENV="development"
 
