@@ -1,16 +1,16 @@
 # Pomegrenade - A Lightweight Calorie Counter With A Bang 
 
-- **Live Demo**: [https://pomegrenade-xyz/]
+- **Live Demo**: [https://pomegrenade.xyz/]
 
 ---
 
 ## 🚀 Introduction
 
-**Pomegrenade** is a full-stack calorie tracking application that helps users monitor their nutritional intake. 
+**Pomegrenade** is a full-stack (MERN) calorie tracking application that helps users monitor their nutritional intake. 
 
 **Features:**
 
-- 🔐 Secure user authentication system (JWT)
+- 🔐 Secure user authentication system (using JWT)
 - 📊 Comprehensive nutrition dashboard
 - 🍎 Food diary with search functionality
 - 🥗 Customizable weight and macronutrient goals
@@ -24,6 +24,8 @@
 **Prerequisites:**
 - Node.js (v20.17.0)
 - MongoDB
+- [FatSecret API](https://platform.fatsecret.com/platform-api) credentials (for nutritional database) 
+- [Brevo](https://www.brevo.com/free-smtp-server/) or alternative SMTP provider (for email notifications)
 - npm or yarn
 
 ### Installation
@@ -37,7 +39,7 @@ cd pomegrenade
 cd client && npm install
 cd ../server && npm install
 ```
-**Environment Setup**
+### Environment Setup ###
 
 Create **.env** files in both client and server directories:
 
