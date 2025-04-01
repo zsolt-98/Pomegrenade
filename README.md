@@ -80,28 +80,28 @@ Where {port} is the dynamic port provided by Vite (typically 5173, visible in te
 
 ### Frontend (Client): ###
 
-| Category          | Technologies       |
-| ----------------  | ------------------ |
-| Core              | React 18 + Vite    |
-| Core              | TypeScript         |
-| Styling           | Tailwind CSS       |
-| Component library | ShadCN             |
-| Forms             | React Hook Form    |
-| Recharts          | Charts             |
-| Notifications     | Toastify           |
-| API Requests      | Axios              |
-| Animations        | (Framer) Motion    |
+| Technology         | Category          |
+| ------------------ | ----------------- |
+| React 18 + Vite    | Core              |
+| TypeScript         | Core              |
+| Tailwind CSS       | Styling           |
+| ShadCN             | Component library |
+| React Hook Form    | Forms             |
+| Recharts           | Charts            |
+| Toastify           | Notifications     |
+| Axios              | API Requests      |
+| (Framer) Motion    | Animations        |
 
 ### Backend (Server): ###
 
-| Category          | Technologies       |
-| ----------------  | ------------------ |
-| Runtime           | Node.js            |
-| Node.js framework | Express            |
-| Database          | MongoDB            |
-| ODM for MongoDB   | Mongoose           |
-| JWT               | Authentication     |
-| Nodemailer        | Email services     |
+| Technology        | Category           |
+| ----------------- | ------------------ |
+| Node.js           | Runtime            |
+| Express           | Node.js framework  |
+| MongoDB           | Database           |
+| Mongoose          | ODM for MongoDB    |
+| Authentication    | JWT                |
+| Email services    | Nodemailer         |
 
 ## 📫 Contact
 
