@@ -6,6 +6,7 @@ import transporter from "../../config/nodemailer.js";
 import {
   EMAIL_VERIFY_TEMPLATE,
   PASSWORD_RESET_TEMPLATE,
+  WELCOME_EMAIL_TEMPLATE,
 } from "../../config/emailTemplates.js";
 
 export const JWT_SECRET = process.env.JWT_SECRET as string;
@@ -52,7 +53,7 @@ export const register = async (req: Request, res: Response) => {
       from: process.env.SENDER_EMAIL,
       to: email,
       subject: "Welcome to Pomegrenade",
-      text: `Welcome to Pomegrenade. Your account has been successfully created under the email address ${email}`,
+      html: WELCOME_EMAIL_TEMPLATE,
     };
 
     await transporter.sendMail(mailOptions);
